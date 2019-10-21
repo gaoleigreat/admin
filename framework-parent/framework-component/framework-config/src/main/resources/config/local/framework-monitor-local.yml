@@ -1,0 +1,24 @@
+spring:
+  boot:
+    admin:
+      notify:
+        mail:
+          from: 513684652@qq.com
+          to: 513684652@qq.com,tyut_gaolei@163.com
+          enabled: true
+        dingtalk:
+          enabled: true
+      monitor:
+        status-lifetime: 100000ms
+
+  mail:
+    host: smtp.163.com
+    username: tyut_gaolei@163.com
+    password: Changeme123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true

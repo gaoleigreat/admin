@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.SysUserOnlineMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.SysUserOnline" id="BaseResultMap">
+        <result property="sessionid" column="sessionId"/>
+        <result property="loginName" column="login_name"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="ipaddr" column="ipaddr"/>
+        <result property="loginLocation" column="login_location"/>
+        <result property="browser" column="browser"/>
+        <result property="os" column="os"/>
+        <result property="status" column="status"/>
+        <result property="startTimestamp" column="start_timestamp"/>
+        <result property="lastAccessTime" column="last_access_time"/>
+        <result property="expireTime" column="expire_time"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        sessionId ,
+        login_name ,
+        dept_name ,
+        ipaddr ,
+        login_location ,
+        browser ,
+        os ,
+        status ,
+        start_timestamp ,
+        last_access_time ,
+        expire_time 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="sysUserOnline.sessionid != null">
+            and sessionId = #{sysUserOnline.sessionid,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.loginName != null">
+            and login_name = #{sysUserOnline.loginName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.deptName != null">
+            and dept_name = #{sysUserOnline.deptName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.ipaddr != null">
+            and ipaddr = #{sysUserOnline.ipaddr,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.loginLocation != null">
+            and login_location = #{sysUserOnline.loginLocation,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.browser != null">
+            and browser = #{sysUserOnline.browser,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.os != null">
+            and os = #{sysUserOnline.os,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.status != null">
+            and status = #{sysUserOnline.status,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUserOnline.startTimestamp != null">
+            and start_timestamp = #{sysUserOnline.startTimestamp,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysUserOnline.lastAccessTime != null">
+            and last_access_time = #{sysUserOnline.lastAccessTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysUserOnline.expireTime != null">
+            and expire_time = #{sysUserOnline.expireTime,jdbcType=INTEGER}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="sysUserOnline.sessionid != null">
+             sessionId = #{sysUserOnline.sessionid,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.loginName != null">
+             login_name = #{sysUserOnline.loginName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.deptName != null">
+             dept_name = #{sysUserOnline.deptName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.ipaddr != null">
+             ipaddr = #{sysUserOnline.ipaddr,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.loginLocation != null">
+             login_location = #{sysUserOnline.loginLocation,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.browser != null">
+             browser = #{sysUserOnline.browser,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.os != null">
+             os = #{sysUserOnline.os,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.status != null">
+             status = #{sysUserOnline.status,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUserOnline.startTimestamp != null">
+             start_timestamp = #{sysUserOnline.startTimestamp,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysUserOnline.lastAccessTime != null">
+             last_access_time = #{sysUserOnline.lastAccessTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysUserOnline.expireTime != null">
+             expire_time = #{sysUserOnline.expireTime,jdbcType=INTEGER}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUserOnline.sessionid != null">
+               sessionId,
+            </if>
+            <if test="sysUserOnline.loginName != null">
+               login_name,
+            </if>
+            <if test="sysUserOnline.deptName != null">
+               dept_name,
+            </if>
+            <if test="sysUserOnline.ipaddr != null">
+               ipaddr,
+            </if>
+            <if test="sysUserOnline.loginLocation != null">
+               login_location,
+            </if>
+            <if test="sysUserOnline.browser != null">
+               browser,
+            </if>
+            <if test="sysUserOnline.os != null">
+               os,
+            </if>
+            <if test="sysUserOnline.status != null">
+               status,
+            </if>
+            <if test="sysUserOnline.startTimestamp != null">
+               start_timestamp,
+            </if>
+            <if test="sysUserOnline.lastAccessTime != null">
+               last_access_time,
+            </if>
+            <if test="sysUserOnline.expireTime != null">
+               expire_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="sysUserOnline.sessionid != null">
+             #{sysUserOnline.sessionid,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.loginName != null">
+             #{sysUserOnline.loginName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.deptName != null">
+             #{sysUserOnline.deptName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.ipaddr != null">
+             #{sysUserOnline.ipaddr,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.loginLocation != null">
+             #{sysUserOnline.loginLocation,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.browser != null">
+             #{sysUserOnline.browser,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.os != null">
+             #{sysUserOnline.os,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.status != null">
+             #{sysUserOnline.status,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUserOnline.startTimestamp != null">
+             #{sysUserOnline.startTimestamp,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysUserOnline.lastAccessTime != null">
+             #{sysUserOnline.lastAccessTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysUserOnline.expireTime != null">
+             #{sysUserOnline.expireTime,jdbcType=INTEGER}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_user_online
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             sessionId,
+             login_name,
+             dept_name,
+             ipaddr,
+             login_location,
+             browser,
+             os,
+             status,
+             start_timestamp,
+             last_access_time,
+             expire_time
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.sessionid,jdbcType=VARCHAR},
+                #{item.loginName,jdbcType=VARCHAR},
+                #{item.deptName,jdbcType=VARCHAR},
+                #{item.ipaddr,jdbcType=VARCHAR},
+                #{item.loginLocation,jdbcType=VARCHAR},
+                #{item.browser,jdbcType=VARCHAR},
+                #{item.os,jdbcType=VARCHAR},
+                #{item.status,jdbcType=VARCHAR},
+                #{item.startTimestamp,jdbcType=TIMESTAMP},
+                #{item.lastAccessTime,jdbcType=TIMESTAMP},
+                #{item.expireTime,jdbcType=INTEGER}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_user_online
+            <set>
+                <trim suffixOverrides=",">
+                    sessionId = #{item.sessionid,jdbcType=VARCHAR},
+                    login_name = #{item.loginName,jdbcType=VARCHAR},
+                    dept_name = #{item.deptName,jdbcType=VARCHAR},
+                    ipaddr = #{item.ipaddr,jdbcType=VARCHAR},
+                    login_location = #{item.loginLocation,jdbcType=VARCHAR},
+                    browser = #{item.browser,jdbcType=VARCHAR},
+                    os = #{item.os,jdbcType=VARCHAR},
+                    status = #{item.status,jdbcType=VARCHAR},
+                    start_timestamp = #{item.startTimestamp,jdbcType=TIMESTAMP},
+                    last_access_time = #{item.lastAccessTime,jdbcType=TIMESTAMP},
+                    expire_time = #{item.expireTime,jdbcType=INTEGER}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where sessionId = #{item.sessionid,jdbcType=VARCHAR}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysUserOnline">
+        insert into sys_user_online
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             sessionId ,
+             login_name ,
+             dept_name ,
+             ipaddr ,
+             login_location ,
+             browser ,
+             os ,
+             status ,
+             start_timestamp ,
+             last_access_time ,
+             expire_time 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{sysUserOnline.sessionid,jdbcType=VARCHAR},
+             #{sysUserOnline.loginName,jdbcType=VARCHAR},
+             #{sysUserOnline.deptName,jdbcType=VARCHAR},
+             #{sysUserOnline.ipaddr,jdbcType=VARCHAR},
+             #{sysUserOnline.loginLocation,jdbcType=VARCHAR},
+             #{sysUserOnline.browser,jdbcType=VARCHAR},
+             #{sysUserOnline.os,jdbcType=VARCHAR},
+             #{sysUserOnline.status,jdbcType=VARCHAR},
+             #{sysUserOnline.startTimestamp,jdbcType=TIMESTAMP},
+             #{sysUserOnline.lastAccessTime,jdbcType=TIMESTAMP},
+             #{sysUserOnline.expireTime,jdbcType=INTEGER}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{sysUserOnline.sessionid,jdbcType=VARCHAR},
+          #{sysUserOnline.loginName,jdbcType=VARCHAR},
+          #{sysUserOnline.deptName,jdbcType=VARCHAR},
+          #{sysUserOnline.ipaddr,jdbcType=VARCHAR},
+          #{sysUserOnline.loginLocation,jdbcType=VARCHAR},
+          #{sysUserOnline.browser,jdbcType=VARCHAR},
+          #{sysUserOnline.os,jdbcType=VARCHAR},
+          #{sysUserOnline.status,jdbcType=VARCHAR},
+          #{sysUserOnline.startTimestamp,jdbcType=TIMESTAMP},
+          #{sysUserOnline.lastAccessTime,jdbcType=TIMESTAMP},
+          #{sysUserOnline.expireTime,jdbcType=INTEGER}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysUserOnline">
+        insert into sys_user_online
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUserOnline.sessionid != null">
+                sessionId,
+            </if>
+            <if test="sysUserOnline.loginName != null">
+                login_name,
+            </if>
+            <if test="sysUserOnline.deptName != null">
+                dept_name,
+            </if>
+            <if test="sysUserOnline.ipaddr != null">
+                ipaddr,
+            </if>
+            <if test="sysUserOnline.loginLocation != null">
+                login_location,
+            </if>
+            <if test="sysUserOnline.browser != null">
+                browser,
+            </if>
+            <if test="sysUserOnline.os != null">
+                os,
+            </if>
+            <if test="sysUserOnline.status != null">
+                status,
+            </if>
+            <if test="sysUserOnline.startTimestamp != null">
+                start_timestamp,
+            </if>
+            <if test="sysUserOnline.lastAccessTime != null">
+                last_access_time,
+            </if>
+            <if test="sysUserOnline.expireTime != null">
+                expire_time
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUserOnline.sessionid !=null ">
+                #{sysUserOnline.sessionid,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.loginName !=null ">
+                #{sysUserOnline.loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.deptName !=null ">
+                #{sysUserOnline.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.ipaddr !=null ">
+                #{sysUserOnline.ipaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.loginLocation !=null ">
+                #{sysUserOnline.loginLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.browser !=null ">
+                #{sysUserOnline.browser,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.os !=null ">
+                #{sysUserOnline.os,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.status !=null ">
+                #{sysUserOnline.status,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.startTimestamp !=null ">
+                #{sysUserOnline.startTimestamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUserOnline.lastAccessTime !=null ">
+                #{sysUserOnline.lastAccessTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUserOnline.expireTime !=null ">
+                #{sysUserOnline.expireTime,jdbcType=INTEGER}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="sysUserOnline.sessionid !=null ">
+             #{sessionid,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.loginName !=null ">
+             #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.deptName !=null ">
+             #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.ipaddr !=null ">
+             #{ipaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.loginLocation !=null ">
+             #{loginLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.browser !=null ">
+             #{browser,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.os !=null ">
+             #{os,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.status !=null ">
+             #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUserOnline.startTimestamp !=null ">
+             #{startTimestamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUserOnline.lastAccessTime !=null ">
+             #{lastAccessTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUserOnline.expireTime !=null ">
+             #{expireTime,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysUserOnline">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_online
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from sys_user_online
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.SysUserMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.SysUser" id="BaseResultMap">
+        <result property="userId" column="user_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="loginName" column="login_name"/>
+        <result property="userName" column="user_name"/>
+        <result property="userType" column="user_type"/>
+        <result property="email" column="email"/>
+        <result property="phonenumber" column="phonenumber"/>
+        <result property="sex" column="sex"/>
+        <result property="avatar" column="avatar"/>
+        <result property="password" column="password"/>
+        <result property="salt" column="salt"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginDate" column="login_date"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        user_id ,
+        dept_id ,
+        login_name ,
+        user_name ,
+        user_type ,
+        email ,
+        phonenumber ,
+        sex ,
+        avatar ,
+        password ,
+        salt ,
+        status ,
+        del_flag ,
+        login_ip ,
+        login_date ,
+        create_by ,
+        create_time ,
+        update_by ,
+        update_time ,
+        remark 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="sysUser.userId != null">
+            and user_id = #{sysUser.userId,jdbcType=BIGINT}
+         </if>
+         <if test="sysUser.deptId != null">
+            and dept_id = #{sysUser.deptId,jdbcType=BIGINT}
+         </if>
+         <if test="sysUser.loginName != null">
+            and login_name = #{sysUser.loginName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.userName != null">
+            and user_name = #{sysUser.userName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.userType != null">
+            and user_type = #{sysUser.userType,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.email != null">
+            and email = #{sysUser.email,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.phonenumber != null">
+            and phonenumber = #{sysUser.phonenumber,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.sex != null">
+            and sex = #{sysUser.sex,jdbcType=CHAR}
+         </if>
+         <if test="sysUser.avatar != null">
+            and avatar = #{sysUser.avatar,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.password != null">
+            and password = #{sysUser.password,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.salt != null">
+            and salt = #{sysUser.salt,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.status != null">
+            and status = #{sysUser.status,jdbcType=CHAR}
+         </if>
+         <if test="sysUser.delFlag != null">
+            and del_flag = #{sysUser.delFlag,jdbcType=CHAR}
+         </if>
+         <if test="sysUser.loginIp != null">
+            and login_ip = #{sysUser.loginIp,jdbcType=VARCHAR}
+         </if>
+         <if test="sysUser.loginDate != null">
+            and login_date = #{sysUser.loginDate,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysUser.createBy != null">
+            and create_by = #{sysUser.createBy,jdbcType=BIGINT}
+         </if>
+         <if test="sysUser.createTime != null">
+            and create_time = #{sysUser.createTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysUser.updateBy != null">
+            and update_by = #{sysUser.updateBy,jdbcType=BIGINT}
+         </if>
+         <if test="sysUser.updateTime != null">
+            and update_time = #{sysUser.updateTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysUser.remark != null">
+            and remark = #{sysUser.remark,jdbcType=VARCHAR}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="sysUser.userId != null">
+             user_id = #{sysUser.userId,jdbcType=BIGINT},
+          </if>
+          <if test="sysUser.deptId != null">
+             dept_id = #{sysUser.deptId,jdbcType=BIGINT},
+          </if>
+          <if test="sysUser.loginName != null">
+             login_name = #{sysUser.loginName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.userName != null">
+             user_name = #{sysUser.userName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.userType != null">
+             user_type = #{sysUser.userType,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.email != null">
+             email = #{sysUser.email,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.phonenumber != null">
+             phonenumber = #{sysUser.phonenumber,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.sex != null">
+             sex = #{sysUser.sex,jdbcType=CHAR},
+          </if>
+          <if test="sysUser.avatar != null">
+             avatar = #{sysUser.avatar,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.password != null">
+             password = #{sysUser.password,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.salt != null">
+             salt = #{sysUser.salt,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.status != null">
+             status = #{sysUser.status,jdbcType=CHAR},
+          </if>
+          <if test="sysUser.delFlag != null">
+             del_flag = #{sysUser.delFlag,jdbcType=CHAR},
+          </if>
+          <if test="sysUser.loginIp != null">
+             login_ip = #{sysUser.loginIp,jdbcType=VARCHAR},
+          </if>
+          <if test="sysUser.loginDate != null">
+             login_date = #{sysUser.loginDate,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysUser.createBy != null">
+             create_by = #{sysUser.createBy,jdbcType=BIGINT},
+          </if>
+          <if test="sysUser.createTime != null">
+             create_time = #{sysUser.createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysUser.updateBy != null">
+             update_by = #{sysUser.updateBy,jdbcType=BIGINT},
+          </if>
+          <if test="sysUser.updateTime != null">
+             update_time = #{sysUser.updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysUser.remark != null">
+             remark = #{sysUser.remark,jdbcType=VARCHAR}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUser.userId != null">
+               user_id,
+            </if>
+            <if test="sysUser.deptId != null">
+               dept_id,
+            </if>
+            <if test="sysUser.loginName != null">
+               login_name,
+            </if>
+            <if test="sysUser.userName != null">
+               user_name,
+            </if>
+            <if test="sysUser.userType != null">
+               user_type,
+            </if>
+            <if test="sysUser.email != null">
+               email,
+            </if>
+            <if test="sysUser.phonenumber != null">
+               phonenumber,
+            </if>
+            <if test="sysUser.sex != null">
+               sex,
+            </if>
+            <if test="sysUser.avatar != null">
+               avatar,
+            </if>
+            <if test="sysUser.password != null">
+               password,
+            </if>
+            <if test="sysUser.salt != null">
+               salt,
+            </if>
+            <if test="sysUser.status != null">
+               status,
+            </if>
+            <if test="sysUser.delFlag != null">
+               del_flag,
+            </if>
+            <if test="sysUser.loginIp != null">
+               login_ip,
+            </if>
+            <if test="sysUser.loginDate != null">
+               login_date,
+            </if>
+            <if test="sysUser.createBy != null">
+               create_by,
+            </if>
+            <if test="sysUser.createTime != null">
+               create_time,
+            </if>
+            <if test="sysUser.updateBy != null">
+               update_by,
+            </if>
+            <if test="sysUser.updateTime != null">
+               update_time,
+            </if>
+            <if test="sysUser.remark != null">
+               remark
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="sysUser.userId != null">
+             #{sysUser.userId,jdbcType=BIGINT},
+             </if>
+             <if test="sysUser.deptId != null">
+             #{sysUser.deptId,jdbcType=BIGINT},
+             </if>
+             <if test="sysUser.loginName != null">
+             #{sysUser.loginName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.userName != null">
+             #{sysUser.userName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.userType != null">
+             #{sysUser.userType,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.email != null">
+             #{sysUser.email,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.phonenumber != null">
+             #{sysUser.phonenumber,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.sex != null">
+             #{sysUser.sex,jdbcType=CHAR},
+             </if>
+             <if test="sysUser.avatar != null">
+             #{sysUser.avatar,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.password != null">
+             #{sysUser.password,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.salt != null">
+             #{sysUser.salt,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.status != null">
+             #{sysUser.status,jdbcType=CHAR},
+             </if>
+             <if test="sysUser.delFlag != null">
+             #{sysUser.delFlag,jdbcType=CHAR},
+             </if>
+             <if test="sysUser.loginIp != null">
+             #{sysUser.loginIp,jdbcType=VARCHAR},
+             </if>
+             <if test="sysUser.loginDate != null">
+             #{sysUser.loginDate,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysUser.createBy != null">
+             #{sysUser.createBy,jdbcType=BIGINT},
+             </if>
+             <if test="sysUser.createTime != null">
+             #{sysUser.createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysUser.updateBy != null">
+             #{sysUser.updateBy,jdbcType=BIGINT},
+             </if>
+             <if test="sysUser.updateTime != null">
+             #{sysUser.updateTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysUser.remark != null">
+             #{sysUser.remark,jdbcType=VARCHAR}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             user_id,
+             dept_id,
+             login_name,
+             user_name,
+             user_type,
+             email,
+             phonenumber,
+             sex,
+             avatar,
+             password,
+             salt,
+             status,
+             del_flag,
+             login_ip,
+             login_date,
+             create_by,
+             create_time,
+             update_by,
+             update_time,
+             remark
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.userId,jdbcType=BIGINT},
+                #{item.deptId,jdbcType=BIGINT},
+                #{item.loginName,jdbcType=VARCHAR},
+                #{item.userName,jdbcType=VARCHAR},
+                #{item.userType,jdbcType=VARCHAR},
+                #{item.email,jdbcType=VARCHAR},
+                #{item.phonenumber,jdbcType=VARCHAR},
+                #{item.sex,jdbcType=CHAR},
+                #{item.avatar,jdbcType=VARCHAR},
+                #{item.password,jdbcType=VARCHAR},
+                #{item.salt,jdbcType=VARCHAR},
+                #{item.status,jdbcType=CHAR},
+                #{item.delFlag,jdbcType=CHAR},
+                #{item.loginIp,jdbcType=VARCHAR},
+                #{item.loginDate,jdbcType=TIMESTAMP},
+                #{item.createBy,jdbcType=BIGINT},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateBy,jdbcType=BIGINT},
+                #{item.updateTime,jdbcType=TIMESTAMP},
+                #{item.remark,jdbcType=VARCHAR}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_user
+            <set>
+                <trim suffixOverrides=",">
+                    user_id = #{item.userId,jdbcType=BIGINT},
+                    dept_id = #{item.deptId,jdbcType=BIGINT},
+                    login_name = #{item.loginName,jdbcType=VARCHAR},
+                    user_name = #{item.userName,jdbcType=VARCHAR},
+                    user_type = #{item.userType,jdbcType=VARCHAR},
+                    email = #{item.email,jdbcType=VARCHAR},
+                    phonenumber = #{item.phonenumber,jdbcType=VARCHAR},
+                    sex = #{item.sex,jdbcType=CHAR},
+                    avatar = #{item.avatar,jdbcType=VARCHAR},
+                    password = #{item.password,jdbcType=VARCHAR},
+                    salt = #{item.salt,jdbcType=VARCHAR},
+                    status = #{item.status,jdbcType=CHAR},
+                    del_flag = #{item.delFlag,jdbcType=CHAR},
+                    login_ip = #{item.loginIp,jdbcType=VARCHAR},
+                    login_date = #{item.loginDate,jdbcType=TIMESTAMP},
+                    create_by = #{item.createBy,jdbcType=BIGINT},
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                    update_by = #{item.updateBy,jdbcType=BIGINT},
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                    remark = #{item.remark,jdbcType=VARCHAR}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where user_id = #{item.userId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysUser">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             user_id ,
+             dept_id ,
+             login_name ,
+             user_name ,
+             user_type ,
+             email ,
+             phonenumber ,
+             sex ,
+             avatar ,
+             password ,
+             salt ,
+             status ,
+             del_flag ,
+             login_ip ,
+             login_date ,
+             create_by ,
+             create_time ,
+             update_by ,
+             update_time ,
+             remark 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{sysUser.userId,jdbcType=BIGINT},
+             #{sysUser.deptId,jdbcType=BIGINT},
+             #{sysUser.loginName,jdbcType=VARCHAR},
+             #{sysUser.userName,jdbcType=VARCHAR},
+             #{sysUser.userType,jdbcType=VARCHAR},
+             #{sysUser.email,jdbcType=VARCHAR},
+             #{sysUser.phonenumber,jdbcType=VARCHAR},
+             #{sysUser.sex,jdbcType=CHAR},
+             #{sysUser.avatar,jdbcType=VARCHAR},
+             #{sysUser.password,jdbcType=VARCHAR},
+             #{sysUser.salt,jdbcType=VARCHAR},
+             #{sysUser.status,jdbcType=CHAR},
+             #{sysUser.delFlag,jdbcType=CHAR},
+             #{sysUser.loginIp,jdbcType=VARCHAR},
+             #{sysUser.loginDate,jdbcType=TIMESTAMP},
+             #{sysUser.createBy,jdbcType=BIGINT},
+             #{sysUser.createTime,jdbcType=TIMESTAMP},
+             #{sysUser.updateBy,jdbcType=BIGINT},
+             #{sysUser.updateTime,jdbcType=TIMESTAMP},
+             #{sysUser.remark,jdbcType=VARCHAR}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{sysUser.userId,jdbcType=BIGINT},
+          #{sysUser.deptId,jdbcType=BIGINT},
+          #{sysUser.loginName,jdbcType=VARCHAR},
+          #{sysUser.userName,jdbcType=VARCHAR},
+          #{sysUser.userType,jdbcType=VARCHAR},
+          #{sysUser.email,jdbcType=VARCHAR},
+          #{sysUser.phonenumber,jdbcType=VARCHAR},
+          #{sysUser.sex,jdbcType=CHAR},
+          #{sysUser.avatar,jdbcType=VARCHAR},
+          #{sysUser.password,jdbcType=VARCHAR},
+          #{sysUser.salt,jdbcType=VARCHAR},
+          #{sysUser.status,jdbcType=CHAR},
+          #{sysUser.delFlag,jdbcType=CHAR},
+          #{sysUser.loginIp,jdbcType=VARCHAR},
+          #{sysUser.loginDate,jdbcType=TIMESTAMP},
+          #{sysUser.createBy,jdbcType=BIGINT},
+          #{sysUser.createTime,jdbcType=TIMESTAMP},
+          #{sysUser.updateBy,jdbcType=BIGINT},
+          #{sysUser.updateTime,jdbcType=TIMESTAMP},
+          #{sysUser.remark,jdbcType=VARCHAR}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysUser">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUser.userId != null">
+                user_id,
+            </if>
+            <if test="sysUser.deptId != null">
+                dept_id,
+            </if>
+            <if test="sysUser.loginName != null">
+                login_name,
+            </if>
+            <if test="sysUser.userName != null">
+                user_name,
+            </if>
+            <if test="sysUser.userType != null">
+                user_type,
+            </if>
+            <if test="sysUser.email != null">
+                email,
+            </if>
+            <if test="sysUser.phonenumber != null">
+                phonenumber,
+            </if>
+            <if test="sysUser.sex != null">
+                sex,
+            </if>
+            <if test="sysUser.avatar != null">
+                avatar,
+            </if>
+            <if test="sysUser.password != null">
+                password,
+            </if>
+            <if test="sysUser.salt != null">
+                salt,
+            </if>
+            <if test="sysUser.status != null">
+                status,
+            </if>
+            <if test="sysUser.delFlag != null">
+                del_flag,
+            </if>
+            <if test="sysUser.loginIp != null">
+                login_ip,
+            </if>
+            <if test="sysUser.loginDate != null">
+                login_date,
+            </if>
+            <if test="sysUser.createBy != null">
+                create_by,
+            </if>
+            <if test="sysUser.createTime != null">
+                create_time,
+            </if>
+            <if test="sysUser.updateBy != null">
+                update_by,
+            </if>
+            <if test="sysUser.updateTime != null">
+                update_time,
+            </if>
+            <if test="sysUser.remark != null">
+                remark
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUser.userId !=null ">
+                #{sysUser.userId,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.deptId !=null ">
+                #{sysUser.deptId,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.loginName !=null ">
+                #{sysUser.loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.userName !=null ">
+                #{sysUser.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.userType !=null ">
+                #{sysUser.userType,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.email !=null ">
+                #{sysUser.email,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.phonenumber !=null ">
+                #{sysUser.phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.sex !=null ">
+                #{sysUser.sex,jdbcType=CHAR},
+            </if>
+            <if test="sysUser.avatar !=null ">
+                #{sysUser.avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.password !=null ">
+                #{sysUser.password,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.salt !=null ">
+                #{sysUser.salt,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.status !=null ">
+                #{sysUser.status,jdbcType=CHAR},
+            </if>
+            <if test="sysUser.delFlag !=null ">
+                #{sysUser.delFlag,jdbcType=CHAR},
+            </if>
+            <if test="sysUser.loginIp !=null ">
+                #{sysUser.loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.loginDate !=null ">
+                #{sysUser.loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUser.createBy !=null ">
+                #{sysUser.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.createTime !=null ">
+                #{sysUser.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUser.updateBy !=null ">
+                #{sysUser.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.updateTime !=null ">
+                #{sysUser.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUser.remark !=null ">
+                #{sysUser.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="sysUser.userId !=null ">
+             #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.deptId !=null ">
+             #{deptId,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.loginName !=null ">
+             #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.userName !=null ">
+             #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.userType !=null ">
+             #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.email !=null ">
+             #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.phonenumber !=null ">
+             #{phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.sex !=null ">
+             #{sex,jdbcType=CHAR},
+            </if>
+            <if test="sysUser.avatar !=null ">
+             #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.password !=null ">
+             #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.salt !=null ">
+             #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.status !=null ">
+             #{status,jdbcType=CHAR},
+            </if>
+            <if test="sysUser.delFlag !=null ">
+             #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="sysUser.loginIp !=null ">
+             #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.loginDate !=null ">
+             #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUser.createBy !=null ">
+             #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.createTime !=null ">
+             #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUser.updateBy !=null ">
+             #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysUser.updateTime !=null ">
+             #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysUser.remark !=null ">
+             #{remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysUser">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from sys_user
+    </select>
+
+
+
+
+</mapper>

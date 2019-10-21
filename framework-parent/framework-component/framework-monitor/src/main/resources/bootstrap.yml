@@ -1,0 +1,10 @@
+server:
+  port: 8765
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: framework-monitor
+  profiles:
+    active: local

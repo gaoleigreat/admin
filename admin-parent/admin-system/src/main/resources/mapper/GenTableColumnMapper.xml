@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.GenTableColumnMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.GenTableColumn" id="BaseResultMap">
+        <result property="columnId" column="column_id"/>
+        <result property="tableId" column="table_id"/>
+        <result property="columnName" column="column_name"/>
+        <result property="columnComment" column="column_comment"/>
+        <result property="columnType" column="column_type"/>
+        <result property="javaType" column="java_type"/>
+        <result property="javaField" column="java_field"/>
+        <result property="isPk" column="is_pk"/>
+        <result property="isIncrement" column="is_increment"/>
+        <result property="isRequired" column="is_required"/>
+        <result property="isInsert" column="is_insert"/>
+        <result property="isEdit" column="is_edit"/>
+        <result property="isList" column="is_list"/>
+        <result property="isQuery" column="is_query"/>
+        <result property="queryType" column="query_type"/>
+        <result property="htmlType" column="html_type"/>
+        <result property="dictType" column="dict_type"/>
+        <result property="sort" column="sort"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        column_id ,
+        table_id ,
+        column_name ,
+        column_comment ,
+        column_type ,
+        java_type ,
+        java_field ,
+        is_pk ,
+        is_increment ,
+        is_required ,
+        is_insert ,
+        is_edit ,
+        is_list ,
+        is_query ,
+        query_type ,
+        html_type ,
+        dict_type ,
+        sort ,
+        create_by ,
+        create_time ,
+        update_by ,
+        update_time 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="genTableColumn.columnId != null">
+            and column_id = #{genTableColumn.columnId,jdbcType=BIGINT}
+         </if>
+         <if test="genTableColumn.tableId != null">
+            and table_id = #{genTableColumn.tableId,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.columnName != null">
+            and column_name = #{genTableColumn.columnName,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.columnComment != null">
+            and column_comment = #{genTableColumn.columnComment,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.columnType != null">
+            and column_type = #{genTableColumn.columnType,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.javaType != null">
+            and java_type = #{genTableColumn.javaType,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.javaField != null">
+            and java_field = #{genTableColumn.javaField,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.isPk != null">
+            and is_pk = #{genTableColumn.isPk,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.isIncrement != null">
+            and is_increment = #{genTableColumn.isIncrement,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.isRequired != null">
+            and is_required = #{genTableColumn.isRequired,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.isInsert != null">
+            and is_insert = #{genTableColumn.isInsert,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.isEdit != null">
+            and is_edit = #{genTableColumn.isEdit,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.isList != null">
+            and is_list = #{genTableColumn.isList,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.isQuery != null">
+            and is_query = #{genTableColumn.isQuery,jdbcType=CHAR}
+         </if>
+         <if test="genTableColumn.queryType != null">
+            and query_type = #{genTableColumn.queryType,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.htmlType != null">
+            and html_type = #{genTableColumn.htmlType,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.dictType != null">
+            and dict_type = #{genTableColumn.dictType,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.sort != null">
+            and sort = #{genTableColumn.sort,jdbcType=INTEGER}
+         </if>
+         <if test="genTableColumn.createBy != null">
+            and create_by = #{genTableColumn.createBy,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.createTime != null">
+            and create_time = #{genTableColumn.createTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="genTableColumn.updateBy != null">
+            and update_by = #{genTableColumn.updateBy,jdbcType=VARCHAR}
+         </if>
+         <if test="genTableColumn.updateTime != null">
+            and update_time = #{genTableColumn.updateTime,jdbcType=TIMESTAMP}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="genTableColumn.columnId != null">
+             column_id = #{genTableColumn.columnId,jdbcType=BIGINT},
+          </if>
+          <if test="genTableColumn.tableId != null">
+             table_id = #{genTableColumn.tableId,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.columnName != null">
+             column_name = #{genTableColumn.columnName,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.columnComment != null">
+             column_comment = #{genTableColumn.columnComment,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.columnType != null">
+             column_type = #{genTableColumn.columnType,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.javaType != null">
+             java_type = #{genTableColumn.javaType,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.javaField != null">
+             java_field = #{genTableColumn.javaField,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.isPk != null">
+             is_pk = #{genTableColumn.isPk,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.isIncrement != null">
+             is_increment = #{genTableColumn.isIncrement,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.isRequired != null">
+             is_required = #{genTableColumn.isRequired,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.isInsert != null">
+             is_insert = #{genTableColumn.isInsert,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.isEdit != null">
+             is_edit = #{genTableColumn.isEdit,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.isList != null">
+             is_list = #{genTableColumn.isList,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.isQuery != null">
+             is_query = #{genTableColumn.isQuery,jdbcType=CHAR},
+          </if>
+          <if test="genTableColumn.queryType != null">
+             query_type = #{genTableColumn.queryType,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.htmlType != null">
+             html_type = #{genTableColumn.htmlType,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.dictType != null">
+             dict_type = #{genTableColumn.dictType,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.sort != null">
+             sort = #{genTableColumn.sort,jdbcType=INTEGER},
+          </if>
+          <if test="genTableColumn.createBy != null">
+             create_by = #{genTableColumn.createBy,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.createTime != null">
+             create_time = #{genTableColumn.createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="genTableColumn.updateBy != null">
+             update_by = #{genTableColumn.updateBy,jdbcType=VARCHAR},
+          </if>
+          <if test="genTableColumn.updateTime != null">
+             update_time = #{genTableColumn.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="genTableColumn.columnId != null">
+               column_id,
+            </if>
+            <if test="genTableColumn.tableId != null">
+               table_id,
+            </if>
+            <if test="genTableColumn.columnName != null">
+               column_name,
+            </if>
+            <if test="genTableColumn.columnComment != null">
+               column_comment,
+            </if>
+            <if test="genTableColumn.columnType != null">
+               column_type,
+            </if>
+            <if test="genTableColumn.javaType != null">
+               java_type,
+            </if>
+            <if test="genTableColumn.javaField != null">
+               java_field,
+            </if>
+            <if test="genTableColumn.isPk != null">
+               is_pk,
+            </if>
+            <if test="genTableColumn.isIncrement != null">
+               is_increment,
+            </if>
+            <if test="genTableColumn.isRequired != null">
+               is_required,
+            </if>
+            <if test="genTableColumn.isInsert != null">
+               is_insert,
+            </if>
+            <if test="genTableColumn.isEdit != null">
+               is_edit,
+            </if>
+            <if test="genTableColumn.isList != null">
+               is_list,
+            </if>
+            <if test="genTableColumn.isQuery != null">
+               is_query,
+            </if>
+            <if test="genTableColumn.queryType != null">
+               query_type,
+            </if>
+            <if test="genTableColumn.htmlType != null">
+               html_type,
+            </if>
+            <if test="genTableColumn.dictType != null">
+               dict_type,
+            </if>
+            <if test="genTableColumn.sort != null">
+               sort,
+            </if>
+            <if test="genTableColumn.createBy != null">
+               create_by,
+            </if>
+            <if test="genTableColumn.createTime != null">
+               create_time,
+            </if>
+            <if test="genTableColumn.updateBy != null">
+               update_by,
+            </if>
+            <if test="genTableColumn.updateTime != null">
+               update_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="genTableColumn.columnId != null">
+             #{genTableColumn.columnId,jdbcType=BIGINT},
+             </if>
+             <if test="genTableColumn.tableId != null">
+             #{genTableColumn.tableId,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.columnName != null">
+             #{genTableColumn.columnName,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.columnComment != null">
+             #{genTableColumn.columnComment,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.columnType != null">
+             #{genTableColumn.columnType,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.javaType != null">
+             #{genTableColumn.javaType,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.javaField != null">
+             #{genTableColumn.javaField,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.isPk != null">
+             #{genTableColumn.isPk,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.isIncrement != null">
+             #{genTableColumn.isIncrement,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.isRequired != null">
+             #{genTableColumn.isRequired,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.isInsert != null">
+             #{genTableColumn.isInsert,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.isEdit != null">
+             #{genTableColumn.isEdit,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.isList != null">
+             #{genTableColumn.isList,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.isQuery != null">
+             #{genTableColumn.isQuery,jdbcType=CHAR},
+             </if>
+             <if test="genTableColumn.queryType != null">
+             #{genTableColumn.queryType,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.htmlType != null">
+             #{genTableColumn.htmlType,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.dictType != null">
+             #{genTableColumn.dictType,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.sort != null">
+             #{genTableColumn.sort,jdbcType=INTEGER},
+             </if>
+             <if test="genTableColumn.createBy != null">
+             #{genTableColumn.createBy,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.createTime != null">
+             #{genTableColumn.createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="genTableColumn.updateBy != null">
+             #{genTableColumn.updateBy,jdbcType=VARCHAR},
+             </if>
+             <if test="genTableColumn.updateTime != null">
+             #{genTableColumn.updateTime,jdbcType=TIMESTAMP}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into gen_table_column
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             column_id,
+             table_id,
+             column_name,
+             column_comment,
+             column_type,
+             java_type,
+             java_field,
+             is_pk,
+             is_increment,
+             is_required,
+             is_insert,
+             is_edit,
+             is_list,
+             is_query,
+             query_type,
+             html_type,
+             dict_type,
+             sort,
+             create_by,
+             create_time,
+             update_by,
+             update_time
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.columnId,jdbcType=BIGINT},
+                #{item.tableId,jdbcType=VARCHAR},
+                #{item.columnName,jdbcType=VARCHAR},
+                #{item.columnComment,jdbcType=VARCHAR},
+                #{item.columnType,jdbcType=VARCHAR},
+                #{item.javaType,jdbcType=VARCHAR},
+                #{item.javaField,jdbcType=VARCHAR},
+                #{item.isPk,jdbcType=CHAR},
+                #{item.isIncrement,jdbcType=CHAR},
+                #{item.isRequired,jdbcType=CHAR},
+                #{item.isInsert,jdbcType=CHAR},
+                #{item.isEdit,jdbcType=CHAR},
+                #{item.isList,jdbcType=CHAR},
+                #{item.isQuery,jdbcType=CHAR},
+                #{item.queryType,jdbcType=VARCHAR},
+                #{item.htmlType,jdbcType=VARCHAR},
+                #{item.dictType,jdbcType=VARCHAR},
+                #{item.sort,jdbcType=INTEGER},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateBy,jdbcType=VARCHAR},
+                #{item.updateTime,jdbcType=TIMESTAMP}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update gen_table_column
+            <set>
+                <trim suffixOverrides=",">
+                    column_id = #{item.columnId,jdbcType=BIGINT},
+                    table_id = #{item.tableId,jdbcType=VARCHAR},
+                    column_name = #{item.columnName,jdbcType=VARCHAR},
+                    column_comment = #{item.columnComment,jdbcType=VARCHAR},
+                    column_type = #{item.columnType,jdbcType=VARCHAR},
+                    java_type = #{item.javaType,jdbcType=VARCHAR},
+                    java_field = #{item.javaField,jdbcType=VARCHAR},
+                    is_pk = #{item.isPk,jdbcType=CHAR},
+                    is_increment = #{item.isIncrement,jdbcType=CHAR},
+                    is_required = #{item.isRequired,jdbcType=CHAR},
+                    is_insert = #{item.isInsert,jdbcType=CHAR},
+                    is_edit = #{item.isEdit,jdbcType=CHAR},
+                    is_list = #{item.isList,jdbcType=CHAR},
+                    is_query = #{item.isQuery,jdbcType=CHAR},
+                    query_type = #{item.queryType,jdbcType=VARCHAR},
+                    html_type = #{item.htmlType,jdbcType=VARCHAR},
+                    dict_type = #{item.dictType,jdbcType=VARCHAR},
+                    sort = #{item.sort,jdbcType=INTEGER},
+                    create_by = #{item.createBy,jdbcType=VARCHAR},
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                    update_by = #{item.updateBy,jdbcType=VARCHAR},
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where column_id = #{item.columnId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.GenTableColumn">
+        insert into gen_table_column
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             column_id ,
+             table_id ,
+             column_name ,
+             column_comment ,
+             column_type ,
+             java_type ,
+             java_field ,
+             is_pk ,
+             is_increment ,
+             is_required ,
+             is_insert ,
+             is_edit ,
+             is_list ,
+             is_query ,
+             query_type ,
+             html_type ,
+             dict_type ,
+             sort ,
+             create_by ,
+             create_time ,
+             update_by ,
+             update_time 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{genTableColumn.columnId,jdbcType=BIGINT},
+             #{genTableColumn.tableId,jdbcType=VARCHAR},
+             #{genTableColumn.columnName,jdbcType=VARCHAR},
+             #{genTableColumn.columnComment,jdbcType=VARCHAR},
+             #{genTableColumn.columnType,jdbcType=VARCHAR},
+             #{genTableColumn.javaType,jdbcType=VARCHAR},
+             #{genTableColumn.javaField,jdbcType=VARCHAR},
+             #{genTableColumn.isPk,jdbcType=CHAR},
+             #{genTableColumn.isIncrement,jdbcType=CHAR},
+             #{genTableColumn.isRequired,jdbcType=CHAR},
+             #{genTableColumn.isInsert,jdbcType=CHAR},
+             #{genTableColumn.isEdit,jdbcType=CHAR},
+             #{genTableColumn.isList,jdbcType=CHAR},
+             #{genTableColumn.isQuery,jdbcType=CHAR},
+             #{genTableColumn.queryType,jdbcType=VARCHAR},
+             #{genTableColumn.htmlType,jdbcType=VARCHAR},
+             #{genTableColumn.dictType,jdbcType=VARCHAR},
+             #{genTableColumn.sort,jdbcType=INTEGER},
+             #{genTableColumn.createBy,jdbcType=VARCHAR},
+             #{genTableColumn.createTime,jdbcType=TIMESTAMP},
+             #{genTableColumn.updateBy,jdbcType=VARCHAR},
+             #{genTableColumn.updateTime,jdbcType=TIMESTAMP}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{genTableColumn.columnId,jdbcType=BIGINT},
+          #{genTableColumn.tableId,jdbcType=VARCHAR},
+          #{genTableColumn.columnName,jdbcType=VARCHAR},
+          #{genTableColumn.columnComment,jdbcType=VARCHAR},
+          #{genTableColumn.columnType,jdbcType=VARCHAR},
+          #{genTableColumn.javaType,jdbcType=VARCHAR},
+          #{genTableColumn.javaField,jdbcType=VARCHAR},
+          #{genTableColumn.isPk,jdbcType=CHAR},
+          #{genTableColumn.isIncrement,jdbcType=CHAR},
+          #{genTableColumn.isRequired,jdbcType=CHAR},
+          #{genTableColumn.isInsert,jdbcType=CHAR},
+          #{genTableColumn.isEdit,jdbcType=CHAR},
+          #{genTableColumn.isList,jdbcType=CHAR},
+          #{genTableColumn.isQuery,jdbcType=CHAR},
+          #{genTableColumn.queryType,jdbcType=VARCHAR},
+          #{genTableColumn.htmlType,jdbcType=VARCHAR},
+          #{genTableColumn.dictType,jdbcType=VARCHAR},
+          #{genTableColumn.sort,jdbcType=INTEGER},
+          #{genTableColumn.createBy,jdbcType=VARCHAR},
+          #{genTableColumn.createTime,jdbcType=TIMESTAMP},
+          #{genTableColumn.updateBy,jdbcType=VARCHAR},
+          #{genTableColumn.updateTime,jdbcType=TIMESTAMP}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.GenTableColumn">
+        insert into gen_table_column
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="genTableColumn.columnId != null">
+                column_id,
+            </if>
+            <if test="genTableColumn.tableId != null">
+                table_id,
+            </if>
+            <if test="genTableColumn.columnName != null">
+                column_name,
+            </if>
+            <if test="genTableColumn.columnComment != null">
+                column_comment,
+            </if>
+            <if test="genTableColumn.columnType != null">
+                column_type,
+            </if>
+            <if test="genTableColumn.javaType != null">
+                java_type,
+            </if>
+            <if test="genTableColumn.javaField != null">
+                java_field,
+            </if>
+            <if test="genTableColumn.isPk != null">
+                is_pk,
+            </if>
+            <if test="genTableColumn.isIncrement != null">
+                is_increment,
+            </if>
+            <if test="genTableColumn.isRequired != null">
+                is_required,
+            </if>
+            <if test="genTableColumn.isInsert != null">
+                is_insert,
+            </if>
+            <if test="genTableColumn.isEdit != null">
+                is_edit,
+            </if>
+            <if test="genTableColumn.isList != null">
+                is_list,
+            </if>
+            <if test="genTableColumn.isQuery != null">
+                is_query,
+            </if>
+            <if test="genTableColumn.queryType != null">
+                query_type,
+            </if>
+            <if test="genTableColumn.htmlType != null">
+                html_type,
+            </if>
+            <if test="genTableColumn.dictType != null">
+                dict_type,
+            </if>
+            <if test="genTableColumn.sort != null">
+                sort,
+            </if>
+            <if test="genTableColumn.createBy != null">
+                create_by,
+            </if>
+            <if test="genTableColumn.createTime != null">
+                create_time,
+            </if>
+            <if test="genTableColumn.updateBy != null">
+                update_by,
+            </if>
+            <if test="genTableColumn.updateTime != null">
+                update_time
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="genTableColumn.columnId !=null ">
+                #{genTableColumn.columnId,jdbcType=BIGINT},
+            </if>
+            <if test="genTableColumn.tableId !=null ">
+                #{genTableColumn.tableId,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.columnName !=null ">
+                #{genTableColumn.columnName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.columnComment !=null ">
+                #{genTableColumn.columnComment,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.columnType !=null ">
+                #{genTableColumn.columnType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.javaType !=null ">
+                #{genTableColumn.javaType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.javaField !=null ">
+                #{genTableColumn.javaField,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.isPk !=null ">
+                #{genTableColumn.isPk,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isIncrement !=null ">
+                #{genTableColumn.isIncrement,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isRequired !=null ">
+                #{genTableColumn.isRequired,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isInsert !=null ">
+                #{genTableColumn.isInsert,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isEdit !=null ">
+                #{genTableColumn.isEdit,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isList !=null ">
+                #{genTableColumn.isList,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isQuery !=null ">
+                #{genTableColumn.isQuery,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.queryType !=null ">
+                #{genTableColumn.queryType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.htmlType !=null ">
+                #{genTableColumn.htmlType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.dictType !=null ">
+                #{genTableColumn.dictType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.sort !=null ">
+                #{genTableColumn.sort,jdbcType=INTEGER},
+            </if>
+            <if test="genTableColumn.createBy !=null ">
+                #{genTableColumn.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.createTime !=null ">
+                #{genTableColumn.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="genTableColumn.updateBy !=null ">
+                #{genTableColumn.updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.updateTime !=null ">
+                #{genTableColumn.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="genTableColumn.columnId !=null ">
+             #{columnId,jdbcType=BIGINT},
+            </if>
+            <if test="genTableColumn.tableId !=null ">
+             #{tableId,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.columnName !=null ">
+             #{columnName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.columnComment !=null ">
+             #{columnComment,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.columnType !=null ">
+             #{columnType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.javaType !=null ">
+             #{javaType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.javaField !=null ">
+             #{javaField,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.isPk !=null ">
+             #{isPk,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isIncrement !=null ">
+             #{isIncrement,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isRequired !=null ">
+             #{isRequired,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isInsert !=null ">
+             #{isInsert,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isEdit !=null ">
+             #{isEdit,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isList !=null ">
+             #{isList,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.isQuery !=null ">
+             #{isQuery,jdbcType=CHAR},
+            </if>
+            <if test="genTableColumn.queryType !=null ">
+             #{queryType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.htmlType !=null ">
+             #{htmlType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.dictType !=null ">
+             #{dictType,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.sort !=null ">
+             #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="genTableColumn.createBy !=null ">
+             #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.createTime !=null ">
+             #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="genTableColumn.updateBy !=null ">
+             #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="genTableColumn.updateTime !=null ">
+             #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.GenTableColumn">
+        select
+        <include refid="Base_Column_List"/>
+        from gen_table_column
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from gen_table_column
+    </select>
+
+
+
+
+</mapper>

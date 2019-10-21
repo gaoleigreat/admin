@@ -1,0 +1,37 @@
+spring:
+  cloud:
+    discovery:
+      enable: true
+      client:
+        simple:
+          local:
+            service-id: framework-zuul
+    config:
+      fail-fast: true
+      uri: http://localhost:8763
+      profile: local
+      label: master
+      retry:
+        max-attempts: 3
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+server:
+  port: 8770
+  servlet:
+    context-path: /
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

@@ -1,0 +1,26 @@
+package ${gentable.packageName}.entity;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import java.util.Date;
+import java.io.Serializable;
+@Data
+@Slf4j
+public class ${gentable.className}VO extends BaseVO implements Serializable {
+
+     private static final long serialVersionUID = 1L;
+
+<#list gentable.columns as field>
+
+    <#if (field.fieldName != "create_by") && (field.fieldName != "update_by") && (field.fieldName != "update_time") && (field.fieldName != "create_time")> /**
+     *${field.comment}VO
+     */</#if>
+    <#if (field.fieldName != "create_by") && (field.fieldName != "update_by") && (field.fieldName != "update_time") && (field.fieldName != "create_time")>@ApiModelProperty("${field.comment}")</#if>
+    <#if (field.fieldName != "create_by") && (field.fieldName != "update_by") && (field.fieldName != "update_time") && (field.fieldName != "create_time")>private ${field.javaType} ${field.javaFieldName};</#if>
+
+</#list>
+
+}

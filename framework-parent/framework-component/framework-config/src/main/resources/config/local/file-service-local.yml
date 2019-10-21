@@ -1,0 +1,12 @@
+swagger:
+  contact:
+    name: 高磊
+    email: 513684652@qq.com
+    url: https://www.baidu.com
+    phone: 18740462315
+
+  title: 后台接口api文档
+  version: 1.0
+  termsOfServiceUrl: https://www.baidu.com
+  routeIdentifier: /file-service-v2/
+

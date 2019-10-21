@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: framework-config
+  profiles:
+    active: local
+
+server:
+  port: 8763
+  servlet:
+    context-path: /
+

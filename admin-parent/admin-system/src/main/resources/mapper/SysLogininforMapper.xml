@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.SysLogininforMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.SysLogininfor" id="BaseResultMap">
+        <result property="infoId" column="info_id"/>
+        <result property="loginName" column="login_name"/>
+        <result property="ipaddr" column="ipaddr"/>
+        <result property="loginLocation" column="login_location"/>
+        <result property="browser" column="browser"/>
+        <result property="os" column="os"/>
+        <result property="status" column="status"/>
+        <result property="msg" column="msg"/>
+        <result property="loginTime" column="login_time"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        info_id ,
+        login_name ,
+        ipaddr ,
+        login_location ,
+        browser ,
+        os ,
+        status ,
+        msg ,
+        login_time 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="sysLogininfor.infoId != null">
+            and info_id = #{sysLogininfor.infoId,jdbcType=BIGINT}
+         </if>
+         <if test="sysLogininfor.loginName != null">
+            and login_name = #{sysLogininfor.loginName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysLogininfor.ipaddr != null">
+            and ipaddr = #{sysLogininfor.ipaddr,jdbcType=VARCHAR}
+         </if>
+         <if test="sysLogininfor.loginLocation != null">
+            and login_location = #{sysLogininfor.loginLocation,jdbcType=VARCHAR}
+         </if>
+         <if test="sysLogininfor.browser != null">
+            and browser = #{sysLogininfor.browser,jdbcType=VARCHAR}
+         </if>
+         <if test="sysLogininfor.os != null">
+            and os = #{sysLogininfor.os,jdbcType=VARCHAR}
+         </if>
+         <if test="sysLogininfor.status != null">
+            and status = #{sysLogininfor.status,jdbcType=CHAR}
+         </if>
+         <if test="sysLogininfor.msg != null">
+            and msg = #{sysLogininfor.msg,jdbcType=VARCHAR}
+         </if>
+         <if test="sysLogininfor.loginTime != null">
+            and login_time = #{sysLogininfor.loginTime,jdbcType=TIMESTAMP}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="sysLogininfor.infoId != null">
+             info_id = #{sysLogininfor.infoId,jdbcType=BIGINT},
+          </if>
+          <if test="sysLogininfor.loginName != null">
+             login_name = #{sysLogininfor.loginName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysLogininfor.ipaddr != null">
+             ipaddr = #{sysLogininfor.ipaddr,jdbcType=VARCHAR},
+          </if>
+          <if test="sysLogininfor.loginLocation != null">
+             login_location = #{sysLogininfor.loginLocation,jdbcType=VARCHAR},
+          </if>
+          <if test="sysLogininfor.browser != null">
+             browser = #{sysLogininfor.browser,jdbcType=VARCHAR},
+          </if>
+          <if test="sysLogininfor.os != null">
+             os = #{sysLogininfor.os,jdbcType=VARCHAR},
+          </if>
+          <if test="sysLogininfor.status != null">
+             status = #{sysLogininfor.status,jdbcType=CHAR},
+          </if>
+          <if test="sysLogininfor.msg != null">
+             msg = #{sysLogininfor.msg,jdbcType=VARCHAR},
+          </if>
+          <if test="sysLogininfor.loginTime != null">
+             login_time = #{sysLogininfor.loginTime,jdbcType=TIMESTAMP}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysLogininfor.infoId != null">
+               info_id,
+            </if>
+            <if test="sysLogininfor.loginName != null">
+               login_name,
+            </if>
+            <if test="sysLogininfor.ipaddr != null">
+               ipaddr,
+            </if>
+            <if test="sysLogininfor.loginLocation != null">
+               login_location,
+            </if>
+            <if test="sysLogininfor.browser != null">
+               browser,
+            </if>
+            <if test="sysLogininfor.os != null">
+               os,
+            </if>
+            <if test="sysLogininfor.status != null">
+               status,
+            </if>
+            <if test="sysLogininfor.msg != null">
+               msg,
+            </if>
+            <if test="sysLogininfor.loginTime != null">
+               login_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="sysLogininfor.infoId != null">
+             #{sysLogininfor.infoId,jdbcType=BIGINT},
+             </if>
+             <if test="sysLogininfor.loginName != null">
+             #{sysLogininfor.loginName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysLogininfor.ipaddr != null">
+             #{sysLogininfor.ipaddr,jdbcType=VARCHAR},
+             </if>
+             <if test="sysLogininfor.loginLocation != null">
+             #{sysLogininfor.loginLocation,jdbcType=VARCHAR},
+             </if>
+             <if test="sysLogininfor.browser != null">
+             #{sysLogininfor.browser,jdbcType=VARCHAR},
+             </if>
+             <if test="sysLogininfor.os != null">
+             #{sysLogininfor.os,jdbcType=VARCHAR},
+             </if>
+             <if test="sysLogininfor.status != null">
+             #{sysLogininfor.status,jdbcType=CHAR},
+             </if>
+             <if test="sysLogininfor.msg != null">
+             #{sysLogininfor.msg,jdbcType=VARCHAR},
+             </if>
+             <if test="sysLogininfor.loginTime != null">
+             #{sysLogininfor.loginTime,jdbcType=TIMESTAMP}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_logininfor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             info_id,
+             login_name,
+             ipaddr,
+             login_location,
+             browser,
+             os,
+             status,
+             msg,
+             login_time
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.infoId,jdbcType=BIGINT},
+                #{item.loginName,jdbcType=VARCHAR},
+                #{item.ipaddr,jdbcType=VARCHAR},
+                #{item.loginLocation,jdbcType=VARCHAR},
+                #{item.browser,jdbcType=VARCHAR},
+                #{item.os,jdbcType=VARCHAR},
+                #{item.status,jdbcType=CHAR},
+                #{item.msg,jdbcType=VARCHAR},
+                #{item.loginTime,jdbcType=TIMESTAMP}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_logininfor
+            <set>
+                <trim suffixOverrides=",">
+                    info_id = #{item.infoId,jdbcType=BIGINT},
+                    login_name = #{item.loginName,jdbcType=VARCHAR},
+                    ipaddr = #{item.ipaddr,jdbcType=VARCHAR},
+                    login_location = #{item.loginLocation,jdbcType=VARCHAR},
+                    browser = #{item.browser,jdbcType=VARCHAR},
+                    os = #{item.os,jdbcType=VARCHAR},
+                    status = #{item.status,jdbcType=CHAR},
+                    msg = #{item.msg,jdbcType=VARCHAR},
+                    login_time = #{item.loginTime,jdbcType=TIMESTAMP}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where info_id = #{item.infoId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysLogininfor">
+        insert into sys_logininfor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             info_id ,
+             login_name ,
+             ipaddr ,
+             login_location ,
+             browser ,
+             os ,
+             status ,
+             msg ,
+             login_time 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{sysLogininfor.infoId,jdbcType=BIGINT},
+             #{sysLogininfor.loginName,jdbcType=VARCHAR},
+             #{sysLogininfor.ipaddr,jdbcType=VARCHAR},
+             #{sysLogininfor.loginLocation,jdbcType=VARCHAR},
+             #{sysLogininfor.browser,jdbcType=VARCHAR},
+             #{sysLogininfor.os,jdbcType=VARCHAR},
+             #{sysLogininfor.status,jdbcType=CHAR},
+             #{sysLogininfor.msg,jdbcType=VARCHAR},
+             #{sysLogininfor.loginTime,jdbcType=TIMESTAMP}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{sysLogininfor.infoId,jdbcType=BIGINT},
+          #{sysLogininfor.loginName,jdbcType=VARCHAR},
+          #{sysLogininfor.ipaddr,jdbcType=VARCHAR},
+          #{sysLogininfor.loginLocation,jdbcType=VARCHAR},
+          #{sysLogininfor.browser,jdbcType=VARCHAR},
+          #{sysLogininfor.os,jdbcType=VARCHAR},
+          #{sysLogininfor.status,jdbcType=CHAR},
+          #{sysLogininfor.msg,jdbcType=VARCHAR},
+          #{sysLogininfor.loginTime,jdbcType=TIMESTAMP}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysLogininfor">
+        insert into sys_logininfor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysLogininfor.infoId != null">
+                info_id,
+            </if>
+            <if test="sysLogininfor.loginName != null">
+                login_name,
+            </if>
+            <if test="sysLogininfor.ipaddr != null">
+                ipaddr,
+            </if>
+            <if test="sysLogininfor.loginLocation != null">
+                login_location,
+            </if>
+            <if test="sysLogininfor.browser != null">
+                browser,
+            </if>
+            <if test="sysLogininfor.os != null">
+                os,
+            </if>
+            <if test="sysLogininfor.status != null">
+                status,
+            </if>
+            <if test="sysLogininfor.msg != null">
+                msg,
+            </if>
+            <if test="sysLogininfor.loginTime != null">
+                login_time
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysLogininfor.infoId !=null ">
+                #{sysLogininfor.infoId,jdbcType=BIGINT},
+            </if>
+            <if test="sysLogininfor.loginName !=null ">
+                #{sysLogininfor.loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.ipaddr !=null ">
+                #{sysLogininfor.ipaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.loginLocation !=null ">
+                #{sysLogininfor.loginLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.browser !=null ">
+                #{sysLogininfor.browser,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.os !=null ">
+                #{sysLogininfor.os,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.status !=null ">
+                #{sysLogininfor.status,jdbcType=CHAR},
+            </if>
+            <if test="sysLogininfor.msg !=null ">
+                #{sysLogininfor.msg,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.loginTime !=null ">
+                #{sysLogininfor.loginTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="sysLogininfor.infoId !=null ">
+             #{infoId,jdbcType=BIGINT},
+            </if>
+            <if test="sysLogininfor.loginName !=null ">
+             #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.ipaddr !=null ">
+             #{ipaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.loginLocation !=null ">
+             #{loginLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.browser !=null ">
+             #{browser,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.os !=null ">
+             #{os,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.status !=null ">
+             #{status,jdbcType=CHAR},
+            </if>
+            <if test="sysLogininfor.msg !=null ">
+             #{msg,jdbcType=VARCHAR},
+            </if>
+            <if test="sysLogininfor.loginTime !=null ">
+             #{loginTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysLogininfor">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_logininfor
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from sys_logininfor
+    </select>
+
+
+
+
+</mapper>

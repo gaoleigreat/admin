@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.GenTableMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.GenTable" id="BaseResultMap">
+        <result property="tableId" column="table_id"/>
+        <result property="tableName" column="table_name"/>
+        <result property="tableComment" column="table_comment"/>
+        <result property="className" column="class_name"/>
+        <result property="tplCategory" column="tpl_category"/>
+        <result property="packageName" column="package_name"/>
+        <result property="moduleName" column="module_name"/>
+        <result property="businessName" column="business_name"/>
+        <result property="functionName" column="function_name"/>
+        <result property="functionAuthor" column="function_author"/>
+        <result property="options" column="options"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        table_id ,
+        table_name ,
+        table_comment ,
+        class_name ,
+        tpl_category ,
+        package_name ,
+        module_name ,
+        business_name ,
+        function_name ,
+        function_author ,
+        options ,
+        create_by ,
+        create_time ,
+        update_by ,
+        update_time ,
+        remark 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="genTable.tableId != null">
+            and table_id = #{genTable.tableId,jdbcType=BIGINT}
+         </if>
+         <if test="genTable.tableName != null">
+            and table_name = #{genTable.tableName,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.tableComment != null">
+            and table_comment = #{genTable.tableComment,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.className != null">
+            and class_name = #{genTable.className,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.tplCategory != null">
+            and tpl_category = #{genTable.tplCategory,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.packageName != null">
+            and package_name = #{genTable.packageName,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.moduleName != null">
+            and module_name = #{genTable.moduleName,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.businessName != null">
+            and business_name = #{genTable.businessName,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.functionName != null">
+            and function_name = #{genTable.functionName,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.functionAuthor != null">
+            and function_author = #{genTable.functionAuthor,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.options != null">
+            and options = #{genTable.options,jdbcType=VARCHAR}
+         </if>
+         <if test="genTable.createBy != null">
+            and create_by = #{genTable.createBy,jdbcType=BIGINT}
+         </if>
+         <if test="genTable.createTime != null">
+            and create_time = #{genTable.createTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="genTable.updateBy != null">
+            and update_by = #{genTable.updateBy,jdbcType=BIGINT}
+         </if>
+         <if test="genTable.updateTime != null">
+            and update_time = #{genTable.updateTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="genTable.remark != null">
+            and remark = #{genTable.remark,jdbcType=VARCHAR}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="genTable.tableId != null">
+             table_id = #{genTable.tableId,jdbcType=BIGINT},
+          </if>
+          <if test="genTable.tableName != null">
+             table_name = #{genTable.tableName,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.tableComment != null">
+             table_comment = #{genTable.tableComment,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.className != null">
+             class_name = #{genTable.className,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.tplCategory != null">
+             tpl_category = #{genTable.tplCategory,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.packageName != null">
+             package_name = #{genTable.packageName,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.moduleName != null">
+             module_name = #{genTable.moduleName,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.businessName != null">
+             business_name = #{genTable.businessName,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.functionName != null">
+             function_name = #{genTable.functionName,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.functionAuthor != null">
+             function_author = #{genTable.functionAuthor,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.options != null">
+             options = #{genTable.options,jdbcType=VARCHAR},
+          </if>
+          <if test="genTable.createBy != null">
+             create_by = #{genTable.createBy,jdbcType=BIGINT},
+          </if>
+          <if test="genTable.createTime != null">
+             create_time = #{genTable.createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="genTable.updateBy != null">
+             update_by = #{genTable.updateBy,jdbcType=BIGINT},
+          </if>
+          <if test="genTable.updateTime != null">
+             update_time = #{genTable.updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="genTable.remark != null">
+             remark = #{genTable.remark,jdbcType=VARCHAR}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="genTable.tableId != null">
+               table_id,
+            </if>
+            <if test="genTable.tableName != null">
+               table_name,
+            </if>
+            <if test="genTable.tableComment != null">
+               table_comment,
+            </if>
+            <if test="genTable.className != null">
+               class_name,
+            </if>
+            <if test="genTable.tplCategory != null">
+               tpl_category,
+            </if>
+            <if test="genTable.packageName != null">
+               package_name,
+            </if>
+            <if test="genTable.moduleName != null">
+               module_name,
+            </if>
+            <if test="genTable.businessName != null">
+               business_name,
+            </if>
+            <if test="genTable.functionName != null">
+               function_name,
+            </if>
+            <if test="genTable.functionAuthor != null">
+               function_author,
+            </if>
+            <if test="genTable.options != null">
+               options,
+            </if>
+            <if test="genTable.createBy != null">
+               create_by,
+            </if>
+            <if test="genTable.createTime != null">
+               create_time,
+            </if>
+            <if test="genTable.updateBy != null">
+               update_by,
+            </if>
+            <if test="genTable.updateTime != null">
+               update_time,
+            </if>
+            <if test="genTable.remark != null">
+               remark
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="genTable.tableId != null">
+             #{genTable.tableId,jdbcType=BIGINT},
+             </if>
+             <if test="genTable.tableName != null">
+             #{genTable.tableName,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.tableComment != null">
+             #{genTable.tableComment,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.className != null">
+             #{genTable.className,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.tplCategory != null">
+             #{genTable.tplCategory,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.packageName != null">
+             #{genTable.packageName,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.moduleName != null">
+             #{genTable.moduleName,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.businessName != null">
+             #{genTable.businessName,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.functionName != null">
+             #{genTable.functionName,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.functionAuthor != null">
+             #{genTable.functionAuthor,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.options != null">
+             #{genTable.options,jdbcType=VARCHAR},
+             </if>
+             <if test="genTable.createBy != null">
+             #{genTable.createBy,jdbcType=BIGINT},
+             </if>
+             <if test="genTable.createTime != null">
+             #{genTable.createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="genTable.updateBy != null">
+             #{genTable.updateBy,jdbcType=BIGINT},
+             </if>
+             <if test="genTable.updateTime != null">
+             #{genTable.updateTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="genTable.remark != null">
+             #{genTable.remark,jdbcType=VARCHAR}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into gen_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             table_id,
+             table_name,
+             table_comment,
+             class_name,
+             tpl_category,
+             package_name,
+             module_name,
+             business_name,
+             function_name,
+             function_author,
+             options,
+             create_by,
+             create_time,
+             update_by,
+             update_time,
+             remark
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.tableId,jdbcType=BIGINT},
+                #{item.tableName,jdbcType=VARCHAR},
+                #{item.tableComment,jdbcType=VARCHAR},
+                #{item.className,jdbcType=VARCHAR},
+                #{item.tplCategory,jdbcType=VARCHAR},
+                #{item.packageName,jdbcType=VARCHAR},
+                #{item.moduleName,jdbcType=VARCHAR},
+                #{item.businessName,jdbcType=VARCHAR},
+                #{item.functionName,jdbcType=VARCHAR},
+                #{item.functionAuthor,jdbcType=VARCHAR},
+                #{item.options,jdbcType=VARCHAR},
+                #{item.createBy,jdbcType=BIGINT},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateBy,jdbcType=BIGINT},
+                #{item.updateTime,jdbcType=TIMESTAMP},
+                #{item.remark,jdbcType=VARCHAR}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update gen_table
+            <set>
+                <trim suffixOverrides=",">
+                    table_id = #{item.tableId,jdbcType=BIGINT},
+                    table_name = #{item.tableName,jdbcType=VARCHAR},
+                    table_comment = #{item.tableComment,jdbcType=VARCHAR},
+                    class_name = #{item.className,jdbcType=VARCHAR},
+                    tpl_category = #{item.tplCategory,jdbcType=VARCHAR},
+                    package_name = #{item.packageName,jdbcType=VARCHAR},
+                    module_name = #{item.moduleName,jdbcType=VARCHAR},
+                    business_name = #{item.businessName,jdbcType=VARCHAR},
+                    function_name = #{item.functionName,jdbcType=VARCHAR},
+                    function_author = #{item.functionAuthor,jdbcType=VARCHAR},
+                    options = #{item.options,jdbcType=VARCHAR},
+                    create_by = #{item.createBy,jdbcType=BIGINT},
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                    update_by = #{item.updateBy,jdbcType=BIGINT},
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                    remark = #{item.remark,jdbcType=VARCHAR}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where table_id = #{item.tableId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.GenTable">
+        insert into gen_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             table_id ,
+             table_name ,
+             table_comment ,
+             class_name ,
+             tpl_category ,
+             package_name ,
+             module_name ,
+             business_name ,
+             function_name ,
+             function_author ,
+             options ,
+             create_by ,
+             create_time ,
+             update_by ,
+             update_time ,
+             remark 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{genTable.tableId,jdbcType=BIGINT},
+             #{genTable.tableName,jdbcType=VARCHAR},
+             #{genTable.tableComment,jdbcType=VARCHAR},
+             #{genTable.className,jdbcType=VARCHAR},
+             #{genTable.tplCategory,jdbcType=VARCHAR},
+             #{genTable.packageName,jdbcType=VARCHAR},
+             #{genTable.moduleName,jdbcType=VARCHAR},
+             #{genTable.businessName,jdbcType=VARCHAR},
+             #{genTable.functionName,jdbcType=VARCHAR},
+             #{genTable.functionAuthor,jdbcType=VARCHAR},
+             #{genTable.options,jdbcType=VARCHAR},
+             #{genTable.createBy,jdbcType=BIGINT},
+             #{genTable.createTime,jdbcType=TIMESTAMP},
+             #{genTable.updateBy,jdbcType=BIGINT},
+             #{genTable.updateTime,jdbcType=TIMESTAMP},
+             #{genTable.remark,jdbcType=VARCHAR}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{genTable.tableId,jdbcType=BIGINT},
+          #{genTable.tableName,jdbcType=VARCHAR},
+          #{genTable.tableComment,jdbcType=VARCHAR},
+          #{genTable.className,jdbcType=VARCHAR},
+          #{genTable.tplCategory,jdbcType=VARCHAR},
+          #{genTable.packageName,jdbcType=VARCHAR},
+          #{genTable.moduleName,jdbcType=VARCHAR},
+          #{genTable.businessName,jdbcType=VARCHAR},
+          #{genTable.functionName,jdbcType=VARCHAR},
+          #{genTable.functionAuthor,jdbcType=VARCHAR},
+          #{genTable.options,jdbcType=VARCHAR},
+          #{genTable.createBy,jdbcType=BIGINT},
+          #{genTable.createTime,jdbcType=TIMESTAMP},
+          #{genTable.updateBy,jdbcType=BIGINT},
+          #{genTable.updateTime,jdbcType=TIMESTAMP},
+          #{genTable.remark,jdbcType=VARCHAR}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.GenTable">
+        insert into gen_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="genTable.tableId != null">
+                table_id,
+            </if>
+            <if test="genTable.tableName != null">
+                table_name,
+            </if>
+            <if test="genTable.tableComment != null">
+                table_comment,
+            </if>
+            <if test="genTable.className != null">
+                class_name,
+            </if>
+            <if test="genTable.tplCategory != null">
+                tpl_category,
+            </if>
+            <if test="genTable.packageName != null">
+                package_name,
+            </if>
+            <if test="genTable.moduleName != null">
+                module_name,
+            </if>
+            <if test="genTable.businessName != null">
+                business_name,
+            </if>
+            <if test="genTable.functionName != null">
+                function_name,
+            </if>
+            <if test="genTable.functionAuthor != null">
+                function_author,
+            </if>
+            <if test="genTable.options != null">
+                options,
+            </if>
+            <if test="genTable.createBy != null">
+                create_by,
+            </if>
+            <if test="genTable.createTime != null">
+                create_time,
+            </if>
+            <if test="genTable.updateBy != null">
+                update_by,
+            </if>
+            <if test="genTable.updateTime != null">
+                update_time,
+            </if>
+            <if test="genTable.remark != null">
+                remark
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="genTable.tableId !=null ">
+                #{genTable.tableId,jdbcType=BIGINT},
+            </if>
+            <if test="genTable.tableName !=null ">
+                #{genTable.tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.tableComment !=null ">
+                #{genTable.tableComment,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.className !=null ">
+                #{genTable.className,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.tplCategory !=null ">
+                #{genTable.tplCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.packageName !=null ">
+                #{genTable.packageName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.moduleName !=null ">
+                #{genTable.moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.businessName !=null ">
+                #{genTable.businessName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.functionName !=null ">
+                #{genTable.functionName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.functionAuthor !=null ">
+                #{genTable.functionAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.options !=null ">
+                #{genTable.options,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.createBy !=null ">
+                #{genTable.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="genTable.createTime !=null ">
+                #{genTable.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="genTable.updateBy !=null ">
+                #{genTable.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="genTable.updateTime !=null ">
+                #{genTable.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="genTable.remark !=null ">
+                #{genTable.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="genTable.tableId !=null ">
+             #{tableId,jdbcType=BIGINT},
+            </if>
+            <if test="genTable.tableName !=null ">
+             #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.tableComment !=null ">
+             #{tableComment,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.className !=null ">
+             #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.tplCategory !=null ">
+             #{tplCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.packageName !=null ">
+             #{packageName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.moduleName !=null ">
+             #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.businessName !=null ">
+             #{businessName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.functionName !=null ">
+             #{functionName,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.functionAuthor !=null ">
+             #{functionAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.options !=null ">
+             #{options,jdbcType=VARCHAR},
+            </if>
+            <if test="genTable.createBy !=null ">
+             #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="genTable.createTime !=null ">
+             #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="genTable.updateBy !=null ">
+             #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="genTable.updateTime !=null ">
+             #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="genTable.remark !=null ">
+             #{remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.GenTable">
+        select
+        <include refid="Base_Column_List"/>
+        from gen_table
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from gen_table
+    </select>
+
+
+
+
+</mapper>

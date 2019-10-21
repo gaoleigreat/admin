@@ -1,0 +1,10 @@
+server:
+  port: 8766
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: framework-gateway
+  profiles:
+    active: local

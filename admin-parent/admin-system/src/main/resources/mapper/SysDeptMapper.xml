@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.SysDeptMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.SysDept" id="BaseResultMap">
+        <result property="deptId" column="dept_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="ancestors" column="ancestors"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="leader" column="leader"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        dept_id ,
+        parent_id ,
+        ancestors ,
+        dept_name ,
+        order_num ,
+        leader ,
+        phone ,
+        email ,
+        status ,
+        del_flag ,
+        create_by ,
+        create_time ,
+        update_by ,
+        update_time 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="sysDept.deptId != null">
+            and dept_id = #{sysDept.deptId,jdbcType=BIGINT}
+         </if>
+         <if test="sysDept.parentId != null">
+            and parent_id = #{sysDept.parentId,jdbcType=BIGINT}
+         </if>
+         <if test="sysDept.ancestors != null">
+            and ancestors = #{sysDept.ancestors,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.deptName != null">
+            and dept_name = #{sysDept.deptName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.orderNum != null">
+            and order_num = #{sysDept.orderNum,jdbcType=INTEGER}
+         </if>
+         <if test="sysDept.leader != null">
+            and leader = #{sysDept.leader,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.phone != null">
+            and phone = #{sysDept.phone,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.email != null">
+            and email = #{sysDept.email,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.status != null">
+            and status = #{sysDept.status,jdbcType=CHAR}
+         </if>
+         <if test="sysDept.delFlag != null">
+            and del_flag = #{sysDept.delFlag,jdbcType=CHAR}
+         </if>
+         <if test="sysDept.createBy != null">
+            and create_by = #{sysDept.createBy,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.createTime != null">
+            and create_time = #{sysDept.createTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysDept.updateBy != null">
+            and update_by = #{sysDept.updateBy,jdbcType=VARCHAR}
+         </if>
+         <if test="sysDept.updateTime != null">
+            and update_time = #{sysDept.updateTime,jdbcType=TIMESTAMP}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="sysDept.deptId != null">
+             dept_id = #{sysDept.deptId,jdbcType=BIGINT},
+          </if>
+          <if test="sysDept.parentId != null">
+             parent_id = #{sysDept.parentId,jdbcType=BIGINT},
+          </if>
+          <if test="sysDept.ancestors != null">
+             ancestors = #{sysDept.ancestors,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.deptName != null">
+             dept_name = #{sysDept.deptName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.orderNum != null">
+             order_num = #{sysDept.orderNum,jdbcType=INTEGER},
+          </if>
+          <if test="sysDept.leader != null">
+             leader = #{sysDept.leader,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.phone != null">
+             phone = #{sysDept.phone,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.email != null">
+             email = #{sysDept.email,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.status != null">
+             status = #{sysDept.status,jdbcType=CHAR},
+          </if>
+          <if test="sysDept.delFlag != null">
+             del_flag = #{sysDept.delFlag,jdbcType=CHAR},
+          </if>
+          <if test="sysDept.createBy != null">
+             create_by = #{sysDept.createBy,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.createTime != null">
+             create_time = #{sysDept.createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysDept.updateBy != null">
+             update_by = #{sysDept.updateBy,jdbcType=VARCHAR},
+          </if>
+          <if test="sysDept.updateTime != null">
+             update_time = #{sysDept.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysDept.deptId != null">
+               dept_id,
+            </if>
+            <if test="sysDept.parentId != null">
+               parent_id,
+            </if>
+            <if test="sysDept.ancestors != null">
+               ancestors,
+            </if>
+            <if test="sysDept.deptName != null">
+               dept_name,
+            </if>
+            <if test="sysDept.orderNum != null">
+               order_num,
+            </if>
+            <if test="sysDept.leader != null">
+               leader,
+            </if>
+            <if test="sysDept.phone != null">
+               phone,
+            </if>
+            <if test="sysDept.email != null">
+               email,
+            </if>
+            <if test="sysDept.status != null">
+               status,
+            </if>
+            <if test="sysDept.delFlag != null">
+               del_flag,
+            </if>
+            <if test="sysDept.createBy != null">
+               create_by,
+            </if>
+            <if test="sysDept.createTime != null">
+               create_time,
+            </if>
+            <if test="sysDept.updateBy != null">
+               update_by,
+            </if>
+            <if test="sysDept.updateTime != null">
+               update_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="sysDept.deptId != null">
+             #{sysDept.deptId,jdbcType=BIGINT},
+             </if>
+             <if test="sysDept.parentId != null">
+             #{sysDept.parentId,jdbcType=BIGINT},
+             </if>
+             <if test="sysDept.ancestors != null">
+             #{sysDept.ancestors,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.deptName != null">
+             #{sysDept.deptName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.orderNum != null">
+             #{sysDept.orderNum,jdbcType=INTEGER},
+             </if>
+             <if test="sysDept.leader != null">
+             #{sysDept.leader,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.phone != null">
+             #{sysDept.phone,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.email != null">
+             #{sysDept.email,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.status != null">
+             #{sysDept.status,jdbcType=CHAR},
+             </if>
+             <if test="sysDept.delFlag != null">
+             #{sysDept.delFlag,jdbcType=CHAR},
+             </if>
+             <if test="sysDept.createBy != null">
+             #{sysDept.createBy,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.createTime != null">
+             #{sysDept.createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysDept.updateBy != null">
+             #{sysDept.updateBy,jdbcType=VARCHAR},
+             </if>
+             <if test="sysDept.updateTime != null">
+             #{sysDept.updateTime,jdbcType=TIMESTAMP}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             dept_id,
+             parent_id,
+             ancestors,
+             dept_name,
+             order_num,
+             leader,
+             phone,
+             email,
+             status,
+             del_flag,
+             create_by,
+             create_time,
+             update_by,
+             update_time
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.deptId,jdbcType=BIGINT},
+                #{item.parentId,jdbcType=BIGINT},
+                #{item.ancestors,jdbcType=VARCHAR},
+                #{item.deptName,jdbcType=VARCHAR},
+                #{item.orderNum,jdbcType=INTEGER},
+                #{item.leader,jdbcType=VARCHAR},
+                #{item.phone,jdbcType=VARCHAR},
+                #{item.email,jdbcType=VARCHAR},
+                #{item.status,jdbcType=CHAR},
+                #{item.delFlag,jdbcType=CHAR},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateBy,jdbcType=VARCHAR},
+                #{item.updateTime,jdbcType=TIMESTAMP}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_dept
+            <set>
+                <trim suffixOverrides=",">
+                    dept_id = #{item.deptId,jdbcType=BIGINT},
+                    parent_id = #{item.parentId,jdbcType=BIGINT},
+                    ancestors = #{item.ancestors,jdbcType=VARCHAR},
+                    dept_name = #{item.deptName,jdbcType=VARCHAR},
+                    order_num = #{item.orderNum,jdbcType=INTEGER},
+                    leader = #{item.leader,jdbcType=VARCHAR},
+                    phone = #{item.phone,jdbcType=VARCHAR},
+                    email = #{item.email,jdbcType=VARCHAR},
+                    status = #{item.status,jdbcType=CHAR},
+                    del_flag = #{item.delFlag,jdbcType=CHAR},
+                    create_by = #{item.createBy,jdbcType=VARCHAR},
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                    update_by = #{item.updateBy,jdbcType=VARCHAR},
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where dept_id = #{item.deptId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysDept">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             dept_id ,
+             parent_id ,
+             ancestors ,
+             dept_name ,
+             order_num ,
+             leader ,
+             phone ,
+             email ,
+             status ,
+             del_flag ,
+             create_by ,
+             create_time ,
+             update_by ,
+             update_time 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{sysDept.deptId,jdbcType=BIGINT},
+             #{sysDept.parentId,jdbcType=BIGINT},
+             #{sysDept.ancestors,jdbcType=VARCHAR},
+             #{sysDept.deptName,jdbcType=VARCHAR},
+             #{sysDept.orderNum,jdbcType=INTEGER},
+             #{sysDept.leader,jdbcType=VARCHAR},
+             #{sysDept.phone,jdbcType=VARCHAR},
+             #{sysDept.email,jdbcType=VARCHAR},
+             #{sysDept.status,jdbcType=CHAR},
+             #{sysDept.delFlag,jdbcType=CHAR},
+             #{sysDept.createBy,jdbcType=VARCHAR},
+             #{sysDept.createTime,jdbcType=TIMESTAMP},
+             #{sysDept.updateBy,jdbcType=VARCHAR},
+             #{sysDept.updateTime,jdbcType=TIMESTAMP}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{sysDept.deptId,jdbcType=BIGINT},
+          #{sysDept.parentId,jdbcType=BIGINT},
+          #{sysDept.ancestors,jdbcType=VARCHAR},
+          #{sysDept.deptName,jdbcType=VARCHAR},
+          #{sysDept.orderNum,jdbcType=INTEGER},
+          #{sysDept.leader,jdbcType=VARCHAR},
+          #{sysDept.phone,jdbcType=VARCHAR},
+          #{sysDept.email,jdbcType=VARCHAR},
+          #{sysDept.status,jdbcType=CHAR},
+          #{sysDept.delFlag,jdbcType=CHAR},
+          #{sysDept.createBy,jdbcType=VARCHAR},
+          #{sysDept.createTime,jdbcType=TIMESTAMP},
+          #{sysDept.updateBy,jdbcType=VARCHAR},
+          #{sysDept.updateTime,jdbcType=TIMESTAMP}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysDept">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysDept.deptId != null">
+                dept_id,
+            </if>
+            <if test="sysDept.parentId != null">
+                parent_id,
+            </if>
+            <if test="sysDept.ancestors != null">
+                ancestors,
+            </if>
+            <if test="sysDept.deptName != null">
+                dept_name,
+            </if>
+            <if test="sysDept.orderNum != null">
+                order_num,
+            </if>
+            <if test="sysDept.leader != null">
+                leader,
+            </if>
+            <if test="sysDept.phone != null">
+                phone,
+            </if>
+            <if test="sysDept.email != null">
+                email,
+            </if>
+            <if test="sysDept.status != null">
+                status,
+            </if>
+            <if test="sysDept.delFlag != null">
+                del_flag,
+            </if>
+            <if test="sysDept.createBy != null">
+                create_by,
+            </if>
+            <if test="sysDept.createTime != null">
+                create_time,
+            </if>
+            <if test="sysDept.updateBy != null">
+                update_by,
+            </if>
+            <if test="sysDept.updateTime != null">
+                update_time
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysDept.deptId !=null ">
+                #{sysDept.deptId,jdbcType=BIGINT},
+            </if>
+            <if test="sysDept.parentId !=null ">
+                #{sysDept.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sysDept.ancestors !=null ">
+                #{sysDept.ancestors,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.deptName !=null ">
+                #{sysDept.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.orderNum !=null ">
+                #{sysDept.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="sysDept.leader !=null ">
+                #{sysDept.leader,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.phone !=null ">
+                #{sysDept.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.email !=null ">
+                #{sysDept.email,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.status !=null ">
+                #{sysDept.status,jdbcType=CHAR},
+            </if>
+            <if test="sysDept.delFlag !=null ">
+                #{sysDept.delFlag,jdbcType=CHAR},
+            </if>
+            <if test="sysDept.createBy !=null ">
+                #{sysDept.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.createTime !=null ">
+                #{sysDept.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysDept.updateBy !=null ">
+                #{sysDept.updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.updateTime !=null ">
+                #{sysDept.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="sysDept.deptId !=null ">
+             #{deptId,jdbcType=BIGINT},
+            </if>
+            <if test="sysDept.parentId !=null ">
+             #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sysDept.ancestors !=null ">
+             #{ancestors,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.deptName !=null ">
+             #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.orderNum !=null ">
+             #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="sysDept.leader !=null ">
+             #{leader,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.phone !=null ">
+             #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.email !=null ">
+             #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.status !=null ">
+             #{status,jdbcType=CHAR},
+            </if>
+            <if test="sysDept.delFlag !=null ">
+             #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="sysDept.createBy !=null ">
+             #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.createTime !=null ">
+             #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysDept.updateBy !=null ">
+             #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="sysDept.updateTime !=null ">
+             #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysDept">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from sys_dept
+    </select>
+
+
+
+
+</mapper>

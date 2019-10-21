@@ -1,0 +1,203 @@
+package ${gentable.packageName}.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import ${gentable.packageName}.mapper.${gentable.className}Mapper;
+import ${gentable.packageName}.service.I${gentable.className}Service;
+import ${gentable.packageName}.entity.${gentable.className};
+
+import java.util.List;
+
+
+/**
+ * @description I${gentable.className} Service层
+ * @author ${gentable.author}
+ * @since jdk1.8
+ */
+@Service
+public class ${gentable.className}ServiceImpl implements I${gentable.className}Service{
+
+
+     @Autowired
+     private ${gentable.className}Mapper ${gentable.camelCaseclassName}Mapper;
+
+    /**
+     * 创建${gentable.className}
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @Override
+    public Integer insert(${gentable.className} ${gentable.camelCaseclassName}){
+        if(${gentable.camelCaseclassName} ==null){
+            return 0;
+        }
+        return ${gentable.camelCaseclassName}Mapper.insert(${gentable.camelCaseclassName});
+    }
+
+
+    /**
+     * 根据主键删除
+     *
+     * @param ${gentable.pkColumn.javaFieldName}
+     * @return
+     */
+    @Override
+    public Integer deleteByPrimaryKey(${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}){
+        if(${gentable.pkColumn.javaFieldName} ==null){
+            return 0;
+        }
+        Integer result = ${gentable.camelCaseclassName}Mapper.deleteById(${gentable.pkColumn.javaFieldName});
+        return result;
+
+    }
+
+    /**
+     * 修改${gentable.className}
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+    */
+    @Override
+    public Integer updateByPrimaryKey(${gentable.className} ${gentable.camelCaseclassName}){
+        if(${gentable.camelCaseclassName} ==null){
+            return 0;
+        }
+        return ${gentable.camelCaseclassName}Mapper.updateById(${gentable.camelCaseclassName});
+    }
+
+    /**
+    * 根据主键查询
+    *
+    * @param ${gentable.pkColumn.javaFieldName}
+    * @return
+    */
+    @Override
+    public ${gentable.className} selectByPrimaryKey(${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}){
+        if(${gentable.pkColumn.javaFieldName} ==null){
+            return null;
+        }
+        ${gentable.className} ${gentable.camelCaseclassName}  = ${gentable.camelCaseclassName}Mapper.selectById(${gentable.pkColumn.javaFieldName});
+        if (${gentable.camelCaseclassName} == null){
+            return null;
+        }
+        return ${gentable.camelCaseclassName};
+    }
+
+    /**
+     * 分页查询
+     * @param pageIndex
+     * @param pageSize
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return IPage<${gentable.className}>
+     */
+    @Override
+    public IPage<${gentable.className}> queryPage(int pageIndex, int pageSize,${gentable.className} ${gentable.camelCaseclassName}){
+        QueryWrapper<${gentable.className}> queryWrapper = Wrappers.query();
+        IPage<${gentable.className}> ipage = ${gentable.camelCaseclassName}Mapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
+        return ipage;
+    };
+
+    /**
+    * 批量插入
+    * @param list List<${gentable.className}
+    * @return Integer
+    */
+    @Override
+    public Integer batchInsert(List<${gentable.className}> list){
+        if (CollectionUtils.isEmpty(list)){
+            return 0;
+        }
+        else{
+            return ${gentable.camelCaseclassName}Mapper.batchInsert(list);
+        }
+    }
+
+    /**
+     * 批量更新
+     * @param list List<${gentable.className}>
+     * @return Integer
+     */
+    @Override
+    public Integer batchUpdate(List<${gentable.className}> list){
+        if (CollectionUtils.isEmpty(list)){
+            return 0;
+        }
+        else{
+            return ${gentable.camelCaseclassName}Mapper.batchInsert(list);
+        }
+    }
+
+    /**
+     * 批量删除
+     * @param list List<${gentable.pkColumn.javaType} >
+     * @return Integer
+    */
+    public Integer deleteBatchIds(List<${gentable.pkColumn.javaType}> list){
+        if (CollectionUtils.isEmpty(list)){
+            return 0;
+        } else{
+            return ${gentable.camelCaseclassName}Mapper.deleteBatchIds(list);
+        }
+    }
+    /**
+     * 存在即更新
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return Integer
+     */
+    @Override
+    public Integer upsert(${gentable.className} ${gentable.camelCaseclassName}){
+
+        if (${gentable.camelCaseclassName} == null){
+            return 0;
+        }
+        else{
+            return ${gentable.camelCaseclassName}Mapper.upsert(${gentable.camelCaseclassName});
+        }
+
+    }
+
+    /**
+     * 存在即更新，可选择具体属性
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return Integer
+     */
+    @Override
+    public Integer upsertSelective(${gentable.className} ${gentable.camelCaseclassName}){
+        if (${gentable.camelCaseclassName} == null){
+            return 0;
+        }
+        else{
+            return ${gentable.camelCaseclassName}Mapper.upsert(${gentable.camelCaseclassName});
+        }
+    }
+
+    /**
+     * 条件查询
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return List<${gentable.className}>
+    */
+    @Override
+    public List<${gentable.className}> query(${gentable.className} ${gentable.camelCaseclassName}){
+        if (${gentable.camelCaseclassName} == null){
+            return null;
+        }
+        else{
+            return ${gentable.camelCaseclassName}Mapper.query(${gentable.camelCaseclassName});
+        }
+    }
+
+    /**
+     * 查询总数
+     * @return Integer
+     */
+    @Override
+    public Long queryTotalCount(){
+        return ${gentable.camelCaseclassName}Mapper.queryTotalCount();
+    }
+}

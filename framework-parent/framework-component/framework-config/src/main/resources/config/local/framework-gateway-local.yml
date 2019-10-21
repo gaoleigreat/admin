@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: api-system-service
+          uri: lb://system-service
+          predicates:
+            - Path=/system-service/**
+          filters:
+            - StripPrefix=1
+        - id: api-file-service
+          uri: lb://file-service
+          predicates:
+            - Path=/file-service/**
+          filters:
+            - StripPrefix=1

@@ -1,0 +1,5 @@
+zuul:
+  routes:
+    system-service: /system-service/**
+    file-service: /file-service/**
+  ignored-services: '*'

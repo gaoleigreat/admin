@@ -1,0 +1,114 @@
+package ${gentable.packageName}.service;
+
+import java.util.List;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Param;
+import javax.validation.constraints.NotNull;
+import ${gentable.packageName}.entity.${gentable.className};
+
+
+/**
+ * @description I${gentable.className} Service层
+ * @author ${gentable.author}
+ * @since jdk1.8
+ */
+public interface I${gentable.className}Service {
+
+
+
+    /**
+     * 创建${gentable.className}
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    Integer insert(@NotNull(message = "添加失败，参数不能为空")${gentable.className} ${gentable.camelCaseclassName});
+
+
+    /**
+     * 根据主键删除
+     *
+     * @param ${gentable.pkColumn.javaFieldName}
+     * @return
+     */
+    Integer deleteByPrimaryKey(@NotNull(message = "删除失败，参数不能为空")${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+
+    /**
+     * 修改${gentable.className}
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+    */
+    Integer updateByPrimaryKey(@NotNull(message = "添加失败，参数不能为空")${gentable.className} ${gentable.camelCaseclassName});
+
+
+    /**
+    * 根据主键查询
+    *
+    * @param ${gentable.pkColumn.javaFieldName}
+    * @return
+    */
+    ${gentable.className} selectByPrimaryKey(@NotNull(message = "查询失败，参数不能为空")${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+
+
+    /**
+     * 分页查询
+     * @param pageIndex
+     * @param pageSize
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return IPage<${gentable.className}>
+     */
+    IPage<${gentable.className}> queryPage(int pageIndex, int pageSize, ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+    * 批量插入
+    * @param list List<${gentable.className}
+    * @return Integer
+    */
+    Integer batchInsert(List<${gentable.className}> list);
+
+    /**
+     * 批量更新
+     * @param list List<${gentable.className}>
+     * @return Integer
+     */
+    Integer batchUpdate(List<${gentable.className}> list);
+
+    /**
+     * 批量删除
+     * @param list List<${gentable.pkColumn.javaType} >
+     * @return Integer
+     */
+    Integer deleteBatchIds(List<${gentable.pkColumn.javaType}> list);
+
+    /**
+     * 存在即更新
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return Integer
+     */
+    Integer upsert(@Param("${gentable.camelCaseclassName}") ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 存在即更新，可选择具体属性
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return Integer
+     */
+    Integer upsertSelective(${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 条件查询
+     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @return List<${gentable.className}>
+    */
+    List<${gentable.className}> query(${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 查询总数
+     * @return Integer
+     */
+    Long queryTotalCount();
+
+
+}

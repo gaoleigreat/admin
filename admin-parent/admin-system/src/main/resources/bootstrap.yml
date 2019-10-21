@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: system-service
+  profiles:
+    active: local
+
+
+application:
+  description: 系统服务
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.SysRoleMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.SysRole" id="BaseResultMap">
+        <result property="roleId" column="role_id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleKey" column="role_key"/>
+        <result property="roleSort" column="role_sort"/>
+        <result property="dataScope" column="data_scope"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        role_id ,
+        role_name ,
+        role_key ,
+        role_sort ,
+        data_scope ,
+        status ,
+        del_flag ,
+        create_by ,
+        create_time ,
+        update_by ,
+        update_time ,
+        remark 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="sysRole.roleId != null">
+            and role_id = #{sysRole.roleId,jdbcType=BIGINT}
+         </if>
+         <if test="sysRole.roleName != null">
+            and role_name = #{sysRole.roleName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysRole.roleKey != null">
+            and role_key = #{sysRole.roleKey,jdbcType=VARCHAR}
+         </if>
+         <if test="sysRole.roleSort != null">
+            and role_sort = #{sysRole.roleSort,jdbcType=INTEGER}
+         </if>
+         <if test="sysRole.dataScope != null">
+            and data_scope = #{sysRole.dataScope,jdbcType=CHAR}
+         </if>
+         <if test="sysRole.status != null">
+            and status = #{sysRole.status,jdbcType=CHAR}
+         </if>
+         <if test="sysRole.delFlag != null">
+            and del_flag = #{sysRole.delFlag,jdbcType=CHAR}
+         </if>
+         <if test="sysRole.createBy != null">
+            and create_by = #{sysRole.createBy,jdbcType=BIGINT}
+         </if>
+         <if test="sysRole.createTime != null">
+            and create_time = #{sysRole.createTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysRole.updateBy != null">
+            and update_by = #{sysRole.updateBy,jdbcType=BIGINT}
+         </if>
+         <if test="sysRole.updateTime != null">
+            and update_time = #{sysRole.updateTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysRole.remark != null">
+            and remark = #{sysRole.remark,jdbcType=VARCHAR}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="sysRole.roleId != null">
+             role_id = #{sysRole.roleId,jdbcType=BIGINT},
+          </if>
+          <if test="sysRole.roleName != null">
+             role_name = #{sysRole.roleName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysRole.roleKey != null">
+             role_key = #{sysRole.roleKey,jdbcType=VARCHAR},
+          </if>
+          <if test="sysRole.roleSort != null">
+             role_sort = #{sysRole.roleSort,jdbcType=INTEGER},
+          </if>
+          <if test="sysRole.dataScope != null">
+             data_scope = #{sysRole.dataScope,jdbcType=CHAR},
+          </if>
+          <if test="sysRole.status != null">
+             status = #{sysRole.status,jdbcType=CHAR},
+          </if>
+          <if test="sysRole.delFlag != null">
+             del_flag = #{sysRole.delFlag,jdbcType=CHAR},
+          </if>
+          <if test="sysRole.createBy != null">
+             create_by = #{sysRole.createBy,jdbcType=BIGINT},
+          </if>
+          <if test="sysRole.createTime != null">
+             create_time = #{sysRole.createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysRole.updateBy != null">
+             update_by = #{sysRole.updateBy,jdbcType=BIGINT},
+          </if>
+          <if test="sysRole.updateTime != null">
+             update_time = #{sysRole.updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysRole.remark != null">
+             remark = #{sysRole.remark,jdbcType=VARCHAR}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysRole.roleId != null">
+               role_id,
+            </if>
+            <if test="sysRole.roleName != null">
+               role_name,
+            </if>
+            <if test="sysRole.roleKey != null">
+               role_key,
+            </if>
+            <if test="sysRole.roleSort != null">
+               role_sort,
+            </if>
+            <if test="sysRole.dataScope != null">
+               data_scope,
+            </if>
+            <if test="sysRole.status != null">
+               status,
+            </if>
+            <if test="sysRole.delFlag != null">
+               del_flag,
+            </if>
+            <if test="sysRole.createBy != null">
+               create_by,
+            </if>
+            <if test="sysRole.createTime != null">
+               create_time,
+            </if>
+            <if test="sysRole.updateBy != null">
+               update_by,
+            </if>
+            <if test="sysRole.updateTime != null">
+               update_time,
+            </if>
+            <if test="sysRole.remark != null">
+               remark
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="sysRole.roleId != null">
+             #{sysRole.roleId,jdbcType=BIGINT},
+             </if>
+             <if test="sysRole.roleName != null">
+             #{sysRole.roleName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysRole.roleKey != null">
+             #{sysRole.roleKey,jdbcType=VARCHAR},
+             </if>
+             <if test="sysRole.roleSort != null">
+             #{sysRole.roleSort,jdbcType=INTEGER},
+             </if>
+             <if test="sysRole.dataScope != null">
+             #{sysRole.dataScope,jdbcType=CHAR},
+             </if>
+             <if test="sysRole.status != null">
+             #{sysRole.status,jdbcType=CHAR},
+             </if>
+             <if test="sysRole.delFlag != null">
+             #{sysRole.delFlag,jdbcType=CHAR},
+             </if>
+             <if test="sysRole.createBy != null">
+             #{sysRole.createBy,jdbcType=BIGINT},
+             </if>
+             <if test="sysRole.createTime != null">
+             #{sysRole.createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysRole.updateBy != null">
+             #{sysRole.updateBy,jdbcType=BIGINT},
+             </if>
+             <if test="sysRole.updateTime != null">
+             #{sysRole.updateTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysRole.remark != null">
+             #{sysRole.remark,jdbcType=VARCHAR}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             role_id,
+             role_name,
+             role_key,
+             role_sort,
+             data_scope,
+             status,
+             del_flag,
+             create_by,
+             create_time,
+             update_by,
+             update_time,
+             remark
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.roleId,jdbcType=BIGINT},
+                #{item.roleName,jdbcType=VARCHAR},
+                #{item.roleKey,jdbcType=VARCHAR},
+                #{item.roleSort,jdbcType=INTEGER},
+                #{item.dataScope,jdbcType=CHAR},
+                #{item.status,jdbcType=CHAR},
+                #{item.delFlag,jdbcType=CHAR},
+                #{item.createBy,jdbcType=BIGINT},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateBy,jdbcType=BIGINT},
+                #{item.updateTime,jdbcType=TIMESTAMP},
+                #{item.remark,jdbcType=VARCHAR}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_role
+            <set>
+                <trim suffixOverrides=",">
+                    role_id = #{item.roleId,jdbcType=BIGINT},
+                    role_name = #{item.roleName,jdbcType=VARCHAR},
+                    role_key = #{item.roleKey,jdbcType=VARCHAR},
+                    role_sort = #{item.roleSort,jdbcType=INTEGER},
+                    data_scope = #{item.dataScope,jdbcType=CHAR},
+                    status = #{item.status,jdbcType=CHAR},
+                    del_flag = #{item.delFlag,jdbcType=CHAR},
+                    create_by = #{item.createBy,jdbcType=BIGINT},
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                    update_by = #{item.updateBy,jdbcType=BIGINT},
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                    remark = #{item.remark,jdbcType=VARCHAR}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where role_id = #{item.roleId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysRole">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             role_id ,
+             role_name ,
+             role_key ,
+             role_sort ,
+             data_scope ,
+             status ,
+             del_flag ,
+             create_by ,
+             create_time ,
+             update_by ,
+             update_time ,
+             remark 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{sysRole.roleId,jdbcType=BIGINT},
+             #{sysRole.roleName,jdbcType=VARCHAR},
+             #{sysRole.roleKey,jdbcType=VARCHAR},
+             #{sysRole.roleSort,jdbcType=INTEGER},
+             #{sysRole.dataScope,jdbcType=CHAR},
+             #{sysRole.status,jdbcType=CHAR},
+             #{sysRole.delFlag,jdbcType=CHAR},
+             #{sysRole.createBy,jdbcType=BIGINT},
+             #{sysRole.createTime,jdbcType=TIMESTAMP},
+             #{sysRole.updateBy,jdbcType=BIGINT},
+             #{sysRole.updateTime,jdbcType=TIMESTAMP},
+             #{sysRole.remark,jdbcType=VARCHAR}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{sysRole.roleId,jdbcType=BIGINT},
+          #{sysRole.roleName,jdbcType=VARCHAR},
+          #{sysRole.roleKey,jdbcType=VARCHAR},
+          #{sysRole.roleSort,jdbcType=INTEGER},
+          #{sysRole.dataScope,jdbcType=CHAR},
+          #{sysRole.status,jdbcType=CHAR},
+          #{sysRole.delFlag,jdbcType=CHAR},
+          #{sysRole.createBy,jdbcType=BIGINT},
+          #{sysRole.createTime,jdbcType=TIMESTAMP},
+          #{sysRole.updateBy,jdbcType=BIGINT},
+          #{sysRole.updateTime,jdbcType=TIMESTAMP},
+          #{sysRole.remark,jdbcType=VARCHAR}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysRole">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysRole.roleId != null">
+                role_id,
+            </if>
+            <if test="sysRole.roleName != null">
+                role_name,
+            </if>
+            <if test="sysRole.roleKey != null">
+                role_key,
+            </if>
+            <if test="sysRole.roleSort != null">
+                role_sort,
+            </if>
+            <if test="sysRole.dataScope != null">
+                data_scope,
+            </if>
+            <if test="sysRole.status != null">
+                status,
+            </if>
+            <if test="sysRole.delFlag != null">
+                del_flag,
+            </if>
+            <if test="sysRole.createBy != null">
+                create_by,
+            </if>
+            <if test="sysRole.createTime != null">
+                create_time,
+            </if>
+            <if test="sysRole.updateBy != null">
+                update_by,
+            </if>
+            <if test="sysRole.updateTime != null">
+                update_time,
+            </if>
+            <if test="sysRole.remark != null">
+                remark
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysRole.roleId !=null ">
+                #{sysRole.roleId,jdbcType=BIGINT},
+            </if>
+            <if test="sysRole.roleName !=null ">
+                #{sysRole.roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysRole.roleKey !=null ">
+                #{sysRole.roleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysRole.roleSort !=null ">
+                #{sysRole.roleSort,jdbcType=INTEGER},
+            </if>
+            <if test="sysRole.dataScope !=null ">
+                #{sysRole.dataScope,jdbcType=CHAR},
+            </if>
+            <if test="sysRole.status !=null ">
+                #{sysRole.status,jdbcType=CHAR},
+            </if>
+            <if test="sysRole.delFlag !=null ">
+                #{sysRole.delFlag,jdbcType=CHAR},
+            </if>
+            <if test="sysRole.createBy !=null ">
+                #{sysRole.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysRole.createTime !=null ">
+                #{sysRole.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysRole.updateBy !=null ">
+                #{sysRole.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysRole.updateTime !=null ">
+                #{sysRole.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysRole.remark !=null ">
+                #{sysRole.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="sysRole.roleId !=null ">
+             #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="sysRole.roleName !=null ">
+             #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysRole.roleKey !=null ">
+             #{roleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysRole.roleSort !=null ">
+             #{roleSort,jdbcType=INTEGER},
+            </if>
+            <if test="sysRole.dataScope !=null ">
+             #{dataScope,jdbcType=CHAR},
+            </if>
+            <if test="sysRole.status !=null ">
+             #{status,jdbcType=CHAR},
+            </if>
+            <if test="sysRole.delFlag !=null ">
+             #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="sysRole.createBy !=null ">
+             #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysRole.createTime !=null ">
+             #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysRole.updateBy !=null ">
+             #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysRole.updateTime !=null ">
+             #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysRole.remark !=null ">
+             #{remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysRole">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from sys_role
+    </select>
+
+
+
+
+</mapper>

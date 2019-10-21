@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.SysConfigMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.system.entity.SysConfig" id="BaseResultMap">
+        <result property="configId" column="config_id"/>
+        <result property="configName" column="config_name"/>
+        <result property="configKey" column="config_key"/>
+        <result property="configValue" column="config_value"/>
+        <result property="configType" column="config_type"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        config_id ,
+        config_name ,
+        config_key ,
+        config_value ,
+        config_type ,
+        create_by ,
+        create_time ,
+        update_by ,
+        update_time ,
+        remark 
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+         <if test="sysConfig.configId != null">
+            and config_id = #{sysConfig.configId,jdbcType=BIGINT}
+         </if>
+         <if test="sysConfig.configName != null">
+            and config_name = #{sysConfig.configName,jdbcType=VARCHAR}
+         </if>
+         <if test="sysConfig.configKey != null">
+            and config_key = #{sysConfig.configKey,jdbcType=VARCHAR}
+         </if>
+         <if test="sysConfig.configValue != null">
+            and config_value = #{sysConfig.configValue,jdbcType=VARCHAR}
+         </if>
+         <if test="sysConfig.configType != null">
+            and config_type = #{sysConfig.configType,jdbcType=CHAR}
+         </if>
+         <if test="sysConfig.createBy != null">
+            and create_by = #{sysConfig.createBy,jdbcType=BIGINT}
+         </if>
+         <if test="sysConfig.createTime != null">
+            and create_time = #{sysConfig.createTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysConfig.updateBy != null">
+            and update_by = #{sysConfig.updateBy,jdbcType=BIGINT}
+         </if>
+         <if test="sysConfig.updateTime != null">
+            and update_time = #{sysConfig.updateTime,jdbcType=TIMESTAMP}
+         </if>
+         <if test="sysConfig.remark != null">
+            and remark = #{sysConfig.remark,jdbcType=VARCHAR}
+         </if>
+    </sql>
+
+
+
+
+    <!--基本更新字段-->
+    <sql id="Base_Update_Column">
+        <set>
+          <if test="sysConfig.configId != null">
+             config_id = #{sysConfig.configId,jdbcType=BIGINT},
+          </if>
+          <if test="sysConfig.configName != null">
+             config_name = #{sysConfig.configName,jdbcType=VARCHAR},
+          </if>
+          <if test="sysConfig.configKey != null">
+             config_key = #{sysConfig.configKey,jdbcType=VARCHAR},
+          </if>
+          <if test="sysConfig.configValue != null">
+             config_value = #{sysConfig.configValue,jdbcType=VARCHAR},
+          </if>
+          <if test="sysConfig.configType != null">
+             config_type = #{sysConfig.configType,jdbcType=CHAR},
+          </if>
+          <if test="sysConfig.createBy != null">
+             create_by = #{sysConfig.createBy,jdbcType=BIGINT},
+          </if>
+          <if test="sysConfig.createTime != null">
+             create_time = #{sysConfig.createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysConfig.updateBy != null">
+             update_by = #{sysConfig.updateBy,jdbcType=BIGINT},
+          </if>
+          <if test="sysConfig.updateTime != null">
+             update_time = #{sysConfig.updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="sysConfig.remark != null">
+             remark = #{sysConfig.remark,jdbcType=VARCHAR}
+          </if>
+        </set>
+    </sql>
+
+
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysConfig.configId != null">
+               config_id,
+            </if>
+            <if test="sysConfig.configName != null">
+               config_name,
+            </if>
+            <if test="sysConfig.configKey != null">
+               config_key,
+            </if>
+            <if test="sysConfig.configValue != null">
+               config_value,
+            </if>
+            <if test="sysConfig.configType != null">
+               config_type,
+            </if>
+            <if test="sysConfig.createBy != null">
+               create_by,
+            </if>
+            <if test="sysConfig.createTime != null">
+               create_time,
+            </if>
+            <if test="sysConfig.updateBy != null">
+               update_by,
+            </if>
+            <if test="sysConfig.updateTime != null">
+               update_time,
+            </if>
+            <if test="sysConfig.remark != null">
+               remark
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="sysConfig.configId != null">
+             #{sysConfig.configId,jdbcType=BIGINT},
+             </if>
+             <if test="sysConfig.configName != null">
+             #{sysConfig.configName,jdbcType=VARCHAR},
+             </if>
+             <if test="sysConfig.configKey != null">
+             #{sysConfig.configKey,jdbcType=VARCHAR},
+             </if>
+             <if test="sysConfig.configValue != null">
+             #{sysConfig.configValue,jdbcType=VARCHAR},
+             </if>
+             <if test="sysConfig.configType != null">
+             #{sysConfig.configType,jdbcType=CHAR},
+             </if>
+             <if test="sysConfig.createBy != null">
+             #{sysConfig.createBy,jdbcType=BIGINT},
+             </if>
+             <if test="sysConfig.createTime != null">
+             #{sysConfig.createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysConfig.updateBy != null">
+             #{sysConfig.updateBy,jdbcType=BIGINT},
+             </if>
+             <if test="sysConfig.updateTime != null">
+             #{sysConfig.updateTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="sysConfig.remark != null">
+             #{sysConfig.remark,jdbcType=VARCHAR}
+             </if>
+        </trim>
+    </sql>
+
+
+
+    <!--批量添加记录到数据库表中-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             config_id,
+             config_name,
+             config_key,
+             config_value,
+             config_type,
+             create_by,
+             create_time,
+             update_by,
+             update_time,
+             remark
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.configId,jdbcType=BIGINT},
+                #{item.configName,jdbcType=VARCHAR},
+                #{item.configKey,jdbcType=VARCHAR},
+                #{item.configValue,jdbcType=VARCHAR},
+                #{item.configType,jdbcType=CHAR},
+                #{item.createBy,jdbcType=BIGINT},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateBy,jdbcType=BIGINT},
+                #{item.updateTime,jdbcType=TIMESTAMP},
+                #{item.remark,jdbcType=VARCHAR}
+            </trim>
+        </foreach>
+    </insert>
+
+
+
+    <!-- 根据主键批量更新数据库表中的记录-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_config
+            <set>
+                <trim suffixOverrides=",">
+                    config_id = #{item.configId,jdbcType=BIGINT},
+                    config_name = #{item.configName,jdbcType=VARCHAR},
+                    config_key = #{item.configKey,jdbcType=VARCHAR},
+                    config_value = #{item.configValue,jdbcType=VARCHAR},
+                    config_type = #{item.configType,jdbcType=CHAR},
+                    create_by = #{item.createBy,jdbcType=BIGINT},
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                    update_by = #{item.updateBy,jdbcType=BIGINT},
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                    remark = #{item.remark,jdbcType=VARCHAR}
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where config_id = #{item.configId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!--存在即更新否则插入-->
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysConfig">
+        insert into sys_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             config_id ,
+             config_name ,
+             config_key ,
+             config_value ,
+             config_type ,
+             create_by ,
+             create_time ,
+             update_by ,
+             update_time ,
+             remark 
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+             #{sysConfig.configId,jdbcType=BIGINT},
+             #{sysConfig.configName,jdbcType=VARCHAR},
+             #{sysConfig.configKey,jdbcType=VARCHAR},
+             #{sysConfig.configValue,jdbcType=VARCHAR},
+             #{sysConfig.configType,jdbcType=CHAR},
+             #{sysConfig.createBy,jdbcType=BIGINT},
+             #{sysConfig.createTime,jdbcType=TIMESTAMP},
+             #{sysConfig.updateBy,jdbcType=BIGINT},
+             #{sysConfig.updateTime,jdbcType=TIMESTAMP},
+             #{sysConfig.remark,jdbcType=VARCHAR}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+          #{sysConfig.configId,jdbcType=BIGINT},
+          #{sysConfig.configName,jdbcType=VARCHAR},
+          #{sysConfig.configKey,jdbcType=VARCHAR},
+          #{sysConfig.configValue,jdbcType=VARCHAR},
+          #{sysConfig.configType,jdbcType=CHAR},
+          #{sysConfig.createBy,jdbcType=BIGINT},
+          #{sysConfig.createTime,jdbcType=TIMESTAMP},
+          #{sysConfig.updateBy,jdbcType=BIGINT},
+          #{sysConfig.updateTime,jdbcType=TIMESTAMP},
+          #{sysConfig.remark,jdbcType=VARCHAR}
+        </trim>
+    </update>
+
+
+    <!--带有空值检查的存在即更新否则插入-->
+    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysConfig">
+        insert into sys_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysConfig.configId != null">
+                config_id,
+            </if>
+            <if test="sysConfig.configName != null">
+                config_name,
+            </if>
+            <if test="sysConfig.configKey != null">
+                config_key,
+            </if>
+            <if test="sysConfig.configValue != null">
+                config_value,
+            </if>
+            <if test="sysConfig.configType != null">
+                config_type,
+            </if>
+            <if test="sysConfig.createBy != null">
+                create_by,
+            </if>
+            <if test="sysConfig.createTime != null">
+                create_time,
+            </if>
+            <if test="sysConfig.updateBy != null">
+                update_by,
+            </if>
+            <if test="sysConfig.updateTime != null">
+                update_time,
+            </if>
+            <if test="sysConfig.remark != null">
+                remark
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysConfig.configId !=null ">
+                #{sysConfig.configId,jdbcType=BIGINT},
+            </if>
+            <if test="sysConfig.configName !=null ">
+                #{sysConfig.configName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysConfig.configKey !=null ">
+                #{sysConfig.configKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysConfig.configValue !=null ">
+                #{sysConfig.configValue,jdbcType=VARCHAR},
+            </if>
+            <if test="sysConfig.configType !=null ">
+                #{sysConfig.configType,jdbcType=CHAR},
+            </if>
+            <if test="sysConfig.createBy !=null ">
+                #{sysConfig.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysConfig.createTime !=null ">
+                #{sysConfig.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysConfig.updateBy !=null ">
+                #{sysConfig.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysConfig.updateTime !=null ">
+                #{sysConfig.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysConfig.remark !=null ">
+                #{sysConfig.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="sysConfig.configId !=null ">
+             #{configId,jdbcType=BIGINT},
+            </if>
+            <if test="sysConfig.configName !=null ">
+             #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysConfig.configKey !=null ">
+             #{configKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysConfig.configValue !=null ">
+             #{configValue,jdbcType=VARCHAR},
+            </if>
+            <if test="sysConfig.configType !=null ">
+             #{configType,jdbcType=CHAR},
+            </if>
+            <if test="sysConfig.createBy !=null ">
+             #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysConfig.createTime !=null ">
+             #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysConfig.updateBy !=null ">
+             #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysConfig.updateTime !=null ">
+             #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysConfig.remark !=null ">
+             #{remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysConfig">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_config
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotalCount" resultType="long">
+        select count(*) from sys_config
+    </select>
+
+
+
+
+</mapper>
