@@ -16,12 +16,12 @@ public class ${gentable.className} extends BaseEntity implements Serializable {
 
 <#list gentable.columns as field>
 
-    <#if (field.fieldName != "create_by") && (field.fieldName != "update_by") && (field.fieldName != "update_time") && (field.fieldName != "create_time")> /**
+    /**
      *${field.comment}
-     */</#if>
+     */
     <#if field.key == "PRI">@TableId</#if>
-    <#if (field.fieldName != "create_by") && (field.fieldName != "update_by") && (field.fieldName != "update_time") && (field.fieldName != "create_time")>@ApiModelProperty("${field.comment}")</#if>
-    <#if (field.fieldName != "create_by") && (field.fieldName != "update_by") && (field.fieldName != "update_time") && (field.fieldName != "create_time")>private ${field.javaType} ${field.javaFieldName};</#if>
+    @ApiModelProperty("${field.comment}")
+    private ${field.javaType} ${field.javaFieldName};
 
 </#list>
 

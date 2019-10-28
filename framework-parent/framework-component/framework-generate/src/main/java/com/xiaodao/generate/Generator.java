@@ -35,7 +35,6 @@ public class Generator {
 
 
         exam.forEach(e -> {
-            if (e.getTableName().equals("data_file")) {
 
 
                 try {
@@ -60,7 +59,7 @@ public class Generator {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-            }
+
         });
 
 
