@@ -31,5 +31,9 @@
             <artifactId>framework-common-core</artifactId>
             <version>${framework.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

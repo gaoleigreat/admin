@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MultipartSupportConfig1 {
+public class MultipartSupportConfig {
 
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;

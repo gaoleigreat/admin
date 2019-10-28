@@ -29,6 +29,9 @@ server:
   port: 8769
   servlet:
     context-path: /
+  max-http-header-size: 204800000
+  tomcat:
+    max-http-post-size: 2048000000
 management:
   endpoints:
     web:
@@ -48,5 +51,6 @@ mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/*/*/mapper/*Mapper.xml
   # 如果是放在resource目录 classpath:/mapper/**.xml
   mapper-locations: classpath:/mapper/**.xml
+
 
 

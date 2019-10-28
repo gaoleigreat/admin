@@ -159,7 +159,7 @@ public class SysMenuController {
             log.error(mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".") + 1));
             log.error("id :{}", id);
         });
-        return RespVOBuilder.success(files.length);
+        return fileClient.uploads(files);
     }
 
     @ApiOperation(value = "单个文件上传", notes = "单个文件上传")
