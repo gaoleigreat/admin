@@ -17,7 +17,7 @@ public class GenConfig {
     /**
      * 生成包路径
      */
-    public static String packageName = "com.xiaodao.system";
+    public static String packageName = "com.lego.perception.data";
 
 
     /**
@@ -34,6 +34,12 @@ public class GenConfig {
      * 表前缀(类名不会包含表前缀)
      */
     public static String tablePrefix = "sys";
+
+
+    /**
+     * 表前缀(类名不会包含表前缀)
+     */
+    public static boolean extendsBase = true;
 
     public static String getAuthor() {
         return author;

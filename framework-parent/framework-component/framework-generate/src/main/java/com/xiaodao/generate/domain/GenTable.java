@@ -66,4 +66,9 @@ public class GenTable implements Serializable {
      */
     private List<GenTableColumn> columns;
 
+    /**
+     * 是否集成Base
+     */
+    private String extendsBase;
+
 }
