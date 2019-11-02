@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_config")
-public class SysConfig extends BaseEntity implements Serializable {
+public class SysConfig implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *参数主键
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysConfig extends BaseEntity implements Serializable {
     private Long configId;
 
 
-     /**
+    /**
      *参数名称
      */
     
@@ -31,7 +31,7 @@ public class SysConfig extends BaseEntity implements Serializable {
     private String configName;
 
 
-     /**
+    /**
      *参数键名
      */
     
@@ -39,7 +39,7 @@ public class SysConfig extends BaseEntity implements Serializable {
     private String configKey;
 
 
-     /**
+    /**
      *参数键值
      */
     
@@ -47,7 +47,7 @@ public class SysConfig extends BaseEntity implements Serializable {
     private String configValue;
 
 
-     /**
+    /**
      *系统内置（Y是 N否）
      */
     
@@ -55,31 +55,39 @@ public class SysConfig extends BaseEntity implements Serializable {
     private String configType;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

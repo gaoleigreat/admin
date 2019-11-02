@@ -1,7 +1,6 @@
 package com.xiaodao.system.mapper;
 
 import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import com.xiaodao.system.entity.GenTableColumn;
@@ -12,19 +11,17 @@ import com.xiaodao.system.entity.GenTableColumn;
  * @author高磊
  * @since jdk1.8
  */
-public interface GenTableColumnMapper extends BaseMapper<GenTableColumn> {
+public interface GenTableColumnMapper extends BaseMapper<GenTableColumn>{
 
     /**
-     * 批量插入
-     *
-     * @param list List<GenTableColumn
-     * @return Integer
-     */
+    * 批量插入
+    * @param list List<GenTableColumn
+    * @return Integer
+    */
     Integer batchInsert(List<GenTableColumn> list);
 
     /**
      * 批量更新
-     *
      * @param list List<GenTableColumn>
      * @return Integer
      */
@@ -32,7 +29,6 @@ public interface GenTableColumnMapper extends BaseMapper<GenTableColumn> {
 
     /**
      * 存在即更新
-     *
      * @param genTableColumn GenTableColumn
      * @return Integer
      */
@@ -40,7 +36,6 @@ public interface GenTableColumnMapper extends BaseMapper<GenTableColumn> {
 
     /**
      * 存在即更新，可选择具体属性
-     *
      * @param genTableColumn GenTableColumn
      * @return Integer
      */
@@ -48,15 +43,13 @@ public interface GenTableColumnMapper extends BaseMapper<GenTableColumn> {
 
     /**
      * 条件查询
-     *
      * @param genTableColumn GenTableColumn
      * @return List<GenTableColumn>
-     */
+    */
     List<GenTableColumn> query(@Param("genTableColumn") GenTableColumn genTableColumn);
 
     /**
      * 查询总数
-     *
      * @return Integer
      */
     Long queryTotalCount();

@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 参数配置表
+ * SysConfig
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysConfig")
-@Api(value = "参数配置表管理", tags = "参数配置表管理")
+@Api(value = "SysConfig管理", tags = "SysConfig管理")
 @Validated
 @Slf4j
 public class SysConfigController {
     @Autowired
     private ISysConfigService sysConfigService;
 
-    @ApiOperation(value = "分页查询参数配置表", notes = "分页查询参数配置表")
+    @ApiOperation(value = "分页查询SysConfig", notes = "分页查询SysConfig")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysConfigController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键configId查询参数配置表", notes = "通过主键configId查询参数配置表")
+    @ApiOperation(value = "通过主键configId查询SysConfig", notes = "通过主键configId查询SysConfig")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "configId", paramType = "path", value = "configId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysConfigController {
         SysConfig sysConfig =
             sysConfigService.selectByPrimaryKey(configId);
         if (sysConfig == null){
-            return RespVOBuilder.failure("当前参数配置表不存在");
+            return RespVOBuilder.failure("当前SysConfig不存在");
         } else{
             return RespVOBuilder.success(sysConfig);
         }
     }
 
-    @ApiOperation(value = "通过主键configId删除参数配置表", notes = "通过主键configId删除参数配置表")
+    @ApiOperation(value = "通过主键configId删除SysConfig", notes = "通过主键configId删除SysConfig")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "configId", paramType = "path", value = "configId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysConfigController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "configId") Long configId) {
         Integer num = sysConfigService.deleteByPrimaryKey(configId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除参数配置表失败");
+            return RespVOBuilder.failure("删除SysConfig失败");
         } else {
-            return RespVOBuilder.success("删除参数配置表成功");
+            return RespVOBuilder.success("删除SysConfig成功");
         }
     }
 
-    @ApiOperation(value = "新增参数配置表", notes = "新增参数配置表")
+    @ApiOperation(value = "新增SysConfig", notes = "新增SysConfig")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysConfigController {
         }
         Integer num = sysConfigService.insert(sysConfig);
         if (num == 0) {
-            return RespVOBuilder.failure("添加参数配置表失败");
+            return RespVOBuilder.failure("添加SysConfig失败");
         } else {
-            return RespVOBuilder.success("添加参数配置表成功");
+            return RespVOBuilder.success("添加SysConfig成功");
         }
     }
 
-    @ApiOperation(value = "修改参数配置表", notes = "修改参数配置表")
+    @ApiOperation(value = "修改SysConfig", notes = "修改SysConfig")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysConfigController {
         }
         Integer num = sysConfigService.updateByPrimaryKey(sysConfig);
         if (num == 0) {
-            return RespVOBuilder.failure("修改参数配置表失败");
+            return RespVOBuilder.failure("修改SysConfig失败");
         } else {
-            return RespVOBuilder.success("修改参数配置表成功");
+            return RespVOBuilder.success("修改SysConfig成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键configId批量删除参数配置表", notes = "通过主键configId批量删除参数配置表")
+    @ApiOperation(value = "通过主键configId批量删除SysConfig", notes = "通过主键configId批量删除SysConfig")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysConfigController {
         }
         Integer num = sysConfigService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除参数配置表失败");
+            return RespVOBuilder.failure("批量删除SysConfig失败");
         } else {
-            return RespVOBuilder.success("批量删除参数配置表成功");
+            return RespVOBuilder.success("批量删除SysConfig成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询参数配置表", notes = "条件查询参数配置表")
+    @ApiOperation(value = "条件查询SysConfig", notes = "条件查询SysConfig")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

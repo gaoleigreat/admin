@@ -1,5 +1,7 @@
 package com.xiaodao.generate;
 
+import com.xiaodao.generate.util.DBConnectionPool;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,7 +31,7 @@ public class DataBaseConnection {
 
 
     public Connection getConnection(){
-        return this.conn;
+        return DBConnectionPool.getInstance().getConnection();
     }
 
     public void close(){

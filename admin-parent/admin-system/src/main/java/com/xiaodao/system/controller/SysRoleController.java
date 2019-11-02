@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 角色信息表
+ * SysRole
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysRole")
-@Api(value = "角色信息表管理", tags = "角色信息表管理")
+@Api(value = "SysRole管理", tags = "SysRole管理")
 @Validated
 @Slf4j
 public class SysRoleController {
     @Autowired
     private ISysRoleService sysRoleService;
 
-    @ApiOperation(value = "分页查询角色信息表", notes = "分页查询角色信息表")
+    @ApiOperation(value = "分页查询SysRole", notes = "分页查询SysRole")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysRoleController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键roleId查询角色信息表", notes = "通过主键roleId查询角色信息表")
+    @ApiOperation(value = "通过主键roleId查询SysRole", notes = "通过主键roleId查询SysRole")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysRoleController {
         SysRole sysRole =
             sysRoleService.selectByPrimaryKey(roleId);
         if (sysRole == null){
-            return RespVOBuilder.failure("当前角色信息表不存在");
+            return RespVOBuilder.failure("当前SysRole不存在");
         } else{
             return RespVOBuilder.success(sysRole);
         }
     }
 
-    @ApiOperation(value = "通过主键roleId删除角色信息表", notes = "通过主键roleId删除角色信息表")
+    @ApiOperation(value = "通过主键roleId删除SysRole", notes = "通过主键roleId删除SysRole")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysRoleController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "roleId") Long roleId) {
         Integer num = sysRoleService.deleteByPrimaryKey(roleId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除角色信息表失败");
+            return RespVOBuilder.failure("删除SysRole失败");
         } else {
-            return RespVOBuilder.success("删除角色信息表成功");
+            return RespVOBuilder.success("删除SysRole成功");
         }
     }
 
-    @ApiOperation(value = "新增角色信息表", notes = "新增角色信息表")
+    @ApiOperation(value = "新增SysRole", notes = "新增SysRole")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysRoleController {
         }
         Integer num = sysRoleService.insert(sysRole);
         if (num == 0) {
-            return RespVOBuilder.failure("添加角色信息表失败");
+            return RespVOBuilder.failure("添加SysRole失败");
         } else {
-            return RespVOBuilder.success("添加角色信息表成功");
+            return RespVOBuilder.success("添加SysRole成功");
         }
     }
 
-    @ApiOperation(value = "修改角色信息表", notes = "修改角色信息表")
+    @ApiOperation(value = "修改SysRole", notes = "修改SysRole")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysRoleController {
         }
         Integer num = sysRoleService.updateByPrimaryKey(sysRole);
         if (num == 0) {
-            return RespVOBuilder.failure("修改角色信息表失败");
+            return RespVOBuilder.failure("修改SysRole失败");
         } else {
-            return RespVOBuilder.success("修改角色信息表成功");
+            return RespVOBuilder.success("修改SysRole成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键roleId批量删除角色信息表", notes = "通过主键roleId批量删除角色信息表")
+    @ApiOperation(value = "通过主键roleId批量删除SysRole", notes = "通过主键roleId批量删除SysRole")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysRoleController {
         }
         Integer num = sysRoleService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除角色信息表失败");
+            return RespVOBuilder.failure("批量删除SysRole失败");
         } else {
-            return RespVOBuilder.success("批量删除角色信息表成功");
+            return RespVOBuilder.success("批量删除SysRole成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询角色信息表", notes = "条件查询角色信息表")
+    @ApiOperation(value = "条件查询SysRole", notes = "条件查询SysRole")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

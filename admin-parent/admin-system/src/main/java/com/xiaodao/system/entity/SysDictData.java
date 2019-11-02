@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_dict_data")
-public class SysDictData extends BaseEntity implements Serializable {
+public class SysDictData implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *字典编码
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private Integer dictCode;
 
 
-     /**
+    /**
      *字典排序
      */
     
@@ -31,7 +31,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private Integer dictSort;
 
 
-     /**
+    /**
      *字典标签
      */
     
@@ -39,7 +39,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String dictLabel;
 
 
-     /**
+    /**
      *字典键值
      */
     
@@ -47,7 +47,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String dictValue;
 
 
-     /**
+    /**
      *字典类型
      */
     
@@ -55,7 +55,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String dictType;
 
 
-     /**
+    /**
      *样式属性（其他样式扩展）
      */
     
@@ -63,7 +63,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String cssClass;
 
 
-     /**
+    /**
      *表格回显样式
      */
     
@@ -71,7 +71,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String listClass;
 
 
-     /**
+    /**
      *是否默认（Y是 N否）
      */
     
@@ -79,7 +79,7 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String isDefault;
 
 
-     /**
+    /**
      *状态（0正常 1停用）
      */
     
@@ -87,31 +87,39 @@ public class SysDictData extends BaseEntity implements Serializable {
     private String status;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

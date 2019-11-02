@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("gen_table")
-public class GenTable extends BaseEntity implements Serializable {
+public class GenTable implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *编号
      */
     @TableId
@@ -23,7 +23,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private Long tableId;
 
 
-     /**
+    /**
      *表名称
      */
     
@@ -31,7 +31,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String tableName;
 
 
-     /**
+    /**
      *表描述
      */
     
@@ -39,7 +39,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String tableComment;
 
 
-     /**
+    /**
      *实体类名称
      */
     
@@ -47,7 +47,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String className;
 
 
-     /**
+    /**
      *使用的模板（crud单表操作 tree树表操作）
      */
     
@@ -55,7 +55,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String tplCategory;
 
 
-     /**
+    /**
      *生成包路径
      */
     
@@ -63,7 +63,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String packageName;
 
 
-     /**
+    /**
      *生成模块名
      */
     
@@ -71,7 +71,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String moduleName;
 
 
-     /**
+    /**
      *生成业务名
      */
     
@@ -79,7 +79,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String businessName;
 
 
-     /**
+    /**
      *生成功能名
      */
     
@@ -87,7 +87,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String functionName;
 
 
-     /**
+    /**
      *生成功能作者
      */
     
@@ -95,7 +95,7 @@ public class GenTable extends BaseEntity implements Serializable {
     private String functionAuthor;
 
 
-     /**
+    /**
      *其它生成选项
      */
     
@@ -103,31 +103,39 @@ public class GenTable extends BaseEntity implements Serializable {
     private String options;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

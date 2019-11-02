@@ -101,7 +101,7 @@ public class SysOssServiceImpl implements ISysOssService{
         QueryWrapper<SysOss> queryWrapper = Wrappers.query();
         IPage<SysOss> ipage = sysOssMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

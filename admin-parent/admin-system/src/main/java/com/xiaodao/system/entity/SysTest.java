@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_test")
-public class SysTest extends BaseEntity implements Serializable {
+public class SysTest implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysTest extends BaseEntity implements Serializable {
     private Long id;
 
 
-     /**
+    /**
      *姓名
      */
     

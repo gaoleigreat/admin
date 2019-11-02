@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_post")
-public class SysPost extends BaseEntity implements Serializable {
+public class SysPost implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *岗位ID
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysPost extends BaseEntity implements Serializable {
     private Long postId;
 
 
-     /**
+    /**
      *岗位编码
      */
     
@@ -31,7 +31,7 @@ public class SysPost extends BaseEntity implements Serializable {
     private String postCode;
 
 
-     /**
+    /**
      *岗位名称
      */
     
@@ -39,7 +39,7 @@ public class SysPost extends BaseEntity implements Serializable {
     private String postName;
 
 
-     /**
+    /**
      *显示顺序
      */
     
@@ -47,7 +47,7 @@ public class SysPost extends BaseEntity implements Serializable {
     private Integer postSort;
 
 
-     /**
+    /**
      *状态（0正常 1停用）
      */
     
@@ -55,31 +55,39 @@ public class SysPost extends BaseEntity implements Serializable {
     private String status;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

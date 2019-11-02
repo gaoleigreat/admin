@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 代码生成业务表
+ * GenTable
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/genTable")
-@Api(value = "代码生成业务表管理", tags = "代码生成业务表管理")
+@Api(value = "GenTable管理", tags = "GenTable管理")
 @Validated
 @Slf4j
 public class GenTableController {
     @Autowired
     private IGenTableService genTableService;
 
-    @ApiOperation(value = "分页查询代码生成业务表", notes = "分页查询代码生成业务表")
+    @ApiOperation(value = "分页查询GenTable", notes = "分页查询GenTable")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class GenTableController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键tableId查询代码生成业务表", notes = "通过主键tableId查询代码生成业务表")
+    @ApiOperation(value = "通过主键tableId查询GenTable", notes = "通过主键tableId查询GenTable")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tableId", paramType = "path", value = "tableId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class GenTableController {
         GenTable genTable =
             genTableService.selectByPrimaryKey(tableId);
         if (genTable == null){
-            return RespVOBuilder.failure("当前代码生成业务表不存在");
+            return RespVOBuilder.failure("当前GenTable不存在");
         } else{
             return RespVOBuilder.success(genTable);
         }
     }
 
-    @ApiOperation(value = "通过主键tableId删除代码生成业务表", notes = "通过主键tableId删除代码生成业务表")
+    @ApiOperation(value = "通过主键tableId删除GenTable", notes = "通过主键tableId删除GenTable")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tableId", paramType = "path", value = "tableId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class GenTableController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "tableId") Long tableId) {
         Integer num = genTableService.deleteByPrimaryKey(tableId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除代码生成业务表失败");
+            return RespVOBuilder.failure("删除GenTable失败");
         } else {
-            return RespVOBuilder.success("删除代码生成业务表成功");
+            return RespVOBuilder.success("删除GenTable成功");
         }
     }
 
-    @ApiOperation(value = "新增代码生成业务表", notes = "新增代码生成业务表")
+    @ApiOperation(value = "新增GenTable", notes = "新增GenTable")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class GenTableController {
         }
         Integer num = genTableService.insert(genTable);
         if (num == 0) {
-            return RespVOBuilder.failure("添加代码生成业务表失败");
+            return RespVOBuilder.failure("添加GenTable失败");
         } else {
-            return RespVOBuilder.success("添加代码生成业务表成功");
+            return RespVOBuilder.success("添加GenTable成功");
         }
     }
 
-    @ApiOperation(value = "修改代码生成业务表", notes = "修改代码生成业务表")
+    @ApiOperation(value = "修改GenTable", notes = "修改GenTable")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class GenTableController {
         }
         Integer num = genTableService.updateByPrimaryKey(genTable);
         if (num == 0) {
-            return RespVOBuilder.failure("修改代码生成业务表失败");
+            return RespVOBuilder.failure("修改GenTable失败");
         } else {
-            return RespVOBuilder.success("修改代码生成业务表成功");
+            return RespVOBuilder.success("修改GenTable成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键tableId批量删除代码生成业务表", notes = "通过主键tableId批量删除代码生成业务表")
+    @ApiOperation(value = "通过主键tableId批量删除GenTable", notes = "通过主键tableId批量删除GenTable")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class GenTableController {
         }
         Integer num = genTableService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除代码生成业务表失败");
+            return RespVOBuilder.failure("批量删除GenTable失败");
         } else {
-            return RespVOBuilder.success("批量删除代码生成业务表成功");
+            return RespVOBuilder.success("批量删除GenTable成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询代码生成业务表", notes = "条件查询代码生成业务表")
+    @ApiOperation(value = "条件查询GenTable", notes = "条件查询GenTable")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

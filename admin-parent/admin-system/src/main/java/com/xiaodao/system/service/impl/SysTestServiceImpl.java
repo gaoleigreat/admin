@@ -101,7 +101,7 @@ public class SysTestServiceImpl implements ISysTestService{
         QueryWrapper<SysTest> queryWrapper = Wrappers.query();
         IPage<SysTest> ipage = sysTestMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

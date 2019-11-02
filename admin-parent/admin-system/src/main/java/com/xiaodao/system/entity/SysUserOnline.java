@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_user_online")
-public class SysUserOnline extends BaseEntity implements Serializable {
+public class SysUserOnline implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *用户会话id
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String sessionid;
 
 
-     /**
+    /**
      *登录账号
      */
     
@@ -31,7 +31,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String loginName;
 
 
-     /**
+    /**
      *部门名称
      */
     
@@ -39,7 +39,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String deptName;
 
 
-     /**
+    /**
      *登录IP地址
      */
     
@@ -47,7 +47,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String ipaddr;
 
 
-     /**
+    /**
      *登录地点
      */
     
@@ -55,7 +55,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String loginLocation;
 
 
-     /**
+    /**
      *浏览器类型
      */
     
@@ -63,7 +63,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String browser;
 
 
-     /**
+    /**
      *操作系统
      */
     
@@ -71,7 +71,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String os;
 
 
-     /**
+    /**
      *在线状态on_line在线off_line离线
      */
     
@@ -79,7 +79,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private String status;
 
 
-     /**
+    /**
      *session创建时间
      */
     
@@ -87,7 +87,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private Date startTimestamp;
 
 
-     /**
+    /**
      *session最后访问时间
      */
     
@@ -95,7 +95,7 @@ public class SysUserOnline extends BaseEntity implements Serializable {
     private Date lastAccessTime;
 
 
-     /**
+    /**
      *超时时间，单位为分钟
      */
     

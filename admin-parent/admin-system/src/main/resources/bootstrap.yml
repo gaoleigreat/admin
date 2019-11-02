@@ -3,10 +3,14 @@ spring:
     name: system-service
   profiles:
     active: local
+  jackson:
+    generator:
+      write_numbers_as_strings: true
 
 
 application:
   description: 系统服务
+
 
 
 

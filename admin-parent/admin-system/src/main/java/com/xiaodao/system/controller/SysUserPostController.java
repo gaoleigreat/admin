@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 用户与岗位关联表
+ * SysUserPost
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysUserPost")
-@Api(value = "用户与岗位关联表管理", tags = "用户与岗位关联表管理")
+@Api(value = "SysUserPost管理", tags = "SysUserPost管理")
 @Validated
 @Slf4j
 public class SysUserPostController {
     @Autowired
     private ISysUserPostService sysUserPostService;
 
-    @ApiOperation(value = "分页查询用户与岗位关联表", notes = "分页查询用户与岗位关联表")
+    @ApiOperation(value = "分页查询SysUserPost", notes = "分页查询SysUserPost")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysUserPostController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键userId查询用户与岗位关联表", notes = "通过主键userId查询用户与岗位关联表")
+    @ApiOperation(value = "通过主键userId查询SysUserPost", notes = "通过主键userId查询SysUserPost")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", paramType = "path", value = "userId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysUserPostController {
         SysUserPost sysUserPost =
             sysUserPostService.selectByPrimaryKey(userId);
         if (sysUserPost == null){
-            return RespVOBuilder.failure("当前用户与岗位关联表不存在");
+            return RespVOBuilder.failure("当前SysUserPost不存在");
         } else{
             return RespVOBuilder.success(sysUserPost);
         }
     }
 
-    @ApiOperation(value = "通过主键userId删除用户与岗位关联表", notes = "通过主键userId删除用户与岗位关联表")
+    @ApiOperation(value = "通过主键userId删除SysUserPost", notes = "通过主键userId删除SysUserPost")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", paramType = "path", value = "userId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysUserPostController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "userId") Long userId) {
         Integer num = sysUserPostService.deleteByPrimaryKey(userId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除用户与岗位关联表失败");
+            return RespVOBuilder.failure("删除SysUserPost失败");
         } else {
-            return RespVOBuilder.success("删除用户与岗位关联表成功");
+            return RespVOBuilder.success("删除SysUserPost成功");
         }
     }
 
-    @ApiOperation(value = "新增用户与岗位关联表", notes = "新增用户与岗位关联表")
+    @ApiOperation(value = "新增SysUserPost", notes = "新增SysUserPost")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysUserPostController {
         }
         Integer num = sysUserPostService.insert(sysUserPost);
         if (num == 0) {
-            return RespVOBuilder.failure("添加用户与岗位关联表失败");
+            return RespVOBuilder.failure("添加SysUserPost失败");
         } else {
-            return RespVOBuilder.success("添加用户与岗位关联表成功");
+            return RespVOBuilder.success("添加SysUserPost成功");
         }
     }
 
-    @ApiOperation(value = "修改用户与岗位关联表", notes = "修改用户与岗位关联表")
+    @ApiOperation(value = "修改SysUserPost", notes = "修改SysUserPost")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysUserPostController {
         }
         Integer num = sysUserPostService.updateByPrimaryKey(sysUserPost);
         if (num == 0) {
-            return RespVOBuilder.failure("修改用户与岗位关联表失败");
+            return RespVOBuilder.failure("修改SysUserPost失败");
         } else {
-            return RespVOBuilder.success("修改用户与岗位关联表成功");
+            return RespVOBuilder.success("修改SysUserPost成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键userId批量删除用户与岗位关联表", notes = "通过主键userId批量删除用户与岗位关联表")
+    @ApiOperation(value = "通过主键userId批量删除SysUserPost", notes = "通过主键userId批量删除SysUserPost")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysUserPostController {
         }
         Integer num = sysUserPostService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除用户与岗位关联表失败");
+            return RespVOBuilder.failure("批量删除SysUserPost失败");
         } else {
-            return RespVOBuilder.success("批量删除用户与岗位关联表成功");
+            return RespVOBuilder.success("批量删除SysUserPost成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询用户与岗位关联表", notes = "条件查询用户与岗位关联表")
+    @ApiOperation(value = "条件查询SysUserPost", notes = "条件查询SysUserPost")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

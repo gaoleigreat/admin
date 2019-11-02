@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_dict_type")
-public class SysDictType extends BaseEntity implements Serializable {
+public class SysDictType implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *字典主键
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysDictType extends BaseEntity implements Serializable {
     private Long dictId;
 
 
-     /**
+    /**
      *字典名称
      */
     
@@ -31,7 +31,7 @@ public class SysDictType extends BaseEntity implements Serializable {
     private String dictName;
 
 
-     /**
+    /**
      *字典类型
      */
     
@@ -39,7 +39,7 @@ public class SysDictType extends BaseEntity implements Serializable {
     private String dictType;
 
 
-     /**
+    /**
      *状态（0正常 1停用）
      */
     
@@ -47,31 +47,39 @@ public class SysDictType extends BaseEntity implements Serializable {
     private String status;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

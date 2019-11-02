@@ -101,7 +101,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService{
         QueryWrapper<SysNotice> queryWrapper = Wrappers.query();
         IPage<SysNotice> ipage = sysNoticeMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

@@ -101,7 +101,7 @@ public class SysPostServiceImpl implements ISysPostService{
         QueryWrapper<SysPost> queryWrapper = Wrappers.query();
         IPage<SysPost> ipage = sysPostMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

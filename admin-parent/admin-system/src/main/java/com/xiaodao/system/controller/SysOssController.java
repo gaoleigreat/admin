@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 文件上传
+ * SysOss
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysOss")
-@Api(value = "文件上传管理", tags = "文件上传管理")
+@Api(value = "SysOss管理", tags = "SysOss管理")
 @Validated
 @Slf4j
 public class SysOssController {
     @Autowired
     private ISysOssService sysOssService;
 
-    @ApiOperation(value = "分页查询文件上传", notes = "分页查询文件上传")
+    @ApiOperation(value = "分页查询SysOss", notes = "分页查询SysOss")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysOssController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键id查询文件上传", notes = "通过主键id查询文件上传")
+    @ApiOperation(value = "通过主键id查询SysOss", notes = "通过主键id查询SysOss")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", value = "id", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysOssController {
         SysOss sysOss =
             sysOssService.selectByPrimaryKey(id);
         if (sysOss == null){
-            return RespVOBuilder.failure("当前文件上传不存在");
+            return RespVOBuilder.failure("当前SysOss不存在");
         } else{
             return RespVOBuilder.success(sysOss);
         }
     }
 
-    @ApiOperation(value = "通过主键id删除文件上传", notes = "通过主键id删除文件上传")
+    @ApiOperation(value = "通过主键id删除SysOss", notes = "通过主键id删除SysOss")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", value = "id", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysOssController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "id") Long id) {
         Integer num = sysOssService.deleteByPrimaryKey(id);
         if (num == 0) {
-            return RespVOBuilder.failure("删除文件上传失败");
+            return RespVOBuilder.failure("删除SysOss失败");
         } else {
-            return RespVOBuilder.success("删除文件上传成功");
+            return RespVOBuilder.success("删除SysOss成功");
         }
     }
 
-    @ApiOperation(value = "新增文件上传", notes = "新增文件上传")
+    @ApiOperation(value = "新增SysOss", notes = "新增SysOss")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysOssController {
         }
         Integer num = sysOssService.insert(sysOss);
         if (num == 0) {
-            return RespVOBuilder.failure("添加文件上传失败");
+            return RespVOBuilder.failure("添加SysOss失败");
         } else {
-            return RespVOBuilder.success("添加文件上传成功");
+            return RespVOBuilder.success("添加SysOss成功");
         }
     }
 
-    @ApiOperation(value = "修改文件上传", notes = "修改文件上传")
+    @ApiOperation(value = "修改SysOss", notes = "修改SysOss")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysOssController {
         }
         Integer num = sysOssService.updateByPrimaryKey(sysOss);
         if (num == 0) {
-            return RespVOBuilder.failure("修改文件上传失败");
+            return RespVOBuilder.failure("修改SysOss失败");
         } else {
-            return RespVOBuilder.success("修改文件上传成功");
+            return RespVOBuilder.success("修改SysOss成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键id批量删除文件上传", notes = "通过主键id批量删除文件上传")
+    @ApiOperation(value = "通过主键id批量删除SysOss", notes = "通过主键id批量删除SysOss")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysOssController {
         }
         Integer num = sysOssService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除文件上传失败");
+            return RespVOBuilder.failure("批量删除SysOss失败");
         } else {
-            return RespVOBuilder.success("批量删除文件上传成功");
+            return RespVOBuilder.success("批量删除SysOss成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询文件上传", notes = "条件查询文件上传")
+    @ApiOperation(value = "条件查询SysOss", notes = "条件查询SysOss")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

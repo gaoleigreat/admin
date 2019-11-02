@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 岗位信息表
+ * SysPost
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysPost")
-@Api(value = "岗位信息表管理", tags = "岗位信息表管理")
+@Api(value = "SysPost管理", tags = "SysPost管理")
 @Validated
 @Slf4j
 public class SysPostController {
     @Autowired
     private ISysPostService sysPostService;
 
-    @ApiOperation(value = "分页查询岗位信息表", notes = "分页查询岗位信息表")
+    @ApiOperation(value = "分页查询SysPost", notes = "分页查询SysPost")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysPostController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键postId查询岗位信息表", notes = "通过主键postId查询岗位信息表")
+    @ApiOperation(value = "通过主键postId查询SysPost", notes = "通过主键postId查询SysPost")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "postId", paramType = "path", value = "postId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysPostController {
         SysPost sysPost =
             sysPostService.selectByPrimaryKey(postId);
         if (sysPost == null){
-            return RespVOBuilder.failure("当前岗位信息表不存在");
+            return RespVOBuilder.failure("当前SysPost不存在");
         } else{
             return RespVOBuilder.success(sysPost);
         }
     }
 
-    @ApiOperation(value = "通过主键postId删除岗位信息表", notes = "通过主键postId删除岗位信息表")
+    @ApiOperation(value = "通过主键postId删除SysPost", notes = "通过主键postId删除SysPost")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "postId", paramType = "path", value = "postId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysPostController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "postId") Long postId) {
         Integer num = sysPostService.deleteByPrimaryKey(postId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除岗位信息表失败");
+            return RespVOBuilder.failure("删除SysPost失败");
         } else {
-            return RespVOBuilder.success("删除岗位信息表成功");
+            return RespVOBuilder.success("删除SysPost成功");
         }
     }
 
-    @ApiOperation(value = "新增岗位信息表", notes = "新增岗位信息表")
+    @ApiOperation(value = "新增SysPost", notes = "新增SysPost")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysPostController {
         }
         Integer num = sysPostService.insert(sysPost);
         if (num == 0) {
-            return RespVOBuilder.failure("添加岗位信息表失败");
+            return RespVOBuilder.failure("添加SysPost失败");
         } else {
-            return RespVOBuilder.success("添加岗位信息表成功");
+            return RespVOBuilder.success("添加SysPost成功");
         }
     }
 
-    @ApiOperation(value = "修改岗位信息表", notes = "修改岗位信息表")
+    @ApiOperation(value = "修改SysPost", notes = "修改SysPost")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysPostController {
         }
         Integer num = sysPostService.updateByPrimaryKey(sysPost);
         if (num == 0) {
-            return RespVOBuilder.failure("修改岗位信息表失败");
+            return RespVOBuilder.failure("修改SysPost失败");
         } else {
-            return RespVOBuilder.success("修改岗位信息表成功");
+            return RespVOBuilder.success("修改SysPost成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键postId批量删除岗位信息表", notes = "通过主键postId批量删除岗位信息表")
+    @ApiOperation(value = "通过主键postId批量删除SysPost", notes = "通过主键postId批量删除SysPost")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysPostController {
         }
         Integer num = sysPostService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除岗位信息表失败");
+            return RespVOBuilder.failure("批量删除SysPost失败");
         } else {
-            return RespVOBuilder.success("批量删除岗位信息表成功");
+            return RespVOBuilder.success("批量删除SysPost成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询岗位信息表", notes = "条件查询岗位信息表")
+    @ApiOperation(value = "条件查询SysPost", notes = "条件查询SysPost")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

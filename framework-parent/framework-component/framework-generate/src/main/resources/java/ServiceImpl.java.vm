@@ -101,7 +101,7 @@ public class ${gentable.className}ServiceImpl implements I${gentable.className}S
         QueryWrapper<${gentable.className}> queryWrapper = Wrappers.query();
         IPage<${gentable.className}> ipage = ${gentable.camelCaseclassName}Mapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

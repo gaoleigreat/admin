@@ -1,7 +1,6 @@
 package com.xiaodao.system.mapper;
 
 import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import com.xiaodao.system.entity.SysMenu;
@@ -12,19 +11,17 @@ import com.xiaodao.system.entity.SysMenu;
  * @author高磊
  * @since jdk1.8
  */
-public interface SysMenuMapper extends BaseMapper<SysMenu> {
+public interface SysMenuMapper extends BaseMapper<SysMenu>{
 
     /**
-     * 批量插入
-     *
-     * @param list List<SysMenu
-     * @return Integer
-     */
+    * 批量插入
+    * @param list List<SysMenu
+    * @return Integer
+    */
     Integer batchInsert(List<SysMenu> list);
 
     /**
      * 批量更新
-     *
      * @param list List<SysMenu>
      * @return Integer
      */
@@ -32,7 +29,6 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     /**
      * 存在即更新
-     *
      * @param sysMenu SysMenu
      * @return Integer
      */
@@ -40,7 +36,6 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     /**
      * 存在即更新，可选择具体属性
-     *
      * @param sysMenu SysMenu
      * @return Integer
      */
@@ -48,15 +43,13 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     /**
      * 条件查询
-     *
      * @param sysMenu SysMenu
      * @return List<SysMenu>
-     */
+    */
     List<SysMenu> query(@Param("sysMenu") SysMenu sysMenu);
 
     /**
      * 查询总数
-     *
      * @return Integer
      */
     Long queryTotalCount();

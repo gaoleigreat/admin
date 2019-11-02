@@ -101,7 +101,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService{
         QueryWrapper<SysLogininfor> queryWrapper = Wrappers.query();
         IPage<SysLogininfor> ipage = sysLogininforMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

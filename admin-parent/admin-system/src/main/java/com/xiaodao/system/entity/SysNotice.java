@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_notice")
-public class SysNotice extends BaseEntity implements Serializable {
+public class SysNotice implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *公告ID
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysNotice extends BaseEntity implements Serializable {
     private Long noticeId;
 
 
-     /**
+    /**
      *公告标题
      */
     
@@ -31,7 +31,7 @@ public class SysNotice extends BaseEntity implements Serializable {
     private String noticeTitle;
 
 
-     /**
+    /**
      *公告类型（1通知 2公告）
      */
     
@@ -39,7 +39,7 @@ public class SysNotice extends BaseEntity implements Serializable {
     private String noticeType;
 
 
-     /**
+    /**
      *公告内容
      */
     
@@ -47,7 +47,7 @@ public class SysNotice extends BaseEntity implements Serializable {
     private String noticeContent;
 
 
-     /**
+    /**
      *公告状态（0正常 1关闭）
      */
     
@@ -55,7 +55,7 @@ public class SysNotice extends BaseEntity implements Serializable {
     private String status;
 
 
-     /**
+    /**
      *创建者
      */
     
@@ -63,25 +63,31 @@ public class SysNotice extends BaseEntity implements Serializable {
     private Long bigint;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

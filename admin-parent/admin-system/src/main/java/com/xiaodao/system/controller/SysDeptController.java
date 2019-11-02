@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 部门表
+ * SysDept
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysDept")
-@Api(value = "部门表管理", tags = "部门表管理")
+@Api(value = "SysDept管理", tags = "SysDept管理")
 @Validated
 @Slf4j
 public class SysDeptController {
     @Autowired
     private ISysDeptService sysDeptService;
 
-    @ApiOperation(value = "分页查询部门表", notes = "分页查询部门表")
+    @ApiOperation(value = "分页查询SysDept", notes = "分页查询SysDept")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysDeptController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键deptId查询部门表", notes = "通过主键deptId查询部门表")
+    @ApiOperation(value = "通过主键deptId查询SysDept", notes = "通过主键deptId查询SysDept")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "deptId", paramType = "path", value = "deptId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysDeptController {
         SysDept sysDept =
             sysDeptService.selectByPrimaryKey(deptId);
         if (sysDept == null){
-            return RespVOBuilder.failure("当前部门表不存在");
+            return RespVOBuilder.failure("当前SysDept不存在");
         } else{
             return RespVOBuilder.success(sysDept);
         }
     }
 
-    @ApiOperation(value = "通过主键deptId删除部门表", notes = "通过主键deptId删除部门表")
+    @ApiOperation(value = "通过主键deptId删除SysDept", notes = "通过主键deptId删除SysDept")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "deptId", paramType = "path", value = "deptId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysDeptController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "deptId") Long deptId) {
         Integer num = sysDeptService.deleteByPrimaryKey(deptId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除部门表失败");
+            return RespVOBuilder.failure("删除SysDept失败");
         } else {
-            return RespVOBuilder.success("删除部门表成功");
+            return RespVOBuilder.success("删除SysDept成功");
         }
     }
 
-    @ApiOperation(value = "新增部门表", notes = "新增部门表")
+    @ApiOperation(value = "新增SysDept", notes = "新增SysDept")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysDeptController {
         }
         Integer num = sysDeptService.insert(sysDept);
         if (num == 0) {
-            return RespVOBuilder.failure("添加部门表失败");
+            return RespVOBuilder.failure("添加SysDept失败");
         } else {
-            return RespVOBuilder.success("添加部门表成功");
+            return RespVOBuilder.success("添加SysDept成功");
         }
     }
 
-    @ApiOperation(value = "修改部门表", notes = "修改部门表")
+    @ApiOperation(value = "修改SysDept", notes = "修改SysDept")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysDeptController {
         }
         Integer num = sysDeptService.updateByPrimaryKey(sysDept);
         if (num == 0) {
-            return RespVOBuilder.failure("修改部门表失败");
+            return RespVOBuilder.failure("修改SysDept失败");
         } else {
-            return RespVOBuilder.success("修改部门表成功");
+            return RespVOBuilder.success("修改SysDept成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键deptId批量删除部门表", notes = "通过主键deptId批量删除部门表")
+    @ApiOperation(value = "通过主键deptId批量删除SysDept", notes = "通过主键deptId批量删除SysDept")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysDeptController {
         }
         Integer num = sysDeptService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除部门表失败");
+            return RespVOBuilder.failure("批量删除SysDept失败");
         } else {
-            return RespVOBuilder.success("批量删除部门表成功");
+            return RespVOBuilder.success("批量删除SysDept成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询部门表", notes = "条件查询部门表")
+    @ApiOperation(value = "条件查询SysDept", notes = "条件查询SysDept")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

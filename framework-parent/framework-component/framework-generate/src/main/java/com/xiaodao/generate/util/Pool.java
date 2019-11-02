@@ -52,7 +52,7 @@ public abstract class Pool {
      */
     private void init() {
         try {
-            InputStream is = Pool.class.getResourceAsStream(propertiesNames);
+            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesNames);
             Properties p = new Properties();
             p.load(is);
             this.driverName = p.getProperty("driverName");

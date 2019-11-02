@@ -101,7 +101,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService{
         QueryWrapper<SysDictType> queryWrapper = Wrappers.query();
         IPage<SysDictType> ipage = sysDictTypeMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

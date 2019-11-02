@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 角色和部门关联表
+ * SysRoleDept
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysRoleDept")
-@Api(value = "角色和部门关联表管理", tags = "角色和部门关联表管理")
+@Api(value = "SysRoleDept管理", tags = "SysRoleDept管理")
 @Validated
 @Slf4j
 public class SysRoleDeptController {
     @Autowired
     private ISysRoleDeptService sysRoleDeptService;
 
-    @ApiOperation(value = "分页查询角色和部门关联表", notes = "分页查询角色和部门关联表")
+    @ApiOperation(value = "分页查询SysRoleDept", notes = "分页查询SysRoleDept")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysRoleDeptController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键roleId查询角色和部门关联表", notes = "通过主键roleId查询角色和部门关联表")
+    @ApiOperation(value = "通过主键roleId查询SysRoleDept", notes = "通过主键roleId查询SysRoleDept")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysRoleDeptController {
         SysRoleDept sysRoleDept =
             sysRoleDeptService.selectByPrimaryKey(roleId);
         if (sysRoleDept == null){
-            return RespVOBuilder.failure("当前角色和部门关联表不存在");
+            return RespVOBuilder.failure("当前SysRoleDept不存在");
         } else{
             return RespVOBuilder.success(sysRoleDept);
         }
     }
 
-    @ApiOperation(value = "通过主键roleId删除角色和部门关联表", notes = "通过主键roleId删除角色和部门关联表")
+    @ApiOperation(value = "通过主键roleId删除SysRoleDept", notes = "通过主键roleId删除SysRoleDept")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysRoleDeptController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "roleId") Long roleId) {
         Integer num = sysRoleDeptService.deleteByPrimaryKey(roleId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除角色和部门关联表失败");
+            return RespVOBuilder.failure("删除SysRoleDept失败");
         } else {
-            return RespVOBuilder.success("删除角色和部门关联表成功");
+            return RespVOBuilder.success("删除SysRoleDept成功");
         }
     }
 
-    @ApiOperation(value = "新增角色和部门关联表", notes = "新增角色和部门关联表")
+    @ApiOperation(value = "新增SysRoleDept", notes = "新增SysRoleDept")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysRoleDeptController {
         }
         Integer num = sysRoleDeptService.insert(sysRoleDept);
         if (num == 0) {
-            return RespVOBuilder.failure("添加角色和部门关联表失败");
+            return RespVOBuilder.failure("添加SysRoleDept失败");
         } else {
-            return RespVOBuilder.success("添加角色和部门关联表成功");
+            return RespVOBuilder.success("添加SysRoleDept成功");
         }
     }
 
-    @ApiOperation(value = "修改角色和部门关联表", notes = "修改角色和部门关联表")
+    @ApiOperation(value = "修改SysRoleDept", notes = "修改SysRoleDept")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysRoleDeptController {
         }
         Integer num = sysRoleDeptService.updateByPrimaryKey(sysRoleDept);
         if (num == 0) {
-            return RespVOBuilder.failure("修改角色和部门关联表失败");
+            return RespVOBuilder.failure("修改SysRoleDept失败");
         } else {
-            return RespVOBuilder.success("修改角色和部门关联表成功");
+            return RespVOBuilder.success("修改SysRoleDept成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键roleId批量删除角色和部门关联表", notes = "通过主键roleId批量删除角色和部门关联表")
+    @ApiOperation(value = "通过主键roleId批量删除SysRoleDept", notes = "通过主键roleId批量删除SysRoleDept")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysRoleDeptController {
         }
         Integer num = sysRoleDeptService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除角色和部门关联表失败");
+            return RespVOBuilder.failure("批量删除SysRoleDept失败");
         } else {
-            return RespVOBuilder.success("批量删除角色和部门关联表成功");
+            return RespVOBuilder.success("批量删除SysRoleDept成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询角色和部门关联表", notes = "条件查询角色和部门关联表")
+    @ApiOperation(value = "条件查询SysRoleDept", notes = "条件查询SysRoleDept")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

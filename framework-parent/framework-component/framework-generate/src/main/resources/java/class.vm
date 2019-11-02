@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("${gentable.tableName}")
-public class ${gentable.className} extends BaseEntity implements Serializable {
+public class ${gentable.className} implements Serializable {
 
      private static final long serialVersionUID = 1L;
 

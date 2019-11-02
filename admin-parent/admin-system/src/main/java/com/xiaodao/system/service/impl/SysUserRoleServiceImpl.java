@@ -101,7 +101,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService{
         QueryWrapper<SysUserRole> queryWrapper = Wrappers.query();
         IPage<SysUserRole> ipage = sysUserRoleMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

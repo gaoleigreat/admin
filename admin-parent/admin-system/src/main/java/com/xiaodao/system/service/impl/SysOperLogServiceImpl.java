@@ -101,7 +101,7 @@ public class SysOperLogServiceImpl implements ISysOperLogService{
         QueryWrapper<SysOperLog> queryWrapper = Wrappers.query();
         IPage<SysOperLog> ipage = sysOperLogMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

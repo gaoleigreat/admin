@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 字典类型表
+ * SysDictType
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysDictType")
-@Api(value = "字典类型表管理", tags = "字典类型表管理")
+@Api(value = "SysDictType管理", tags = "SysDictType管理")
 @Validated
 @Slf4j
 public class SysDictTypeController {
     @Autowired
     private ISysDictTypeService sysDictTypeService;
 
-    @ApiOperation(value = "分页查询字典类型表", notes = "分页查询字典类型表")
+    @ApiOperation(value = "分页查询SysDictType", notes = "分页查询SysDictType")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysDictTypeController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键dictId查询字典类型表", notes = "通过主键dictId查询字典类型表")
+    @ApiOperation(value = "通过主键dictId查询SysDictType", notes = "通过主键dictId查询SysDictType")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "dictId", paramType = "path", value = "dictId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysDictTypeController {
         SysDictType sysDictType =
             sysDictTypeService.selectByPrimaryKey(dictId);
         if (sysDictType == null){
-            return RespVOBuilder.failure("当前字典类型表不存在");
+            return RespVOBuilder.failure("当前SysDictType不存在");
         } else{
             return RespVOBuilder.success(sysDictType);
         }
     }
 
-    @ApiOperation(value = "通过主键dictId删除字典类型表", notes = "通过主键dictId删除字典类型表")
+    @ApiOperation(value = "通过主键dictId删除SysDictType", notes = "通过主键dictId删除SysDictType")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "dictId", paramType = "path", value = "dictId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysDictTypeController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "dictId") Long dictId) {
         Integer num = sysDictTypeService.deleteByPrimaryKey(dictId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除字典类型表失败");
+            return RespVOBuilder.failure("删除SysDictType失败");
         } else {
-            return RespVOBuilder.success("删除字典类型表成功");
+            return RespVOBuilder.success("删除SysDictType成功");
         }
     }
 
-    @ApiOperation(value = "新增字典类型表", notes = "新增字典类型表")
+    @ApiOperation(value = "新增SysDictType", notes = "新增SysDictType")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysDictTypeController {
         }
         Integer num = sysDictTypeService.insert(sysDictType);
         if (num == 0) {
-            return RespVOBuilder.failure("添加字典类型表失败");
+            return RespVOBuilder.failure("添加SysDictType失败");
         } else {
-            return RespVOBuilder.success("添加字典类型表成功");
+            return RespVOBuilder.success("添加SysDictType成功");
         }
     }
 
-    @ApiOperation(value = "修改字典类型表", notes = "修改字典类型表")
+    @ApiOperation(value = "修改SysDictType", notes = "修改SysDictType")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysDictTypeController {
         }
         Integer num = sysDictTypeService.updateByPrimaryKey(sysDictType);
         if (num == 0) {
-            return RespVOBuilder.failure("修改字典类型表失败");
+            return RespVOBuilder.failure("修改SysDictType失败");
         } else {
-            return RespVOBuilder.success("修改字典类型表成功");
+            return RespVOBuilder.success("修改SysDictType成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键dictId批量删除字典类型表", notes = "通过主键dictId批量删除字典类型表")
+    @ApiOperation(value = "通过主键dictId批量删除SysDictType", notes = "通过主键dictId批量删除SysDictType")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysDictTypeController {
         }
         Integer num = sysDictTypeService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除字典类型表失败");
+            return RespVOBuilder.failure("批量删除SysDictType失败");
         } else {
-            return RespVOBuilder.success("批量删除字典类型表成功");
+            return RespVOBuilder.success("批量删除SysDictType成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询字典类型表", notes = "条件查询字典类型表")
+    @ApiOperation(value = "条件查询SysDictType", notes = "条件查询SysDictType")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

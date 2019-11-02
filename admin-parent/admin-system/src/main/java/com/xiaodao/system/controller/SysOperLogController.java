@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 操作日志记录
+ * SysOperLog
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysOperLog")
-@Api(value = "操作日志记录管理", tags = "操作日志记录管理")
+@Api(value = "SysOperLog管理", tags = "SysOperLog管理")
 @Validated
 @Slf4j
 public class SysOperLogController {
     @Autowired
     private ISysOperLogService sysOperLogService;
 
-    @ApiOperation(value = "分页查询操作日志记录", notes = "分页查询操作日志记录")
+    @ApiOperation(value = "分页查询SysOperLog", notes = "分页查询SysOperLog")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysOperLogController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键operId查询操作日志记录", notes = "通过主键operId查询操作日志记录")
+    @ApiOperation(value = "通过主键operId查询SysOperLog", notes = "通过主键operId查询SysOperLog")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "operId", paramType = "path", value = "operId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysOperLogController {
         SysOperLog sysOperLog =
             sysOperLogService.selectByPrimaryKey(operId);
         if (sysOperLog == null){
-            return RespVOBuilder.failure("当前操作日志记录不存在");
+            return RespVOBuilder.failure("当前SysOperLog不存在");
         } else{
             return RespVOBuilder.success(sysOperLog);
         }
     }
 
-    @ApiOperation(value = "通过主键operId删除操作日志记录", notes = "通过主键operId删除操作日志记录")
+    @ApiOperation(value = "通过主键operId删除SysOperLog", notes = "通过主键operId删除SysOperLog")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "operId", paramType = "path", value = "operId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysOperLogController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "operId") Long operId) {
         Integer num = sysOperLogService.deleteByPrimaryKey(operId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除操作日志记录失败");
+            return RespVOBuilder.failure("删除SysOperLog失败");
         } else {
-            return RespVOBuilder.success("删除操作日志记录成功");
+            return RespVOBuilder.success("删除SysOperLog成功");
         }
     }
 
-    @ApiOperation(value = "新增操作日志记录", notes = "新增操作日志记录")
+    @ApiOperation(value = "新增SysOperLog", notes = "新增SysOperLog")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysOperLogController {
         }
         Integer num = sysOperLogService.insert(sysOperLog);
         if (num == 0) {
-            return RespVOBuilder.failure("添加操作日志记录失败");
+            return RespVOBuilder.failure("添加SysOperLog失败");
         } else {
-            return RespVOBuilder.success("添加操作日志记录成功");
+            return RespVOBuilder.success("添加SysOperLog成功");
         }
     }
 
-    @ApiOperation(value = "修改操作日志记录", notes = "修改操作日志记录")
+    @ApiOperation(value = "修改SysOperLog", notes = "修改SysOperLog")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysOperLogController {
         }
         Integer num = sysOperLogService.updateByPrimaryKey(sysOperLog);
         if (num == 0) {
-            return RespVOBuilder.failure("修改操作日志记录失败");
+            return RespVOBuilder.failure("修改SysOperLog失败");
         } else {
-            return RespVOBuilder.success("修改操作日志记录成功");
+            return RespVOBuilder.success("修改SysOperLog成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键operId批量删除操作日志记录", notes = "通过主键operId批量删除操作日志记录")
+    @ApiOperation(value = "通过主键operId批量删除SysOperLog", notes = "通过主键operId批量删除SysOperLog")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysOperLogController {
         }
         Integer num = sysOperLogService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除操作日志记录失败");
+            return RespVOBuilder.failure("批量删除SysOperLog失败");
         } else {
-            return RespVOBuilder.success("批量删除操作日志记录成功");
+            return RespVOBuilder.success("批量删除SysOperLog成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询操作日志记录", notes = "条件查询操作日志记录")
+    @ApiOperation(value = "条件查询SysOperLog", notes = "条件查询SysOperLog")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

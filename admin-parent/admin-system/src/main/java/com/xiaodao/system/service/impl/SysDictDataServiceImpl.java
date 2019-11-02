@@ -101,7 +101,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService{
         QueryWrapper<SysDictData> queryWrapper = Wrappers.query();
         IPage<SysDictData> ipage = sysDictDataMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

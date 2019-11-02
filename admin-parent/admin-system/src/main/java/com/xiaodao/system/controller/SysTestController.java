@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 测试
+ * SysTest
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysTest")
-@Api(value = "测试管理", tags = "测试管理")
+@Api(value = "SysTest管理", tags = "SysTest管理")
 @Validated
 @Slf4j
 public class SysTestController {
     @Autowired
     private ISysTestService sysTestService;
 
-    @ApiOperation(value = "分页查询测试", notes = "分页查询测试")
+    @ApiOperation(value = "分页查询SysTest", notes = "分页查询SysTest")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysTestController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键id查询测试", notes = "通过主键id查询测试")
+    @ApiOperation(value = "通过主键id查询SysTest", notes = "通过主键id查询SysTest")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", value = "id", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysTestController {
         SysTest sysTest =
             sysTestService.selectByPrimaryKey(id);
         if (sysTest == null){
-            return RespVOBuilder.failure("当前测试不存在");
+            return RespVOBuilder.failure("当前SysTest不存在");
         } else{
             return RespVOBuilder.success(sysTest);
         }
     }
 
-    @ApiOperation(value = "通过主键id删除测试", notes = "通过主键id删除测试")
+    @ApiOperation(value = "通过主键id删除SysTest", notes = "通过主键id删除SysTest")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", paramType = "path", value = "id", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysTestController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "id") Long id) {
         Integer num = sysTestService.deleteByPrimaryKey(id);
         if (num == 0) {
-            return RespVOBuilder.failure("删除测试失败");
+            return RespVOBuilder.failure("删除SysTest失败");
         } else {
-            return RespVOBuilder.success("删除测试成功");
+            return RespVOBuilder.success("删除SysTest成功");
         }
     }
 
-    @ApiOperation(value = "新增测试", notes = "新增测试")
+    @ApiOperation(value = "新增SysTest", notes = "新增SysTest")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysTestController {
         }
         Integer num = sysTestService.insert(sysTest);
         if (num == 0) {
-            return RespVOBuilder.failure("添加测试失败");
+            return RespVOBuilder.failure("添加SysTest失败");
         } else {
-            return RespVOBuilder.success("添加测试成功");
+            return RespVOBuilder.success("添加SysTest成功");
         }
     }
 
-    @ApiOperation(value = "修改测试", notes = "修改测试")
+    @ApiOperation(value = "修改SysTest", notes = "修改SysTest")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysTestController {
         }
         Integer num = sysTestService.updateByPrimaryKey(sysTest);
         if (num == 0) {
-            return RespVOBuilder.failure("修改测试失败");
+            return RespVOBuilder.failure("修改SysTest失败");
         } else {
-            return RespVOBuilder.success("修改测试成功");
+            return RespVOBuilder.success("修改SysTest成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键id批量删除测试", notes = "通过主键id批量删除测试")
+    @ApiOperation(value = "通过主键id批量删除SysTest", notes = "通过主键id批量删除SysTest")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysTestController {
         }
         Integer num = sysTestService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除测试失败");
+            return RespVOBuilder.failure("批量删除SysTest失败");
         } else {
-            return RespVOBuilder.success("批量删除测试成功");
+            return RespVOBuilder.success("批量删除SysTest成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询测试", notes = "条件查询测试")
+    @ApiOperation(value = "条件查询SysTest", notes = "条件查询SysTest")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

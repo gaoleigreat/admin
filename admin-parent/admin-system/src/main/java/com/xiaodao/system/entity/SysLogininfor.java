@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_logininfor")
-public class SysLogininfor extends BaseEntity implements Serializable {
+public class SysLogininfor implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *访问ID
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private Long infoId;
 
 
-     /**
+    /**
      *登录账号
      */
     
@@ -31,7 +31,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String loginName;
 
 
-     /**
+    /**
      *登录IP地址
      */
     
@@ -39,7 +39,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String ipaddr;
 
 
-     /**
+    /**
      *登录地点
      */
     
@@ -47,7 +47,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String loginLocation;
 
 
-     /**
+    /**
      *浏览器类型
      */
     
@@ -55,7 +55,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String browser;
 
 
-     /**
+    /**
      *操作系统
      */
     
@@ -63,7 +63,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String os;
 
 
-     /**
+    /**
      *登录状态（0成功 1失败）
      */
     
@@ -71,7 +71,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String status;
 
 
-     /**
+    /**
      *提示消息
      */
     
@@ -79,7 +79,7 @@ public class SysLogininfor extends BaseEntity implements Serializable {
     private String msg;
 
 
-     /**
+    /**
      *访问时间
      */
     

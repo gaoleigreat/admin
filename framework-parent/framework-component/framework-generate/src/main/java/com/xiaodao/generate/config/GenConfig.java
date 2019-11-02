@@ -17,7 +17,7 @@ public class GenConfig {
     /**
      * 生成包路径
      */
-    public static String packageName = "com.lego.perception.data";
+    public static String packageName = "com.xiaodao.system";
 
 
     /**

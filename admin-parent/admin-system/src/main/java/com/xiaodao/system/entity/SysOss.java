@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_oss")
-public class SysOss extends BaseEntity implements Serializable {
+public class SysOss implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysOss extends BaseEntity implements Serializable {
     private Long id;
 
 
-     /**
+    /**
      *文件名
      */
     
@@ -31,7 +31,7 @@ public class SysOss extends BaseEntity implements Serializable {
     private String fileName;
 
 
-     /**
+    /**
      *文件后缀名
      */
     
@@ -39,7 +39,7 @@ public class SysOss extends BaseEntity implements Serializable {
     private String fileSuffix;
 
 
-     /**
+    /**
      *URL地址
      */
     
@@ -47,19 +47,23 @@ public class SysOss extends BaseEntity implements Serializable {
     private String url;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *上传人
+     */
     
-    
-    
-    
+    @ApiModelProperty("上传人")
+    private Long createBy;
 
 
-     /**
+    /**
      *服务商
      */
     

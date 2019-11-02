@@ -1,10 +1,14 @@
 package com.xiaodao.generate.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -13,6 +17,7 @@ import java.util.Vector;
  * @Date 2019/11/2 0:33
  * @Version 1.0
  */
+@Slf4j
 public final class DBConnectionPool extends Pool {
     /**
      * 正在使用的连接数
@@ -49,6 +54,19 @@ public final class DBConnectionPool extends Pool {
     }
 
     private DBConnectionPool() {
+        try {
+            this.init();
+            for (int i = 0; i < normalConnect; i++) {
+                Connection c = newConnection();
+                if (c != null) {
+                    freeConnections.add(c);
+                    num++;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -57,10 +75,14 @@ public final class DBConnectionPool extends Pool {
      *
      * @throws IOException
      */
-    private void init() throws IOException {
-        InputStream is = Pool.class.getResourceAsStream(propertiesNames);
+    private void init()  {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesNames);
         Properties p = new Properties();
-        p.load(is);
+        try {
+            p.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.userName = p.getProperty("userName");
         this.passWord = p.getProperty("passWord");
         this.driverName = p.getProperty("driverName");
@@ -90,8 +112,9 @@ public final class DBConnectionPool extends Pool {
             } else {
                 con = DriverManager.getConnection(url, userName, passWord);
             }
+            log.info("创建一个新连接");
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("无法创建这个url的连接{}",url);
             return null;
         }
         return con;
@@ -125,29 +148,73 @@ public final class DBConnectionPool extends Pool {
                 e.printStackTrace();
                 con = getConnection();
             }
+        } else if (maxConnect == 0 || checkedOut < maxConnect) {
+            con = newConnection();
         }
+        if (con != null) {
+            checkedOut++;
+        }
+        numActive++;
         return con;
     }
 
 
     @Override
     public void createPool() {
+        pool = new DBConnectionPool();
+        if (pool != null) {
+            log.info("创建连接池成功");
+        } else {
+            log.error("创建连接池失败");
+        }
 
     }
 
+    @Override
+    protected synchronized void release() {
+        try {
+            Enumeration allConnections = freeConnections.elements();
+            while (allConnections.hasMoreElements()) {
+                Connection con = (Connection) allConnections.nextElement();
+                try {
+                    con.close();
+                    num--;
+                } catch (SQLException e) {
+                    log.error("无法关闭连接池中的连接");
+                }
+            }
+            freeConnections.removeAllElements();
+            numActive = 0;
+        } finally {
+            super.release();
+        }
+
+    }
 
     @Override
-    public Connection getConnection(long time) {
-        return null;
+    public synchronized Connection getConnection(long timeout) {
+        long startTime = System.currentTimeMillis();
+        Connection con;
+        while ((con = getConnection()) != null) {
+            try {
+                wait(timeout);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if ((System.currentTimeMillis() - startTime) >= timeout) {
+            return null;
+        }
+        return con;
     }
 
     @Override
     public int getnum() {
-        return 0;
+        return num;
     }
 
     @Override
     public int getnumActive() {
-        return 0;
+        return numActive;
     }
 }

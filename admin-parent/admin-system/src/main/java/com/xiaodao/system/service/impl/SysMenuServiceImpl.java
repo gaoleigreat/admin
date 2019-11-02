@@ -101,7 +101,7 @@ public class SysMenuServiceImpl implements ISysMenuService{
         QueryWrapper<SysMenu> queryWrapper = Wrappers.query();
         IPage<SysMenu> ipage = sysMenuMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

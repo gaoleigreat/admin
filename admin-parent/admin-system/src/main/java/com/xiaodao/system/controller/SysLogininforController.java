@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 系统访问记录
+ * SysLogininfor
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysLogininfor")
-@Api(value = "系统访问记录管理", tags = "系统访问记录管理")
+@Api(value = "SysLogininfor管理", tags = "SysLogininfor管理")
 @Validated
 @Slf4j
 public class SysLogininforController {
     @Autowired
     private ISysLogininforService sysLogininforService;
 
-    @ApiOperation(value = "分页查询系统访问记录", notes = "分页查询系统访问记录")
+    @ApiOperation(value = "分页查询SysLogininfor", notes = "分页查询SysLogininfor")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysLogininforController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键infoId查询系统访问记录", notes = "通过主键infoId查询系统访问记录")
+    @ApiOperation(value = "通过主键infoId查询SysLogininfor", notes = "通过主键infoId查询SysLogininfor")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "infoId", paramType = "path", value = "infoId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysLogininforController {
         SysLogininfor sysLogininfor =
             sysLogininforService.selectByPrimaryKey(infoId);
         if (sysLogininfor == null){
-            return RespVOBuilder.failure("当前系统访问记录不存在");
+            return RespVOBuilder.failure("当前SysLogininfor不存在");
         } else{
             return RespVOBuilder.success(sysLogininfor);
         }
     }
 
-    @ApiOperation(value = "通过主键infoId删除系统访问记录", notes = "通过主键infoId删除系统访问记录")
+    @ApiOperation(value = "通过主键infoId删除SysLogininfor", notes = "通过主键infoId删除SysLogininfor")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "infoId", paramType = "path", value = "infoId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysLogininforController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "infoId") Long infoId) {
         Integer num = sysLogininforService.deleteByPrimaryKey(infoId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除系统访问记录失败");
+            return RespVOBuilder.failure("删除SysLogininfor失败");
         } else {
-            return RespVOBuilder.success("删除系统访问记录成功");
+            return RespVOBuilder.success("删除SysLogininfor成功");
         }
     }
 
-    @ApiOperation(value = "新增系统访问记录", notes = "新增系统访问记录")
+    @ApiOperation(value = "新增SysLogininfor", notes = "新增SysLogininfor")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysLogininforController {
         }
         Integer num = sysLogininforService.insert(sysLogininfor);
         if (num == 0) {
-            return RespVOBuilder.failure("添加系统访问记录失败");
+            return RespVOBuilder.failure("添加SysLogininfor失败");
         } else {
-            return RespVOBuilder.success("添加系统访问记录成功");
+            return RespVOBuilder.success("添加SysLogininfor成功");
         }
     }
 
-    @ApiOperation(value = "修改系统访问记录", notes = "修改系统访问记录")
+    @ApiOperation(value = "修改SysLogininfor", notes = "修改SysLogininfor")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysLogininforController {
         }
         Integer num = sysLogininforService.updateByPrimaryKey(sysLogininfor);
         if (num == 0) {
-            return RespVOBuilder.failure("修改系统访问记录失败");
+            return RespVOBuilder.failure("修改SysLogininfor失败");
         } else {
-            return RespVOBuilder.success("修改系统访问记录成功");
+            return RespVOBuilder.success("修改SysLogininfor成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键infoId批量删除系统访问记录", notes = "通过主键infoId批量删除系统访问记录")
+    @ApiOperation(value = "通过主键infoId批量删除SysLogininfor", notes = "通过主键infoId批量删除SysLogininfor")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysLogininforController {
         }
         Integer num = sysLogininforService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除系统访问记录失败");
+            return RespVOBuilder.failure("批量删除SysLogininfor失败");
         } else {
-            return RespVOBuilder.success("批量删除系统访问记录成功");
+            return RespVOBuilder.success("批量删除SysLogininfor成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询系统访问记录", notes = "条件查询系统访问记录")
+    @ApiOperation(value = "条件查询SysLogininfor", notes = "条件查询SysLogininfor")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

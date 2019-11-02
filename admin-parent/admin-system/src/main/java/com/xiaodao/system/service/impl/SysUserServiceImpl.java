@@ -101,7 +101,7 @@ public class SysUserServiceImpl implements ISysUserService{
         QueryWrapper<SysUser> queryWrapper = Wrappers.query();
         IPage<SysUser> ipage = sysUserMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

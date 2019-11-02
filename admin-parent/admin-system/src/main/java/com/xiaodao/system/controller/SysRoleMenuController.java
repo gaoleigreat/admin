@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 角色和菜单关联表
+ * SysRoleMenu
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysRoleMenu")
-@Api(value = "角色和菜单关联表管理", tags = "角色和菜单关联表管理")
+@Api(value = "SysRoleMenu管理", tags = "SysRoleMenu管理")
 @Validated
 @Slf4j
 public class SysRoleMenuController {
     @Autowired
     private ISysRoleMenuService sysRoleMenuService;
 
-    @ApiOperation(value = "分页查询角色和菜单关联表", notes = "分页查询角色和菜单关联表")
+    @ApiOperation(value = "分页查询SysRoleMenu", notes = "分页查询SysRoleMenu")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysRoleMenuController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键roleId查询角色和菜单关联表", notes = "通过主键roleId查询角色和菜单关联表")
+    @ApiOperation(value = "通过主键roleId查询SysRoleMenu", notes = "通过主键roleId查询SysRoleMenu")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysRoleMenuController {
         SysRoleMenu sysRoleMenu =
             sysRoleMenuService.selectByPrimaryKey(roleId);
         if (sysRoleMenu == null){
-            return RespVOBuilder.failure("当前角色和菜单关联表不存在");
+            return RespVOBuilder.failure("当前SysRoleMenu不存在");
         } else{
             return RespVOBuilder.success(sysRoleMenu);
         }
     }
 
-    @ApiOperation(value = "通过主键roleId删除角色和菜单关联表", notes = "通过主键roleId删除角色和菜单关联表")
+    @ApiOperation(value = "通过主键roleId删除SysRoleMenu", notes = "通过主键roleId删除SysRoleMenu")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysRoleMenuController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "roleId") Long roleId) {
         Integer num = sysRoleMenuService.deleteByPrimaryKey(roleId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除角色和菜单关联表失败");
+            return RespVOBuilder.failure("删除SysRoleMenu失败");
         } else {
-            return RespVOBuilder.success("删除角色和菜单关联表成功");
+            return RespVOBuilder.success("删除SysRoleMenu成功");
         }
     }
 
-    @ApiOperation(value = "新增角色和菜单关联表", notes = "新增角色和菜单关联表")
+    @ApiOperation(value = "新增SysRoleMenu", notes = "新增SysRoleMenu")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysRoleMenuController {
         }
         Integer num = sysRoleMenuService.insert(sysRoleMenu);
         if (num == 0) {
-            return RespVOBuilder.failure("添加角色和菜单关联表失败");
+            return RespVOBuilder.failure("添加SysRoleMenu失败");
         } else {
-            return RespVOBuilder.success("添加角色和菜单关联表成功");
+            return RespVOBuilder.success("添加SysRoleMenu成功");
         }
     }
 
-    @ApiOperation(value = "修改角色和菜单关联表", notes = "修改角色和菜单关联表")
+    @ApiOperation(value = "修改SysRoleMenu", notes = "修改SysRoleMenu")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysRoleMenuController {
         }
         Integer num = sysRoleMenuService.updateByPrimaryKey(sysRoleMenu);
         if (num == 0) {
-            return RespVOBuilder.failure("修改角色和菜单关联表失败");
+            return RespVOBuilder.failure("修改SysRoleMenu失败");
         } else {
-            return RespVOBuilder.success("修改角色和菜单关联表成功");
+            return RespVOBuilder.success("修改SysRoleMenu成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键roleId批量删除角色和菜单关联表", notes = "通过主键roleId批量删除角色和菜单关联表")
+    @ApiOperation(value = "通过主键roleId批量删除SysRoleMenu", notes = "通过主键roleId批量删除SysRoleMenu")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysRoleMenuController {
         }
         Integer num = sysRoleMenuService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除角色和菜单关联表失败");
+            return RespVOBuilder.failure("批量删除SysRoleMenu失败");
         } else {
-            return RespVOBuilder.success("批量删除角色和菜单关联表成功");
+            return RespVOBuilder.success("批量删除SysRoleMenu成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询角色和菜单关联表", notes = "条件查询角色和菜单关联表")
+    @ApiOperation(value = "条件查询SysRoleMenu", notes = "条件查询SysRoleMenu")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

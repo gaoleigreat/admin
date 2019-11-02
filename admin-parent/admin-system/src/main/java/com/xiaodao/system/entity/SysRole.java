@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_role")
-public class SysRole extends BaseEntity implements Serializable {
+public class SysRole implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *角色ID
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysRole extends BaseEntity implements Serializable {
     private Long roleId;
 
 
-     /**
+    /**
      *角色名称
      */
     
@@ -31,7 +31,7 @@ public class SysRole extends BaseEntity implements Serializable {
     private String roleName;
 
 
-     /**
+    /**
      *角色权限字符串
      */
     
@@ -39,7 +39,7 @@ public class SysRole extends BaseEntity implements Serializable {
     private String roleKey;
 
 
-     /**
+    /**
      *显示顺序
      */
     
@@ -47,7 +47,7 @@ public class SysRole extends BaseEntity implements Serializable {
     private Integer roleSort;
 
 
-     /**
+    /**
      *数据范围（1：全部数据权限 2：自定数据权限）
      */
     
@@ -55,7 +55,7 @@ public class SysRole extends BaseEntity implements Serializable {
     private String dataScope;
 
 
-     /**
+    /**
      *角色状态（0正常 1停用）
      */
     
@@ -63,7 +63,7 @@ public class SysRole extends BaseEntity implements Serializable {
     private String status;
 
 
-     /**
+    /**
      *删除标志（0代表存在 2代表删除）
      */
     
@@ -71,31 +71,39 @@ public class SysRole extends BaseEntity implements Serializable {
     private String delFlag;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

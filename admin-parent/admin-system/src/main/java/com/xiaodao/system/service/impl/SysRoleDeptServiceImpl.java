@@ -101,7 +101,7 @@ public class SysRoleDeptServiceImpl implements ISysRoleDeptService{
         QueryWrapper<SysRoleDept> queryWrapper = Wrappers.query();
         IPage<SysRoleDept> ipage = sysRoleDeptMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

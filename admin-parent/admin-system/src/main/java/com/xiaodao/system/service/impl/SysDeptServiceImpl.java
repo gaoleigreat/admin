@@ -101,7 +101,7 @@ public class SysDeptServiceImpl implements ISysDeptService{
         QueryWrapper<SysDept> queryWrapper = Wrappers.query();
         IPage<SysDept> ipage = sysDeptMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

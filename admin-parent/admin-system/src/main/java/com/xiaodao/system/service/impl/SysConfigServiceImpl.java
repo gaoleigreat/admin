@@ -101,7 +101,7 @@ public class SysConfigServiceImpl implements ISysConfigService{
         QueryWrapper<SysConfig> queryWrapper = Wrappers.query();
         IPage<SysConfig> ipage = sysConfigMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入

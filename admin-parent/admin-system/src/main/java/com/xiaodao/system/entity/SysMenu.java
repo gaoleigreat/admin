@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_menu")
-public class SysMenu extends BaseEntity implements Serializable {
+public class SysMenu implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *菜单ID
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private Long menuId;
 
 
-     /**
+    /**
      *菜单名称
      */
     
@@ -31,7 +31,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String menuName;
 
 
-     /**
+    /**
      *菜单标识
      */
     
@@ -39,7 +39,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String menuKey;
 
 
-     /**
+    /**
      *菜单布局
      */
     
@@ -47,7 +47,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String menuLay;
 
 
-     /**
+    /**
      *父菜单ID
      */
     
@@ -55,7 +55,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private Long parentId;
 
 
-     /**
+    /**
      *打开方式
      */
     
@@ -63,7 +63,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String target;
 
 
-     /**
+    /**
      *显示顺序
      */
     
@@ -71,7 +71,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private Integer orderNum;
 
 
-     /**
+    /**
      *请求地址
      */
     
@@ -79,7 +79,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String url;
 
 
-     /**
+    /**
      *菜单类型（M目录 C菜单 F按钮）
      */
     
@@ -87,7 +87,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String menuType;
 
 
-     /**
+    /**
      *菜单状态（0显示 1隐藏）
      */
     
@@ -95,7 +95,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String visible;
 
 
-     /**
+    /**
      *权限标识
      */
     
@@ -103,7 +103,7 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String perms;
 
 
-     /**
+    /**
      *菜单图标
      */
     
@@ -111,31 +111,39 @@ public class SysMenu extends BaseEntity implements Serializable {
     private String icon;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private Long createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private Long updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
-     /**
+    /**
      *备注
      */
     

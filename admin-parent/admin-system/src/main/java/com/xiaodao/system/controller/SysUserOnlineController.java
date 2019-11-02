@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 在线用户记录
+ * SysUserOnline
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysUserOnline")
-@Api(value = "在线用户记录管理", tags = "在线用户记录管理")
+@Api(value = "SysUserOnline管理", tags = "SysUserOnline管理")
 @Validated
 @Slf4j
 public class SysUserOnlineController {
     @Autowired
     private ISysUserOnlineService sysUserOnlineService;
 
-    @ApiOperation(value = "分页查询在线用户记录", notes = "分页查询在线用户记录")
+    @ApiOperation(value = "分页查询SysUserOnline", notes = "分页查询SysUserOnline")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysUserOnlineController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键sessionid查询在线用户记录", notes = "通过主键sessionid查询在线用户记录")
+    @ApiOperation(value = "通过主键sessionid查询SysUserOnline", notes = "通过主键sessionid查询SysUserOnline")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sessionid", paramType = "path", value = "sessionid", required = true, dataType = "String")
     })
@@ -54,13 +54,13 @@ public class SysUserOnlineController {
         SysUserOnline sysUserOnline =
             sysUserOnlineService.selectByPrimaryKey(sessionid);
         if (sysUserOnline == null){
-            return RespVOBuilder.failure("当前在线用户记录不存在");
+            return RespVOBuilder.failure("当前SysUserOnline不存在");
         } else{
             return RespVOBuilder.success(sysUserOnline);
         }
     }
 
-    @ApiOperation(value = "通过主键sessionid删除在线用户记录", notes = "通过主键sessionid删除在线用户记录")
+    @ApiOperation(value = "通过主键sessionid删除SysUserOnline", notes = "通过主键sessionid删除SysUserOnline")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sessionid", paramType = "path", value = "sessionid", required = true, dataType = "String")
     })
@@ -68,13 +68,13 @@ public class SysUserOnlineController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "sessionid") String sessionid) {
         Integer num = sysUserOnlineService.deleteByPrimaryKey(sessionid);
         if (num == 0) {
-            return RespVOBuilder.failure("删除在线用户记录失败");
+            return RespVOBuilder.failure("删除SysUserOnline失败");
         } else {
-            return RespVOBuilder.success("删除在线用户记录成功");
+            return RespVOBuilder.success("删除SysUserOnline成功");
         }
     }
 
-    @ApiOperation(value = "新增在线用户记录", notes = "新增在线用户记录")
+    @ApiOperation(value = "新增SysUserOnline", notes = "新增SysUserOnline")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysUserOnlineController {
         }
         Integer num = sysUserOnlineService.insert(sysUserOnline);
         if (num == 0) {
-            return RespVOBuilder.failure("添加在线用户记录失败");
+            return RespVOBuilder.failure("添加SysUserOnline失败");
         } else {
-            return RespVOBuilder.success("添加在线用户记录成功");
+            return RespVOBuilder.success("添加SysUserOnline成功");
         }
     }
 
-    @ApiOperation(value = "修改在线用户记录", notes = "修改在线用户记录")
+    @ApiOperation(value = "修改SysUserOnline", notes = "修改SysUserOnline")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysUserOnlineController {
         }
         Integer num = sysUserOnlineService.updateByPrimaryKey(sysUserOnline);
         if (num == 0) {
-            return RespVOBuilder.failure("修改在线用户记录失败");
+            return RespVOBuilder.failure("修改SysUserOnline失败");
         } else {
-            return RespVOBuilder.success("修改在线用户记录成功");
+            return RespVOBuilder.success("修改SysUserOnline成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键sessionid批量删除在线用户记录", notes = "通过主键sessionid批量删除在线用户记录")
+    @ApiOperation(value = "通过主键sessionid批量删除SysUserOnline", notes = "通过主键sessionid批量删除SysUserOnline")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysUserOnlineController {
         }
         Integer num = sysUserOnlineService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除在线用户记录失败");
+            return RespVOBuilder.failure("批量删除SysUserOnline失败");
         } else {
-            return RespVOBuilder.success("批量删除在线用户记录成功");
+            return RespVOBuilder.success("批量删除SysUserOnline成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询在线用户记录", notes = "条件查询在线用户记录")
+    @ApiOperation(value = "条件查询SysUserOnline", notes = "条件查询SysUserOnline")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

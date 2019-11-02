@@ -2,7 +2,6 @@ package com.xiaodao.system.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -11,13 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_oper_log")
-@ApiModel("操作日志记录")
-public class SysOperLog extends BaseEntity implements Serializable {
+public class SysOperLog implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *日志主键
      */
     @TableId
@@ -25,7 +23,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private Long operId;
 
 
-     /**
+    /**
      *模块标题
      */
     
@@ -33,7 +31,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String title;
 
 
-     /**
+    /**
      *业务类型（0其它 1新增 2修改 3删除）
      */
     
@@ -41,7 +39,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private Integer businessType;
 
 
-     /**
+    /**
      *方法名称
      */
     
@@ -49,7 +47,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String method;
 
 
-     /**
+    /**
      *请求方式
      */
     
@@ -57,7 +55,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String requestMethod;
 
 
-     /**
+    /**
      *操作类别（0其它 1后台用户 2手机端用户）
      */
     
@@ -65,7 +63,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private Integer operatorType;
 
 
-     /**
+    /**
      *操作人员
      */
     
@@ -73,7 +71,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String operName;
 
 
-     /**
+    /**
      *部门名称
      */
     
@@ -81,7 +79,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String deptName;
 
 
-     /**
+    /**
      *请求URL
      */
     
@@ -89,7 +87,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String operUrl;
 
 
-     /**
+    /**
      *主机地址
      */
     
@@ -97,7 +95,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String operIp;
 
 
-     /**
+    /**
      *操作地点
      */
     
@@ -105,7 +103,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String operLocation;
 
 
-     /**
+    /**
      *请求参数
      */
     
@@ -113,7 +111,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String operParam;
 
 
-     /**
+    /**
      *操作状态（0正常 1异常）
      */
     
@@ -121,7 +119,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private Integer status;
 
 
-     /**
+    /**
      *错误消息
      */
     
@@ -129,7 +127,7 @@ public class SysOperLog extends BaseEntity implements Serializable {
     private String errorMsg;
 
 
-     /**
+    /**
      *操作时间
      */
     

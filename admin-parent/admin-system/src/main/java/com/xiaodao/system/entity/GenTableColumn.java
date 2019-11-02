@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("gen_table_column")
-public class GenTableColumn extends BaseEntity implements Serializable {
+public class GenTableColumn implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *编号
      */
     @TableId
@@ -23,7 +23,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private Long columnId;
 
 
-     /**
+    /**
      *归属表编号
      */
     
@@ -31,7 +31,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String tableId;
 
 
-     /**
+    /**
      *列名称
      */
     
@@ -39,7 +39,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String columnName;
 
 
-     /**
+    /**
      *列描述
      */
     
@@ -47,7 +47,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String columnComment;
 
 
-     /**
+    /**
      *列类型
      */
     
@@ -55,7 +55,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String columnType;
 
 
-     /**
+    /**
      *JAVA类型
      */
     
@@ -63,7 +63,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String javaType;
 
 
-     /**
+    /**
      *JAVA字段名
      */
     
@@ -71,7 +71,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String javaField;
 
 
-     /**
+    /**
      *是否主键（1是）
      */
     
@@ -79,7 +79,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isPk;
 
 
-     /**
+    /**
      *是否自增（1是）
      */
     
@@ -87,7 +87,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isIncrement;
 
 
-     /**
+    /**
      *是否必填（1是）
      */
     
@@ -95,7 +95,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isRequired;
 
 
-     /**
+    /**
      *是否为插入字段（1是）
      */
     
@@ -103,7 +103,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isInsert;
 
 
-     /**
+    /**
      *是否编辑字段（1是）
      */
     
@@ -111,7 +111,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isEdit;
 
 
-     /**
+    /**
      *是否列表字段（1是）
      */
     
@@ -119,7 +119,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isList;
 
 
-     /**
+    /**
      *是否查询字段（1是）
      */
     
@@ -127,7 +127,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String isQuery;
 
 
-     /**
+    /**
      *查询方式（等于、不等于、大于、小于、范围）
      */
     
@@ -135,7 +135,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String queryType;
 
 
-     /**
+    /**
      *显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）
      */
     
@@ -143,7 +143,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String htmlType;
 
 
-     /**
+    /**
      *字典类型
      */
     
@@ -151,7 +151,7 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private String dictType;
 
 
-     /**
+    /**
      *排序
      */
     
@@ -159,28 +159,36 @@ public class GenTableColumn extends BaseEntity implements Serializable {
     private Integer sort;
 
 
+    /**
+     *创建者
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建者")
+    private String createBy;
 
 
+    /**
+     *创建时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
 
+    /**
+     *更新者
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新者")
+    private String updateBy;
 
 
+    /**
+     *更新时间
+     */
     
-    
-    
-    
+    @ApiModelProperty("更新时间")
+    private Date updateTime;
 
 
 }

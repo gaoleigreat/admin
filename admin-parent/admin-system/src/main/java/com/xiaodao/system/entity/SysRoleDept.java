@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Data
 @Slf4j
 @TableName("sys_role_dept")
-public class SysRoleDept extends BaseEntity implements Serializable {
+public class SysRoleDept implements Serializable {
 
      private static final long serialVersionUID = 1L;
 
 
-     /**
+    /**
      *角色ID
      */
     @TableId
@@ -23,7 +23,7 @@ public class SysRoleDept extends BaseEntity implements Serializable {
     private Long roleId;
 
 
-     /**
+    /**
      *部门ID
      */
     @TableId

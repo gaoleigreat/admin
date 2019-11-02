@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * 用户信息表
+ * SysUser
  *
  * @author 高磊
  * @email 513684652@qq.com
@@ -26,14 +26,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysUser")
-@Api(value = "用户信息表管理", tags = "用户信息表管理")
+@Api(value = "SysUser管理", tags = "SysUser管理")
 @Validated
 @Slf4j
 public class SysUserController {
     @Autowired
     private ISysUserService sysUserService;
 
-    @ApiOperation(value = "分页查询用户信息表", notes = "分页查询用户信息表")
+    @ApiOperation(value = "分页查询SysUser", notes = "分页查询SysUser")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
@@ -45,7 +45,7 @@ public class SysUserController {
         return RespVOBuilder.success(iPage);
     }
 
-    @ApiOperation(value = "通过主键userId查询用户信息表", notes = "通过主键userId查询用户信息表")
+    @ApiOperation(value = "通过主键userId查询SysUser", notes = "通过主键userId查询SysUser")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", paramType = "path", value = "userId", required = true, dataType = "Long")
     })
@@ -54,13 +54,13 @@ public class SysUserController {
         SysUser sysUser =
             sysUserService.selectByPrimaryKey(userId);
         if (sysUser == null){
-            return RespVOBuilder.failure("当前用户信息表不存在");
+            return RespVOBuilder.failure("当前SysUser不存在");
         } else{
             return RespVOBuilder.success(sysUser);
         }
     }
 
-    @ApiOperation(value = "通过主键userId删除用户信息表", notes = "通过主键userId删除用户信息表")
+    @ApiOperation(value = "通过主键userId删除SysUser", notes = "通过主键userId删除SysUser")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", paramType = "path", value = "userId", required = true, dataType = "Long")
     })
@@ -68,13 +68,13 @@ public class SysUserController {
     public RespVO deleteByPrimaryKey(@PathVariable(value = "userId") Long userId) {
         Integer num = sysUserService.deleteByPrimaryKey(userId);
         if (num == 0) {
-            return RespVOBuilder.failure("删除用户信息表失败");
+            return RespVOBuilder.failure("删除SysUser失败");
         } else {
-            return RespVOBuilder.success("删除用户信息表成功");
+            return RespVOBuilder.success("删除SysUser成功");
         }
     }
 
-    @ApiOperation(value = "新增用户信息表", notes = "新增用户信息表")
+    @ApiOperation(value = "新增SysUser", notes = "新增SysUser")
     @ApiImplicitParams({
     })
     @PostMapping("/")
@@ -84,13 +84,13 @@ public class SysUserController {
         }
         Integer num = sysUserService.insert(sysUser);
         if (num == 0) {
-            return RespVOBuilder.failure("添加用户信息表失败");
+            return RespVOBuilder.failure("添加SysUser失败");
         } else {
-            return RespVOBuilder.success("添加用户信息表成功");
+            return RespVOBuilder.success("添加SysUser成功");
         }
     }
 
-    @ApiOperation(value = "修改用户信息表", notes = "修改用户信息表")
+    @ApiOperation(value = "修改SysUser", notes = "修改SysUser")
     @ApiImplicitParams({
     })
     @PutMapping("/")
@@ -100,14 +100,14 @@ public class SysUserController {
         }
         Integer num = sysUserService.updateByPrimaryKey(sysUser);
         if (num == 0) {
-            return RespVOBuilder.failure("修改用户信息表失败");
+            return RespVOBuilder.failure("修改SysUser失败");
         } else {
-            return RespVOBuilder.success("修改用户信息表成功");
+            return RespVOBuilder.success("修改SysUser成功");
         }
     }
 
 
-    @ApiOperation(value = "通过主键userId批量删除用户信息表", notes = "通过主键userId批量删除用户信息表")
+    @ApiOperation(value = "通过主键userId批量删除SysUser", notes = "通过主键userId批量删除SysUser")
     @ApiImplicitParams({
     })
     @DeleteMapping("/deleteBatchPrimaryKeys")
@@ -117,14 +117,14 @@ public class SysUserController {
         }
         Integer num = sysUserService.deleteBatchIds(list);
         if (num == 0) {
-            return RespVOBuilder.failure("批量删除用户信息表失败");
+            return RespVOBuilder.failure("批量删除SysUser失败");
         } else {
-            return RespVOBuilder.success("批量删除用户信息表成功");
+            return RespVOBuilder.success("批量删除SysUser成功");
         }
     }
 
 
-    @ApiOperation(value = "条件查询用户信息表", notes = "条件查询用户信息表")
+    @ApiOperation(value = "条件查询SysUser", notes = "条件查询SysUser")
     @ApiImplicitParams({
     })
     @PostMapping("/list")

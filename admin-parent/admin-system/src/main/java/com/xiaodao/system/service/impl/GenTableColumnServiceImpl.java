@@ -101,7 +101,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService{
         QueryWrapper<GenTableColumn> queryWrapper = Wrappers.query();
         IPage<GenTableColumn> ipage = genTableColumnMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
         return ipage;
-    };
+    }
 
     /**
     * 批量插入
