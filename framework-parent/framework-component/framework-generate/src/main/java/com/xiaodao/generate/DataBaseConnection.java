@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class DataBaseConnection {
     private static final String DBDRIVER ="com.mysql.cj.jdbc.Driver";
-    private static final String DBURL ="jdbc:mysql://49.235.172.6:3306/exam";
+    private static final String DBURL ="jdbc:mysql://49.235.172.6:3306/perception_base";
     private static final String DBUSER ="root";
     private static final String DBPASSWORD ="Changeme_123";
 

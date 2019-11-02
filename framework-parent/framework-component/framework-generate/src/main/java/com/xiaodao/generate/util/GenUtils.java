@@ -5,8 +5,11 @@ import com.xiaodao.generate.config.GenConfig;
 import com.xiaodao.generate.constant.GenConstants;
 import com.xiaodao.generate.domain.GenTable;
 import com.xiaodao.generate.domain.GenTableColumn;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 代码生成器 工具类
@@ -25,6 +28,19 @@ public class GenUtils
         genTable.setPackageName(GenConfig.getPackageName());
         genTable.setModuleName(getModuleName(GenConfig.getModuleName()));
         genTable.setAuthor(GenConfig.getAuthor());
+        List<GenTableColumn> columns = genTable.getColumns();
+        //获取list对象的某个字段组装成新list
+        List<String> javaFileNameList = columns.stream().map(a -> a.getJavaFieldName()).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(javaFileNameList)){
+            if (javaFileNameList.contains("createBy") && GenConfig.extendsBase == true){
+                genTable.setExtendsBase("yes");
+            }else {
+                genTable.setExtendsBase("false");
+            }
+        } else {
+            genTable.setExtendsBase("false");
+        }
+
     }
 
     /**
@@ -72,6 +88,8 @@ public class GenUtils
                 column.setJavaType(GenConstants.TYPE_LONG);
                 column.setJdbcType("BIGINT");
             }
+        }else{
+            column.setJavaType(GenConstants.TYPE_STRING);
         }
 
     }

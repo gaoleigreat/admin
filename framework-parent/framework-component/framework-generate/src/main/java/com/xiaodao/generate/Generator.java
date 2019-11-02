@@ -15,7 +15,7 @@ public class Generator {
 
     public static void main(String[] args) throws Exception {
         DataServiceImpl dataService = new DataServiceImpl();
-        List<GenTable> exam = dataService.getGenTable("exam");
+        List<GenTable> exam = dataService.getGenTable("perception_base");
 
         //创建Configuration对象
         Configuration configuration = new Configuration();
@@ -39,6 +39,13 @@ public class Generator {
 
                 try {
                     map.put("gentable", e);
+
+                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/mapper/");
+                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/entity/");
+                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/mapper/xml/");
+                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/service/");
+                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/service/impl");
+                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/controller");
                     Writer writer1 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/mapper/" + e.getClassName() + "Mapper.java"));
                     Writer writer2 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/mapper/xml/" + e.getClassName() + "Mapper.xml"));
                     Writer writer3 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/service/I" + e.getClassName() + "Service.java"));
@@ -63,6 +70,15 @@ public class Generator {
         });
 
 
+    }
+
+
+
+    public static void mkdirs(String dir){
+        File file = new File(dir);
+        if (!file.exists()){
+            file.mkdirs();
+        }
     }
 }
  
