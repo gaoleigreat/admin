@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * PerceptionStructuredData
  *
- * @author 高磊
+ * @author xiaodao
  * @email 513684652@qq.com
  * @since jdk 1.8
  */

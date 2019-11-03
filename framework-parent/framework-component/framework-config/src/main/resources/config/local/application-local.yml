@@ -8,6 +8,8 @@ spring:
   jackson:
     date-format: yyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  main:
+    allow-bean-definition-overriding: true
 eureka:
   client:
     fetch-registry: true

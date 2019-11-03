@@ -221,7 +221,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysLogininfor">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysLogininfor">
         insert into sys_logininfor
         <trim prefix="(" suffix=")" suffixOverrides=",">
              info_id ,

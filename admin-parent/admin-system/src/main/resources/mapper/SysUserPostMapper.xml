@@ -102,7 +102,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysUserPost">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysUserPost">
         insert into sys_user_post
         <trim prefix="(" suffix=")" suffixOverrides=",">
              user_id ,

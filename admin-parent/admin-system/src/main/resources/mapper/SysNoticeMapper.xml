@@ -238,7 +238,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysNotice">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysNotice">
         insert into sys_notice
         <trim prefix="(" suffix=")" suffixOverrides=",">
              notice_id ,

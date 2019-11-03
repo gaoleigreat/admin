@@ -1,4 +1,4 @@
-package com.xiaodao.feign.config;
+package com.xiaodao.config;
 
 /**
  * @auther xiaodao

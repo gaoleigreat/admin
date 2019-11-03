@@ -238,7 +238,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysConfig">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysConfig">
         insert into sys_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
              config_id ,

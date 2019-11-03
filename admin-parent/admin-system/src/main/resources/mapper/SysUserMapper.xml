@@ -408,7 +408,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysUser">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysUser">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
              user_id ,

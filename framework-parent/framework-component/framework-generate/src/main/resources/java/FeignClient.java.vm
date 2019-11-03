@@ -1,0 +1,89 @@
+package ${gentable.packageName}.${gentable.moduleName}.feign;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xiaodao.core.vo.RespVO;
+import com.xiaodao.core.vo.RespVOBuilder;
+import com.xiaodao.config.MultipartSupportConfig;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
+
+import java.util.List;
+
+@FeignClient(value = "${gentable.moduleName}-service", path = "/${gentable.camelCaseclassName}", fallbackFactory = ${gentable.className}ClientFallback.class, configuration = MultipartSupportConfig.class)
+public interface ${gentable.className}Client {
+
+    @GetMapping("/")
+    RespVO<IPage<${gentable.className}>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
+                                                   @RequestParam(required = false, defaultValue = "10") int pageSize);
+
+
+    @GetMapping("/{${gentable.pkColumn.javaFieldName}}")
+    RespVO<${gentable.className}> selectByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+
+
+    @DeleteMapping("/{${gentable.pkColumn.javaFieldName}}")
+    RespVO deleteByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+
+
+    @PostMapping("/")
+    RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+
+    @PutMapping("/")
+    RespVO updateByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+
+    @DeleteMapping("/deleteBatchPrimaryKeys")
+    RespVO deleteBatchPrimaryKeys(@RequestBody List<${gentable.pkColumn.javaType}> list);
+
+
+    @PostMapping("/list")
+    RespVO query(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+}
+
+class ${gentable.className}ClientFallback implements ${gentable.className}Client {
+
+
+    @Override
+    public RespVO<IPage<${gentable.className}>> queryPage(int pageIndex, int pageSize) {
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+
+
+    @Override
+    public RespVO<${gentable.className}> selectByPrimaryKey( ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}){
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+
+
+    @Override
+    public RespVO deleteByPrimaryKey( ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}){
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+
+
+    @Override
+    public RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}){
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+
+
+    @Override
+    public RespVO updateByPrimaryKey(${gentable.className} ${gentable.camelCaseclassName}){
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+
+
+    @Override
+    public RespVO deleteBatchPrimaryKeys(List<${gentable.pkColumn.javaType}> list){
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+
+
+    @Override
+    public RespVO query(${gentable.className} ${gentable.camelCaseclassName}){
+        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    }
+}

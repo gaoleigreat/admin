@@ -238,7 +238,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysPost">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysPost">
         insert into sys_post
         <trim prefix="(" suffix=")" suffixOverrides=",">
              post_id ,

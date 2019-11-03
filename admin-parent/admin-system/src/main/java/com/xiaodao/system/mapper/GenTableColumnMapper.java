@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.GenTableColumn;
 
 /**
  * @description GenTableColumnMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface GenTableColumnMapper extends BaseMapper<GenTableColumn>{

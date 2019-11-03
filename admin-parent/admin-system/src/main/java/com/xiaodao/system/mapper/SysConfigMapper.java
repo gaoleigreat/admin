@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysConfig;
 
 /**
  * @description SysConfigMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface SysConfigMapper extends BaseMapper<SysConfig>{

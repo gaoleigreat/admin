@@ -25,9 +25,9 @@ public class GenUtils
     {
         genTable.setClassName(convertClassName(genTable.getTableName()));
         genTable.setCamelCaseclassName(StringUtils.toCamelCase(genTable.getTableName()));
-        genTable.setPackageName(GenConfig.getPackageName());
-        genTable.setModuleName(getModuleName(GenConfig.getModuleName()));
-        genTable.setAuthor(GenConfig.getAuthor());
+        genTable.setPackageName(GenConfig.packageName);
+        genTable.setModuleName(GenConfig.moduleName);
+        genTable.setAuthor(GenConfig.author);
         List<GenTableColumn> columns = genTable.getColumns();
         //获取list对象的某个字段组装成新list
         List<String> javaFileNameList = columns.stream().map(a -> a.getJavaFieldName()).collect(Collectors.toList());
@@ -142,24 +142,13 @@ public class GenUtils
      */
     public static String convertClassName(String tableName)
     {
-        boolean autoRemovePre = GenConfig.getAutoRemovePre();
-        String tablePrefix = GenConfig.getTablePrefix();
+        boolean autoRemovePre = GenConfig.autoRemovePre;
+        String tablePrefix = GenConfig.tablePrefix;
         if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix))
         {
             tableName = tableName.replaceFirst(tablePrefix, "");
         }
         return StringUtils.convertToCamelCase(tableName);
-    }
-
-    /**
-     * 关键字替换
-     * 
-     * @param name 需要被替换的名字
-     * @return 替换后的名字
-     */
-    public static String replaceText(String text)
-    {
-        return text.replaceAll("(?:表|若依)", "");
     }
 
     /**

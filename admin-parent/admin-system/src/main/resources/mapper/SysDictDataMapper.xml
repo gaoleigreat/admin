@@ -306,7 +306,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysDictData">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysDictData">
         insert into sys_dict_data
         <trim prefix="(" suffix=")" suffixOverrides=",">
              dict_code ,

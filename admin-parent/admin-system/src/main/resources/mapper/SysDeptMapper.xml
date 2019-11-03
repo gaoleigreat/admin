@@ -306,7 +306,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysDept">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysDept">
         insert into sys_dept
         <trim prefix="(" suffix=")" suffixOverrides=",">
              dept_id ,

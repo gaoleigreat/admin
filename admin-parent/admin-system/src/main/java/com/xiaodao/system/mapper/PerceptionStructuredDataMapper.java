@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.PerceptionStructuredData;
 
 /**
  * @description PerceptionStructuredDataMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface PerceptionStructuredDataMapper extends BaseMapper<PerceptionStructuredData>{

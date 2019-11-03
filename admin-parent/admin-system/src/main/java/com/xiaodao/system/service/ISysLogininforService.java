@@ -11,7 +11,7 @@ import com.xiaodao.system.entity.SysLogininfor;
 
 /**
  * @description ISysLogininfor Service层
- * @author 高磊
+ * @author xiaodao
  * @since jdk1.8
  */
 public interface ISysLogininforService {

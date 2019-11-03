@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysLogininfor;
 
 /**
  * @description SysLogininforMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface SysLogininforMapper extends BaseMapper<SysLogininfor>{

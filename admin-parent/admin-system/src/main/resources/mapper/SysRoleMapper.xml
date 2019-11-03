@@ -272,7 +272,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysRole">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysRole">
         insert into sys_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
              role_id ,

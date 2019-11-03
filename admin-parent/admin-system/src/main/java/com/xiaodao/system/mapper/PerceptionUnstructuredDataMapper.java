@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.PerceptionUnstructuredData;
 
 /**
  * @description PerceptionUnstructuredDataMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface PerceptionUnstructuredDataMapper extends BaseMapper<PerceptionUnstructuredData>{

@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.PerceptionFile;
 
 /**
  * @description PerceptionFileMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface PerceptionFileMapper extends BaseMapper<PerceptionFile>{

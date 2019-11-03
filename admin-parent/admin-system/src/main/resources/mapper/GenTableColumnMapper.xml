@@ -442,7 +442,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.GenTableColumn">
+    <update id="upsert" parameterType="com.xiaodao.entity.GenTableColumn">
         insert into gen_table_column
         <trim prefix="(" suffix=")" suffixOverrides=",">
              column_id ,

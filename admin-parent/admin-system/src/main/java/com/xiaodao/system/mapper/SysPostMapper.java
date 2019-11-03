@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysPost;
 
 /**
  * @description SysPostMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface SysPostMapper extends BaseMapper<SysPost>{

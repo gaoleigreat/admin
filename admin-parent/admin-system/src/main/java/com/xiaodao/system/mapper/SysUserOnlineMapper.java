@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysUserOnline;
 
 /**
  * @description SysUserOnlineMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface SysUserOnlineMapper extends BaseMapper<SysUserOnline>{

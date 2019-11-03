@@ -1,4 +1,4 @@
-package com.xiaodao.feign.config;
+package com.xiaodao.config;
 
 import feign.RequestTemplate;
 import feign.codec.EncodeException;

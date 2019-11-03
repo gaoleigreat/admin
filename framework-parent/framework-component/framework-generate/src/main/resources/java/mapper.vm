@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="${gentable.packageName}.mapper.${gentable.className}Mapper">
+<mapper namespace="${gentable.packageName}.${gentable.moduleName}.mapper.${gentable.className}Mapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="${gentable.packageName}.entity.${gentable.className}" id="BaseResultMap">
+    <resultMap type="${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className}" id="BaseResultMap">
     <#list gentable.columns as field>
         <result property="${field.javaFieldName}" column="${field.fieldName}"/>
     </#list>
@@ -126,7 +126,7 @@
 
 
     <!--带有空值检查的存在即更新否则插入-->
-    <update id="upsertSelective" parameterType="${gentable.packageName}.entity.${gentable.className}">
+    <update id="upsertSelective" parameterType="${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className}">
         insert into ${gentable.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list gentable.columns as field>
@@ -153,7 +153,7 @@
         </trim>
     </update>
 
-    <select id="query" resultMap="BaseResultMap" parameterType="${gentable.packageName}.entity.${gentable.className}">
+    <select id="query" resultMap="BaseResultMap" parameterType="${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className}">
         select
         <include refid="Base_Column_List"/>
         from ${gentable.tableName}

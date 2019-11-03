@@ -187,7 +187,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysOss">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysOss">
         insert into sys_oss
         <trim prefix="(" suffix=")" suffixOverrides=",">
              id ,

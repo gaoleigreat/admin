@@ -1,5 +1,6 @@
 package com.xiaodao.generate;
 
+import com.xiaodao.generate.config.GenConfig;
 import com.xiaodao.generate.domain.GenTable;
 import com.xiaodao.generate.service.DataServiceImpl;
 import freemarker.template.Configuration;
@@ -29,6 +30,7 @@ public class Generator {
         Template template4 = configuration.getTemplate("serviceimpl.java.vm");
         Template template5 = configuration.getTemplate("class.vm");
         Template template6 = configuration.getTemplate("controller.java.vm");
+        Template template7 = configuration.getTemplate("FeignClient.java.vm");
 
         //设置数据并执行
         Map map = new HashMap();
@@ -37,35 +39,46 @@ public class Generator {
         exam.forEach(e -> {
 
 
-                try {
-                    map.put("gentable", e);
+            try {
+                map.put("gentable", e);
+                Map<String, String> dirMap = new HashMap<>();
 
-                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/mapper/");
-                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/entity/");
-                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/mapper/xml/");
-                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/service/");
-                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/service/impl");
-                    mkdirs("E:/" + e.getPackageName().replace('.', '/') + "/controller");
-                    Writer writer1 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/mapper/" + e.getClassName() + "Mapper.java"));
-                    Writer writer2 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/mapper/xml/" + e.getClassName() + "Mapper.xml"));
-                    Writer writer3 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/service/I" + e.getClassName() + "Service.java"));
-                    Writer writer4 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/service/impl/" + e.getClassName() + "ServiceImpl.java"));
-                    Writer writer5 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/entity/" + e.getClassName() + ".java"));
-                    Writer writer6 = new OutputStreamWriter(new FileOutputStream("E:/" + e.getPackageName().replace('.', '/') + "/controller/" + e.getClassName() + "Controller.java"));
+                String mapperDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/mapper/";
+                String entityDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/entity/";
+                String serviceDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/service/";
+                String serviceImplDir = serviceDir + "impl/";
+                String controllerDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/controller/";
+                String feignClient = GenConfig.packagePath + "/" + GenConfig.moduleName + "/feign/";
+                String mapperXmlDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/xml/";
+                mkdirs(mapperDir);
+                mkdirs(entityDir);
+                mkdirs(serviceDir);
+                mkdirs(serviceImplDir);
+                mkdirs(controllerDir);
+                mkdirs(feignClient);
+                mkdirs(mapperXmlDir);
+                Writer writer1 = new OutputStreamWriter(new FileOutputStream(mapperDir + e.getClassName() + "Mapper.java"));
+                Writer writer2 = new OutputStreamWriter(new FileOutputStream(mapperXmlDir + e.getClassName() + "Mapper.xml"));
+                Writer writer3 = new OutputStreamWriter(new FileOutputStream(serviceDir + "I"+e.getClassName() + "Service.java"));
+                Writer writer4 = new OutputStreamWriter(new FileOutputStream(serviceImplDir + e.getClassName() + "ServiceImpl.java"));
+                Writer writer5 = new OutputStreamWriter(new FileOutputStream(entityDir + e.getClassName() + ".java"));
+                Writer writer6 = new OutputStreamWriter(new FileOutputStream(controllerDir + e.getClassName() + "Controller.java"));
+                Writer writer7 = new OutputStreamWriter(new FileOutputStream(feignClient + e.getClassName() + "Client.java"));
 
-                    template1.process(map, writer1);
-                    template2.process(map, writer2);
-                    template3.process(map, writer3);
-                    template4.process(map, writer4);
-                    template5.process(map, writer5);
-                    template6.process(map, writer6);
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (TemplateException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                template1.process(map, writer1);
+                template2.process(map, writer2);
+                template3.process(map, writer3);
+                template4.process(map, writer4);
+                template5.process(map, writer5);
+                template6.process(map, writer6);
+                template7.process(map, writer7);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (TemplateException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
         });
 
@@ -73,12 +86,12 @@ public class Generator {
     }
 
 
-
-    public static void mkdirs(String dir){
+    public static void mkdirs(String dir) {
         File file = new File(dir);
-        if (!file.exists()){
-            file.mkdirs();
+        if (file.exists()) {
+            file.delete();
         }
+        file.mkdirs();
     }
 }
  

@@ -357,7 +357,7 @@
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.system.entity.SysMenu">
+    <update id="upsert" parameterType="com.xiaodao.entity.SysMenu">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
              menu_id ,

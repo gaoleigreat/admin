@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 import javax.validation.constraints.NotNull;
-import ${gentable.packageName}.entity.${gentable.className};
+import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
 
 
 /**

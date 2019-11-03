@@ -1,5 +1,4 @@
 package com.xiaodao.system.controller;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -15,15 +14,13 @@ import com.xiaodao.core.vo.RespVO;
 import com.xiaodao.core.vo.RespVOBuilder;
 import com.xiaodao.system.service.IPerceptionFileService;
 import com.xiaodao.system.entity.PerceptionFile;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 
 /**
  * PerceptionFile
  *
- * @author 高磊
+ * @author xiaodao
  * @email 513684652@qq.com
  * @since jdk 1.8
  */
@@ -43,7 +40,7 @@ public class PerceptionFileController {
     })
     @GetMapping("/")
     public RespVO<IPage<PerceptionFile>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                   @RequestParam(required = false, defaultValue = "10") int pageSize) {
+                                                          @RequestParam(required = false, defaultValue = "10") int pageSize) {
         IPage<PerceptionFile> iPage = perceptionFileService.queryPage(pageIndex, pageSize, new PerceptionFile());
         return RespVOBuilder.success(iPage);
     }
@@ -55,10 +52,10 @@ public class PerceptionFileController {
     @GetMapping("/{id}")
     public RespVO<PerceptionFile> selectByPrimaryKey(@PathVariable(value = "id") Long id) {
         PerceptionFile perceptionFile =
-                perceptionFileService.selectByPrimaryKey(id);
-        if (perceptionFile == null) {
+            perceptionFileService.selectByPrimaryKey(id);
+        if (perceptionFile == null){
             return RespVOBuilder.failure("当前PerceptionFile不存在");
-        } else {
+        } else{
             return RespVOBuilder.success(perceptionFile);
         }
     }
@@ -82,7 +79,7 @@ public class PerceptionFileController {
     })
     @PostMapping("/")
     public RespVO insert(@RequestBody PerceptionFile perceptionFile) {
-        if (perceptionFile == null) {
+        if (perceptionFile == null){
             return RespVOBuilder.failure("参数不能为空");
         }
         Integer num = perceptionFileService.insert(perceptionFile);
@@ -98,7 +95,7 @@ public class PerceptionFileController {
     })
     @PutMapping("/")
     public RespVO updateByPrimaryKey(@RequestBody PerceptionFile perceptionFile) {
-        if (perceptionFile == null) {
+        if (perceptionFile == null){
             return RespVOBuilder.failure("参数不能为空");
         }
         Integer num = perceptionFileService.updateByPrimaryKey(perceptionFile);
@@ -132,41 +129,10 @@ public class PerceptionFileController {
     })
     @PostMapping("/list")
     public RespVO query(@RequestBody PerceptionFile perceptionFile) {
-        if (perceptionFile == null) {
+        if (perceptionFile ==null){
             return RespVOBuilder.failure("参数不能为空");
         }
         List<PerceptionFile> list = perceptionFileService.query(perceptionFile);
         return RespVOBuilder.success(list);
-    }
-
-    @ApiOperation(value = "条件查询PerceptionFile", notes = "条件查询PerceptionFile")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "businessMoudle", value = "业务模块", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "sourceModule", value = "文件来源模块", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "createdBy", value = "文件上传人", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "projectId", value = "工程Id", dataType = "long", paramType = "query"),
-            @ApiImplicitParam(name = "tags", value = "文件标签", dataType = "List", paramType = "query"),
-
-
-    })
-    @PostMapping("/upload")
-    public RespVO upload(@RequestParam(value = "businessMoudle") String businessMoudle,
-                         @RequestParam(value = "sourceModule") String sourceModule,
-                         @RequestParam(value = "createdBy") String createdBy,
-                         @RequestParam(value = "projectId") long projectId,
-                         @RequestParam(value = "tags") List<String> tags,
-                         @RequestParam(value = "files") MultipartFile[] files) {
-        PerceptionFile perceptionFile = new PerceptionFile();
-        perceptionFile.setBusinessModule(businessMoudle);
-        perceptionFile.setProjectId(files[0].getSize());
-        perceptionFile.setCreatedBy(createdBy);
-        perceptionFile.setTags(tags.toString());
-        Integer insert = perceptionFileService.insert(perceptionFile);
-        if (insert > 0) {
-            return RespVOBuilder.success(perceptionFile);
-        } else {
-            return RespVOBuilder.failure();
-        }
-
     }
 }

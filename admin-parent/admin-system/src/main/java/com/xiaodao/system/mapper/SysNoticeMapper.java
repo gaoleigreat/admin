@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysNotice;
 
 /**
  * @description SysNoticeMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface SysNoticeMapper extends BaseMapper<SysNotice>{

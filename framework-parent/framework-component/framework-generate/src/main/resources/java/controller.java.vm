@@ -1,4 +1,4 @@
-package ${gentable.packageName}.controller;
+package ${gentable.packageName}.${gentable.moduleName}.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.xiaodao.core.vo.RespVO;
 import com.xiaodao.core.vo.RespVOBuilder;
-import ${gentable.packageName}.service.I${gentable.className}Service;
-import ${gentable.packageName}.entity.${gentable.className};
+import ${gentable.packageName}.${gentable.moduleName}.service.I${gentable.className}Service;
+import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
 import java.util.List;
 
 

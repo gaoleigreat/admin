@@ -1,8 +1,8 @@
-package com.xiaodao.feign.file;
+package com.xiaodao.file;
 
 import com.xiaodao.core.vo.RespVO;
 import com.xiaodao.core.vo.RespVOBuilder;
-import com.xiaodao.feign.config.MultipartSupportConfig;
+import com.xiaodao.config.MultipartSupportConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

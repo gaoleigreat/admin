@@ -1,9 +1,9 @@
-package ${gentable.packageName}.mapper;
+package ${gentable.packageName}.${gentable.moduleName}.mapper;
 
 import java.util.List;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import ${gentable.packageName}.entity.${gentable.className};
+import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
 
 
 /**

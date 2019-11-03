@@ -11,7 +11,7 @@ import com.xiaodao.system.entity.SysUserPost;
 
 /**
  * @description ISysUserPost Service层
- * @author 高磊
+ * @author xiaodao
  * @since jdk1.8
  */
 public interface ISysUserPostService {

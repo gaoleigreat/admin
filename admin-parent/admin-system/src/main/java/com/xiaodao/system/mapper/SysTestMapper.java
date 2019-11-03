@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysTest;
 
 /**
  * @description SysTestMapper
- * @author高磊
+ * @authorxiaodao
  * @since jdk1.8
  */
 public interface SysTestMapper extends BaseMapper<SysTest>{
