@@ -211,17 +211,14 @@
                     login_time = #{item.loginTime,jdbcType=TIMESTAMP}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where info_id = #{item.infoId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where info_id = #{item.infoId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysLogininfor">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysLogininfor">
         insert into sys_logininfor
         <trim prefix="(" suffix=")" suffixOverrides=",">
              info_id ,

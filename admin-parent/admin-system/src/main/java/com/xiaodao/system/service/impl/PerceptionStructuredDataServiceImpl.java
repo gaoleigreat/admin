@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description IPerceptionStructuredData Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class PerceptionStructuredDataServiceImpl implements IPerceptionStructure
             return 0;
         }
         else{
-            return perceptionStructuredDataMapper.batchInsert(list);
+            return perceptionStructuredDataMapper.batchUpdate(list);
         }
     }
 

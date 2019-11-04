@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysRoleMenu;
 
 /**
  * @description SysRoleMenuMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu>{

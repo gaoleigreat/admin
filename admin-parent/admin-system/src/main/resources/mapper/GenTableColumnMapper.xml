@@ -432,17 +432,14 @@
                     update_time = #{item.updateTime,jdbcType=TIMESTAMP}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where column_id = #{item.columnId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where column_id = #{item.columnId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.GenTableColumn">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.GenTableColumn">
         insert into gen_table_column
         <trim prefix="(" suffix=")" suffixOverrides=",">
              column_id ,

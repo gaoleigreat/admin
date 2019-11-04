@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysConfig Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysConfigServiceImpl implements ISysConfigService{
             return 0;
         }
         else{
-            return sysConfigMapper.batchInsert(list);
+            return sysConfigMapper.batchUpdate(list);
         }
     }
 

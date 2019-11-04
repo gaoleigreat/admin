@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysRole Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysRoleServiceImpl implements ISysRoleService{
             return 0;
         }
         else{
-            return sysRoleMapper.batchInsert(list);
+            return sysRoleMapper.batchUpdate(list);
         }
     }
 

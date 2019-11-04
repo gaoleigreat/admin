@@ -313,17 +313,14 @@
                     oper_time = #{item.operTime,jdbcType=TIMESTAMP}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where oper_id = #{item.operId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where oper_id = #{item.operId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysOperLog">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysOperLog">
         insert into sys_oper_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
              oper_id ,

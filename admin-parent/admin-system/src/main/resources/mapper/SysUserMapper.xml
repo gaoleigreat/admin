@@ -398,17 +398,14 @@
                     remark = #{item.remark,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where user_id = #{item.userId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where user_id = #{item.userId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysUser">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysUser">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
              user_id ,

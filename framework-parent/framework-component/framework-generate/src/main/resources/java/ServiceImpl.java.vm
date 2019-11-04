@@ -129,7 +129,7 @@ public class ${gentable.className}ServiceImpl implements I${gentable.className}S
             return 0;
         }
         else{
-            return ${gentable.camelCaseclassName}Mapper.batchInsert(list);
+            return ${gentable.camelCaseclassName}Mapper.batchUpdate(list);
         }
     }
 

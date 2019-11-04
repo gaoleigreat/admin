@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysOss;
 
 /**
  * @description SysOssMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysOssMapper extends BaseMapper<SysOss>{

@@ -228,17 +228,14 @@
                     remark = #{item.remark,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where post_id = #{item.postId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where post_id = #{item.postId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysPost">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysPost">
         insert into sys_post
         <trim prefix="(" suffix=")" suffixOverrides=",">
              post_id ,

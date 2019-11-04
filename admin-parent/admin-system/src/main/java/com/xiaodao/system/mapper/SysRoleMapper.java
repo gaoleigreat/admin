@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysRole;
 
 /**
  * @description SysRoleMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysRoleMapper extends BaseMapper<SysRole>{

@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.GenTable;
 
 /**
  * @description GenTableMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface GenTableMapper extends BaseMapper<GenTable>{

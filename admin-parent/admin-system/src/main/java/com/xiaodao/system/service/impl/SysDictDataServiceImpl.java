@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysDictData Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService{
             return 0;
         }
         else{
-            return sysDictDataMapper.batchInsert(list);
+            return sysDictDataMapper.batchUpdate(list);
         }
     }
 

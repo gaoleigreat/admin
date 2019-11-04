@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysTest Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysTestServiceImpl implements ISysTestService{
             return 0;
         }
         else{
-            return sysTestMapper.batchInsert(list);
+            return sysTestMapper.batchUpdate(list);
         }
     }
 

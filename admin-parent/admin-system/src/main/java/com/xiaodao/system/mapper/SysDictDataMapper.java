@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysDictData;
 
 /**
  * @description SysDictDataMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysDictDataMapper extends BaseMapper<SysDictData>{

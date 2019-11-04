@@ -296,17 +296,14 @@
                     remark = #{item.remark,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where dict_code = #{item.dictCode,jdbcType=INTEGER}
-                </trim>
-            </where>
+              where dict_code = #{item.dictCode,jdbcType=INTEGER}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysDictData">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysDictData">
         insert into sys_dict_data
         <trim prefix="(" suffix=")" suffixOverrides=",">
              dict_code ,

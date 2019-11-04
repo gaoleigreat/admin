@@ -228,17 +228,14 @@
                     remark = #{item.remark,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where config_id = #{item.configId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where config_id = #{item.configId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysConfig">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysConfig">
         insert into sys_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
              config_id ,

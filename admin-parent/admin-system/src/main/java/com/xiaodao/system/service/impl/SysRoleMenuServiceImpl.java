@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysRoleMenu Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysRoleMenuServiceImpl implements ISysRoleMenuService{
             return 0;
         }
         else{
-            return sysRoleMenuMapper.batchInsert(list);
+            return sysRoleMenuMapper.batchUpdate(list);
         }
     }
 

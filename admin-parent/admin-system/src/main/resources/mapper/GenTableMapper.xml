@@ -330,17 +330,14 @@
                     remark = #{item.remark,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where table_id = #{item.tableId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where table_id = #{item.tableId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.GenTable">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.GenTable">
         insert into gen_table
         <trim prefix="(" suffix=")" suffixOverrides=",">
              table_id ,

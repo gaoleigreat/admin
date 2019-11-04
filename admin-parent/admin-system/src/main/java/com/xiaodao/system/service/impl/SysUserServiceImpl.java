@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysUser Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysUserServiceImpl implements ISysUserService{
             return 0;
         }
         else{
-            return sysUserMapper.batchInsert(list);
+            return sysUserMapper.batchUpdate(list);
         }
     }
 

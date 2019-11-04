@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysPost Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysPostServiceImpl implements ISysPostService{
             return 0;
         }
         else{
-            return sysPostMapper.batchInsert(list);
+            return sysPostMapper.batchUpdate(list);
         }
     }
 

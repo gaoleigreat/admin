@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysOss Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysOssServiceImpl implements ISysOssService{
             return 0;
         }
         else{
-            return sysOssMapper.batchInsert(list);
+            return sysOssMapper.batchUpdate(list);
         }
     }
 

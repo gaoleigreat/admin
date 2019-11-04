@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysUserPost;
 
 /**
  * @description SysUserPostMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysUserPostMapper extends BaseMapper<SysUserPost>{

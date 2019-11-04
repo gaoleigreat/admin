@@ -11,7 +11,7 @@ import com.xiaodao.system.entity.SysTest;
 
 /**
  * @description ISysTest Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 public interface ISysTestService {

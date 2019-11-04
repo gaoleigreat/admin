@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description ISysUserOnline Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService{
             return 0;
         }
         else{
-            return sysUserOnlineMapper.batchInsert(list);
+            return sysUserOnlineMapper.batchUpdate(list);
         }
     }
 

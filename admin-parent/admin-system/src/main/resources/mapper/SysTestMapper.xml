@@ -92,17 +92,14 @@
                     name = #{item.name,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where id = #{item.id,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where id = #{item.id,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysTest">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysTest">
         insert into sys_test
         <trim prefix="(" suffix=")" suffixOverrides=",">
              id ,

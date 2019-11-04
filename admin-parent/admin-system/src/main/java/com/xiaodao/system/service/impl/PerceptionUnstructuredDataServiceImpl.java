@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description IPerceptionUnstructuredData Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class PerceptionUnstructuredDataServiceImpl implements IPerceptionUnstruc
             return 0;
         }
         else{
-            return perceptionUnstructuredDataMapper.batchInsert(list);
+            return perceptionUnstructuredDataMapper.batchUpdate(list);
         }
     }
 

@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysMenu;
 
 /**
  * @description SysMenuMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysMenuMapper extends BaseMapper<SysMenu>{

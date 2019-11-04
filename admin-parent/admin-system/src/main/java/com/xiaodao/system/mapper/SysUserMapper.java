@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysUser;
 
 /**
  * @description SysUserMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysUserMapper extends BaseMapper<SysUser>{

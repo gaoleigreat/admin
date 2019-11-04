@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysOperLog;
 
 /**
  * @description SysOperLogMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysOperLogMapper extends BaseMapper<SysOperLog>{

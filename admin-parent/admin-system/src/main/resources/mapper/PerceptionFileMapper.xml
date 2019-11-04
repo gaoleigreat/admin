@@ -330,17 +330,14 @@
                     last_update_date = #{item.lastUpdateDate,jdbcType=TIMESTAMP}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where id = #{item.id,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where id = #{item.id,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.PerceptionFile">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.PerceptionFile">
         insert into perception_file
         <trim prefix="(" suffix=")" suffixOverrides=",">
              id ,

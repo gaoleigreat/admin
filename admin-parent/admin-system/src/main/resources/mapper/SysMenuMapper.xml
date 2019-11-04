@@ -347,17 +347,14 @@
                     remark = #{item.remark,jdbcType=VARCHAR}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where menu_id = #{item.menuId,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where menu_id = #{item.menuId,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysMenu">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysMenu">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
              menu_id ,

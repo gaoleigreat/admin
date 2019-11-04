@@ -8,7 +8,7 @@ import com.xiaodao.system.entity.SysDept;
 
 /**
  * @description SysDeptMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysDeptMapper extends BaseMapper<SysDept>{

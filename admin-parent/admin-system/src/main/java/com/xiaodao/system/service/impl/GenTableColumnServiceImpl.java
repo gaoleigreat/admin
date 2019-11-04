@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @description IGenTableColumn Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 @Service
@@ -129,7 +129,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService{
             return 0;
         }
         else{
-            return genTableColumnMapper.batchInsert(list);
+            return genTableColumnMapper.batchUpdate(list);
         }
     }
 

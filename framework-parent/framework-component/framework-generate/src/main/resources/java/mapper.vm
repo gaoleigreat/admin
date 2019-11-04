@@ -93,11 +93,8 @@
                     </#list>
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where ${gentable.pkColumn.fieldName} = <#noparse>#{item.</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
-                </trim>
-            </where>
+              where ${gentable.pkColumn.fieldName} = <#noparse>#{item.</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+
         </foreach>
     </update>
 

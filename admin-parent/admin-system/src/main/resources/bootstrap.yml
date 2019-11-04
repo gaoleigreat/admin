@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: system-service
   profiles:
@@ -6,7 +8,6 @@ spring:
   jackson:
     generator:
       write_numbers_as_strings: true
-
 
 application:
   description: 系统服务

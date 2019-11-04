@@ -177,17 +177,14 @@
                     service = #{item.service,jdbcType=BIGINT}
                 </trim>
             </set>
-            <where>
-                <trim suffixOverrides=",">
-                    where id = #{item.id,jdbcType=BIGINT}
-                </trim>
-            </where>
+              where id = #{item.id,jdbcType=BIGINT}
+
         </foreach>
     </update>
 
 
     <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysOss">
+    <update id="upsert" parameterType="com.xiaodao.system.entity.SysOss">
         insert into sys_oss
         <trim prefix="(" suffix=")" suffixOverrides=",">
              id ,

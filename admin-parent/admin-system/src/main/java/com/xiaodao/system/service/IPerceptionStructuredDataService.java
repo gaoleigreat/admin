@@ -11,7 +11,7 @@ import com.xiaodao.system.entity.PerceptionStructuredData;
 
 /**
  * @description IPerceptionStructuredData Service层
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @since jdk1.8
  */
 public interface IPerceptionStructuredDataService {
