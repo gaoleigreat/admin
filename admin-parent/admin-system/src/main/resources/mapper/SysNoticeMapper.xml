@@ -2,402 +2,824 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xiaodao.system.mapper.SysNoticeMapper">
-
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.xiaodao.system.entity.SysNotice" id="BaseResultMap">
+    <resultMap type="com.xiaodao.feign.system.entity.SysNotice" id="BaseResultMap">
         <result property="noticeId" column="notice_id"/>
         <result property="noticeTitle" column="notice_title"/>
         <result property="noticeType" column="notice_type"/>
         <result property="noticeContent" column="notice_content"/>
         <result property="status" column="status"/>
-        <result property="bigint" column="bigint"/>
+        <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
     </resultMap>
 
-
     <!--数据库表的基本查询列名集合 -->
     <sql id="Base_Column_List">
-        notice_id ,
-        notice_title ,
-        notice_type ,
-        notice_content ,
-        status ,
-        bigint ,
-        create_time ,
-        update_by ,
-        update_time ,
-        remark 
+        notice_id,
+        notice_title,
+        notice_type,
+        notice_content,
+        status,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark
+    </sql>
+
+
+    <!--基本插入字段-->
+    <sql id="Base_Insert_Column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        notice_id,
+        notice_title,
+        notice_type,
+        notice_content,
+        status,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark
+    </trim>
+    </sql>
+
+    <!--基本插入值-->
+    <sql id="Base_Insert_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{sysNotice.noticeId,jdbcType=INTEGER},
+            #{sysNotice.noticeTitle,jdbcType=VARCHAR},
+            #{sysNotice.noticeType,jdbcType=CHAR},
+            #{sysNotice.noticeContent,jdbcType=VARCHAR},
+            #{sysNotice.status,jdbcType=CHAR},
+            #{sysNotice.createBy,jdbcType=BIGINT},
+            #{sysNotice.createTime,jdbcType=TIMESTAMP},
+            #{sysNotice.updateBy,jdbcType=BIGINT},
+            #{sysNotice.updateTime,jdbcType=TIMESTAMP},
+            #{sysNotice.remark,jdbcType=VARCHAR}
+    </trim>
+    </sql>
+    <!--基本选择插入字段-->
+    <sql id="Base_Insert_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysNotice.noticeId != null">
+                 notice_id,
+            </if>
+            <if test="sysNotice.noticeTitle != null">
+                 notice_title,
+            </if>
+            <if test="sysNotice.noticeType != null">
+                 notice_type,
+            </if>
+            <if test="sysNotice.noticeContent != null">
+                 notice_content,
+            </if>
+            <if test="sysNotice.status != null">
+                 status,
+            </if>
+            <if test="sysNotice.createBy != null">
+                 create_by,
+            </if>
+            <if test="sysNotice.createTime != null">
+                 create_time,
+            </if>
+            <if test="sysNotice.updateBy != null">
+                 update_by,
+            </if>
+            <if test="sysNotice.updateTime != null">
+                 update_time,
+            </if>
+            <if test="sysNotice.remark != null">
+                 remark
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本选择插入值-->
+    <sql id="Base_Insert_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysNotice.noticeId != null">
+                #{sysNotice.noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="sysNotice.noticeTitle != null">
+                #{sysNotice.noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.noticeType != null">
+                #{sysNotice.noticeType,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.noticeContent != null">
+                #{sysNotice.noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.status != null">
+                #{sysNotice.status,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.createBy != null">
+                #{sysNotice.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.createTime != null">
+                #{sysNotice.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.updateBy != null">
+                #{sysNotice.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.updateTime != null">
+                #{sysNotice.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.remark != null">
+                #{sysNotice.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本更新-->
+    <sql id="Base_Update">
+        <set>
+            notice_id = #{sysNotice.noticeId,jdbcType=INTEGER},
+            notice_title = #{sysNotice.noticeTitle,jdbcType=VARCHAR},
+            notice_type = #{sysNotice.noticeType,jdbcType=CHAR},
+            notice_content = #{sysNotice.noticeContent,jdbcType=VARCHAR},
+            status = #{sysNotice.status,jdbcType=CHAR},
+            create_by = #{sysNotice.createBy,jdbcType=BIGINT},
+            create_time = #{sysNotice.createTime,jdbcType=TIMESTAMP},
+            update_by = #{sysNotice.updateBy,jdbcType=BIGINT},
+            update_time = #{sysNotice.updateTime,jdbcType=TIMESTAMP},
+            remark = #{sysNotice.remark,jdbcType=VARCHAR}
+        </set>
+    </sql>
+    <!--带有空值检查的基本更新-->
+    <sql id="Base_Update_Selective">
+        <set>
+            <if test="sysNotice.noticeId != null">
+                notice_id = #{sysNotice.noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="sysNotice.noticeTitle != null">
+                notice_title = #{sysNotice.noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.noticeType != null">
+                notice_type = #{sysNotice.noticeType,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.noticeContent != null">
+                notice_content = #{sysNotice.noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.status != null">
+                status = #{sysNotice.status,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.createBy != null">
+                create_by = #{sysNotice.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.createTime != null">
+                create_time = #{sysNotice.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.updateBy != null">
+                update_by = #{sysNotice.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.updateTime != null">
+                update_time = #{sysNotice.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.remark != null">
+                remark = #{sysNotice.remark,jdbcType=VARCHAR}
+            </if>
+        </set>
     </sql>
 
 
     <!--Where子句 -->
     <sql id="Base_Query_Where">
-         <if test="sysNotice.noticeId != null">
-            and notice_id = #{sysNotice.noticeId,jdbcType=BIGINT}
-         </if>
-         <if test="sysNotice.noticeTitle != null">
+        <if test="sysNotice.noticeId != null">
+            and notice_id = #{sysNotice.noticeId,jdbcType=INTEGER}
+        </if>
+        <if test="sysNotice.noticeTitle != null">
             and notice_title = #{sysNotice.noticeTitle,jdbcType=VARCHAR}
-         </if>
-         <if test="sysNotice.noticeType != null">
+        </if>
+        <if test="sysNotice.noticeType != null">
             and notice_type = #{sysNotice.noticeType,jdbcType=CHAR}
-         </if>
-         <if test="sysNotice.noticeContent != null">
+        </if>
+        <if test="sysNotice.noticeContent != null">
             and notice_content = #{sysNotice.noticeContent,jdbcType=VARCHAR}
-         </if>
-         <if test="sysNotice.status != null">
+        </if>
+        <if test="sysNotice.status != null">
             and status = #{sysNotice.status,jdbcType=CHAR}
-         </if>
-         <if test="sysNotice.bigint != null">
-            and bigint = #{sysNotice.bigint,jdbcType=BIGINT}
-         </if>
-         <if test="sysNotice.createTime != null">
+        </if>
+        <if test="sysNotice.createBy != null">
+            and create_by = #{sysNotice.createBy,jdbcType=BIGINT}
+        </if>
+        <if test="sysNotice.createTime != null">
             and create_time = #{sysNotice.createTime,jdbcType=TIMESTAMP}
-         </if>
-         <if test="sysNotice.updateBy != null">
+        </if>
+        <if test="sysNotice.updateBy != null">
             and update_by = #{sysNotice.updateBy,jdbcType=BIGINT}
-         </if>
-         <if test="sysNotice.updateTime != null">
+        </if>
+        <if test="sysNotice.updateTime != null">
             and update_time = #{sysNotice.updateTime,jdbcType=TIMESTAMP}
-         </if>
-         <if test="sysNotice.remark != null">
+        </if>
+        <if test="sysNotice.remark != null">
             and remark = #{sysNotice.remark,jdbcType=VARCHAR}
-         </if>
+        </if>
+    </sql>
+
+    <!--模糊查询条件 -->
+    <sql id="Base_Query_Like_Where">
+        <if test="sysNotice.noticeId != null">
+            and notice_id like concat('%',concat(#{sysNotice.noticeId},'%'))
+        </if>
+        <if test="sysNotice.noticeTitle != null">
+            and notice_title like concat('%',concat(#{sysNotice.noticeTitle},'%'))
+        </if>
+        <if test="sysNotice.noticeType != null">
+            and notice_type like concat('%',concat(#{sysNotice.noticeType},'%'))
+        </if>
+        <if test="sysNotice.noticeContent != null">
+            and notice_content like concat('%',concat(#{sysNotice.noticeContent},'%'))
+        </if>
+        <if test="sysNotice.status != null">
+            and status like concat('%',concat(#{sysNotice.status},'%'))
+        </if>
+        <if test="sysNotice.createBy != null">
+            and create_by like concat('%',concat(#{sysNotice.createBy},'%'))
+        </if>
+        <if test="sysNotice.createTime != null">
+            and create_time like concat('%',concat(#{sysNotice.createTime},'%'))
+        </if>
+        <if test="sysNotice.updateBy != null">
+            and update_by like concat('%',concat(#{sysNotice.updateBy},'%'))
+        </if>
+        <if test="sysNotice.updateTime != null">
+            and update_time like concat('%',concat(#{sysNotice.updateTime},'%'))
+        </if>
+        <if test="sysNotice.remark != null">
+            and remark like concat('%',concat(#{sysNotice.remark},'%'))
+        </if>
+    </sql>
+
+    <!--模糊查询 -->
+    <sql id="Base_Query_Fuzzy_Where">
+        or notice_id like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or notice_title like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or notice_type like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or notice_content like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or status like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or create_by like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or create_time like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or update_by like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or update_time like concat('%',concat(#{sysNotice.searchValue},'%'))
+        or remark like concat('%',concat(#{sysNotice.searchValue},'%'))
     </sql>
 
 
+    <sql id="Order_By">
+        order by
+        <if test="sysNotice.orderBy != null and sysNotice.orderBy != ''">
+            #{sysNotice.orderBy}
+        </if>
+        <if test="sysNotice.orderBy == null or sysNotice.orderBy==''">
+            #{sysNotice.notice_id}
+        </if>
+        <if test="baseService.isAsc  == 1">
+            DESC
+        </if>
+    </sql>
 
+    <sql id="Time_Limit">
+        <if test="sysNotice.beginTime != null">
+            and DATE_FORMAT(#{sysNotice.createTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="sysNotice.endTime != null">
+            and DATE_FORMAT(#{sysNotice.createTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+    </sql>
 
-    <!--基本更新字段-->
-    <sql id="Base_Update_Column">
+    <!--插入更新-->
+    <sql id="On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            notice_id = #{sysNotice.noticeId,jdbcType=INTEGER},
+            notice_title = #{sysNotice.noticeTitle,jdbcType=VARCHAR},
+            notice_type = #{sysNotice.noticeType,jdbcType=CHAR},
+            notice_content = #{sysNotice.noticeContent,jdbcType=VARCHAR},
+            status = #{sysNotice.status,jdbcType=CHAR},
+            create_by = #{sysNotice.createBy,jdbcType=BIGINT},
+            create_time = #{sysNotice.createTime,jdbcType=TIMESTAMP},
+            update_by = #{sysNotice.updateBy,jdbcType=BIGINT},
+            update_time = #{sysNotice.updateTime,jdbcType=TIMESTAMP},
+            remark = #{sysNotice.remark,jdbcType=VARCHAR}
+         </trim>
+    </sql>
+
+    <!--带有空值检查的插入更新-->
+    <sql id="On_Duplicate_Column_Selective_Update">
+        <trim suffixOverrides=",">
+            <if test="sysNotice.noticeId != null">
+                notice_id = #{sysNotice.noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="sysNotice.noticeTitle != null">
+                notice_title = #{sysNotice.noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.noticeType != null">
+                notice_type = #{sysNotice.noticeType,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.noticeContent != null">
+                notice_content = #{sysNotice.noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.status != null">
+                status = #{sysNotice.status,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.createBy != null">
+                create_by = #{sysNotice.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.createTime != null">
+                create_time = #{sysNotice.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.updateBy != null">
+                update_by = #{sysNotice.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.updateTime != null">
+                update_time = #{sysNotice.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.remark != null">
+                remark = #{sysNotice.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            notice_id = values(notice_id),
+            notice_title = values(notice_title),
+            notice_type = values(notice_type),
+            notice_content = values(notice_content),
+            status = values(status),
+            create_by = values(create_by),
+            create_time = values(create_time),
+            update_by = values(update_by),
+            update_time = values(update_time),
+            remark = values(remark),
+        </trim>
+    </sql>
+
+    <!--带有控制判断的批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update_Selective">
+        <trim suffixOverrides=",">
+            <if test="sysNotice.noticeId != null">
+                notice_id = #{item.noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="sysNotice.noticeTitle != null">
+                notice_title = #{item.noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.noticeType != null">
+                notice_type = #{item.noticeType,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.noticeContent != null">
+                notice_content = #{item.noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="sysNotice.status != null">
+                status = #{item.status,jdbcType=CHAR},
+            </if>
+            <if test="sysNotice.createBy != null">
+                create_by = #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysNotice.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysNotice.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入，更新插入值-->
+    <sql id="Batch_Operating_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{item.noticeId,jdbcType=INTEGER},
+            #{item.noticeTitle,jdbcType=VARCHAR},
+            #{item.noticeType,jdbcType=CHAR},
+            #{item.noticeContent,jdbcType=VARCHAR},
+            #{item.status,jdbcType=CHAR},
+            #{item.createBy,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.remark,jdbcType=VARCHAR}
+        </trim>
+    </sql>
+
+    <!--批量更新-->
+    <sql id="Batch_Update">
         <set>
-          <if test="sysNotice.noticeId != null">
-             notice_id = #{sysNotice.noticeId,jdbcType=BIGINT},
-          </if>
-          <if test="sysNotice.noticeTitle != null">
-             notice_title = #{sysNotice.noticeTitle,jdbcType=VARCHAR},
-          </if>
-          <if test="sysNotice.noticeType != null">
-             notice_type = #{sysNotice.noticeType,jdbcType=CHAR},
-          </if>
-          <if test="sysNotice.noticeContent != null">
-             notice_content = #{sysNotice.noticeContent,jdbcType=VARCHAR},
-          </if>
-          <if test="sysNotice.status != null">
-             status = #{sysNotice.status,jdbcType=CHAR},
-          </if>
-          <if test="sysNotice.bigint != null">
-             bigint = #{sysNotice.bigint,jdbcType=BIGINT},
-          </if>
-          <if test="sysNotice.createTime != null">
-             create_time = #{sysNotice.createTime,jdbcType=TIMESTAMP},
-          </if>
-          <if test="sysNotice.updateBy != null">
-             update_by = #{sysNotice.updateBy,jdbcType=BIGINT},
-          </if>
-          <if test="sysNotice.updateTime != null">
-             update_time = #{sysNotice.updateTime,jdbcType=TIMESTAMP},
-          </if>
-          <if test="sysNotice.remark != null">
-             remark = #{sysNotice.remark,jdbcType=VARCHAR}
-          </if>
+            notice_id = #{item.noticeId,jdbcType=INTEGER},
+            notice_title = #{item.noticeTitle,jdbcType=VARCHAR},
+            notice_type = #{item.noticeType,jdbcType=CHAR},
+            notice_content = #{item.noticeContent,jdbcType=VARCHAR},
+            status = #{item.status,jdbcType=CHAR},
+            create_by = #{item.createBy,jdbcType=BIGINT},
+            create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            update_by = #{item.updateBy,jdbcType=BIGINT},
+            update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            remark = #{item.remark,jdbcType=VARCHAR}
         </set>
     </sql>
 
+    <!--带有空值检查的批量更新-->
+    <sql id="Batch_Update_selective">
+        <set>
+            <if test="item.noticeId != null">
+                notice_id = #{item.noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="item.noticeTitle != null">
+                notice_title = #{item.noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="item.noticeType != null">
+                notice_type = #{item.noticeType,jdbcType=CHAR},
+            </if>
+            <if test="item.noticeContent != null">
+                notice_content = #{item.noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="item.status != null">
+                status = #{item.status,jdbcType=CHAR},
+            </if>
+            <if test="item.createBy != null">
+                create_by = #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </set>
+    </sql>
 
-    <sql id="Base_Insert_Selective">
+    <!--带有空值检查的批量操作字段-->
+    <sql id="Batch_Operating_Selective_Column">
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysNotice.noticeId != null">
-               notice_id,
+            <if test="item.noticeId != null">
+                notice_id ,
             </if>
-            <if test="sysNotice.noticeTitle != null">
-               notice_title,
+            <if test="item.noticeTitle != null">
+                notice_title ,
             </if>
-            <if test="sysNotice.noticeType != null">
-               notice_type,
+            <if test="item.noticeType != null">
+                notice_type ,
             </if>
-            <if test="sysNotice.noticeContent != null">
-               notice_content,
+            <if test="item.noticeContent != null">
+                notice_content ,
             </if>
-            <if test="sysNotice.status != null">
-               status,
+            <if test="item.status != null">
+                status ,
             </if>
-            <if test="sysNotice.bigint != null">
-               bigint,
+            <if test="item.createBy != null">
+                create_by ,
             </if>
-            <if test="sysNotice.createTime != null">
-               create_time,
+            <if test="item.createTime != null">
+                create_time ,
             </if>
-            <if test="sysNotice.updateBy != null">
-               update_by,
+            <if test="item.updateBy != null">
+                update_by ,
             </if>
-            <if test="sysNotice.updateTime != null">
-               update_time,
+            <if test="item.updateTime != null">
+                update_time ,
             </if>
-            <if test="sysNotice.remark != null">
-               remark
+            <if test="item.remark != null">
+                remark 
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-             <if test="sysNotice.noticeId != null">
-             #{sysNotice.noticeId,jdbcType=BIGINT},
-             </if>
-             <if test="sysNotice.noticeTitle != null">
-             #{sysNotice.noticeTitle,jdbcType=VARCHAR},
-             </if>
-             <if test="sysNotice.noticeType != null">
-             #{sysNotice.noticeType,jdbcType=CHAR},
-             </if>
-             <if test="sysNotice.noticeContent != null">
-             #{sysNotice.noticeContent,jdbcType=VARCHAR},
-             </if>
-             <if test="sysNotice.status != null">
-             #{sysNotice.status,jdbcType=CHAR},
-             </if>
-             <if test="sysNotice.bigint != null">
-             #{sysNotice.bigint,jdbcType=BIGINT},
-             </if>
-             <if test="sysNotice.createTime != null">
-             #{sysNotice.createTime,jdbcType=TIMESTAMP},
-             </if>
-             <if test="sysNotice.updateBy != null">
-             #{sysNotice.updateBy,jdbcType=BIGINT},
-             </if>
-             <if test="sysNotice.updateTime != null">
-             #{sysNotice.updateTime,jdbcType=TIMESTAMP},
-             </if>
-             <if test="sysNotice.remark != null">
-             #{sysNotice.remark,jdbcType=VARCHAR}
-             </if>
         </trim>
     </sql>
 
+    <!--带有空值检查的批量操作值-->
+    <sql id="Batch_Operating_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.noticeId != null">
+                #{item.noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="item.noticeTitle != null">
+                #{item.noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="item.noticeType != null">
+                #{item.noticeType,jdbcType=CHAR},
+            </if>
+            <if test="item.noticeContent != null">
+                #{item.noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="item.status != null">
+                #{item.status,jdbcType=CHAR},
+            </if>
+            <if test="item.createBy != null">
+                #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.createTime != null">
+                #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateTime != null">
+                #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.remark != null">
+                #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        insert into sys_notice
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+    </insert>
+
+    <!--带有空值检查的插入-->
+    <insert id="insertSelective" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        insert into sys_notice
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+    </insert>
+
+    <!--更新-->
+    <update id="updateByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        update sys_notice
+        <include refid="Base_Update"/>
+        <where>
+            notice_id = #{sysNotice.noticeId,jdbcType=INTEGER}
+        </where>
+    </update>
+
+    <!--带有空值检查的更新-->
+    <update id="updateSelectiveByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        update sys_notice
+        <include refid="Base_Update_Selective"/>
+        <where>
+            notice_id = #{sysNotice.noticeId,jdbcType=INTEGER}
+         </where>
+    </update>
 
 
-    <!--批量添加记录到数据库表中-->
+    <!--更新插入-->
+    <insert id="upsert" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        insert into sys_notice
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Update"/>
+    </insert>
+
+
+    <!--带有控制判断的更新插入-->
+    <insert id="upsertSelective" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        insert into sys_notice
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Selective_Update"/>
+    </insert>
+
+
+    <!--批量插入-->
     <insert id="batchInsert" parameterType="java.util.List">
         insert into sys_notice
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             notice_id,
-             notice_title,
-             notice_type,
-             notice_content,
-             status,
-             bigint,
-             create_time,
-             update_by,
-             update_time,
-             remark
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
         <foreach collection="list" index="index" item="item" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.noticeId,jdbcType=BIGINT},
-                #{item.noticeTitle,jdbcType=VARCHAR},
-                #{item.noticeType,jdbcType=CHAR},
-                #{item.noticeContent,jdbcType=VARCHAR},
-                #{item.status,jdbcType=CHAR},
-                #{item.bigint,jdbcType=BIGINT},
-                #{item.createTime,jdbcType=TIMESTAMP},
-                #{item.updateBy,jdbcType=BIGINT},
-                #{item.updateTime,jdbcType=TIMESTAMP},
-                #{item.remark,jdbcType=VARCHAR}
-            </trim>
+            <include refid="Batch_Operating_Value"/>
         </foreach>
     </insert>
 
 
-
-    <!-- 根据主键批量更新数据库表中的记录-->
+    <!-- 批量更新-->
     <update id="batchUpdate" parameterType="java.util.List">
         <foreach collection="list" index="index" item="item" separator=";">
             update sys_notice
-            <set>
-                <trim suffixOverrides=",">
-                    notice_id = #{item.noticeId,jdbcType=BIGINT},
-                    notice_title = #{item.noticeTitle,jdbcType=VARCHAR},
-                    notice_type = #{item.noticeType,jdbcType=CHAR},
-                    notice_content = #{item.noticeContent,jdbcType=VARCHAR},
-                    status = #{item.status,jdbcType=CHAR},
-                    bigint = #{item.bigint,jdbcType=BIGINT},
-                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
-                    update_by = #{item.updateBy,jdbcType=BIGINT},
-                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
-                    remark = #{item.remark,jdbcType=VARCHAR}
-                </trim>
-            </set>
+            <include refid="Batch_Update"/>
             <where>
                 <trim suffixOverrides=",">
-                    where notice_id = #{item.noticeId,jdbcType=BIGINT}
+                    notice_id = #{item.noticeId,jdbcType=INTEGER}
                 </trim>
             </where>
         </foreach>
     </update>
 
 
-    <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysNotice">
+    <!-- 批量更新插入-->
+    <update id="batchUpsert" parameterType="java.util.List">
         insert into sys_notice
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             notice_id ,
-             notice_title ,
-             notice_type ,
-             notice_content ,
-             status ,
-             bigint ,
-             create_time ,
-             update_by ,
-             update_time ,
-             remark 
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             #{sysNotice.noticeId,jdbcType=BIGINT},
-             #{sysNotice.noticeTitle,jdbcType=VARCHAR},
-             #{sysNotice.noticeType,jdbcType=CHAR},
-             #{sysNotice.noticeContent,jdbcType=VARCHAR},
-             #{sysNotice.status,jdbcType=CHAR},
-             #{sysNotice.bigint,jdbcType=BIGINT},
-             #{sysNotice.createTime,jdbcType=TIMESTAMP},
-             #{sysNotice.updateBy,jdbcType=BIGINT},
-             #{sysNotice.updateTime,jdbcType=TIMESTAMP},
-             #{sysNotice.remark,jdbcType=VARCHAR}
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-          #{sysNotice.noticeId,jdbcType=BIGINT},
-          #{sysNotice.noticeTitle,jdbcType=VARCHAR},
-          #{sysNotice.noticeType,jdbcType=CHAR},
-          #{sysNotice.noticeContent,jdbcType=VARCHAR},
-          #{sysNotice.status,jdbcType=CHAR},
-          #{sysNotice.bigint,jdbcType=BIGINT},
-          #{sysNotice.createTime,jdbcType=TIMESTAMP},
-          #{sysNotice.updateBy,jdbcType=BIGINT},
-          #{sysNotice.updateTime,jdbcType=TIMESTAMP},
-          #{sysNotice.remark,jdbcType=VARCHAR}
-        </trim>
+        <include refid="Batch_Operating_Value"/>
+        on duplicate Column update
+        <include refid="Batch_On_Duplicate_Column_Update"/>
     </update>
 
 
-    <!--带有空值检查的存在即更新否则插入-->
-    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysNotice">
-        insert into sys_notice
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysNotice.noticeId != null">
-                notice_id,
-            </if>
-            <if test="sysNotice.noticeTitle != null">
-                notice_title,
-            </if>
-            <if test="sysNotice.noticeType != null">
-                notice_type,
-            </if>
-            <if test="sysNotice.noticeContent != null">
-                notice_content,
-            </if>
-            <if test="sysNotice.status != null">
-                status,
-            </if>
-            <if test="sysNotice.bigint != null">
-                bigint,
-            </if>
-            <if test="sysNotice.createTime != null">
-                create_time,
-            </if>
-            <if test="sysNotice.updateBy != null">
-                update_by,
-            </if>
-            <if test="sysNotice.updateTime != null">
-                update_time,
-            </if>
-            <if test="sysNotice.remark != null">
-                remark
-            </if>
-        </trim>
-        values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysNotice.noticeId !=null ">
-                #{sysNotice.noticeId,jdbcType=BIGINT},
-            </if>
-            <if test="sysNotice.noticeTitle !=null ">
-                #{sysNotice.noticeTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="sysNotice.noticeType !=null ">
-                #{sysNotice.noticeType,jdbcType=CHAR},
-            </if>
-            <if test="sysNotice.noticeContent !=null ">
-                #{sysNotice.noticeContent,jdbcType=VARCHAR},
-            </if>
-            <if test="sysNotice.status !=null ">
-                #{sysNotice.status,jdbcType=CHAR},
-            </if>
-            <if test="sysNotice.bigint !=null ">
-                #{sysNotice.bigint,jdbcType=BIGINT},
-            </if>
-            <if test="sysNotice.createTime !=null ">
-                #{sysNotice.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysNotice.updateBy !=null ">
-                #{sysNotice.updateBy,jdbcType=BIGINT},
-            </if>
-            <if test="sysNotice.updateTime !=null ">
-                #{sysNotice.updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysNotice.remark !=null ">
-                #{sysNotice.remark,jdbcType=VARCHAR}
-            </if>
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-            <if test="sysNotice.noticeId !=null ">
-             #{noticeId,jdbcType=BIGINT},
-            </if>
-            <if test="sysNotice.noticeTitle !=null ">
-             #{noticeTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="sysNotice.noticeType !=null ">
-             #{noticeType,jdbcType=CHAR},
-            </if>
-            <if test="sysNotice.noticeContent !=null ">
-             #{noticeContent,jdbcType=VARCHAR},
-            </if>
-            <if test="sysNotice.status !=null ">
-             #{status,jdbcType=CHAR},
-            </if>
-            <if test="sysNotice.bigint !=null ">
-             #{bigint,jdbcType=BIGINT},
-            </if>
-            <if test="sysNotice.createTime !=null ">
-             #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysNotice.updateBy !=null ">
-             #{updateBy,jdbcType=BIGINT},
-            </if>
-            <if test="sysNotice.updateTime !=null ">
-             #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysNotice.remark !=null ">
-             #{remark,jdbcType=VARCHAR}
-            </if>
-        </trim>
+    <!-- 带有控制判断的批量更新-->
+    <update id="batchUpdateSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_notice
+            <include refid="Batch_Update_selective"/>
+            <where>
+                <trim suffixOverrides=",">
+                    notice_id = #{item.noticeId,jdbcType=INTEGER}
+                </trim>
+            </where>
+        </foreach>
     </update>
 
-    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysNotice">
+
+    <!-- 带有空值判断的批量插入-->
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_notice
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+        </foreach>
+    </insert>
+
+    <!-- 带有空值判断的批量更新插入-->
+    <update id="batchUpsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_notice
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+            on duplicate Column update
+            <include refid="Batch_On_Duplicate_Column_Update_Selective"/>
+        </foreach>
+    </update>
+
+
+    <!--通过主键批量查询-->
+    <select id="queryBatchPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from sys_notice
         <where>
-            <include refid="Base_Query_Where"></include>
+            notice_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+            <include refid="Order_By"></include>
+            <include refid="Time_Limit"></include>
         </where>
     </select>
 
-    <select id="queryTotalCount" resultType="long">
-        select count(*) from sys_notice
+    <!--通过主键批量查询-->
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        <where>
+            notice_id = #{noticeId,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--查询一个-->
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        limit 1
     </select>
 
 
+    <!--条件模糊查询-->
+    <select id="queryByLikeCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        <include refid="Time_Limit"></include>
+    </select>
 
+
+    <!--模糊查询-->
+    <select id="queryFuzzy" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--条件查询数量-->
+    <select id="queryCount" resultType="int" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select count(*) from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--条件删除-->
+    <delete id="delete" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        delete from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_notice
+        <where>
+            <trim suffixOverrides=",">
+                notice_id = #{noticeId,jdbcType=INTEGER}
+            </trim>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键批量删除-->
+    <delete id="deleteBatchByPrimaryKeys" parameterType="java.lang.Long">
+        delete from sys_notice
+        <where>
+            notice_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+        </where>
+    </delete>
+
+    <!--分组统计-->
+    <select id="statisticsGroup" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select ${sysNotice.statisticalProperty} as name,${sysNotice.statisticalMethod}(${sysNotice.statisticalProperty}) as value from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+         group by ${sysNotice.statisticalProperty}
+    </select>
+
+    <!--按日统计-->
+    <select id="statisticsGroupByDay" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select date_format(create_time, '%Y-%m-%d') as name,${sysNotice.statisticalMethod}(${sysNotice.statisticalProperty}) as value from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        group by date_format(create_time,'%Y-%m-%d')
+    </select>
+
+    <!--按月统计-->
+    <select id="statisticsGroupByMonth" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select date_format(create_time, '%Y-%m') as name, ${sysNotice.statisticalMethod}(${sysNotice.statisticalProperty}) as value from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+        </where>
+            group by date_format(create_time,'%Y-%m')
+    </select>
+
+    <!--按年统计-->
+    <select id="statisticsGroupByYear" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysNotice">
+        select date_format(create_time, '%Y') as name,${sysNotice.statisticalMethod}(${sysNotice.statisticalProperty}) as value from sys_notice
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+         </where>
+            group by date_format(create_time,'%Y')
+    </select>
 
 </mapper>

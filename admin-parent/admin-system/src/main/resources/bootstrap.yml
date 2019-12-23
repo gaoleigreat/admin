@@ -1,12 +1,12 @@
 spring:
   application:
     name: system-service
+    menu:
+      name: 系统管理
   profiles:
     active: local
-  jackson:
-    generator:
-      write_numbers_as_strings: true
-
+  main:
+    allow-bean-definition-overriding: true
 
 application:
   description: 系统服务

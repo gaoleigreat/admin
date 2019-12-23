@@ -9,3 +9,13 @@ spring:
       password: Changeme_123
       retry:
         max-attempts: 3
+
+permission:
+  whiteUrls:
+    - .*api-docs.*
+    - .*swagger.*
+    - .*crsf.*
+    - .*captcha.jpg
+    - .*login
+    - .*
+  blackUrls:

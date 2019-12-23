@@ -47,10 +47,5 @@ druid:
     loginUsername: xiaodao
     resetEnable: false
 
-mybatis-plus:
-  # 如果是放在src/main/java目录下 classpath:/com/*/*/mapper/*Mapper.xml
-  # 如果是放在resource目录 classpath:/mapper/**.xml
-  mapper-locations: classpath:/mapper/**.xml
-
 
 

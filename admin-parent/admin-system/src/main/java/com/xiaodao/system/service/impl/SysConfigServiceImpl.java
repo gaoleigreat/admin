@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysConfigMapper;
 import com.xiaodao.system.service.ISysConfigService;
-import com.xiaodao.system.entity.SysConfig;
+import com.xiaodao.feign.system.entity.SysConfig;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysConfigServiceImpl implements ISysConfigService{
      @Autowired
      private SysConfigMapper sysConfigMapper;
 
-    /**
-     * 创建SysConfig
-     *
-     * @param sysConfig
-     * @return
-     */
     @Override
-    public Integer insert(SysConfig sysConfig){
-        if(sysConfig ==null){
-            return 0;
-        }
+    public int insert(SysConfig sysConfig) {
         return sysConfigMapper.insert(sysConfig);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param configId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long configId){
-        if(configId ==null){
-            return 0;
-        }
-        Integer result = sysConfigMapper.deleteById(configId);
-        return result;
-
+    public int insertSelective(SysConfig sysConfig) {
+        return sysConfigMapper.insertSelective(sysConfig);
     }
 
-    /**
-     * 修改SysConfig
-     *
-     * @param sysConfig
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysConfig sysConfig){
-        if(sysConfig ==null){
-            return 0;
-        }
-        return sysConfigMapper.updateById(sysConfig);
+    public int batchInsert(List<SysConfig> list) {
+        return sysConfigMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param configId
-    * @return
-    */
     @Override
-    public SysConfig selectByPrimaryKey(Long configId){
-        if(configId ==null){
-            return null;
-        }
-        SysConfig sysConfig  = sysConfigMapper.selectById(configId);
-        if (sysConfig == null){
-            return null;
-        }
-        return sysConfig;
+    public int batchInsertSelective(List<SysConfig> list) {
+        return sysConfigMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysConfig SysConfig
-     * @return IPage<SysConfig>
-     */
     @Override
-    public IPage<SysConfig> queryPage(int pageIndex, int pageSize,SysConfig sysConfig){
-        QueryWrapper<SysConfig> queryWrapper = Wrappers.query();
-        IPage<SysConfig> ipage = sysConfigMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysConfig sysConfig) {
+        return sysConfigMapper.updateByPrimaryKey(sysConfig);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysConfig
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysConfig> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysConfigMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysConfig sysConfig) {
+        return sysConfigMapper.updateSelectiveByPrimaryKey(sysConfig);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysConfig>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysConfig> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysConfigMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysConfig> list) {
+        return sysConfigMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysConfigMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysConfig SysConfig
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysConfig sysConfig){
-
-        if (sysConfig == null){
-            return 0;
-        }
-        else{
-            return sysConfigMapper.upsert(sysConfig);
-        }
-
+    public int batchUpdateSelective(List<SysConfig> list) {
+        return sysConfigMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysConfig SysConfig
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysConfig sysConfig){
-        if (sysConfig == null){
-            return 0;
-        }
-        else{
-            return sysConfigMapper.upsert(sysConfig);
-        }
+    public int upsert(SysConfig sysConfig) {
+        return sysConfigMapper.upsert(sysConfig);
     }
 
-    /**
-     * 条件查询
-     * @param sysConfig SysConfig
-     * @return List<SysConfig>
-    */
     @Override
-    public List<SysConfig> query(SysConfig sysConfig){
-        if (sysConfig == null){
-            return null;
-        }
-        else{
-            return sysConfigMapper.query(sysConfig);
-        }
+    public int upsertSelective(SysConfig sysConfig) {
+        return sysConfigMapper.upsertSelective(sysConfig);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysConfigMapper.queryTotalCount();
+    public int batchUpsert(List<SysConfig> list) {
+        return sysConfigMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysConfig> list) {
+        return sysConfigMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long configId) {
+        return sysConfigMapper.deleteByPrimaryKey(configId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Long> list) {
+        return sysConfigMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysConfig sysConfig) {
+        return sysConfigMapper.delete(sysConfig);
+    }
+
+    @Override
+    public SysConfig queryByPrimaryKey(Long configId) {
+        return sysConfigMapper.queryByPrimaryKey(configId);
+    }
+
+    @Override
+    public List<SysConfig> queryBatchPrimaryKeys(List<Long> list) {
+        return sysConfigMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysConfig queryOne(SysConfig sysConfig) {
+        return sysConfigMapper.queryOne(sysConfig);
+    }
+
+    @Override
+    public List<SysConfig> queryByCondition(SysConfig sysConfig) {
+        return sysConfigMapper.queryByCondition(sysConfig);
+    }
+
+    @Override
+    public List<SysConfig> queryFuzzy(SysConfig sysConfig) {
+        return sysConfigMapper.queryFuzzy(sysConfig);
+    }
+
+    @Override
+    public List<SysConfig> queryByLikeCondition(SysConfig sysConfig) {
+        return sysConfigMapper.queryByLikeCondition(sysConfig);
+    }
+
+    @Override
+    public int queryCount(SysConfig sysConfig) {
+        return sysConfigMapper.queryCount(sysConfig);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysConfig sysConfig) {
+        return sysConfigMapper.statisticsGroup(sysConfig);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysConfig sysConfig) {
+        return sysConfigMapper.statisticsGroupByDay(sysConfig);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysConfig sysConfig) {
+        return sysConfigMapper.statisticsGroupByMonth(sysConfig);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysConfig sysConfig) {
+        return sysConfigMapper.statisticsGroupByYear(sysConfig);
     }
 }

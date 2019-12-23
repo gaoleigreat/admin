@@ -8,3 +8,5 @@ spring:
     name: framework-gateway
   profiles:
     active: local
+  main:
+    allow-bean-definition-overriding: true

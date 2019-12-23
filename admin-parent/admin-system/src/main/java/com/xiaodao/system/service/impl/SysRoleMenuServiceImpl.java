@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysRoleMenuMapper;
 import com.xiaodao.system.service.ISysRoleMenuService;
-import com.xiaodao.system.entity.SysRoleMenu;
+import com.xiaodao.feign.system.entity.SysRoleMenu;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysRoleMenuServiceImpl implements ISysRoleMenuService{
      @Autowired
      private SysRoleMenuMapper sysRoleMenuMapper;
 
-    /**
-     * 创建SysRoleMenu
-     *
-     * @param sysRoleMenu
-     * @return
-     */
     @Override
-    public Integer insert(SysRoleMenu sysRoleMenu){
-        if(sysRoleMenu ==null){
-            return 0;
-        }
+    public int insert(SysRoleMenu sysRoleMenu) {
         return sysRoleMenuMapper.insert(sysRoleMenu);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param roleId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long roleId){
-        if(roleId ==null){
-            return 0;
-        }
-        Integer result = sysRoleMenuMapper.deleteById(roleId);
-        return result;
-
+    public int insertSelective(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.insertSelective(sysRoleMenu);
     }
 
-    /**
-     * 修改SysRoleMenu
-     *
-     * @param sysRoleMenu
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysRoleMenu sysRoleMenu){
-        if(sysRoleMenu ==null){
-            return 0;
-        }
-        return sysRoleMenuMapper.updateById(sysRoleMenu);
+    public int batchInsert(List<SysRoleMenu> list) {
+        return sysRoleMenuMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param roleId
-    * @return
-    */
     @Override
-    public SysRoleMenu selectByPrimaryKey(Long roleId){
-        if(roleId ==null){
-            return null;
-        }
-        SysRoleMenu sysRoleMenu  = sysRoleMenuMapper.selectById(roleId);
-        if (sysRoleMenu == null){
-            return null;
-        }
-        return sysRoleMenu;
+    public int batchInsertSelective(List<SysRoleMenu> list) {
+        return sysRoleMenuMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysRoleMenu SysRoleMenu
-     * @return IPage<SysRoleMenu>
-     */
     @Override
-    public IPage<SysRoleMenu> queryPage(int pageIndex, int pageSize,SysRoleMenu sysRoleMenu){
-        QueryWrapper<SysRoleMenu> queryWrapper = Wrappers.query();
-        IPage<SysRoleMenu> ipage = sysRoleMenuMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.updateByPrimaryKey(sysRoleMenu);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysRoleMenu
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysRoleMenu> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysRoleMenuMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.updateSelectiveByPrimaryKey(sysRoleMenu);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysRoleMenu>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysRoleMenu> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysRoleMenuMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysRoleMenu> list) {
+        return sysRoleMenuMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysRoleMenuMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysRoleMenu SysRoleMenu
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysRoleMenu sysRoleMenu){
-
-        if (sysRoleMenu == null){
-            return 0;
-        }
-        else{
-            return sysRoleMenuMapper.upsert(sysRoleMenu);
-        }
-
+    public int batchUpdateSelective(List<SysRoleMenu> list) {
+        return sysRoleMenuMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysRoleMenu SysRoleMenu
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysRoleMenu sysRoleMenu){
-        if (sysRoleMenu == null){
-            return 0;
-        }
-        else{
-            return sysRoleMenuMapper.upsert(sysRoleMenu);
-        }
+    public int upsert(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.upsert(sysRoleMenu);
     }
 
-    /**
-     * 条件查询
-     * @param sysRoleMenu SysRoleMenu
-     * @return List<SysRoleMenu>
-    */
     @Override
-    public List<SysRoleMenu> query(SysRoleMenu sysRoleMenu){
-        if (sysRoleMenu == null){
-            return null;
-        }
-        else{
-            return sysRoleMenuMapper.query(sysRoleMenu);
-        }
+    public int upsertSelective(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.upsertSelective(sysRoleMenu);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysRoleMenuMapper.queryTotalCount();
+    public int batchUpsert(List<SysRoleMenu> list) {
+        return sysRoleMenuMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysRoleMenu> list) {
+        return sysRoleMenuMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long roleId) {
+        return sysRoleMenuMapper.deleteByPrimaryKey(roleId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Long> list) {
+        return sysRoleMenuMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.delete(sysRoleMenu);
+    }
+
+    @Override
+    public SysRoleMenu queryByPrimaryKey(Long roleId) {
+        return sysRoleMenuMapper.queryByPrimaryKey(roleId);
+    }
+
+    @Override
+    public List<SysRoleMenu> queryBatchPrimaryKeys(List<Long> list) {
+        return sysRoleMenuMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysRoleMenu queryOne(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.queryOne(sysRoleMenu);
+    }
+
+    @Override
+    public List<SysRoleMenu> queryByCondition(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.queryByCondition(sysRoleMenu);
+    }
+
+    @Override
+    public List<SysRoleMenu> queryFuzzy(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.queryFuzzy(sysRoleMenu);
+    }
+
+    @Override
+    public List<SysRoleMenu> queryByLikeCondition(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.queryByLikeCondition(sysRoleMenu);
+    }
+
+    @Override
+    public int queryCount(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.queryCount(sysRoleMenu);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.statisticsGroup(sysRoleMenu);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.statisticsGroupByDay(sysRoleMenu);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.statisticsGroupByMonth(sysRoleMenu);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysRoleMenu sysRoleMenu) {
+        return sysRoleMenuMapper.statisticsGroupByYear(sysRoleMenu);
     }
 }

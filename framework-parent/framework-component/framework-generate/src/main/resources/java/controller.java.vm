@@ -1,138 +1,343 @@
-package ${gentable.packageName}.${gentable.moduleName}.controller;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+package ${genconfig.controllerPackageName};
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  ${genconfig.servicePackageName}.I${gentable.className}Service;
+import ${genconfig.entityPackageName}.${gentable.className};
 
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
-import ${gentable.packageName}.${gentable.moduleName}.service.I${gentable.className}Service;
-import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * ${gentable.className}
  *
- * @author ${gentable.author}
- * @email 513684652@qq.com
+ * @author ${genconfig.author}
+ * @email ${genconfig.email}
  * @since jdk 1.8
  */
 @RestController
 @RequestMapping("/${gentable.camelCaseclassName}")
-@Api(value = "${gentable.className}管理", tags = "${gentable.className}管理")
+@Api(value = "${gentable.tableComment}管理", tags = "${gentable.tableComment}管理")
 @Validated
 @Slf4j
 public class ${gentable.className}Controller {
     @Autowired
     private I${gentable.className}Service ${gentable.camelCaseclassName}Service;
 
-    @ApiOperation(value = "分页查询${gentable.className}", notes = "分页查询${gentable.className}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
-    })
-    @GetMapping("/")
-    public RespVO<IPage<${gentable.className}>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                          @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        IPage<${gentable.className}> iPage = ${gentable.camelCaseclassName}Service.queryPage(pageIndex, pageSize, new ${gentable.className}());
-        return RespVOBuilder.success(iPage);
-    }
 
-    @ApiOperation(value = "通过主键${gentable.pkColumn.javaFieldName}查询${gentable.className}", notes = "通过主键${gentable.pkColumn.javaFieldName}查询${gentable.className}")
+    @ApiOperation(value = "新增", notes = "新增")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "${gentable.pkColumn.javaFieldName}", paramType = "path", value = "${gentable.pkColumn.javaFieldName}", required = true, dataType = "${gentable.pkColumn.javaType}")
     })
-    @GetMapping("/{${gentable.pkColumn.javaFieldName}}")
-    public RespVO<${gentable.className}> selectByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}) {
-        ${gentable.className} ${gentable.camelCaseclassName} =
-            ${gentable.camelCaseclassName}Service.selectByPrimaryKey(${gentable.pkColumn.javaFieldName});
-        if (${gentable.camelCaseclassName} == null){
-            return RespVOBuilder.failure("当前${gentable.className}不存在");
-        } else{
-            return RespVOBuilder.success(${gentable.camelCaseclassName});
+    @PostMapping("/insert")
+    public RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+
+        int resultNum = ${gentable.camelCaseclassName}Service.insert(${gentable.camelCaseclassName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
         }
     }
 
-    @ApiOperation(value = "通过主键${gentable.pkColumn.javaFieldName}删除${gentable.className}", notes = "通过主键${gentable.pkColumn.javaFieldName}删除${gentable.className}")
+    @ApiOperation(value = "带有空值判断的新增", notes = "带有空值判断的新增")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/insertSelective")
+    public RespVO insertSelective(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        int resultNum = ${gentable.camelCaseclassName}Service.insertSelective(${gentable.camelCaseclassName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量插入", notes = "批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsert")
+    public RespVO batchInsert(@RequestBody List<${gentable.className}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.batchInsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量插入", notes = "带有空值判断的批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsertSelective")
+    public RespVO batchInsertSelective(@RequestBody List<${gentable.className}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.batchInsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "根据主键更新", notes = "根据主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateByPrimaryKey")
+    public RespVO updateByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        int resultNum = ${gentable.camelCaseclassName}Service.updateByPrimaryKey(${gentable.camelCaseclassName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的主键更新", notes = "带有空值判断的主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateSelectiveByPrimaryKey")
+    public RespVO updateSelectiveByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        int resultNum = ${gentable.camelCaseclassName}Service.updateSelectiveByPrimaryKey(${gentable.camelCaseclassName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "批量更新", notes = "批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdate")
+    public RespVO batchUpdate(@RequestBody List<${gentable.className}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.batchUpdate(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的批量更新", notes = "带有空值判断的批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdateSelective")
+    public RespVO batchUpdateSelective(@RequestBody List<${gentable.className}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.batchUpdateSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "更新插入", notes = "更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsert")
+    public RespVO upsert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        int resultNum = ${gentable.camelCaseclassName}Service.upsert(${gentable.camelCaseclassName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的更新插入", notes = "带有空值判断的更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsertSelective")
+    public RespVO upsertSelective(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        int resultNum = ${gentable.camelCaseclassName}Service.upsertSelective(${gentable.camelCaseclassName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量更新插入", notes = "批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsert")
+    public RespVO batchUpsert(@RequestBody List<${gentable.className}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.batchUpsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量更新插入", notes = "带有空值判断的批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsertSelective")
+    public RespVO batchUpsertSelective(@RequestBody List<${gentable.className}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.batchUpsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "通过主键删除", notes = "通过主键删除")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "${gentable.pkColumn.javaFieldName}", paramType = "path", value = "${gentable.pkColumn.javaFieldName}", required = true, dataType = "${gentable.pkColumn.javaType}")
     })
     @DeleteMapping("/{${gentable.pkColumn.javaFieldName}}")
     public RespVO deleteByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}) {
-        Integer num = ${gentable.camelCaseclassName}Service.deleteByPrimaryKey(${gentable.pkColumn.javaFieldName});
-        if (num == 0) {
-            return RespVOBuilder.failure("删除${gentable.className}失败");
+        Integer resultNum = ${gentable.camelCaseclassName}Service.deleteByPrimaryKey(${gentable.pkColumn.javaFieldName});
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("删除失败");
         } else {
-            return RespVOBuilder.success("删除${gentable.className}成功");
+            return RespVOBuilder.success("删除成功");
         }
     }
 
-    @ApiOperation(value = "新增${gentable.className}", notes = "新增${gentable.className}")
+    @ApiOperation(value = "通过主键批量删除", notes = "通过主键批量删除")
     @ApiImplicitParams({
     })
-    @PostMapping("/")
-    public RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
-        if (${gentable.camelCaseclassName} == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = ${gentable.camelCaseclassName}Service.insert(${gentable.camelCaseclassName});
-        if (num == 0) {
-            return RespVOBuilder.failure("添加${gentable.className}失败");
+    @DeleteMapping("/deleteBatchByPrimaryKeys")
+    public RespVO deleteBatchByPrimaryKeys(@RequestBody List<${gentable.pkColumn.javaType}> list) {
+        int resultNum = ${gentable.camelCaseclassName}Service.deleteBatchByPrimaryKeys(list);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("添加${gentable.className}成功");
+            return RespVOBuilder.failure("删除失败");
         }
     }
 
-    @ApiOperation(value = "修改${gentable.className}", notes = "修改${gentable.className}")
+    @ApiOperation(value = "条件删除", notes = "条件删除")
     @ApiImplicitParams({
     })
-    @PutMapping("/")
-    public RespVO updateByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
-        if (${gentable.camelCaseclassName} == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = ${gentable.camelCaseclassName}Service.updateByPrimaryKey(${gentable.camelCaseclassName});
-        if (num == 0) {
-            return RespVOBuilder.failure("修改${gentable.className}失败");
+    @DeleteMapping("/delete")
+    public RespVO delete(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+
+        int resultNum = ${gentable.camelCaseclassName}Service.delete(${gentable.camelCaseclassName});
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("修改${gentable.className}成功");
+            return RespVOBuilder.failure("删除失败");
         }
+
     }
 
-
-    @ApiOperation(value = "通过主键${gentable.pkColumn.javaFieldName}批量删除${gentable.className}", notes = "通过主键${gentable.pkColumn.javaFieldName}批量删除${gentable.className}")
+    @ApiOperation(value = "通过主键查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @DeleteMapping("/deleteBatchPrimaryKeys")
-    public RespVO deleteBatchPrimaryKeys(@RequestBody List<${gentable.pkColumn.javaType}> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = ${gentable.camelCaseclassName}Service.deleteBatchIds(list);
-        if (num == 0) {
-            return RespVOBuilder.failure("批量删除${gentable.className}失败");
-        } else {
-            return RespVOBuilder.success("批量删除${gentable.className}成功");
-        }
+    @GetMapping("/{${gentable.pkColumn.javaFieldName}}")
+    public RespVO<${gentable.className}> queryByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}) {
+        ${gentable.className} ${gentable.camelCaseclassName} = ${gentable.camelCaseclassName}Service.queryByPrimaryKey(${gentable.pkColumn.javaFieldName});
+        return RespVOBuilder.success(${gentable.camelCaseclassName});
     }
 
-
-    @ApiOperation(value = "条件查询${gentable.className}", notes = "条件查询${gentable.className}")
+    @ApiOperation(value = "通过主键批量查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @PostMapping("/list")
-    public RespVO query(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
-        if (${gentable.camelCaseclassName} ==null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        List<${gentable.className}> list = ${gentable.camelCaseclassName}Service.query(${gentable.camelCaseclassName});
+    @PostMapping("/queryBatchPrimaryKeys")
+    public RespVO<RespDataVO<${gentable.className}>> queryBatchPrimaryKeys(@RequestBody List<${gentable.pkColumn.javaType}> list) {
+        List< ${gentable.className}> ${gentable.camelCaseclassName}s = ${gentable.camelCaseclassName}Service.queryBatchPrimaryKeys(list);
+        return RespVOBuilder.success(${gentable.camelCaseclassName}s);
+    }
+
+    @ApiOperation(value = "条件查询一个", notes = "条件查询一个")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryOne")
+    public RespVO<${gentable.className}> queryOne(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        ${gentable.camelCaseclassName} =${gentable.camelCaseclassName}Service.queryOne(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(${gentable.camelCaseclassName});
+    }
+
+    @ApiOperation(value = "条件查询", notes = "条件查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByCondition")
+    public RespVO<RespDataVO<${gentable.className}>> queryByCondition(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<${gentable.className}> list = ${gentable.camelCaseclassName}Service.queryByCondition(${gentable.camelCaseclassName});
         return RespVOBuilder.success(list);
     }
+
+    @ApiOperation(value = "模糊查询", notes = "模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryFuzzy")
+    public RespVO<RespDataVO<${gentable.className}>> queryFuzzy(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<${gentable.className}> list = ${gentable.camelCaseclassName}Service.queryFuzzy(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByLikeCondition")
+    public RespVO<RespDataVO<${gentable.className}>> queryByLikeCondition(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<${gentable.className}> list = ${gentable.camelCaseclassName}Service.queryByLikeCondition(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "条件查询数量", notes = "条件查询数量")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryCount")
+    public RespVO<Long> queryCount(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        long count = ${gentable.camelCaseclassName}Service.queryCount(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(count);
+    }
+
+
+    @ApiOperation(value = "分组统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroup")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<Map<String, Object>> maps = ${gentable.camelCaseclassName}Service.statisticsGroup(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(maps);
+    }
+
+
+    @ApiOperation(value = "日统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByDay")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<Map<String, Object>> maps = ${gentable.camelCaseclassName}Service.statisticsGroupByDay(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "月统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByMonth")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<Map<String, Object>> maps = ${gentable.camelCaseclassName}Service.statisticsGroupByMonth(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "年统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByYear")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}) {
+        List<Map<String, Object>> maps = ${gentable.camelCaseclassName}Service.statisticsGroupByYear(${gentable.camelCaseclassName});
+        return RespVOBuilder.success(maps);
+    }
+
 }

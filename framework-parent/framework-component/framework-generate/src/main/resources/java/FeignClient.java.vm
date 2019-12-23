@@ -1,89 +1,434 @@
-package ${gentable.packageName}.${gentable.moduleName}.feign;
+package ${genconfig.feignClientPackageName};
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
+import com.github.pagehelper.PageInfo;
 import com.xiaodao.config.MultipartSupportConfig;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespVOBuilder;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
-import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
+
+import ${genconfig.entityPackageName}.${gentable.className};
 
 import java.util.List;
+import java.util.Map;
 
-@FeignClient(value = "${gentable.moduleName}-service", path = "/${gentable.camelCaseclassName}", fallbackFactory = ${gentable.className}ClientFallback.class, configuration = MultipartSupportConfig.class)
+@FeignClient(value = "${genconfig.moduleName}-service", path = "/${gentable.camelCaseclassName}", fallbackFactory = ${gentable.className}ClientFallback.class, configuration = MultipartSupportConfig.class)
 public interface ${gentable.className}Client {
 
-    @GetMapping("/")
-    RespVO<IPage<${gentable.className}>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                   @RequestParam(required = false, defaultValue = "10") int pageSize);
+
+    /**
+     * 新增
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/insert")
+    RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 带有空值判断的新增
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/insertSelective")
+    RespVO insertSelective(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 批量新增
+     *
+     * @param list
+     * @return
+     */
+    @PostMapping("/batchInsert")
+    RespVO batchInsert(@RequestBody List<${gentable.className}> list);
+
+    /**
+     * 带有空值判断的新增
+     *
+     * @param list
+     * @return
+     */
+    @PostMapping("/batchInsertSelective")
+    RespVO batchInsertSelective(@RequestBody List<${gentable.className}> list);
+
+    /**
+     * 根据主键更新
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PutMapping("/updateByPrimaryKey")
+    RespVO updateByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 根据空值判断的主键更新
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PutMapping("/updateSelectiveByPrimaryKey")
+    RespVO updateSelectiveByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 批量更新
+     *
+     * @param list
+     * @return
+     */
+    @PutMapping("/batchUpdate")
+    RespVO batchUpdate(@RequestBody List<${gentable.className}> list);
+
+    /**
+     * 带有空值判断的批量更新
+     *
+     * @param list
+     * @return
+     */
+    @PutMapping("/batchUpdateSelective")
+    RespVO batchUpdateSelective(@RequestBody List<${gentable.className}> list);
 
 
-    @GetMapping("/{${gentable.pkColumn.javaFieldName}}")
-    RespVO<${gentable.className}> selectByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+    /**
+     * 更新插入
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/upsert")
+    RespVO upsert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 带有空值判断的更新插入
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/upsertSelective")
+    RespVO upsertSelective(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
 
 
+    /**
+     * 批量更新插入
+     *
+     * @param list
+     * @return
+     */
+    @PostMapping("/batchUpsert")
+    RespVO batchUpsert(@RequestBody List<${gentable.className}> list);
+
+
+    /**
+     * 带有空值判断的批量更新插入
+     *
+     * @param list
+     * @return
+     */
+    @PostMapping("/batchUpsertSelective")
+    RespVO batchUpsertSelective(@RequestBody List<${gentable.className}> list);
+
+
+    /**
+     * 通过主键删除
+     *
+     * @param ${gentable.pkColumn.javaFieldName}
+     * @return
+     */
     @DeleteMapping("/{${gentable.pkColumn.javaFieldName}}")
     RespVO deleteByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
 
+    /**
+     * 通过主键批量删除
+     *
+     * @param list
+     * @return
+     */
+    @DeleteMapping("/deleteBatchByPrimaryKeys")
+    RespVO deleteBatchByPrimaryKeys(@RequestBody List<Long> list);
 
-    @PostMapping("/")
-    RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+    /**
+     * 条件删除
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @DeleteMapping("/delete")
+    RespVO delete(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 通过主键查询
+     *
+     * @param ${gentable.pkColumn.javaFieldName}
+     * @return
+     */
+    @GetMapping("/{${gentable.pkColumn.javaFieldName}}")
+    RespVO<${gentable.className}> queryByPrimaryKey(@PathVariable(value = "${gentable.pkColumn.javaFieldName}") ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
 
 
-    @PutMapping("/")
-    RespVO updateByPrimaryKey(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+    /**
+     * 通过主键批量查询
+     *
+     * @param list
+     * @return
+     */
+    @PostMapping("/queryBatchPrimaryKeys")
+    RespVO<RespDataVO<${gentable.className}>> queryBatchPrimaryKeys(@RequestBody List<Long> list);
 
 
-    @DeleteMapping("/deleteBatchPrimaryKeys")
-    RespVO deleteBatchPrimaryKeys(@RequestBody List<${gentable.pkColumn.javaType}> list);
+    /**
+     * 条件查询一个
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryOne")
+    RespVO<${gentable.className}> queryOne(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
 
+    /**
+     * 条件查询
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryByCondition")
+    RespVO<RespDataVO<${gentable.className}>> queryByCondition(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
 
-    @PostMapping("/list")
-    RespVO query(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+    /**
+     * 条件分页查询
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryPageByCondition")
+    RespVO<PageInfo<${gentable.className}>> queryPageByCondition(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 模糊查询
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryFuzzy")
+    RespVO<RespDataVO<${gentable.className}>> queryFuzzy(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 模糊分页查询
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryPageFuzzy")
+    RespVO<PageInfo<${gentable.className}>> queryPageFuzzy(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 模糊条件查询
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryByLikeCondition")
+    RespVO<RespDataVO<${gentable.className}>> queryByLikeCondition(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 模糊分页条件查询
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryPageByLikeCondition")
+    RespVO<PageInfo<${gentable.className}>> queryPageByLikeCondition(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 条件查询数量
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/queryCount")
+    RespVO<Long> queryCount(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 分组统计
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/statisticsGroup")
+    RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 日统计
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/statisticsGroupByDay")
+    RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 月统计
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/statisticsGroupByMonth")
+    RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 年统计
+     *
+     * @param ${gentable.camelCaseclassName}
+     * @return
+     */
+    @PostMapping("/statisticsGroupByYear")
+    RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(@RequestBody ${gentable.className} ${gentable.camelCaseclassName});
+
 }
 
 class ${gentable.className}ClientFallback implements ${gentable.className}Client {
-
-
     @Override
-    public RespVO<IPage<${gentable.className}>> queryPage(int pageIndex, int pageSize) {
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO insert(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 
-
     @Override
-    public RespVO<${gentable.className}> selectByPrimaryKey( ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}){
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO insertSelective(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 
-
     @Override
-    public RespVO deleteByPrimaryKey( ${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}){
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO batchInsert(List<${gentable.className}> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 
-
     @Override
-    public RespVO insert(@RequestBody ${gentable.className} ${gentable.camelCaseclassName}){
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO batchInsertSelective(List<${gentable.className}> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 
-
     @Override
-    public RespVO updateByPrimaryKey(${gentable.className} ${gentable.camelCaseclassName}){
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO updateByPrimaryKey(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 
-
     @Override
-    public RespVO deleteBatchPrimaryKeys(List<${gentable.pkColumn.javaType}> list){
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO updateSelectiveByPrimaryKey(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 
+    @Override
+    public RespVO batchUpdate(List<${gentable.className}> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
 
     @Override
-    public RespVO query(${gentable.className} ${gentable.camelCaseclassName}){
-        return RespVOBuilder.failure("${gentable.moduleName}-service服务不可用");
+    public RespVO batchUpdateSelective(List<${gentable.className}> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO upsert(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO upsertSelective(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO batchUpsert(List<${gentable.className}> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO batchUpsertSelective(List<${gentable.className}> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO deleteByPrimaryKey(${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO deleteBatchByPrimaryKeys(List<Long> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO delete(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<${gentable.className}> queryByPrimaryKey(${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<${gentable.className}>> queryBatchPrimaryKeys(List<Long> list) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<${gentable.className}> queryOne(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<${gentable.className}>> queryByCondition(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<PageInfo<${gentable.className}>> queryPageByCondition(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<${gentable.className}>> queryFuzzy(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<PageInfo<${gentable.className}>> queryPageFuzzy(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<${gentable.className}>> queryByLikeCondition(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<PageInfo<${gentable.className}>> queryPageByLikeCondition(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<Long> queryCount(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
+    }
+
+    @Override
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(${gentable.className} ${gentable.camelCaseclassName}) {
+        return RespVOBuilder.failure("system-service服务不可用");
     }
 }

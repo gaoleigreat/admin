@@ -1,138 +1,343 @@
 package com.xiaodao.system.controller;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  com.xiaodao.system.service.ISysRoleDeptService;
+import com.xiaodao.feign.system.entity.SysRoleDept;
 
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
-import com.xiaodao.system.service.ISysRoleDeptService;
-import com.xiaodao.system.entity.SysRoleDept;
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * SysRoleDept
  *
  * @author xiaodao
- * @email 513684652@qq.com
+ * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
 @RestController
 @RequestMapping("/sysRoleDept")
-@Api(value = "SysRoleDept管理", tags = "SysRoleDept管理")
+@Api(value = "角色和部门关联管理", tags = "角色和部门关联管理")
 @Validated
 @Slf4j
 public class SysRoleDeptController {
     @Autowired
     private ISysRoleDeptService sysRoleDeptService;
 
-    @ApiOperation(value = "分页查询SysRoleDept", notes = "分页查询SysRoleDept")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
-    })
-    @GetMapping("/")
-    public RespVO<IPage<SysRoleDept>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                          @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        IPage<SysRoleDept> iPage = sysRoleDeptService.queryPage(pageIndex, pageSize, new SysRoleDept());
-        return RespVOBuilder.success(iPage);
-    }
 
-    @ApiOperation(value = "通过主键roleId查询SysRoleDept", notes = "通过主键roleId查询SysRoleDept")
+    @ApiOperation(value = "新增", notes = "新增")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
-    @GetMapping("/{roleId}")
-    public RespVO<SysRoleDept> selectByPrimaryKey(@PathVariable(value = "roleId") Long roleId) {
-        SysRoleDept sysRoleDept =
-            sysRoleDeptService.selectByPrimaryKey(roleId);
-        if (sysRoleDept == null){
-            return RespVOBuilder.failure("当前SysRoleDept不存在");
-        } else{
-            return RespVOBuilder.success(sysRoleDept);
+    @PostMapping("/insert")
+    public RespVO insert(@RequestBody SysRoleDept sysRoleDept) {
+
+        int resultNum = sysRoleDeptService.insert(sysRoleDept);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
         }
     }
 
-    @ApiOperation(value = "通过主键roleId删除SysRoleDept", notes = "通过主键roleId删除SysRoleDept")
+    @ApiOperation(value = "带有空值判断的新增", notes = "带有空值判断的新增")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/insertSelective")
+    public RespVO insertSelective(@RequestBody SysRoleDept sysRoleDept) {
+        int resultNum = sysRoleDeptService.insertSelective(sysRoleDept);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量插入", notes = "批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsert")
+    public RespVO batchInsert(@RequestBody List<SysRoleDept> list) {
+        int resultNum = sysRoleDeptService.batchInsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量插入", notes = "带有空值判断的批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsertSelective")
+    public RespVO batchInsertSelective(@RequestBody List<SysRoleDept> list) {
+        int resultNum = sysRoleDeptService.batchInsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "根据主键更新", notes = "根据主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateByPrimaryKey")
+    public RespVO updateByPrimaryKey(@RequestBody SysRoleDept sysRoleDept) {
+        int resultNum = sysRoleDeptService.updateByPrimaryKey(sysRoleDept);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的主键更新", notes = "带有空值判断的主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateSelectiveByPrimaryKey")
+    public RespVO updateSelectiveByPrimaryKey(@RequestBody SysRoleDept sysRoleDept) {
+        int resultNum = sysRoleDeptService.updateSelectiveByPrimaryKey(sysRoleDept);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "批量更新", notes = "批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdate")
+    public RespVO batchUpdate(@RequestBody List<SysRoleDept> list) {
+        int resultNum = sysRoleDeptService.batchUpdate(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的批量更新", notes = "带有空值判断的批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdateSelective")
+    public RespVO batchUpdateSelective(@RequestBody List<SysRoleDept> list) {
+        int resultNum = sysRoleDeptService.batchUpdateSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "更新插入", notes = "更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsert")
+    public RespVO upsert(@RequestBody SysRoleDept sysRoleDept) {
+        int resultNum = sysRoleDeptService.upsert(sysRoleDept);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的更新插入", notes = "带有空值判断的更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsertSelective")
+    public RespVO upsertSelective(@RequestBody SysRoleDept sysRoleDept) {
+        int resultNum = sysRoleDeptService.upsertSelective(sysRoleDept);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量更新插入", notes = "批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsert")
+    public RespVO batchUpsert(@RequestBody List<SysRoleDept> list) {
+        int resultNum = sysRoleDeptService.batchUpsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量更新插入", notes = "带有空值判断的批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsertSelective")
+    public RespVO batchUpsertSelective(@RequestBody List<SysRoleDept> list) {
+        int resultNum = sysRoleDeptService.batchUpsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "通过主键删除", notes = "通过主键删除")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleId", paramType = "path", value = "roleId", required = true, dataType = "Long")
     })
     @DeleteMapping("/{roleId}")
     public RespVO deleteByPrimaryKey(@PathVariable(value = "roleId") Long roleId) {
-        Integer num = sysRoleDeptService.deleteByPrimaryKey(roleId);
-        if (num == 0) {
-            return RespVOBuilder.failure("删除SysRoleDept失败");
+        Integer resultNum = sysRoleDeptService.deleteByPrimaryKey(roleId);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("删除失败");
         } else {
-            return RespVOBuilder.success("删除SysRoleDept成功");
+            return RespVOBuilder.success("删除成功");
         }
     }
 
-    @ApiOperation(value = "新增SysRoleDept", notes = "新增SysRoleDept")
+    @ApiOperation(value = "通过主键批量删除", notes = "通过主键批量删除")
     @ApiImplicitParams({
     })
-    @PostMapping("/")
-    public RespVO insert(@RequestBody SysRoleDept sysRoleDept) {
-        if (sysRoleDept == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysRoleDeptService.insert(sysRoleDept);
-        if (num == 0) {
-            return RespVOBuilder.failure("添加SysRoleDept失败");
+    @DeleteMapping("/deleteBatchByPrimaryKeys")
+    public RespVO deleteBatchByPrimaryKeys(@RequestBody List<Long> list) {
+        int resultNum = sysRoleDeptService.deleteBatchByPrimaryKeys(list);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("添加SysRoleDept成功");
+            return RespVOBuilder.failure("删除失败");
         }
     }
 
-    @ApiOperation(value = "修改SysRoleDept", notes = "修改SysRoleDept")
+    @ApiOperation(value = "条件删除", notes = "条件删除")
     @ApiImplicitParams({
     })
-    @PutMapping("/")
-    public RespVO updateByPrimaryKey(@RequestBody SysRoleDept sysRoleDept) {
-        if (sysRoleDept == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysRoleDeptService.updateByPrimaryKey(sysRoleDept);
-        if (num == 0) {
-            return RespVOBuilder.failure("修改SysRoleDept失败");
+    @DeleteMapping("/delete")
+    public RespVO delete(@RequestBody SysRoleDept sysRoleDept) {
+
+        int resultNum = sysRoleDeptService.delete(sysRoleDept);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("修改SysRoleDept成功");
+            return RespVOBuilder.failure("删除失败");
         }
+
     }
 
-
-    @ApiOperation(value = "通过主键roleId批量删除SysRoleDept", notes = "通过主键roleId批量删除SysRoleDept")
+    @ApiOperation(value = "通过主键查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @DeleteMapping("/deleteBatchPrimaryKeys")
-    public RespVO deleteBatchPrimaryKeys(@RequestBody List<Long> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysRoleDeptService.deleteBatchIds(list);
-        if (num == 0) {
-            return RespVOBuilder.failure("批量删除SysRoleDept失败");
-        } else {
-            return RespVOBuilder.success("批量删除SysRoleDept成功");
-        }
+    @GetMapping("/{roleId}")
+    public RespVO<SysRoleDept> queryByPrimaryKey(@PathVariable(value = "roleId") Long roleId) {
+        SysRoleDept sysRoleDept = sysRoleDeptService.queryByPrimaryKey(roleId);
+        return RespVOBuilder.success(sysRoleDept);
     }
 
-
-    @ApiOperation(value = "条件查询SysRoleDept", notes = "条件查询SysRoleDept")
+    @ApiOperation(value = "通过主键批量查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @PostMapping("/list")
-    public RespVO query(@RequestBody SysRoleDept sysRoleDept) {
-        if (sysRoleDept ==null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        List<SysRoleDept> list = sysRoleDeptService.query(sysRoleDept);
+    @PostMapping("/queryBatchPrimaryKeys")
+    public RespVO<RespDataVO<SysRoleDept>> queryBatchPrimaryKeys(@RequestBody List<Long> list) {
+        List< SysRoleDept> sysRoleDepts = sysRoleDeptService.queryBatchPrimaryKeys(list);
+        return RespVOBuilder.success(sysRoleDepts);
+    }
+
+    @ApiOperation(value = "条件查询一个", notes = "条件查询一个")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryOne")
+    public RespVO<SysRoleDept> queryOne(@RequestBody SysRoleDept sysRoleDept) {
+        sysRoleDept =sysRoleDeptService.queryOne(sysRoleDept);
+        return RespVOBuilder.success(sysRoleDept);
+    }
+
+    @ApiOperation(value = "条件查询", notes = "条件查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByCondition")
+    public RespVO<RespDataVO<SysRoleDept>> queryByCondition(@RequestBody SysRoleDept sysRoleDept) {
+        List<SysRoleDept> list = sysRoleDeptService.queryByCondition(sysRoleDept);
         return RespVOBuilder.success(list);
     }
+
+    @ApiOperation(value = "模糊查询", notes = "模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryFuzzy")
+    public RespVO<RespDataVO<SysRoleDept>> queryFuzzy(@RequestBody SysRoleDept sysRoleDept) {
+        List<SysRoleDept> list = sysRoleDeptService.queryFuzzy(sysRoleDept);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByLikeCondition")
+    public RespVO<RespDataVO<SysRoleDept>> queryByLikeCondition(@RequestBody SysRoleDept sysRoleDept) {
+        List<SysRoleDept> list = sysRoleDeptService.queryByLikeCondition(sysRoleDept);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "条件查询数量", notes = "条件查询数量")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryCount")
+    public RespVO<Long> queryCount(@RequestBody SysRoleDept sysRoleDept) {
+        long count = sysRoleDeptService.queryCount(sysRoleDept);
+        return RespVOBuilder.success(count);
+    }
+
+
+    @ApiOperation(value = "分组统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroup")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(@RequestBody SysRoleDept sysRoleDept) {
+        List<Map<String, Object>> maps = sysRoleDeptService.statisticsGroup(sysRoleDept);
+        return RespVOBuilder.success(maps);
+    }
+
+
+    @ApiOperation(value = "日统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByDay")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(@RequestBody SysRoleDept sysRoleDept) {
+        List<Map<String, Object>> maps = sysRoleDeptService.statisticsGroupByDay(sysRoleDept);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "月统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByMonth")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(@RequestBody SysRoleDept sysRoleDept) {
+        List<Map<String, Object>> maps = sysRoleDeptService.statisticsGroupByMonth(sysRoleDept);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "年统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByYear")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(@RequestBody SysRoleDept sysRoleDept) {
+        List<Map<String, Object>> maps = sysRoleDeptService.statisticsGroupByYear(sysRoleDept);
+        return RespVOBuilder.success(maps);
+    }
+
 }

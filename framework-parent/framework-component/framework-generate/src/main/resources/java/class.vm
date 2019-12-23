@@ -1,28 +1,26 @@
-package com.xiaodao.feign.${gentable.moduleName}.entity;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+package ${genconfig.entityPackageName};
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.xiaodao.core.domain.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.Date;
-import java.io.Serializable;
+
 @Data
 @Slf4j
-@TableName("${gentable.tableName}")
-public class ${gentable.className} implements Serializable {
-
-     private static final long serialVersionUID = 1L;
-
+public class ${gentable.className} <#if gentable.extendsBase == "true">extends BaseEntity</#if> {
 <#list gentable.columns as field>
-
+    <#if gentable.extendsBase == "false" || (field.javaFieldName != "createTime" && field.javaFieldName != "createBy" && field.javaFieldName != "updateTime" && field.javaFieldName != "updateBy" && field.javaFieldName != "remark")>
     /**
-     *${field.comment}
+     * ${field.comment}
      */
-    <#if field.key == "PRI">@TableId</#if>
+    <#if field.key == "PRI">@JsonSerialize(using = ToStringSerializer.class)</#if>
     @ApiModelProperty("${field.comment}")
     private ${field.javaType} ${field.javaFieldName};
-
+    </#if>
 </#list>
 
 }

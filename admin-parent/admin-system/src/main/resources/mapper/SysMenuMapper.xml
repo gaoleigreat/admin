@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xiaodao.system.mapper.SysMenuMapper">
-
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.xiaodao.system.entity.SysMenu" id="BaseResultMap">
+    <resultMap type="com.xiaodao.feign.system.entity.SysMenu" id="BaseResultMap">
         <result property="menuId" column="menu_id"/>
         <result property="menuName" column="menu_name"/>
         <result property="menuKey" column="menu_key"/>
@@ -22,585 +21,1229 @@
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
+        <result property="metnod" column="metnod"/>
     </resultMap>
-
 
     <!--数据库表的基本查询列名集合 -->
     <sql id="Base_Column_List">
-        menu_id ,
-        menu_name ,
-        menu_key ,
-        menu_lay ,
-        parent_id ,
-        target ,
-        order_num ,
-        url ,
-        menu_type ,
-        visible ,
-        perms ,
-        icon ,
-        create_by ,
-        create_time ,
-        update_by ,
-        update_time ,
-        remark 
+        menu_id,
+        menu_name,
+        menu_key,
+        menu_lay,
+        parent_id,
+        target,
+        order_num,
+        url,
+        menu_type,
+        visible,
+        perms,
+        icon,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        metnod
+    </sql>
+
+
+    <!--基本插入字段-->
+    <sql id="Base_Insert_Column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        menu_id,
+        menu_name,
+        menu_key,
+        menu_lay,
+        parent_id,
+        target,
+        order_num,
+        url,
+        menu_type,
+        visible,
+        perms,
+        icon,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        metnod
+    </trim>
+    </sql>
+
+    <!--基本插入值-->
+    <sql id="Base_Insert_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{sysMenu.menuId,jdbcType=BIGINT},
+            #{sysMenu.menuName,jdbcType=VARCHAR},
+            #{sysMenu.menuKey,jdbcType=VARCHAR},
+            #{sysMenu.menuLay,jdbcType=VARCHAR},
+            #{sysMenu.parentId,jdbcType=BIGINT},
+            #{sysMenu.target,jdbcType=VARCHAR},
+            #{sysMenu.orderNum,jdbcType=INTEGER},
+            #{sysMenu.url,jdbcType=VARCHAR},
+            #{sysMenu.menuType,jdbcType=CHAR},
+            #{sysMenu.visible,jdbcType=CHAR},
+            #{sysMenu.perms,jdbcType=VARCHAR},
+            #{sysMenu.icon,jdbcType=VARCHAR},
+            #{sysMenu.createBy,jdbcType=BIGINT},
+            #{sysMenu.createTime,jdbcType=TIMESTAMP},
+            #{sysMenu.updateBy,jdbcType=BIGINT},
+            #{sysMenu.updateTime,jdbcType=TIMESTAMP},
+            #{sysMenu.remark,jdbcType=VARCHAR},
+            #{sysMenu.metnod,jdbcType=VARCHAR}
+    </trim>
+    </sql>
+    <!--基本选择插入字段-->
+    <sql id="Base_Insert_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysMenu.menuId != null">
+                 menu_id,
+            </if>
+            <if test="sysMenu.menuName != null">
+                 menu_name,
+            </if>
+            <if test="sysMenu.menuKey != null">
+                 menu_key,
+            </if>
+            <if test="sysMenu.menuLay != null">
+                 menu_lay,
+            </if>
+            <if test="sysMenu.parentId != null">
+                 parent_id,
+            </if>
+            <if test="sysMenu.target != null">
+                 target,
+            </if>
+            <if test="sysMenu.orderNum != null">
+                 order_num,
+            </if>
+            <if test="sysMenu.url != null">
+                 url,
+            </if>
+            <if test="sysMenu.menuType != null">
+                 menu_type,
+            </if>
+            <if test="sysMenu.visible != null">
+                 visible,
+            </if>
+            <if test="sysMenu.perms != null">
+                 perms,
+            </if>
+            <if test="sysMenu.icon != null">
+                 icon,
+            </if>
+            <if test="sysMenu.createBy != null">
+                 create_by,
+            </if>
+            <if test="sysMenu.createTime != null">
+                 create_time,
+            </if>
+            <if test="sysMenu.updateBy != null">
+                 update_by,
+            </if>
+            <if test="sysMenu.updateTime != null">
+                 update_time,
+            </if>
+            <if test="sysMenu.remark != null">
+                 remark,
+            </if>
+            <if test="sysMenu.metnod != null">
+                 metnod
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本选择插入值-->
+    <sql id="Base_Insert_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysMenu.menuId != null">
+                #{sysMenu.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.menuName != null">
+                #{sysMenu.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuKey != null">
+                #{sysMenu.menuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuLay != null">
+                #{sysMenu.menuLay,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.parentId != null">
+                #{sysMenu.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.target != null">
+                #{sysMenu.target,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.orderNum != null">
+                #{sysMenu.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="sysMenu.url != null">
+                #{sysMenu.url,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuType != null">
+                #{sysMenu.menuType,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.visible != null">
+                #{sysMenu.visible,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.perms != null">
+                #{sysMenu.perms,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.icon != null">
+                #{sysMenu.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.createBy != null">
+                #{sysMenu.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.createTime != null">
+                #{sysMenu.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.updateBy != null">
+                #{sysMenu.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.updateTime != null">
+                #{sysMenu.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.remark != null">
+                #{sysMenu.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.metnod != null">
+                #{sysMenu.metnod,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本更新-->
+    <sql id="Base_Update">
+        <set>
+            menu_id = #{sysMenu.menuId,jdbcType=BIGINT},
+            menu_name = #{sysMenu.menuName,jdbcType=VARCHAR},
+            menu_key = #{sysMenu.menuKey,jdbcType=VARCHAR},
+            menu_lay = #{sysMenu.menuLay,jdbcType=VARCHAR},
+            parent_id = #{sysMenu.parentId,jdbcType=BIGINT},
+            target = #{sysMenu.target,jdbcType=VARCHAR},
+            order_num = #{sysMenu.orderNum,jdbcType=INTEGER},
+            url = #{sysMenu.url,jdbcType=VARCHAR},
+            menu_type = #{sysMenu.menuType,jdbcType=CHAR},
+            visible = #{sysMenu.visible,jdbcType=CHAR},
+            perms = #{sysMenu.perms,jdbcType=VARCHAR},
+            icon = #{sysMenu.icon,jdbcType=VARCHAR},
+            create_by = #{sysMenu.createBy,jdbcType=BIGINT},
+            create_time = #{sysMenu.createTime,jdbcType=TIMESTAMP},
+            update_by = #{sysMenu.updateBy,jdbcType=BIGINT},
+            update_time = #{sysMenu.updateTime,jdbcType=TIMESTAMP},
+            remark = #{sysMenu.remark,jdbcType=VARCHAR},
+            metnod = #{sysMenu.metnod,jdbcType=VARCHAR}
+        </set>
+    </sql>
+    <!--带有空值检查的基本更新-->
+    <sql id="Base_Update_Selective">
+        <set>
+            <if test="sysMenu.menuId != null">
+                menu_id = #{sysMenu.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.menuName != null">
+                menu_name = #{sysMenu.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuKey != null">
+                menu_key = #{sysMenu.menuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuLay != null">
+                menu_lay = #{sysMenu.menuLay,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.parentId != null">
+                parent_id = #{sysMenu.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.target != null">
+                target = #{sysMenu.target,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.orderNum != null">
+                order_num = #{sysMenu.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="sysMenu.url != null">
+                url = #{sysMenu.url,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuType != null">
+                menu_type = #{sysMenu.menuType,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.visible != null">
+                visible = #{sysMenu.visible,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.perms != null">
+                perms = #{sysMenu.perms,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.icon != null">
+                icon = #{sysMenu.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.createBy != null">
+                create_by = #{sysMenu.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.createTime != null">
+                create_time = #{sysMenu.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.updateBy != null">
+                update_by = #{sysMenu.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.updateTime != null">
+                update_time = #{sysMenu.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.remark != null">
+                remark = #{sysMenu.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.metnod != null">
+                metnod = #{sysMenu.metnod,jdbcType=VARCHAR}
+            </if>
+        </set>
     </sql>
 
 
     <!--Where子句 -->
     <sql id="Base_Query_Where">
-         <if test="sysMenu.menuId != null">
+        <if test="sysMenu.menuId != null">
             and menu_id = #{sysMenu.menuId,jdbcType=BIGINT}
-         </if>
-         <if test="sysMenu.menuName != null">
+        </if>
+        <if test="sysMenu.menuName != null">
             and menu_name = #{sysMenu.menuName,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.menuKey != null">
+        </if>
+        <if test="sysMenu.menuKey != null">
             and menu_key = #{sysMenu.menuKey,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.menuLay != null">
+        </if>
+        <if test="sysMenu.menuLay != null">
             and menu_lay = #{sysMenu.menuLay,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.parentId != null">
+        </if>
+        <if test="sysMenu.parentId != null">
             and parent_id = #{sysMenu.parentId,jdbcType=BIGINT}
-         </if>
-         <if test="sysMenu.target != null">
+        </if>
+        <if test="sysMenu.target != null">
             and target = #{sysMenu.target,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.orderNum != null">
+        </if>
+        <if test="sysMenu.orderNum != null">
             and order_num = #{sysMenu.orderNum,jdbcType=INTEGER}
-         </if>
-         <if test="sysMenu.url != null">
+        </if>
+        <if test="sysMenu.url != null">
             and url = #{sysMenu.url,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.menuType != null">
+        </if>
+        <if test="sysMenu.menuType != null">
             and menu_type = #{sysMenu.menuType,jdbcType=CHAR}
-         </if>
-         <if test="sysMenu.visible != null">
+        </if>
+        <if test="sysMenu.visible != null">
             and visible = #{sysMenu.visible,jdbcType=CHAR}
-         </if>
-         <if test="sysMenu.perms != null">
+        </if>
+        <if test="sysMenu.perms != null">
             and perms = #{sysMenu.perms,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.icon != null">
+        </if>
+        <if test="sysMenu.icon != null">
             and icon = #{sysMenu.icon,jdbcType=VARCHAR}
-         </if>
-         <if test="sysMenu.createBy != null">
+        </if>
+        <if test="sysMenu.createBy != null">
             and create_by = #{sysMenu.createBy,jdbcType=BIGINT}
-         </if>
-         <if test="sysMenu.createTime != null">
+        </if>
+        <if test="sysMenu.createTime != null">
             and create_time = #{sysMenu.createTime,jdbcType=TIMESTAMP}
-         </if>
-         <if test="sysMenu.updateBy != null">
+        </if>
+        <if test="sysMenu.updateBy != null">
             and update_by = #{sysMenu.updateBy,jdbcType=BIGINT}
-         </if>
-         <if test="sysMenu.updateTime != null">
+        </if>
+        <if test="sysMenu.updateTime != null">
             and update_time = #{sysMenu.updateTime,jdbcType=TIMESTAMP}
-         </if>
-         <if test="sysMenu.remark != null">
+        </if>
+        <if test="sysMenu.remark != null">
             and remark = #{sysMenu.remark,jdbcType=VARCHAR}
-         </if>
+        </if>
+        <if test="sysMenu.metnod != null">
+            and metnod = #{sysMenu.metnod,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--模糊查询条件 -->
+    <sql id="Base_Query_Like_Where">
+        <if test="sysMenu.menuId != null">
+            and menu_id like concat('%',concat(#{sysMenu.menuId},'%'))
+        </if>
+        <if test="sysMenu.menuName != null">
+            and menu_name like concat('%',concat(#{sysMenu.menuName},'%'))
+        </if>
+        <if test="sysMenu.menuKey != null">
+            and menu_key like concat('%',concat(#{sysMenu.menuKey},'%'))
+        </if>
+        <if test="sysMenu.menuLay != null">
+            and menu_lay like concat('%',concat(#{sysMenu.menuLay},'%'))
+        </if>
+        <if test="sysMenu.parentId != null">
+            and parent_id like concat('%',concat(#{sysMenu.parentId},'%'))
+        </if>
+        <if test="sysMenu.target != null">
+            and target like concat('%',concat(#{sysMenu.target},'%'))
+        </if>
+        <if test="sysMenu.orderNum != null">
+            and order_num like concat('%',concat(#{sysMenu.orderNum},'%'))
+        </if>
+        <if test="sysMenu.url != null">
+            and url like concat('%',concat(#{sysMenu.url},'%'))
+        </if>
+        <if test="sysMenu.menuType != null">
+            and menu_type like concat('%',concat(#{sysMenu.menuType},'%'))
+        </if>
+        <if test="sysMenu.visible != null">
+            and visible like concat('%',concat(#{sysMenu.visible},'%'))
+        </if>
+        <if test="sysMenu.perms != null">
+            and perms like concat('%',concat(#{sysMenu.perms},'%'))
+        </if>
+        <if test="sysMenu.icon != null">
+            and icon like concat('%',concat(#{sysMenu.icon},'%'))
+        </if>
+        <if test="sysMenu.createBy != null">
+            and create_by like concat('%',concat(#{sysMenu.createBy},'%'))
+        </if>
+        <if test="sysMenu.createTime != null">
+            and create_time like concat('%',concat(#{sysMenu.createTime},'%'))
+        </if>
+        <if test="sysMenu.updateBy != null">
+            and update_by like concat('%',concat(#{sysMenu.updateBy},'%'))
+        </if>
+        <if test="sysMenu.updateTime != null">
+            and update_time like concat('%',concat(#{sysMenu.updateTime},'%'))
+        </if>
+        <if test="sysMenu.remark != null">
+            and remark like concat('%',concat(#{sysMenu.remark},'%'))
+        </if>
+        <if test="sysMenu.metnod != null">
+            and metnod like concat('%',concat(#{sysMenu.metnod},'%'))
+        </if>
+    </sql>
+
+    <!--模糊查询 -->
+    <sql id="Base_Query_Fuzzy_Where">
+        or menu_id like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or menu_name like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or menu_key like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or menu_lay like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or parent_id like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or target like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or order_num like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or url like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or menu_type like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or visible like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or perms like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or icon like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or create_by like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or create_time like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or update_by like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or update_time like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or remark like concat('%',concat(#{sysMenu.searchValue},'%'))
+        or metnod like concat('%',concat(#{sysMenu.searchValue},'%'))
     </sql>
 
 
+    <sql id="Order_By">
+        order by
+        <if test="sysMenu.orderBy != null and sysMenu.orderBy != ''">
+            #{sysMenu.orderBy}
+        </if>
+        <if test="sysMenu.orderBy == null or sysMenu.orderBy==''">
+            #{sysMenu.menu_id}
+        </if>
+        <if test="baseService.isAsc  == 1">
+            DESC
+        </if>
+    </sql>
 
+    <sql id="Time_Limit">
+        <if test="sysMenu.beginTime != null">
+            and DATE_FORMAT(#{sysMenu.createTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="sysMenu.endTime != null">
+            and DATE_FORMAT(#{sysMenu.createTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+    </sql>
 
-    <!--基本更新字段-->
-    <sql id="Base_Update_Column">
+    <!--插入更新-->
+    <sql id="On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            menu_id = #{sysMenu.menuId,jdbcType=BIGINT},
+            menu_name = #{sysMenu.menuName,jdbcType=VARCHAR},
+            menu_key = #{sysMenu.menuKey,jdbcType=VARCHAR},
+            menu_lay = #{sysMenu.menuLay,jdbcType=VARCHAR},
+            parent_id = #{sysMenu.parentId,jdbcType=BIGINT},
+            target = #{sysMenu.target,jdbcType=VARCHAR},
+            order_num = #{sysMenu.orderNum,jdbcType=INTEGER},
+            url = #{sysMenu.url,jdbcType=VARCHAR},
+            menu_type = #{sysMenu.menuType,jdbcType=CHAR},
+            visible = #{sysMenu.visible,jdbcType=CHAR},
+            perms = #{sysMenu.perms,jdbcType=VARCHAR},
+            icon = #{sysMenu.icon,jdbcType=VARCHAR},
+            create_by = #{sysMenu.createBy,jdbcType=BIGINT},
+            create_time = #{sysMenu.createTime,jdbcType=TIMESTAMP},
+            update_by = #{sysMenu.updateBy,jdbcType=BIGINT},
+            update_time = #{sysMenu.updateTime,jdbcType=TIMESTAMP},
+            remark = #{sysMenu.remark,jdbcType=VARCHAR},
+            metnod = #{sysMenu.metnod,jdbcType=VARCHAR}
+         </trim>
+    </sql>
+
+    <!--带有空值检查的插入更新-->
+    <sql id="On_Duplicate_Column_Selective_Update">
+        <trim suffixOverrides=",">
+            <if test="sysMenu.menuId != null">
+                menu_id = #{sysMenu.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.menuName != null">
+                menu_name = #{sysMenu.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuKey != null">
+                menu_key = #{sysMenu.menuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuLay != null">
+                menu_lay = #{sysMenu.menuLay,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.parentId != null">
+                parent_id = #{sysMenu.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.target != null">
+                target = #{sysMenu.target,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.orderNum != null">
+                order_num = #{sysMenu.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="sysMenu.url != null">
+                url = #{sysMenu.url,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuType != null">
+                menu_type = #{sysMenu.menuType,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.visible != null">
+                visible = #{sysMenu.visible,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.perms != null">
+                perms = #{sysMenu.perms,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.icon != null">
+                icon = #{sysMenu.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.createBy != null">
+                create_by = #{sysMenu.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.createTime != null">
+                create_time = #{sysMenu.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.updateBy != null">
+                update_by = #{sysMenu.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.updateTime != null">
+                update_time = #{sysMenu.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.remark != null">
+                remark = #{sysMenu.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.metnod != null">
+                metnod = #{sysMenu.metnod,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            menu_id = values(menu_id),
+            menu_name = values(menu_name),
+            menu_key = values(menu_key),
+            menu_lay = values(menu_lay),
+            parent_id = values(parent_id),
+            target = values(target),
+            order_num = values(order_num),
+            url = values(url),
+            menu_type = values(menu_type),
+            visible = values(visible),
+            perms = values(perms),
+            icon = values(icon),
+            create_by = values(create_by),
+            create_time = values(create_time),
+            update_by = values(update_by),
+            update_time = values(update_time),
+            remark = values(remark),
+            metnod = values(metnod),
+        </trim>
+    </sql>
+
+    <!--带有控制判断的批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update_Selective">
+        <trim suffixOverrides=",">
+            <if test="sysMenu.menuId != null">
+                menu_id = #{item.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.menuName != null">
+                menu_name = #{item.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuKey != null">
+                menu_key = #{item.menuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuLay != null">
+                menu_lay = #{item.menuLay,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.parentId != null">
+                parent_id = #{item.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.target != null">
+                target = #{item.target,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.orderNum != null">
+                order_num = #{item.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="sysMenu.url != null">
+                url = #{item.url,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.menuType != null">
+                menu_type = #{item.menuType,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.visible != null">
+                visible = #{item.visible,jdbcType=CHAR},
+            </if>
+            <if test="sysMenu.perms != null">
+                perms = #{item.perms,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.icon != null">
+                icon = #{item.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.createBy != null">
+                create_by = #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysMenu.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysMenu.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sysMenu.metnod != null">
+                metnod = #{item.metnod,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入，更新插入值-->
+    <sql id="Batch_Operating_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{item.menuId,jdbcType=BIGINT},
+            #{item.menuName,jdbcType=VARCHAR},
+            #{item.menuKey,jdbcType=VARCHAR},
+            #{item.menuLay,jdbcType=VARCHAR},
+            #{item.parentId,jdbcType=BIGINT},
+            #{item.target,jdbcType=VARCHAR},
+            #{item.orderNum,jdbcType=INTEGER},
+            #{item.url,jdbcType=VARCHAR},
+            #{item.menuType,jdbcType=CHAR},
+            #{item.visible,jdbcType=CHAR},
+            #{item.perms,jdbcType=VARCHAR},
+            #{item.icon,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.remark,jdbcType=VARCHAR},
+            #{item.metnod,jdbcType=VARCHAR}
+        </trim>
+    </sql>
+
+    <!--批量更新-->
+    <sql id="Batch_Update">
         <set>
-          <if test="sysMenu.menuId != null">
-             menu_id = #{sysMenu.menuId,jdbcType=BIGINT},
-          </if>
-          <if test="sysMenu.menuName != null">
-             menu_name = #{sysMenu.menuName,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.menuKey != null">
-             menu_key = #{sysMenu.menuKey,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.menuLay != null">
-             menu_lay = #{sysMenu.menuLay,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.parentId != null">
-             parent_id = #{sysMenu.parentId,jdbcType=BIGINT},
-          </if>
-          <if test="sysMenu.target != null">
-             target = #{sysMenu.target,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.orderNum != null">
-             order_num = #{sysMenu.orderNum,jdbcType=INTEGER},
-          </if>
-          <if test="sysMenu.url != null">
-             url = #{sysMenu.url,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.menuType != null">
-             menu_type = #{sysMenu.menuType,jdbcType=CHAR},
-          </if>
-          <if test="sysMenu.visible != null">
-             visible = #{sysMenu.visible,jdbcType=CHAR},
-          </if>
-          <if test="sysMenu.perms != null">
-             perms = #{sysMenu.perms,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.icon != null">
-             icon = #{sysMenu.icon,jdbcType=VARCHAR},
-          </if>
-          <if test="sysMenu.createBy != null">
-             create_by = #{sysMenu.createBy,jdbcType=BIGINT},
-          </if>
-          <if test="sysMenu.createTime != null">
-             create_time = #{sysMenu.createTime,jdbcType=TIMESTAMP},
-          </if>
-          <if test="sysMenu.updateBy != null">
-             update_by = #{sysMenu.updateBy,jdbcType=BIGINT},
-          </if>
-          <if test="sysMenu.updateTime != null">
-             update_time = #{sysMenu.updateTime,jdbcType=TIMESTAMP},
-          </if>
-          <if test="sysMenu.remark != null">
-             remark = #{sysMenu.remark,jdbcType=VARCHAR}
-          </if>
+            menu_id = #{item.menuId,jdbcType=BIGINT},
+            menu_name = #{item.menuName,jdbcType=VARCHAR},
+            menu_key = #{item.menuKey,jdbcType=VARCHAR},
+            menu_lay = #{item.menuLay,jdbcType=VARCHAR},
+            parent_id = #{item.parentId,jdbcType=BIGINT},
+            target = #{item.target,jdbcType=VARCHAR},
+            order_num = #{item.orderNum,jdbcType=INTEGER},
+            url = #{item.url,jdbcType=VARCHAR},
+            menu_type = #{item.menuType,jdbcType=CHAR},
+            visible = #{item.visible,jdbcType=CHAR},
+            perms = #{item.perms,jdbcType=VARCHAR},
+            icon = #{item.icon,jdbcType=VARCHAR},
+            create_by = #{item.createBy,jdbcType=BIGINT},
+            create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            update_by = #{item.updateBy,jdbcType=BIGINT},
+            update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            remark = #{item.remark,jdbcType=VARCHAR},
+            metnod = #{item.metnod,jdbcType=VARCHAR}
         </set>
     </sql>
 
+    <!--带有空值检查的批量更新-->
+    <sql id="Batch_Update_selective">
+        <set>
+            <if test="item.menuId != null">
+                menu_id = #{item.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="item.menuName != null">
+                menu_name = #{item.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.menuKey != null">
+                menu_key = #{item.menuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="item.menuLay != null">
+                menu_lay = #{item.menuLay,jdbcType=VARCHAR},
+            </if>
+            <if test="item.parentId != null">
+                parent_id = #{item.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="item.target != null">
+                target = #{item.target,jdbcType=VARCHAR},
+            </if>
+            <if test="item.orderNum != null">
+                order_num = #{item.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="item.url != null">
+                url = #{item.url,jdbcType=VARCHAR},
+            </if>
+            <if test="item.menuType != null">
+                menu_type = #{item.menuType,jdbcType=CHAR},
+            </if>
+            <if test="item.visible != null">
+                visible = #{item.visible,jdbcType=CHAR},
+            </if>
+            <if test="item.perms != null">
+                perms = #{item.perms,jdbcType=VARCHAR},
+            </if>
+            <if test="item.icon != null">
+                icon = #{item.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="item.createBy != null">
+                create_by = #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="item.metnod != null">
+                metnod = #{item.metnod,jdbcType=VARCHAR}
+            </if>
+        </set>
+    </sql>
 
-    <sql id="Base_Insert_Selective">
+    <!--带有空值检查的批量操作字段-->
+    <sql id="Batch_Operating_Selective_Column">
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysMenu.menuId != null">
-               menu_id,
+            <if test="item.menuId != null">
+                menu_id ,
             </if>
-            <if test="sysMenu.menuName != null">
-               menu_name,
+            <if test="item.menuName != null">
+                menu_name ,
             </if>
-            <if test="sysMenu.menuKey != null">
-               menu_key,
+            <if test="item.menuKey != null">
+                menu_key ,
             </if>
-            <if test="sysMenu.menuLay != null">
-               menu_lay,
+            <if test="item.menuLay != null">
+                menu_lay ,
             </if>
-            <if test="sysMenu.parentId != null">
-               parent_id,
+            <if test="item.parentId != null">
+                parent_id ,
             </if>
-            <if test="sysMenu.target != null">
-               target,
+            <if test="item.target != null">
+                target ,
             </if>
-            <if test="sysMenu.orderNum != null">
-               order_num,
+            <if test="item.orderNum != null">
+                order_num ,
             </if>
-            <if test="sysMenu.url != null">
-               url,
+            <if test="item.url != null">
+                url ,
             </if>
-            <if test="sysMenu.menuType != null">
-               menu_type,
+            <if test="item.menuType != null">
+                menu_type ,
             </if>
-            <if test="sysMenu.visible != null">
-               visible,
+            <if test="item.visible != null">
+                visible ,
             </if>
-            <if test="sysMenu.perms != null">
-               perms,
+            <if test="item.perms != null">
+                perms ,
             </if>
-            <if test="sysMenu.icon != null">
-               icon,
+            <if test="item.icon != null">
+                icon ,
             </if>
-            <if test="sysMenu.createBy != null">
-               create_by,
+            <if test="item.createBy != null">
+                create_by ,
             </if>
-            <if test="sysMenu.createTime != null">
-               create_time,
+            <if test="item.createTime != null">
+                create_time ,
             </if>
-            <if test="sysMenu.updateBy != null">
-               update_by,
+            <if test="item.updateBy != null">
+                update_by ,
             </if>
-            <if test="sysMenu.updateTime != null">
-               update_time,
+            <if test="item.updateTime != null">
+                update_time ,
             </if>
-            <if test="sysMenu.remark != null">
-               remark
+            <if test="item.remark != null">
+                remark ,
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-             <if test="sysMenu.menuId != null">
-             #{sysMenu.menuId,jdbcType=BIGINT},
-             </if>
-             <if test="sysMenu.menuName != null">
-             #{sysMenu.menuName,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.menuKey != null">
-             #{sysMenu.menuKey,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.menuLay != null">
-             #{sysMenu.menuLay,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.parentId != null">
-             #{sysMenu.parentId,jdbcType=BIGINT},
-             </if>
-             <if test="sysMenu.target != null">
-             #{sysMenu.target,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.orderNum != null">
-             #{sysMenu.orderNum,jdbcType=INTEGER},
-             </if>
-             <if test="sysMenu.url != null">
-             #{sysMenu.url,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.menuType != null">
-             #{sysMenu.menuType,jdbcType=CHAR},
-             </if>
-             <if test="sysMenu.visible != null">
-             #{sysMenu.visible,jdbcType=CHAR},
-             </if>
-             <if test="sysMenu.perms != null">
-             #{sysMenu.perms,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.icon != null">
-             #{sysMenu.icon,jdbcType=VARCHAR},
-             </if>
-             <if test="sysMenu.createBy != null">
-             #{sysMenu.createBy,jdbcType=BIGINT},
-             </if>
-             <if test="sysMenu.createTime != null">
-             #{sysMenu.createTime,jdbcType=TIMESTAMP},
-             </if>
-             <if test="sysMenu.updateBy != null">
-             #{sysMenu.updateBy,jdbcType=BIGINT},
-             </if>
-             <if test="sysMenu.updateTime != null">
-             #{sysMenu.updateTime,jdbcType=TIMESTAMP},
-             </if>
-             <if test="sysMenu.remark != null">
-             #{sysMenu.remark,jdbcType=VARCHAR}
-             </if>
+            <if test="item.metnod != null">
+                metnod 
+            </if>
         </trim>
     </sql>
 
+    <!--带有空值检查的批量操作值-->
+    <sql id="Batch_Operating_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.menuId != null">
+                #{item.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="item.menuName != null">
+                #{item.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.menuKey != null">
+                #{item.menuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="item.menuLay != null">
+                #{item.menuLay,jdbcType=VARCHAR},
+            </if>
+            <if test="item.parentId != null">
+                #{item.parentId,jdbcType=BIGINT},
+            </if>
+            <if test="item.target != null">
+                #{item.target,jdbcType=VARCHAR},
+            </if>
+            <if test="item.orderNum != null">
+                #{item.orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="item.url != null">
+                #{item.url,jdbcType=VARCHAR},
+            </if>
+            <if test="item.menuType != null">
+                #{item.menuType,jdbcType=CHAR},
+            </if>
+            <if test="item.visible != null">
+                #{item.visible,jdbcType=CHAR},
+            </if>
+            <if test="item.perms != null">
+                #{item.perms,jdbcType=VARCHAR},
+            </if>
+            <if test="item.icon != null">
+                #{item.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="item.createBy != null">
+                #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.createTime != null">
+                #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateTime != null">
+                #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.remark != null">
+                #{item.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="item.metnod != null">
+                #{item.metnod,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        insert into sys_menu
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+    </insert>
+
+    <!--带有空值检查的插入-->
+    <insert id="insertSelective" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        insert into sys_menu
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+    </insert>
+
+    <!--更新-->
+    <update id="updateByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        update sys_menu
+        <include refid="Base_Update"/>
+        <where>
+            menu_id = #{sysMenu.menuId,jdbcType=BIGINT}
+        </where>
+    </update>
+
+    <!--带有空值检查的更新-->
+    <update id="updateSelectiveByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        update sys_menu
+        <include refid="Base_Update_Selective"/>
+        <where>
+            menu_id = #{sysMenu.menuId,jdbcType=BIGINT}
+         </where>
+    </update>
 
 
-    <!--批量添加记录到数据库表中-->
+    <!--更新插入-->
+    <insert id="upsert" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        insert into sys_menu
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Update"/>
+    </insert>
+
+
+    <!--带有控制判断的更新插入-->
+    <insert id="upsertSelective" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        insert into sys_menu
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Selective_Update"/>
+    </insert>
+
+
+    <!--批量插入-->
     <insert id="batchInsert" parameterType="java.util.List">
         insert into sys_menu
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             menu_id,
-             menu_name,
-             menu_key,
-             menu_lay,
-             parent_id,
-             target,
-             order_num,
-             url,
-             menu_type,
-             visible,
-             perms,
-             icon,
-             create_by,
-             create_time,
-             update_by,
-             update_time,
-             remark
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
         <foreach collection="list" index="index" item="item" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.menuId,jdbcType=BIGINT},
-                #{item.menuName,jdbcType=VARCHAR},
-                #{item.menuKey,jdbcType=VARCHAR},
-                #{item.menuLay,jdbcType=VARCHAR},
-                #{item.parentId,jdbcType=BIGINT},
-                #{item.target,jdbcType=VARCHAR},
-                #{item.orderNum,jdbcType=INTEGER},
-                #{item.url,jdbcType=VARCHAR},
-                #{item.menuType,jdbcType=CHAR},
-                #{item.visible,jdbcType=CHAR},
-                #{item.perms,jdbcType=VARCHAR},
-                #{item.icon,jdbcType=VARCHAR},
-                #{item.createBy,jdbcType=BIGINT},
-                #{item.createTime,jdbcType=TIMESTAMP},
-                #{item.updateBy,jdbcType=BIGINT},
-                #{item.updateTime,jdbcType=TIMESTAMP},
-                #{item.remark,jdbcType=VARCHAR}
-            </trim>
+            <include refid="Batch_Operating_Value"/>
         </foreach>
     </insert>
 
 
-
-    <!-- 根据主键批量更新数据库表中的记录-->
+    <!-- 批量更新-->
     <update id="batchUpdate" parameterType="java.util.List">
         <foreach collection="list" index="index" item="item" separator=";">
             update sys_menu
-            <set>
-                <trim suffixOverrides=",">
-                    menu_id = #{item.menuId,jdbcType=BIGINT},
-                    menu_name = #{item.menuName,jdbcType=VARCHAR},
-                    menu_key = #{item.menuKey,jdbcType=VARCHAR},
-                    menu_lay = #{item.menuLay,jdbcType=VARCHAR},
-                    parent_id = #{item.parentId,jdbcType=BIGINT},
-                    target = #{item.target,jdbcType=VARCHAR},
-                    order_num = #{item.orderNum,jdbcType=INTEGER},
-                    url = #{item.url,jdbcType=VARCHAR},
-                    menu_type = #{item.menuType,jdbcType=CHAR},
-                    visible = #{item.visible,jdbcType=CHAR},
-                    perms = #{item.perms,jdbcType=VARCHAR},
-                    icon = #{item.icon,jdbcType=VARCHAR},
-                    create_by = #{item.createBy,jdbcType=BIGINT},
-                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
-                    update_by = #{item.updateBy,jdbcType=BIGINT},
-                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
-                    remark = #{item.remark,jdbcType=VARCHAR}
-                </trim>
-            </set>
+            <include refid="Batch_Update"/>
             <where>
                 <trim suffixOverrides=",">
-                    where menu_id = #{item.menuId,jdbcType=BIGINT}
+                    menu_id = #{item.menuId,jdbcType=BIGINT}
                 </trim>
             </where>
         </foreach>
     </update>
 
 
-    <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysMenu">
+    <!-- 批量更新插入-->
+    <update id="batchUpsert" parameterType="java.util.List">
         insert into sys_menu
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             menu_id ,
-             menu_name ,
-             menu_key ,
-             menu_lay ,
-             parent_id ,
-             target ,
-             order_num ,
-             url ,
-             menu_type ,
-             visible ,
-             perms ,
-             icon ,
-             create_by ,
-             create_time ,
-             update_by ,
-             update_time ,
-             remark 
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             #{sysMenu.menuId,jdbcType=BIGINT},
-             #{sysMenu.menuName,jdbcType=VARCHAR},
-             #{sysMenu.menuKey,jdbcType=VARCHAR},
-             #{sysMenu.menuLay,jdbcType=VARCHAR},
-             #{sysMenu.parentId,jdbcType=BIGINT},
-             #{sysMenu.target,jdbcType=VARCHAR},
-             #{sysMenu.orderNum,jdbcType=INTEGER},
-             #{sysMenu.url,jdbcType=VARCHAR},
-             #{sysMenu.menuType,jdbcType=CHAR},
-             #{sysMenu.visible,jdbcType=CHAR},
-             #{sysMenu.perms,jdbcType=VARCHAR},
-             #{sysMenu.icon,jdbcType=VARCHAR},
-             #{sysMenu.createBy,jdbcType=BIGINT},
-             #{sysMenu.createTime,jdbcType=TIMESTAMP},
-             #{sysMenu.updateBy,jdbcType=BIGINT},
-             #{sysMenu.updateTime,jdbcType=TIMESTAMP},
-             #{sysMenu.remark,jdbcType=VARCHAR}
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-          #{sysMenu.menuId,jdbcType=BIGINT},
-          #{sysMenu.menuName,jdbcType=VARCHAR},
-          #{sysMenu.menuKey,jdbcType=VARCHAR},
-          #{sysMenu.menuLay,jdbcType=VARCHAR},
-          #{sysMenu.parentId,jdbcType=BIGINT},
-          #{sysMenu.target,jdbcType=VARCHAR},
-          #{sysMenu.orderNum,jdbcType=INTEGER},
-          #{sysMenu.url,jdbcType=VARCHAR},
-          #{sysMenu.menuType,jdbcType=CHAR},
-          #{sysMenu.visible,jdbcType=CHAR},
-          #{sysMenu.perms,jdbcType=VARCHAR},
-          #{sysMenu.icon,jdbcType=VARCHAR},
-          #{sysMenu.createBy,jdbcType=BIGINT},
-          #{sysMenu.createTime,jdbcType=TIMESTAMP},
-          #{sysMenu.updateBy,jdbcType=BIGINT},
-          #{sysMenu.updateTime,jdbcType=TIMESTAMP},
-          #{sysMenu.remark,jdbcType=VARCHAR}
-        </trim>
+        <include refid="Batch_Operating_Value"/>
+        on duplicate Column update
+        <include refid="Batch_On_Duplicate_Column_Update"/>
     </update>
 
 
-    <!--带有空值检查的存在即更新否则插入-->
-    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysMenu">
-        insert into sys_menu
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysMenu.menuId != null">
-                menu_id,
-            </if>
-            <if test="sysMenu.menuName != null">
-                menu_name,
-            </if>
-            <if test="sysMenu.menuKey != null">
-                menu_key,
-            </if>
-            <if test="sysMenu.menuLay != null">
-                menu_lay,
-            </if>
-            <if test="sysMenu.parentId != null">
-                parent_id,
-            </if>
-            <if test="sysMenu.target != null">
-                target,
-            </if>
-            <if test="sysMenu.orderNum != null">
-                order_num,
-            </if>
-            <if test="sysMenu.url != null">
-                url,
-            </if>
-            <if test="sysMenu.menuType != null">
-                menu_type,
-            </if>
-            <if test="sysMenu.visible != null">
-                visible,
-            </if>
-            <if test="sysMenu.perms != null">
-                perms,
-            </if>
-            <if test="sysMenu.icon != null">
-                icon,
-            </if>
-            <if test="sysMenu.createBy != null">
-                create_by,
-            </if>
-            <if test="sysMenu.createTime != null">
-                create_time,
-            </if>
-            <if test="sysMenu.updateBy != null">
-                update_by,
-            </if>
-            <if test="sysMenu.updateTime != null">
-                update_time,
-            </if>
-            <if test="sysMenu.remark != null">
-                remark
-            </if>
-        </trim>
-        values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysMenu.menuId !=null ">
-                #{sysMenu.menuId,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.menuName !=null ">
-                #{sysMenu.menuName,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.menuKey !=null ">
-                #{sysMenu.menuKey,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.menuLay !=null ">
-                #{sysMenu.menuLay,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.parentId !=null ">
-                #{sysMenu.parentId,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.target !=null ">
-                #{sysMenu.target,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.orderNum !=null ">
-                #{sysMenu.orderNum,jdbcType=INTEGER},
-            </if>
-            <if test="sysMenu.url !=null ">
-                #{sysMenu.url,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.menuType !=null ">
-                #{sysMenu.menuType,jdbcType=CHAR},
-            </if>
-            <if test="sysMenu.visible !=null ">
-                #{sysMenu.visible,jdbcType=CHAR},
-            </if>
-            <if test="sysMenu.perms !=null ">
-                #{sysMenu.perms,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.icon !=null ">
-                #{sysMenu.icon,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.createBy !=null ">
-                #{sysMenu.createBy,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.createTime !=null ">
-                #{sysMenu.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysMenu.updateBy !=null ">
-                #{sysMenu.updateBy,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.updateTime !=null ">
-                #{sysMenu.updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysMenu.remark !=null ">
-                #{sysMenu.remark,jdbcType=VARCHAR}
-            </if>
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-            <if test="sysMenu.menuId !=null ">
-             #{menuId,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.menuName !=null ">
-             #{menuName,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.menuKey !=null ">
-             #{menuKey,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.menuLay !=null ">
-             #{menuLay,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.parentId !=null ">
-             #{parentId,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.target !=null ">
-             #{target,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.orderNum !=null ">
-             #{orderNum,jdbcType=INTEGER},
-            </if>
-            <if test="sysMenu.url !=null ">
-             #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.menuType !=null ">
-             #{menuType,jdbcType=CHAR},
-            </if>
-            <if test="sysMenu.visible !=null ">
-             #{visible,jdbcType=CHAR},
-            </if>
-            <if test="sysMenu.perms !=null ">
-             #{perms,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.icon !=null ">
-             #{icon,jdbcType=VARCHAR},
-            </if>
-            <if test="sysMenu.createBy !=null ">
-             #{createBy,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.createTime !=null ">
-             #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysMenu.updateBy !=null ">
-             #{updateBy,jdbcType=BIGINT},
-            </if>
-            <if test="sysMenu.updateTime !=null ">
-             #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="sysMenu.remark !=null ">
-             #{remark,jdbcType=VARCHAR}
-            </if>
-        </trim>
+    <!-- 带有控制判断的批量更新-->
+    <update id="batchUpdateSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_menu
+            <include refid="Batch_Update_selective"/>
+            <where>
+                <trim suffixOverrides=",">
+                    menu_id = #{item.menuId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
     </update>
 
-    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysMenu">
+
+    <!-- 带有空值判断的批量插入-->
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_menu
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+        </foreach>
+    </insert>
+
+    <!-- 带有空值判断的批量更新插入-->
+    <update id="batchUpsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_menu
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+            on duplicate Column update
+            <include refid="Batch_On_Duplicate_Column_Update_Selective"/>
+        </foreach>
+    </update>
+
+
+    <!--通过主键批量查询-->
+    <select id="queryBatchPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from sys_menu
         <where>
-            <include refid="Base_Query_Where"></include>
+            menu_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+            <include refid="Order_By"></include>
+            <include refid="Time_Limit"></include>
         </where>
     </select>
 
-    <select id="queryTotalCount" resultType="long">
-        select count(*) from sys_menu
+    <!--通过主键批量查询-->
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <where>
+            menu_id = #{menuId,jdbcType=BIGINT}
+        </where>
+    </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--查询一个-->
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        limit 1
     </select>
 
 
+    <!--条件模糊查询-->
+    <select id="queryByLikeCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        <include refid="Time_Limit"></include>
+    </select>
 
+
+    <!--模糊查询-->
+    <select id="queryFuzzy" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--条件查询数量-->
+    <select id="queryCount" resultType="int" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select count(*) from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--条件删除-->
+    <delete id="delete" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        delete from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_menu
+        <where>
+            <trim suffixOverrides=",">
+                menu_id = #{menuId,jdbcType=BIGINT}
+            </trim>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键批量删除-->
+    <delete id="deleteBatchByPrimaryKeys" parameterType="java.lang.Long">
+        delete from sys_menu
+        <where>
+            menu_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+        </where>
+    </delete>
+
+    <!--分组统计-->
+    <select id="statisticsGroup" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select ${sysMenu.statisticalProperty} as name,${sysMenu.statisticalMethod}(${sysMenu.statisticalProperty}) as value from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+         group by ${sysMenu.statisticalProperty}
+    </select>
+
+    <!--按日统计-->
+    <select id="statisticsGroupByDay" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select date_format(create_time, '%Y-%m-%d') as name,${sysMenu.statisticalMethod}(${sysMenu.statisticalProperty}) as value from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        group by date_format(create_time,'%Y-%m-%d')
+    </select>
+
+    <!--按月统计-->
+    <select id="statisticsGroupByMonth" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select date_format(create_time, '%Y-%m') as name, ${sysMenu.statisticalMethod}(${sysMenu.statisticalProperty}) as value from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+        </where>
+            group by date_format(create_time,'%Y-%m')
+    </select>
+
+    <!--按年统计-->
+    <select id="statisticsGroupByYear" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysMenu">
+        select date_format(create_time, '%Y') as name,${sysMenu.statisticalMethod}(${sysMenu.statisticalProperty}) as value from sys_menu
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+         </where>
+            group by date_format(create_time,'%Y')
+    </select>
+
+    <select id="selectMenusByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+            SELECT DISTINCT
+                m.menu_id ,
+                m.menu_name ,
+                m.menu_key ,
+                m.menu_lay ,
+                m.parent_id ,
+                m.target ,
+                m.order_num ,
+                m.url ,
+                m.menu_type ,
+                m.visible ,
+                m.perms ,
+                m.icon ,
+                m.create_by ,
+                m.create_time ,
+                m.update_by ,
+                m.update_time ,
+                m.remark
+
+            FROM
+	            sys_menu m
+	        LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id
+	        LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id
+	        LEFT JOIN sys_role ro ON ur.role_id = ro.role_id
+            WHERE
+	            ur.user_id = #{userId} and m.menu_type in ('M', 'C') and
+	            ro.STATUS = 0
+	            AND length( m.menu_key )> 0
+            ORDER BY m.order_num
+	</select>
+
+    <select id="selectMenuNormalAll" resultMap="BaseResultMap">
+		SELECT DISTINCT
+	        m.menu_id ,
+            m.menu_name ,
+            m.menu_key ,
+            m.menu_lay ,
+            m.parent_id ,
+            m.target ,
+            m.order_num ,
+            m.url ,
+            m.menu_type ,
+            m.visible ,
+            m.perms ,
+            m.icon ,
+            m.create_by ,
+            m.create_time ,
+            m.update_by ,
+            m.update_time ,
+            m.remark
+        FROM
+	        sys_menu m
+        WHERE
+	        m.menu_type IN ( 'M', 'C' )
+	        AND length( m.menu_key )> 0
+        ORDER BY
+	        m.order_num
+	</select>
+
+    <select id="selectMenuAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu m
+        order by order_num
+    </select>
+
+    <select id="selectPermsByUserId" parameterType="java.lang.Long" resultType="java.lang.String">
+		select distinct m.perms
+		from sys_menu m
+		left join sys_role_menu rm on m.menu_id = rm.menu_id
+		left join sys_user_role ur on rm.role_id = ur.role_id
+		where ur.user_id = #{userId}
+	</select>
+
+    <select id="selectMenuIdsByRoleId" parameterType="java.lang.Long" resultType="java.lang.Long">
+		select distinct m.menu_id
+		from sys_menu m
+		left join sys_role_menu rm on m.menu_id = rm.menu_id
+		where rm.role_id = #{roleId}
+	</select>
+
+
+    <select id="selectMenuTree" parameterType="java.lang.Long"
+            resultType="java.lang.String">
+		select concat(m.menu_id, ifnull(m.perms,'')) as perms
+		from
+		sys_menu m
+		left join sys_role_menu rm on m.menu_id = rm.menu_id
+		where rm.role_id =
+		#{roleId}
+		order by m.parent_id, m.order_num
+	</select>
+
+
+    <select id="checkMenuNameUnique" parameterType="com.xiaodao.feign.system.entity.SysMenu"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        sys_menu m
+        where menu_name=#{menuName} and parent_id = #{parentId}
+    </select>
 
 </mapper>

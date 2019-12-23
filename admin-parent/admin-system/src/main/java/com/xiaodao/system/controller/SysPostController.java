@@ -1,138 +1,343 @@
 package com.xiaodao.system.controller;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  com.xiaodao.system.service.ISysPostService;
+import com.xiaodao.feign.system.entity.SysPost;
 
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
-import com.xiaodao.system.service.ISysPostService;
-import com.xiaodao.system.entity.SysPost;
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * SysPost
  *
  * @author xiaodao
- * @email 513684652@qq.com
+ * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
 @RestController
 @RequestMapping("/sysPost")
-@Api(value = "SysPost管理", tags = "SysPost管理")
+@Api(value = "岗位信息管理", tags = "岗位信息管理")
 @Validated
 @Slf4j
 public class SysPostController {
     @Autowired
     private ISysPostService sysPostService;
 
-    @ApiOperation(value = "分页查询SysPost", notes = "分页查询SysPost")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
-    })
-    @GetMapping("/")
-    public RespVO<IPage<SysPost>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                          @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        IPage<SysPost> iPage = sysPostService.queryPage(pageIndex, pageSize, new SysPost());
-        return RespVOBuilder.success(iPage);
-    }
 
-    @ApiOperation(value = "通过主键postId查询SysPost", notes = "通过主键postId查询SysPost")
+    @ApiOperation(value = "新增", notes = "新增")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "postId", paramType = "path", value = "postId", required = true, dataType = "Long")
     })
-    @GetMapping("/{postId}")
-    public RespVO<SysPost> selectByPrimaryKey(@PathVariable(value = "postId") Long postId) {
-        SysPost sysPost =
-            sysPostService.selectByPrimaryKey(postId);
-        if (sysPost == null){
-            return RespVOBuilder.failure("当前SysPost不存在");
-        } else{
-            return RespVOBuilder.success(sysPost);
+    @PostMapping("/insert")
+    public RespVO insert(@RequestBody SysPost sysPost) {
+
+        int resultNum = sysPostService.insert(sysPost);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
         }
     }
 
-    @ApiOperation(value = "通过主键postId删除SysPost", notes = "通过主键postId删除SysPost")
+    @ApiOperation(value = "带有空值判断的新增", notes = "带有空值判断的新增")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/insertSelective")
+    public RespVO insertSelective(@RequestBody SysPost sysPost) {
+        int resultNum = sysPostService.insertSelective(sysPost);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量插入", notes = "批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsert")
+    public RespVO batchInsert(@RequestBody List<SysPost> list) {
+        int resultNum = sysPostService.batchInsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量插入", notes = "带有空值判断的批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsertSelective")
+    public RespVO batchInsertSelective(@RequestBody List<SysPost> list) {
+        int resultNum = sysPostService.batchInsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "根据主键更新", notes = "根据主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateByPrimaryKey")
+    public RespVO updateByPrimaryKey(@RequestBody SysPost sysPost) {
+        int resultNum = sysPostService.updateByPrimaryKey(sysPost);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的主键更新", notes = "带有空值判断的主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateSelectiveByPrimaryKey")
+    public RespVO updateSelectiveByPrimaryKey(@RequestBody SysPost sysPost) {
+        int resultNum = sysPostService.updateSelectiveByPrimaryKey(sysPost);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "批量更新", notes = "批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdate")
+    public RespVO batchUpdate(@RequestBody List<SysPost> list) {
+        int resultNum = sysPostService.batchUpdate(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的批量更新", notes = "带有空值判断的批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdateSelective")
+    public RespVO batchUpdateSelective(@RequestBody List<SysPost> list) {
+        int resultNum = sysPostService.batchUpdateSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "更新插入", notes = "更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsert")
+    public RespVO upsert(@RequestBody SysPost sysPost) {
+        int resultNum = sysPostService.upsert(sysPost);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的更新插入", notes = "带有空值判断的更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsertSelective")
+    public RespVO upsertSelective(@RequestBody SysPost sysPost) {
+        int resultNum = sysPostService.upsertSelective(sysPost);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量更新插入", notes = "批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsert")
+    public RespVO batchUpsert(@RequestBody List<SysPost> list) {
+        int resultNum = sysPostService.batchUpsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量更新插入", notes = "带有空值判断的批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsertSelective")
+    public RespVO batchUpsertSelective(@RequestBody List<SysPost> list) {
+        int resultNum = sysPostService.batchUpsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "通过主键删除", notes = "通过主键删除")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "postId", paramType = "path", value = "postId", required = true, dataType = "Long")
     })
     @DeleteMapping("/{postId}")
     public RespVO deleteByPrimaryKey(@PathVariable(value = "postId") Long postId) {
-        Integer num = sysPostService.deleteByPrimaryKey(postId);
-        if (num == 0) {
-            return RespVOBuilder.failure("删除SysPost失败");
+        Integer resultNum = sysPostService.deleteByPrimaryKey(postId);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("删除失败");
         } else {
-            return RespVOBuilder.success("删除SysPost成功");
+            return RespVOBuilder.success("删除成功");
         }
     }
 
-    @ApiOperation(value = "新增SysPost", notes = "新增SysPost")
+    @ApiOperation(value = "通过主键批量删除", notes = "通过主键批量删除")
     @ApiImplicitParams({
     })
-    @PostMapping("/")
-    public RespVO insert(@RequestBody SysPost sysPost) {
-        if (sysPost == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysPostService.insert(sysPost);
-        if (num == 0) {
-            return RespVOBuilder.failure("添加SysPost失败");
+    @DeleteMapping("/deleteBatchByPrimaryKeys")
+    public RespVO deleteBatchByPrimaryKeys(@RequestBody List<Long> list) {
+        int resultNum = sysPostService.deleteBatchByPrimaryKeys(list);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("添加SysPost成功");
+            return RespVOBuilder.failure("删除失败");
         }
     }
 
-    @ApiOperation(value = "修改SysPost", notes = "修改SysPost")
+    @ApiOperation(value = "条件删除", notes = "条件删除")
     @ApiImplicitParams({
     })
-    @PutMapping("/")
-    public RespVO updateByPrimaryKey(@RequestBody SysPost sysPost) {
-        if (sysPost == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysPostService.updateByPrimaryKey(sysPost);
-        if (num == 0) {
-            return RespVOBuilder.failure("修改SysPost失败");
+    @DeleteMapping("/delete")
+    public RespVO delete(@RequestBody SysPost sysPost) {
+
+        int resultNum = sysPostService.delete(sysPost);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("修改SysPost成功");
+            return RespVOBuilder.failure("删除失败");
         }
+
     }
 
-
-    @ApiOperation(value = "通过主键postId批量删除SysPost", notes = "通过主键postId批量删除SysPost")
+    @ApiOperation(value = "通过主键查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @DeleteMapping("/deleteBatchPrimaryKeys")
-    public RespVO deleteBatchPrimaryKeys(@RequestBody List<Long> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysPostService.deleteBatchIds(list);
-        if (num == 0) {
-            return RespVOBuilder.failure("批量删除SysPost失败");
-        } else {
-            return RespVOBuilder.success("批量删除SysPost成功");
-        }
+    @GetMapping("/{postId}")
+    public RespVO<SysPost> queryByPrimaryKey(@PathVariable(value = "postId") Long postId) {
+        SysPost sysPost = sysPostService.queryByPrimaryKey(postId);
+        return RespVOBuilder.success(sysPost);
     }
 
-
-    @ApiOperation(value = "条件查询SysPost", notes = "条件查询SysPost")
+    @ApiOperation(value = "通过主键批量查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @PostMapping("/list")
-    public RespVO query(@RequestBody SysPost sysPost) {
-        if (sysPost ==null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        List<SysPost> list = sysPostService.query(sysPost);
+    @PostMapping("/queryBatchPrimaryKeys")
+    public RespVO<RespDataVO<SysPost>> queryBatchPrimaryKeys(@RequestBody List<Long> list) {
+        List< SysPost> sysPosts = sysPostService.queryBatchPrimaryKeys(list);
+        return RespVOBuilder.success(sysPosts);
+    }
+
+    @ApiOperation(value = "条件查询一个", notes = "条件查询一个")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryOne")
+    public RespVO<SysPost> queryOne(@RequestBody SysPost sysPost) {
+        sysPost =sysPostService.queryOne(sysPost);
+        return RespVOBuilder.success(sysPost);
+    }
+
+    @ApiOperation(value = "条件查询", notes = "条件查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByCondition")
+    public RespVO<RespDataVO<SysPost>> queryByCondition(@RequestBody SysPost sysPost) {
+        List<SysPost> list = sysPostService.queryByCondition(sysPost);
         return RespVOBuilder.success(list);
     }
+
+    @ApiOperation(value = "模糊查询", notes = "模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryFuzzy")
+    public RespVO<RespDataVO<SysPost>> queryFuzzy(@RequestBody SysPost sysPost) {
+        List<SysPost> list = sysPostService.queryFuzzy(sysPost);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByLikeCondition")
+    public RespVO<RespDataVO<SysPost>> queryByLikeCondition(@RequestBody SysPost sysPost) {
+        List<SysPost> list = sysPostService.queryByLikeCondition(sysPost);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "条件查询数量", notes = "条件查询数量")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryCount")
+    public RespVO<Long> queryCount(@RequestBody SysPost sysPost) {
+        long count = sysPostService.queryCount(sysPost);
+        return RespVOBuilder.success(count);
+    }
+
+
+    @ApiOperation(value = "分组统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroup")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(@RequestBody SysPost sysPost) {
+        List<Map<String, Object>> maps = sysPostService.statisticsGroup(sysPost);
+        return RespVOBuilder.success(maps);
+    }
+
+
+    @ApiOperation(value = "日统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByDay")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(@RequestBody SysPost sysPost) {
+        List<Map<String, Object>> maps = sysPostService.statisticsGroupByDay(sysPost);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "月统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByMonth")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(@RequestBody SysPost sysPost) {
+        List<Map<String, Object>> maps = sysPostService.statisticsGroupByMonth(sysPost);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "年统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByYear")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(@RequestBody SysPost sysPost) {
+        List<Map<String, Object>> maps = sysPostService.statisticsGroupByYear(sysPost);
+        return RespVOBuilder.success(maps);
+    }
+
 }

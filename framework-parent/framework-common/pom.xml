@@ -16,6 +16,10 @@
         <module>framework-common-datasource</module>
         <module>framework-common-core</module>
         <module>framework-common-feign</module>
+        <module>framework-common-log</module>
+        <module>framework-common-redis</module>
+        <module>framework-common-datascope</module>
+        <module>framework-common-auth</module>
     </modules>
 
 

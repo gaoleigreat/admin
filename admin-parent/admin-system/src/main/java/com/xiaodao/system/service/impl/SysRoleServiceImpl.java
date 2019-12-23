@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysRoleMapper;
 import com.xiaodao.system.service.ISysRoleService;
-import com.xiaodao.system.entity.SysRole;
+import com.xiaodao.feign.system.entity.SysRole;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysRoleServiceImpl implements ISysRoleService{
      @Autowired
      private SysRoleMapper sysRoleMapper;
 
-    /**
-     * 创建SysRole
-     *
-     * @param sysRole
-     * @return
-     */
     @Override
-    public Integer insert(SysRole sysRole){
-        if(sysRole ==null){
-            return 0;
-        }
+    public int insert(SysRole sysRole) {
         return sysRoleMapper.insert(sysRole);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param roleId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long roleId){
-        if(roleId ==null){
-            return 0;
-        }
-        Integer result = sysRoleMapper.deleteById(roleId);
-        return result;
-
+    public int insertSelective(SysRole sysRole) {
+        return sysRoleMapper.insertSelective(sysRole);
     }
 
-    /**
-     * 修改SysRole
-     *
-     * @param sysRole
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysRole sysRole){
-        if(sysRole ==null){
-            return 0;
-        }
-        return sysRoleMapper.updateById(sysRole);
+    public int batchInsert(List<SysRole> list) {
+        return sysRoleMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param roleId
-    * @return
-    */
     @Override
-    public SysRole selectByPrimaryKey(Long roleId){
-        if(roleId ==null){
-            return null;
-        }
-        SysRole sysRole  = sysRoleMapper.selectById(roleId);
-        if (sysRole == null){
-            return null;
-        }
-        return sysRole;
+    public int batchInsertSelective(List<SysRole> list) {
+        return sysRoleMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysRole SysRole
-     * @return IPage<SysRole>
-     */
     @Override
-    public IPage<SysRole> queryPage(int pageIndex, int pageSize,SysRole sysRole){
-        QueryWrapper<SysRole> queryWrapper = Wrappers.query();
-        IPage<SysRole> ipage = sysRoleMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysRole sysRole) {
+        return sysRoleMapper.updateByPrimaryKey(sysRole);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysRole
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysRole> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysRoleMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysRole sysRole) {
+        return sysRoleMapper.updateSelectiveByPrimaryKey(sysRole);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysRole>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysRole> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysRoleMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysRole> list) {
+        return sysRoleMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysRoleMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysRole SysRole
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysRole sysRole){
-
-        if (sysRole == null){
-            return 0;
-        }
-        else{
-            return sysRoleMapper.upsert(sysRole);
-        }
-
+    public int batchUpdateSelective(List<SysRole> list) {
+        return sysRoleMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysRole SysRole
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysRole sysRole){
-        if (sysRole == null){
-            return 0;
-        }
-        else{
-            return sysRoleMapper.upsert(sysRole);
-        }
+    public int upsert(SysRole sysRole) {
+        return sysRoleMapper.upsert(sysRole);
     }
 
-    /**
-     * 条件查询
-     * @param sysRole SysRole
-     * @return List<SysRole>
-    */
     @Override
-    public List<SysRole> query(SysRole sysRole){
-        if (sysRole == null){
-            return null;
-        }
-        else{
-            return sysRoleMapper.query(sysRole);
-        }
+    public int upsertSelective(SysRole sysRole) {
+        return sysRoleMapper.upsertSelective(sysRole);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysRoleMapper.queryTotalCount();
+    public int batchUpsert(List<SysRole> list) {
+        return sysRoleMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysRole> list) {
+        return sysRoleMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long roleId) {
+        return sysRoleMapper.deleteByPrimaryKey(roleId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Long> list) {
+        return sysRoleMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysRole sysRole) {
+        return sysRoleMapper.delete(sysRole);
+    }
+
+    @Override
+    public SysRole queryByPrimaryKey(Long roleId) {
+        return sysRoleMapper.queryByPrimaryKey(roleId);
+    }
+
+    @Override
+    public List<SysRole> queryBatchPrimaryKeys(List<Long> list) {
+        return sysRoleMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysRole queryOne(SysRole sysRole) {
+        return sysRoleMapper.queryOne(sysRole);
+    }
+
+    @Override
+    public List<SysRole> queryByCondition(SysRole sysRole) {
+        return sysRoleMapper.queryByCondition(sysRole);
+    }
+
+    @Override
+    public List<SysRole> queryFuzzy(SysRole sysRole) {
+        return sysRoleMapper.queryFuzzy(sysRole);
+    }
+
+    @Override
+    public List<SysRole> queryByLikeCondition(SysRole sysRole) {
+        return sysRoleMapper.queryByLikeCondition(sysRole);
+    }
+
+    @Override
+    public int queryCount(SysRole sysRole) {
+        return sysRoleMapper.queryCount(sysRole);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysRole sysRole) {
+        return sysRoleMapper.statisticsGroup(sysRole);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysRole sysRole) {
+        return sysRoleMapper.statisticsGroupByDay(sysRole);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysRole sysRole) {
+        return sysRoleMapper.statisticsGroupByMonth(sysRole);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysRole sysRole) {
+        return sysRoleMapper.statisticsGroupByYear(sysRole);
     }
 }

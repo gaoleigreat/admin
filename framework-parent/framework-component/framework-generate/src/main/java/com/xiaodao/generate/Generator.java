@@ -16,7 +16,7 @@ public class Generator {
 
     public static void main(String[] args) throws Exception {
         DataServiceImpl dataService = new DataServiceImpl();
-        List<GenTable> exam = dataService.getGenTable("perception_base");
+        List<GenTable> exam = dataService.getGenTable("exam");
 
         //创建Configuration对象
         Configuration configuration = new Configuration();
@@ -40,16 +40,17 @@ public class Generator {
 
 
             try {
+                GenConfig genConfig = new GenConfig();
                 map.put("gentable", e);
-                Map<String, String> dirMap = new HashMap<>();
+                map.put("genconfig", genConfig);
 
-                String mapperDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/mapper/";
-                String entityDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/entity/";
-                String serviceDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/service/";
-                String serviceImplDir = serviceDir + "impl/";
-                String controllerDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/controller/";
-                String feignClient = GenConfig.packagePath + "/" + GenConfig.moduleName + "/feign/";
-                String mapperXmlDir = GenConfig.packagePath + "/" + GenConfig.moduleName + "/xml/";
+                String mapperDir = "E:\\" + genConfig.getDaoPackageName().replace(".", "/") + "/";
+                String entityDir = "E:\\" + genConfig.getEntityPackageName().replace(".", "/") + "/";
+                String serviceDir = "E:\\" + genConfig.getServicePackageName().replace(".", "/") + "/";
+                String serviceImplDir = "E:\\" + genConfig.getServiceImplPackageName().replace(".", "/") + "/";
+                String controllerDir = "E:\\" + genConfig.getControllerPackageName().replace(".", "/") + "/";
+                String feignClient = "E:\\" + genConfig.getFeignClientPackageName().replace(".", "/") + "/";
+                String mapperXmlDir = "E:\\" + genConfig.getMapperPackageName().replace(".", "/") + "/";
                 mkdirs(mapperDir);
                 mkdirs(entityDir);
                 mkdirs(serviceDir);
@@ -59,7 +60,7 @@ public class Generator {
                 mkdirs(mapperXmlDir);
                 Writer writer1 = new OutputStreamWriter(new FileOutputStream(mapperDir + e.getClassName() + "Mapper.java"));
                 Writer writer2 = new OutputStreamWriter(new FileOutputStream(mapperXmlDir + e.getClassName() + "Mapper.xml"));
-                Writer writer3 = new OutputStreamWriter(new FileOutputStream(serviceDir + "I"+e.getClassName() + "Service.java"));
+                Writer writer3 = new OutputStreamWriter(new FileOutputStream(serviceDir + "I" + e.getClassName() + "Service.java"));
                 Writer writer4 = new OutputStreamWriter(new FileOutputStream(serviceImplDir + e.getClassName() + "ServiceImpl.java"));
                 Writer writer5 = new OutputStreamWriter(new FileOutputStream(entityDir + e.getClassName() + ".java"));
                 Writer writer6 = new OutputStreamWriter(new FileOutputStream(controllerDir + e.getClassName() + "Controller.java"));

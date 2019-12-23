@@ -1,58 +1,200 @@
-package ${gentable.packageName}.${gentable.moduleName}.mapper;
+package  ${genconfig.daoPackageName};
+
+
+import org.apache.ibatis.annotations.Param;
+import ${genconfig.entityPackageName}.${gentable.className};
 
 import java.util.List;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Param;
-import ${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className};
-
-
+import java.util.Map;
 /**
  * @description ${gentable.className}Mapper
- * @author${gentable.author}
+ * @author${genconfig.author}
  * @since jdk1.8
  */
-public interface ${gentable.className}Mapper extends BaseMapper<${gentable.className}>{
+public interface ${gentable.className}Mapper{
 
     /**
-    * 批量插入
-    * @param list List<${gentable.className}
-    * @return Integer
-    */
-    Integer batchInsert(List<${gentable.className}> list);
+     * 新增
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int insert(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 带有空值判断的新增
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int insertSelective(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsert(@Param("list")List<${gentable.className}> list);
+
+    /**
+     * 带有空值判断的批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsertSelective(@Param("list")List<${gentable.className}> list);
+
+    /**
+     * 根据主键更新
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int updateByPrimaryKey(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 带有空值判断的主键更新
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int updateSelectiveByPrimaryKey(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
 
     /**
      * 批量更新
-     * @param list List<${gentable.className}>
-     * @return Integer
+     * @param list
+     * @return int
      */
-    Integer batchUpdate(List<${gentable.className}> list);
+    int batchUpdate(@Param("list")List<${gentable.className}> list);
 
     /**
-     * 存在即更新
-     * @param ${gentable.camelCaseclassName} ${gentable.className}
-     * @return Integer
+     * 带有空值判断的批量更新
+     * @param list
+     * @return int
      */
-    Integer upsert(@Param("${gentable.camelCaseclassName}") ${gentable.className} ${gentable.camelCaseclassName});
+    int batchUpdateSelective(@Param("list")List<${gentable.className}> list);
 
     /**
-     * 存在即更新，可选择具体属性
-     * @param ${gentable.camelCaseclassName} ${gentable.className}
-     * @return Integer
+     * 更新插入
+     * @param ${gentable.camelCaseclassName}
+     * @return int
      */
-    Integer upsertSelective(@Param("${gentable.camelCaseclassName}") ${gentable.className} ${gentable.camelCaseclassName});
+    int upsert(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 带有空值判断的更新插入
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int upsertSelective(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsert(@Param("list")List<${gentable.className}> list);
+
+    /**
+     * 带有空值判断的批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsertSelective(@Param("list")List<${gentable.className}> list);
+
+    /**
+     * 通过主键删除
+     * @param ${gentable.pkColumn.javaFieldName}
+     * @return int
+     */
+    int deleteByPrimaryKey(@Param("${gentable.camelCaseclassName}")${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+
+    /**
+     * 通过主键批量删除
+     * @param list
+     * @return int
+     */
+    int deleteBatchByPrimaryKeys(@Param("list")List<${gentable.pkColumn.javaType}> list);
+
+    /**
+     * 条件删除
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int delete(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 通过主键查询
+     * @param ${gentable.pkColumn.javaFieldName}
+     * @return ${gentable.className} ${gentable.camelCaseclassName}
+     */
+     ${gentable.className} queryByPrimaryKey(@Param("${gentable.camelCaseclassName}")${gentable.pkColumn.javaType} ${gentable.pkColumn.javaFieldName});
+
+    /**
+     * 通过主键批量查询
+     * @param list
+     * @return List<${gentable.className}>
+     */
+    List<${gentable.className}> queryBatchPrimaryKeys(@Param("list")List<${gentable.pkColumn.javaType}> list);
+
+    /**
+     * 条件查询一个
+     * @param ${gentable.camelCaseclassName}
+     * @return List<${gentable.className}>
+     */
+    ${gentable.className} queryOne(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
 
     /**
      * 条件查询
-     * @param ${gentable.camelCaseclassName} ${gentable.className}
+     * @param ${gentable.camelCaseclassName}
      * @return List<${gentable.className}>
-    */
-    List<${gentable.className}> query(@Param("${gentable.camelCaseclassName}") ${gentable.className} ${gentable.camelCaseclassName});
+     */
+    List<${gentable.className}> queryByCondition(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
 
     /**
-     * 查询总数
-     * @return Integer
+     * 模糊查询
+     * @param ${gentable.camelCaseclassName}
+     * @return List<${gentable.className}>
      */
-    Long queryTotalCount();
+    List<${gentable.className}> queryFuzzy(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 模糊条件查询
+     * @param ${gentable.camelCaseclassName}
+     * @return List<${gentable.className}>
+     */
+    List<${gentable.className}> queryByLikeCondition(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 条件查询数量
+     * @param ${gentable.camelCaseclassName}
+     * @return int
+     */
+    int queryCount(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 分组统计
+     * @param ${gentable.camelCaseclassName}
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroup(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 日统计
+     * @param ${gentable.camelCaseclassName}
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByDay(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 月统计
+     * @param ${gentable.camelCaseclassName}
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByMonth(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
+    /**
+     * 年统计
+     * @param ${gentable.camelCaseclassName}
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByYear(@Param("${gentable.camelCaseclassName}")${gentable.className} ${gentable.camelCaseclassName});
+
 
 
 }

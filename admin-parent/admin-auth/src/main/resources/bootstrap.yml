@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: auth-service
+  profiles:
+    active: local
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  main:
+    allow-bean-definition-overriding: true
+
+application:
+  description: 权限服务
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

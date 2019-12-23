@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysDeptMapper;
 import com.xiaodao.system.service.ISysDeptService;
-import com.xiaodao.system.entity.SysDept;
+import com.xiaodao.feign.system.entity.SysDept;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysDeptServiceImpl implements ISysDeptService{
      @Autowired
      private SysDeptMapper sysDeptMapper;
 
-    /**
-     * 创建SysDept
-     *
-     * @param sysDept
-     * @return
-     */
     @Override
-    public Integer insert(SysDept sysDept){
-        if(sysDept ==null){
-            return 0;
-        }
+    public int insert(SysDept sysDept) {
         return sysDeptMapper.insert(sysDept);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param deptId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long deptId){
-        if(deptId ==null){
-            return 0;
-        }
-        Integer result = sysDeptMapper.deleteById(deptId);
-        return result;
-
+    public int insertSelective(SysDept sysDept) {
+        return sysDeptMapper.insertSelective(sysDept);
     }
 
-    /**
-     * 修改SysDept
-     *
-     * @param sysDept
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysDept sysDept){
-        if(sysDept ==null){
-            return 0;
-        }
-        return sysDeptMapper.updateById(sysDept);
+    public int batchInsert(List<SysDept> list) {
+        return sysDeptMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param deptId
-    * @return
-    */
     @Override
-    public SysDept selectByPrimaryKey(Long deptId){
-        if(deptId ==null){
-            return null;
-        }
-        SysDept sysDept  = sysDeptMapper.selectById(deptId);
-        if (sysDept == null){
-            return null;
-        }
-        return sysDept;
+    public int batchInsertSelective(List<SysDept> list) {
+        return sysDeptMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysDept SysDept
-     * @return IPage<SysDept>
-     */
     @Override
-    public IPage<SysDept> queryPage(int pageIndex, int pageSize,SysDept sysDept){
-        QueryWrapper<SysDept> queryWrapper = Wrappers.query();
-        IPage<SysDept> ipage = sysDeptMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysDept sysDept) {
+        return sysDeptMapper.updateByPrimaryKey(sysDept);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysDept
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysDept> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysDeptMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysDept sysDept) {
+        return sysDeptMapper.updateSelectiveByPrimaryKey(sysDept);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysDept>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysDept> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysDeptMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysDept> list) {
+        return sysDeptMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysDeptMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysDept SysDept
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysDept sysDept){
-
-        if (sysDept == null){
-            return 0;
-        }
-        else{
-            return sysDeptMapper.upsert(sysDept);
-        }
-
+    public int batchUpdateSelective(List<SysDept> list) {
+        return sysDeptMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysDept SysDept
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysDept sysDept){
-        if (sysDept == null){
-            return 0;
-        }
-        else{
-            return sysDeptMapper.upsert(sysDept);
-        }
+    public int upsert(SysDept sysDept) {
+        return sysDeptMapper.upsert(sysDept);
     }
 
-    /**
-     * 条件查询
-     * @param sysDept SysDept
-     * @return List<SysDept>
-    */
     @Override
-    public List<SysDept> query(SysDept sysDept){
-        if (sysDept == null){
-            return null;
-        }
-        else{
-            return sysDeptMapper.query(sysDept);
-        }
+    public int upsertSelective(SysDept sysDept) {
+        return sysDeptMapper.upsertSelective(sysDept);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysDeptMapper.queryTotalCount();
+    public int batchUpsert(List<SysDept> list) {
+        return sysDeptMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysDept> list) {
+        return sysDeptMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long deptId) {
+        return sysDeptMapper.deleteByPrimaryKey(deptId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Long> list) {
+        return sysDeptMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysDept sysDept) {
+        return sysDeptMapper.delete(sysDept);
+    }
+
+    @Override
+    public SysDept queryByPrimaryKey(Long deptId) {
+        return sysDeptMapper.queryByPrimaryKey(deptId);
+    }
+
+    @Override
+    public List<SysDept> queryBatchPrimaryKeys(List<Long> list) {
+        return sysDeptMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysDept queryOne(SysDept sysDept) {
+        return sysDeptMapper.queryOne(sysDept);
+    }
+
+    @Override
+    public List<SysDept> queryByCondition(SysDept sysDept) {
+        return sysDeptMapper.queryByCondition(sysDept);
+    }
+
+    @Override
+    public List<SysDept> queryFuzzy(SysDept sysDept) {
+        return sysDeptMapper.queryFuzzy(sysDept);
+    }
+
+    @Override
+    public List<SysDept> queryByLikeCondition(SysDept sysDept) {
+        return sysDeptMapper.queryByLikeCondition(sysDept);
+    }
+
+    @Override
+    public int queryCount(SysDept sysDept) {
+        return sysDeptMapper.queryCount(sysDept);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysDept sysDept) {
+        return sysDeptMapper.statisticsGroup(sysDept);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysDept sysDept) {
+        return sysDeptMapper.statisticsGroupByDay(sysDept);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysDept sysDept) {
+        return sysDeptMapper.statisticsGroupByMonth(sysDept);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysDept sysDept) {
+        return sysDeptMapper.statisticsGroupByYear(sysDept);
     }
 }

@@ -74,8 +74,8 @@ public class SwaggerConfiguration {
         osVersionPar.name("osVersion").description("设备系统版本号").modelRef(new ModelRef("String")).parameterType("header").required(true).build();
 
 
-/*        parameters.add(tokenPar.build());
-        parameters.add(versionPar.build());
+        parameters.add(tokenPar.build());
+      /*  parameters.add(versionPar.build());
         parameters.add(timePar.build());
         parameters.add(snPar.build());
         parameters.add(deviceTypePar.build());

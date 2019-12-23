@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>admin-system</module>
+        <module>admin-auth</module>
     </modules>
 
 

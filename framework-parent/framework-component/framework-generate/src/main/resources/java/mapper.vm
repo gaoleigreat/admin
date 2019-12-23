@@ -1,172 +1,505 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="${gentable.packageName}.${gentable.moduleName}.mapper.${gentable.className}Mapper">
-
+<mapper namespace="${genconfig.daoPackageName}.${gentable.className}Mapper">
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className}" id="BaseResultMap">
-    <#list gentable.columns as field>
+    <resultMap type="${genconfig.entityPackageName}.${gentable.className}" id="BaseResultMap">
+        <#list gentable.columns as field>
         <result property="${field.javaFieldName}" column="${field.fieldName}"/>
-    </#list>
+        </#list>
     </resultMap>
-
 
     <!--数据库表的基本查询列名集合 -->
     <sql id="Base_Column_List">
         <#list gentable.columns as field>
-        ${field.fieldName} <#if field_has_next>,</#if>
+        ${field.fieldName}<#if field_has_next>,</#if>
         </#list>
+    </sql>
+
+
+    <!--基本插入字段-->
+    <sql id="Base_Insert_Column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <#list gentable.columns as field>
+        ${field.fieldName}<#if field_has_next>,</#if>
+        </#list>
+    </trim>
+    </sql>
+
+    <!--基本插入值-->
+    <sql id="Base_Insert_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list gentable.columns as field>
+            <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </#list>
+    </trim>
+    </sql>
+    <!--基本选择插入字段-->
+    <sql id="Base_Insert_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list gentable.columns as field>
+            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
+                 ${field.fieldName}<#if field_has_next>,</#if>
+            </if>
+            </#list>
+        </trim>
+    </sql>
+
+    <!--基本选择插入值-->
+    <sql id="Base_Insert_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list gentable.columns as field>
+            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
+                <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </if>
+            </#list>
+        </trim>
+    </sql>
+
+    <!--基本更新-->
+    <sql id="Base_Update">
+        <set>
+            <#list gentable.columns as field>
+            ${field.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </#list>
+        </set>
+    </sql>
+    <!--带有空值检查的基本更新-->
+    <sql id="Base_Update_Selective">
+        <set>
+            <#list gentable.columns as field>
+            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
+                ${field.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </if>
+            </#list>
+        </set>
     </sql>
 
 
     <!--Where子句 -->
     <sql id="Base_Query_Where">
         <#list gentable.columns as field>
-         <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
+        <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
             and ${field.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse>
-         </if>
+        </if>
         </#list>
     </sql>
 
-
-
-
-    <!--基本更新字段-->
-    <sql id="Base_Update_Column">
-        <set>
+    <!--模糊查询条件 -->
+    <sql id="Base_Query_Like_Where">
         <#list gentable.columns as field>
-          <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
-             ${field.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-          </if>
+        <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
+            and ${field.fieldName} like concat('%',concat(<#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName}<#noparse>}</#noparse>,'%'))
+        </if>
         </#list>
-        </set>
+    </sql>
+
+    <!--模糊查询 -->
+    <sql id="Base_Query_Fuzzy_Where">
+        <#list gentable.columns as field>
+        or ${field.fieldName} like concat('%',concat(<#noparse>#{</#noparse>${gentable.camelCaseclassName}.searchValue<#noparse>}</#noparse>,'%'))
+        </#list>
     </sql>
 
 
-    <sql id="Base_Insert_Selective">
-        <trim prefix="(" suffix=")" suffixOverrides=",">
+    <sql id="Order_By">
+        order by
+        <if test="${gentable.camelCaseclassName}.orderBy != null and ${gentable.camelCaseclassName}.orderBy != ''">
+            <#noparse>#{</#noparse>${gentable.camelCaseclassName}.orderBy<#noparse>}</#noparse>
+        </if>
+        <if test="${gentable.camelCaseclassName}.orderBy == null or ${gentable.camelCaseclassName}.orderBy==''">
+            <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${gentable.pkColumn.javaFieldName}<#noparse>}</#noparse>
+        </if>
+        <if test="baseService.isAsc  == 1">
+            DESC
+        </if>
+    </sql>
+
+    <sql id="Time_Limit">
+        <if test="${gentable.camelCaseclassName}.beginTime != null">
+            and DATE_FORMAT(<#noparse>#{</#noparse>${gentable.camelCaseclassName}.createTime<#noparse>}</#noparse>,'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(<#noparse>#{</#noparse>create_time<#noparse>}</#noparse>,'%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="${gentable.camelCaseclassName}.endTime != null">
+            and DATE_FORMAT(<#noparse>#{</#noparse>${gentable.camelCaseclassName}.createTime<#noparse>}</#noparse>,'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(<#noparse>#{</#noparse>create_time<#noparse>}</#noparse>,'%Y-%m-%d %H:%i:%S')
+        </if>
+    </sql>
+
+    <!--插入更新-->
+    <sql id="On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            <#list gentable.columns as field>
+            ${field.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </#list>
+         </trim>
+    </sql>
+
+    <!--带有空值检查的插入更新-->
+    <sql id="On_Duplicate_Column_Selective_Update">
+        <trim suffixOverrides=",">
             <#list gentable.columns as field>
             <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
-               ${field.fieldName}<#if field_has_next>,</#if>
+                ${field.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
             </if>
             </#list>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
+    </sql>
+
+    <!--批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
             <#list gentable.columns as field>
-             <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
-             <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-             </if>
+            ${field.fieldName} = values(${field.fieldName}),
             </#list>
         </trim>
     </sql>
 
-
-
-    <!--批量添加记录到数据库表中-->
-    <insert id="batchInsert" parameterType="java.util.List">
-        insert into ${gentable.tableName}
-        <trim prefix="(" suffix=")" suffixOverrides=",">
+    <!--带有控制判断的批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update_Selective">
+        <trim suffixOverrides=",">
             <#list gentable.columns as field>
-             ${field.fieldName}<#if field_has_next>,</#if>
+            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
+                ${field.fieldName} = <#noparse>#{</#noparse>item.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </if>
             </#list>
         </trim>
+    </sql>
+
+    <!--批量插入，更新插入值-->
+    <sql id="Batch_Operating_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list gentable.columns as field>
+            <#noparse>#{</#noparse>item.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </#list>
+        </trim>
+    </sql>
+
+    <!--批量更新-->
+    <sql id="Batch_Update">
+        <set>
+            <#list gentable.columns as field>
+            ${field.fieldName} = <#noparse>#{</#noparse>item.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </#list>
+        </set>
+    </sql>
+
+    <!--带有空值检查的批量更新-->
+    <sql id="Batch_Update_selective">
+        <set>
+            <#list gentable.columns as field>
+            <if test="item.${field.javaFieldName} != null">
+                ${field.fieldName} = <#noparse>#{</#noparse>item.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </if>
+            </#list>
+        </set>
+    </sql>
+
+    <!--带有空值检查的批量操作字段-->
+    <sql id="Batch_Operating_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <#list gentable.columns as field>
+            <if test="item.${field.javaFieldName} != null">
+                ${field.fieldName} <#if field_has_next>,</#if>
+            </if>
+        </#list>
+        </trim>
+    </sql>
+
+    <!--带有空值检查的批量操作值-->
+    <sql id="Batch_Operating_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <#list gentable.columns as field>
+            <if test="item.${field.javaFieldName} != null">
+                <#noparse>#{</#noparse>item.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
+            </if>
+            </#list>
+        </trim>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        insert into ${gentable.tableName}
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+    </insert>
+
+    <!--带有空值检查的插入-->
+    <insert id="insertSelective" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        insert into ${gentable.tableName}
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+    </insert>
+
+    <!--更新-->
+    <update id="updateByPrimaryKey" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        update ${gentable.tableName}
+        <include refid="Base_Update"/>
+        <where>
+            ${gentable.pkColumn.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+        </where>
+    </update>
+
+    <!--带有空值检查的更新-->
+    <update id="updateSelectiveByPrimaryKey" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        update ${gentable.tableName}
+        <include refid="Base_Update_Selective"/>
+        <where>
+            ${gentable.pkColumn.fieldName} = <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+         </where>
+    </update>
+
+
+    <!--更新插入-->
+    <insert id="upsert" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        insert into ${gentable.tableName}
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Update"/>
+    </insert>
+
+
+    <!--带有控制判断的更新插入-->
+    <insert id="upsertSelective" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        insert into ${gentable.tableName}
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Selective_Update"/>
+    </insert>
+
+
+    <!--批量插入-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into ${gentable.tableName}
+        <include refid="Base_Insert_Column"/>
         values
         <foreach collection="list" index="index" item="item" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                <#list gentable.columns as field>
-                <#noparse>#{item.</#noparse>${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-                </#list>
-            </trim>
+            <include refid="Batch_Operating_Value"/>
         </foreach>
     </insert>
 
 
-
-    <!-- 根据主键批量更新数据库表中的记录-->
+    <!-- 批量更新-->
     <update id="batchUpdate" parameterType="java.util.List">
         <foreach collection="list" index="index" item="item" separator=";">
             update ${gentable.tableName}
-            <set>
-                <trim suffixOverrides=",">
-                    <#list gentable.columns as field>
-                    ${field.fieldName} = <#noparse>#{item.</#noparse>${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-                    </#list>
-                </trim>
-            </set>
+            <include refid="Batch_Update"/>
             <where>
                 <trim suffixOverrides=",">
-                    where ${gentable.pkColumn.fieldName} = <#noparse>#{item.</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+                    ${gentable.pkColumn.fieldName} = <#noparse>#{item.</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
                 </trim>
             </where>
         </foreach>
     </update>
 
 
-    <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="${gentable.packageName}.entity.${gentable.className}">
+    <!-- 批量更新插入-->
+    <update id="batchUpsert" parameterType="java.util.List">
         insert into ${gentable.tableName}
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <#list gentable.columns as field>
-             ${field.fieldName} <#if field_has_next>,</#if>
-            </#list>
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <#list gentable.columns as field>
-             <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-            </#list>
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-         <#list gentable.columns as field>
-          <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-         </#list>
-        </trim>
+        <include refid="Batch_Operating_Value"/>
+        on duplicate Column update
+        <include refid="Batch_On_Duplicate_Column_Update"/>
     </update>
 
 
-    <!--带有空值检查的存在即更新否则插入-->
-    <update id="upsertSelective" parameterType="${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className}">
-        insert into ${gentable.tableName}
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <#list gentable.columns as field>
-            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} != null">
-                ${field.fieldName}<#if field_has_next>,</#if>
-            </if>
-            </#list>
-        </trim>
-        values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <#list gentable.columns as field>
-            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} !=null ">
-                <#noparse>#{</#noparse>${gentable.camelCaseclassName}.${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-            </if>
-            </#list>
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-            <#list gentable.columns as field>
-            <if test="${gentable.camelCaseclassName}.${field.javaFieldName} !=null ">
-             <#noparse>#{</#noparse>${field.javaFieldName},jdbcType=${field.jdbcType}<#noparse>}</#noparse><#if field_has_next>,</#if>
-            </if>
-            </#list>
-        </trim>
+    <!-- 带有控制判断的批量更新-->
+    <update id="batchUpdateSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update ${gentable.tableName}
+            <include refid="Batch_Update_selective"/>
+            <where>
+                <trim suffixOverrides=",">
+                    ${gentable.pkColumn.fieldName} = <#noparse>#{item.</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+                </trim>
+            </where>
+        </foreach>
     </update>
 
-    <select id="query" resultMap="BaseResultMap" parameterType="${gentable.packageName}.${gentable.moduleName}.entity.${gentable.className}">
+
+    <!-- 带有空值判断的批量插入-->
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into ${gentable.tableName}
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+        </foreach>
+    </insert>
+
+    <!-- 带有空值判断的批量更新插入-->
+    <update id="batchUpsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into ${gentable.tableName}
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+            on duplicate Column update
+            <include refid="Batch_On_Duplicate_Column_Update_Selective"/>
+        </foreach>
+    </update>
+
+
+    <!--通过主键批量查询-->
+    <select id="queryBatchPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from ${gentable.tableName}
         <where>
-            <include refid="Base_Query_Where"></include>
+            ${gentable.pkColumn.fieldName} in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                <#noparse>#{</#noparse>item <#noparse>}</#noparse>
+            </foreach>
+            <include refid="Order_By"></include>
+            <include refid="Time_Limit"></include>
         </where>
     </select>
 
-    <select id="queryTotalCount" resultType="long">
-        select count(*) from ${gentable.tableName}
+    <!--通过主键批量查询-->
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ${gentable.tableName}
+        <where>
+            ${gentable.pkColumn.fieldName} = <#noparse>#{</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+        </where>
+    </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultMap="BaseResultMap" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select
+        <include refid="Base_Column_List"/>
+        from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--查询一个-->
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select
+        <include refid="Base_Column_List"/>
+        from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        limit 1
     </select>
 
 
+    <!--条件模糊查询-->
+    <select id="queryByLikeCondition" resultMap="BaseResultMap" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select
+        <include refid="Base_Column_List"/>
+        from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        <include refid="Time_Limit"></include>
+    </select>
 
+
+    <!--模糊查询-->
+    <select id="queryFuzzy" resultMap="BaseResultMap" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select
+        <include refid="Base_Column_List"/>
+        from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--条件查询数量-->
+    <select id="queryCount" resultType="int" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select count(*) from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--条件删除-->
+    <delete id="delete" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        delete from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ${gentable.tableName}
+        <where>
+            <trim suffixOverrides=",">
+                ${gentable.pkColumn.fieldName} = <#noparse>#{</#noparse>${gentable.pkColumn.javaFieldName},jdbcType=${gentable.pkColumn.jdbcType}<#noparse>}</#noparse>
+            </trim>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键批量删除-->
+    <delete id="deleteBatchByPrimaryKeys" parameterType="java.lang.Long">
+        delete from ${gentable.tableName}
+        <where>
+            ${gentable.pkColumn.fieldName} in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                <#noparse>#{</#noparse>item <#noparse>}</#noparse>
+            </foreach>
+        </where>
+    </delete>
+
+    <!--分组统计-->
+    <select id="statisticsGroup" resultType="java.util.Map" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select <#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalProperty} as name,<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalMethod}(<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalProperty}) as value from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+         group by <#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalProperty}
+    </select>
+
+    <!--按日统计-->
+    <select id="statisticsGroupByDay" resultType="java.util.Map" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select date_format(create_time, '%Y-%m-%d') as name,<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalMethod}(<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalProperty}) as value from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        group by date_format(create_time,'%Y-%m-%d')
+    </select>
+
+    <!--按月统计-->
+    <select id="statisticsGroupByMonth" resultType="java.util.Map" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select date_format(create_time, '%Y-%m') as name, <#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalMethod}(<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalProperty}) as value from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+        </where>
+            group by date_format(create_time,'%Y-%m')
+    </select>
+
+    <!--按年统计-->
+    <select id="statisticsGroupByYear" resultType="java.util.Map" parameterType="${genconfig.entityPackageName}.${gentable.className}">
+        select date_format(create_time, '%Y') as name,<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalMethod}(<#noparse>${</#noparse>${gentable.camelCaseclassName}.statisticalProperty}) as value from ${gentable.tableName}
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+         </where>
+            group by date_format(create_time,'%Y')
+    </select>
 
 </mapper>

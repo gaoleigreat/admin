@@ -1,138 +1,343 @@
 package com.xiaodao.system.controller;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  com.xiaodao.system.service.ISysDictTypeService;
+import com.xiaodao.feign.system.entity.SysDictType;
 
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
-import com.xiaodao.system.service.ISysDictTypeService;
-import com.xiaodao.system.entity.SysDictType;
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * SysDictType
  *
  * @author xiaodao
- * @email 513684652@qq.com
+ * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
 @RestController
 @RequestMapping("/sysDictType")
-@Api(value = "SysDictType管理", tags = "SysDictType管理")
+@Api(value = "字典类型表管理", tags = "字典类型表管理")
 @Validated
 @Slf4j
 public class SysDictTypeController {
     @Autowired
     private ISysDictTypeService sysDictTypeService;
 
-    @ApiOperation(value = "分页查询SysDictType", notes = "分页查询SysDictType")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
-    })
-    @GetMapping("/")
-    public RespVO<IPage<SysDictType>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                          @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        IPage<SysDictType> iPage = sysDictTypeService.queryPage(pageIndex, pageSize, new SysDictType());
-        return RespVOBuilder.success(iPage);
-    }
 
-    @ApiOperation(value = "通过主键dictId查询SysDictType", notes = "通过主键dictId查询SysDictType")
+    @ApiOperation(value = "新增", notes = "新增")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "dictId", paramType = "path", value = "dictId", required = true, dataType = "Long")
     })
-    @GetMapping("/{dictId}")
-    public RespVO<SysDictType> selectByPrimaryKey(@PathVariable(value = "dictId") Long dictId) {
-        SysDictType sysDictType =
-            sysDictTypeService.selectByPrimaryKey(dictId);
-        if (sysDictType == null){
-            return RespVOBuilder.failure("当前SysDictType不存在");
-        } else{
-            return RespVOBuilder.success(sysDictType);
+    @PostMapping("/insert")
+    public RespVO insert(@RequestBody SysDictType sysDictType) {
+
+        int resultNum = sysDictTypeService.insert(sysDictType);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
         }
     }
 
-    @ApiOperation(value = "通过主键dictId删除SysDictType", notes = "通过主键dictId删除SysDictType")
+    @ApiOperation(value = "带有空值判断的新增", notes = "带有空值判断的新增")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/insertSelective")
+    public RespVO insertSelective(@RequestBody SysDictType sysDictType) {
+        int resultNum = sysDictTypeService.insertSelective(sysDictType);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量插入", notes = "批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsert")
+    public RespVO batchInsert(@RequestBody List<SysDictType> list) {
+        int resultNum = sysDictTypeService.batchInsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量插入", notes = "带有空值判断的批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsertSelective")
+    public RespVO batchInsertSelective(@RequestBody List<SysDictType> list) {
+        int resultNum = sysDictTypeService.batchInsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "根据主键更新", notes = "根据主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateByPrimaryKey")
+    public RespVO updateByPrimaryKey(@RequestBody SysDictType sysDictType) {
+        int resultNum = sysDictTypeService.updateByPrimaryKey(sysDictType);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的主键更新", notes = "带有空值判断的主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateSelectiveByPrimaryKey")
+    public RespVO updateSelectiveByPrimaryKey(@RequestBody SysDictType sysDictType) {
+        int resultNum = sysDictTypeService.updateSelectiveByPrimaryKey(sysDictType);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "批量更新", notes = "批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdate")
+    public RespVO batchUpdate(@RequestBody List<SysDictType> list) {
+        int resultNum = sysDictTypeService.batchUpdate(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的批量更新", notes = "带有空值判断的批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdateSelective")
+    public RespVO batchUpdateSelective(@RequestBody List<SysDictType> list) {
+        int resultNum = sysDictTypeService.batchUpdateSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "更新插入", notes = "更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsert")
+    public RespVO upsert(@RequestBody SysDictType sysDictType) {
+        int resultNum = sysDictTypeService.upsert(sysDictType);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的更新插入", notes = "带有空值判断的更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsertSelective")
+    public RespVO upsertSelective(@RequestBody SysDictType sysDictType) {
+        int resultNum = sysDictTypeService.upsertSelective(sysDictType);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量更新插入", notes = "批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsert")
+    public RespVO batchUpsert(@RequestBody List<SysDictType> list) {
+        int resultNum = sysDictTypeService.batchUpsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量更新插入", notes = "带有空值判断的批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsertSelective")
+    public RespVO batchUpsertSelective(@RequestBody List<SysDictType> list) {
+        int resultNum = sysDictTypeService.batchUpsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "通过主键删除", notes = "通过主键删除")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "dictId", paramType = "path", value = "dictId", required = true, dataType = "Long")
     })
     @DeleteMapping("/{dictId}")
     public RespVO deleteByPrimaryKey(@PathVariable(value = "dictId") Long dictId) {
-        Integer num = sysDictTypeService.deleteByPrimaryKey(dictId);
-        if (num == 0) {
-            return RespVOBuilder.failure("删除SysDictType失败");
+        Integer resultNum = sysDictTypeService.deleteByPrimaryKey(dictId);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("删除失败");
         } else {
-            return RespVOBuilder.success("删除SysDictType成功");
+            return RespVOBuilder.success("删除成功");
         }
     }
 
-    @ApiOperation(value = "新增SysDictType", notes = "新增SysDictType")
+    @ApiOperation(value = "通过主键批量删除", notes = "通过主键批量删除")
     @ApiImplicitParams({
     })
-    @PostMapping("/")
-    public RespVO insert(@RequestBody SysDictType sysDictType) {
-        if (sysDictType == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysDictTypeService.insert(sysDictType);
-        if (num == 0) {
-            return RespVOBuilder.failure("添加SysDictType失败");
+    @DeleteMapping("/deleteBatchByPrimaryKeys")
+    public RespVO deleteBatchByPrimaryKeys(@RequestBody List<Long> list) {
+        int resultNum = sysDictTypeService.deleteBatchByPrimaryKeys(list);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("添加SysDictType成功");
+            return RespVOBuilder.failure("删除失败");
         }
     }
 
-    @ApiOperation(value = "修改SysDictType", notes = "修改SysDictType")
+    @ApiOperation(value = "条件删除", notes = "条件删除")
     @ApiImplicitParams({
     })
-    @PutMapping("/")
-    public RespVO updateByPrimaryKey(@RequestBody SysDictType sysDictType) {
-        if (sysDictType == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysDictTypeService.updateByPrimaryKey(sysDictType);
-        if (num == 0) {
-            return RespVOBuilder.failure("修改SysDictType失败");
+    @DeleteMapping("/delete")
+    public RespVO delete(@RequestBody SysDictType sysDictType) {
+
+        int resultNum = sysDictTypeService.delete(sysDictType);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("修改SysDictType成功");
+            return RespVOBuilder.failure("删除失败");
         }
+
     }
 
-
-    @ApiOperation(value = "通过主键dictId批量删除SysDictType", notes = "通过主键dictId批量删除SysDictType")
+    @ApiOperation(value = "通过主键查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @DeleteMapping("/deleteBatchPrimaryKeys")
-    public RespVO deleteBatchPrimaryKeys(@RequestBody List<Long> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysDictTypeService.deleteBatchIds(list);
-        if (num == 0) {
-            return RespVOBuilder.failure("批量删除SysDictType失败");
-        } else {
-            return RespVOBuilder.success("批量删除SysDictType成功");
-        }
+    @GetMapping("/{dictId}")
+    public RespVO<SysDictType> queryByPrimaryKey(@PathVariable(value = "dictId") Long dictId) {
+        SysDictType sysDictType = sysDictTypeService.queryByPrimaryKey(dictId);
+        return RespVOBuilder.success(sysDictType);
     }
 
-
-    @ApiOperation(value = "条件查询SysDictType", notes = "条件查询SysDictType")
+    @ApiOperation(value = "通过主键批量查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @PostMapping("/list")
-    public RespVO query(@RequestBody SysDictType sysDictType) {
-        if (sysDictType ==null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        List<SysDictType> list = sysDictTypeService.query(sysDictType);
+    @PostMapping("/queryBatchPrimaryKeys")
+    public RespVO<RespDataVO<SysDictType>> queryBatchPrimaryKeys(@RequestBody List<Long> list) {
+        List< SysDictType> sysDictTypes = sysDictTypeService.queryBatchPrimaryKeys(list);
+        return RespVOBuilder.success(sysDictTypes);
+    }
+
+    @ApiOperation(value = "条件查询一个", notes = "条件查询一个")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryOne")
+    public RespVO<SysDictType> queryOne(@RequestBody SysDictType sysDictType) {
+        sysDictType =sysDictTypeService.queryOne(sysDictType);
+        return RespVOBuilder.success(sysDictType);
+    }
+
+    @ApiOperation(value = "条件查询", notes = "条件查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByCondition")
+    public RespVO<RespDataVO<SysDictType>> queryByCondition(@RequestBody SysDictType sysDictType) {
+        List<SysDictType> list = sysDictTypeService.queryByCondition(sysDictType);
         return RespVOBuilder.success(list);
     }
+
+    @ApiOperation(value = "模糊查询", notes = "模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryFuzzy")
+    public RespVO<RespDataVO<SysDictType>> queryFuzzy(@RequestBody SysDictType sysDictType) {
+        List<SysDictType> list = sysDictTypeService.queryFuzzy(sysDictType);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByLikeCondition")
+    public RespVO<RespDataVO<SysDictType>> queryByLikeCondition(@RequestBody SysDictType sysDictType) {
+        List<SysDictType> list = sysDictTypeService.queryByLikeCondition(sysDictType);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "条件查询数量", notes = "条件查询数量")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryCount")
+    public RespVO<Long> queryCount(@RequestBody SysDictType sysDictType) {
+        long count = sysDictTypeService.queryCount(sysDictType);
+        return RespVOBuilder.success(count);
+    }
+
+
+    @ApiOperation(value = "分组统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroup")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(@RequestBody SysDictType sysDictType) {
+        List<Map<String, Object>> maps = sysDictTypeService.statisticsGroup(sysDictType);
+        return RespVOBuilder.success(maps);
+    }
+
+
+    @ApiOperation(value = "日统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByDay")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(@RequestBody SysDictType sysDictType) {
+        List<Map<String, Object>> maps = sysDictTypeService.statisticsGroupByDay(sysDictType);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "月统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByMonth")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(@RequestBody SysDictType sysDictType) {
+        List<Map<String, Object>> maps = sysDictTypeService.statisticsGroupByMonth(sysDictType);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "年统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByYear")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(@RequestBody SysDictType sysDictType) {
+        List<Map<String, Object>> maps = sysDictTypeService.statisticsGroupByYear(sysDictType);
+        return RespVOBuilder.success(maps);
+    }
+
 }

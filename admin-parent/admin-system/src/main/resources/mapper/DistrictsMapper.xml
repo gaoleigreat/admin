@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.DistrictsMapper">
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.feign.system.entity.Districts" id="BaseResultMap">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="deep" column="deep"/>
+        <result property="name" column="name"/>
+        <result property="pinyin" column="pinyin"/>
+        <result property="pinyinShor" column="pinyin_shor"/>
+        <result property="extName" column="ext_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        id,
+        pid,
+        deep,
+        name,
+        pinyin,
+        pinyin_shor,
+        ext_name,
+        create_time,
+        update_time,
+        create_by,
+        update_by,
+        remark
+    </sql>
+
+
+    <!--基本插入字段-->
+    <sql id="Base_Insert_Column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        id,
+        pid,
+        deep,
+        name,
+        pinyin,
+        pinyin_shor,
+        ext_name,
+        create_time,
+        update_time,
+        create_by,
+        update_by,
+        remark
+    </trim>
+    </sql>
+
+    <!--基本插入值-->
+    <sql id="Base_Insert_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{districts.id,jdbcType=INTEGER},
+            #{districts.pid,jdbcType=INTEGER},
+            #{districts.deep,jdbcType=BIGINT},
+            #{districts.name,jdbcType=VARCHAR},
+            #{districts.pinyin,jdbcType=VARCHAR},
+            #{districts.pinyinShor,jdbcType=VARCHAR},
+            #{districts.extName,jdbcType=VARCHAR},
+            #{districts.createTime,jdbcType=TIMESTAMP},
+            #{districts.updateTime,jdbcType=TIMESTAMP},
+            #{districts.createBy,jdbcType=BIGINT},
+            #{districts.updateBy,jdbcType=BIGINT},
+            #{districts.remark,jdbcType=VARCHAR}
+    </trim>
+    </sql>
+    <!--基本选择插入字段-->
+    <sql id="Base_Insert_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="districts.id != null">
+                 id,
+            </if>
+            <if test="districts.pid != null">
+                 pid,
+            </if>
+            <if test="districts.deep != null">
+                 deep,
+            </if>
+            <if test="districts.name != null">
+                 name,
+            </if>
+            <if test="districts.pinyin != null">
+                 pinyin,
+            </if>
+            <if test="districts.pinyinShor != null">
+                 pinyin_shor,
+            </if>
+            <if test="districts.extName != null">
+                 ext_name,
+            </if>
+            <if test="districts.createTime != null">
+                 create_time,
+            </if>
+            <if test="districts.updateTime != null">
+                 update_time,
+            </if>
+            <if test="districts.createBy != null">
+                 create_by,
+            </if>
+            <if test="districts.updateBy != null">
+                 update_by,
+            </if>
+            <if test="districts.remark != null">
+                 remark
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本选择插入值-->
+    <sql id="Base_Insert_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="districts.id != null">
+                #{districts.id,jdbcType=INTEGER},
+            </if>
+            <if test="districts.pid != null">
+                #{districts.pid,jdbcType=INTEGER},
+            </if>
+            <if test="districts.deep != null">
+                #{districts.deep,jdbcType=BIGINT},
+            </if>
+            <if test="districts.name != null">
+                #{districts.name,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyin != null">
+                #{districts.pinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyinShor != null">
+                #{districts.pinyinShor,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.extName != null">
+                #{districts.extName,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.createTime != null">
+                #{districts.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.updateTime != null">
+                #{districts.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.createBy != null">
+                #{districts.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.updateBy != null">
+                #{districts.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.remark != null">
+                #{districts.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本更新-->
+    <sql id="Base_Update">
+        <set>
+            id = #{districts.id,jdbcType=INTEGER},
+            pid = #{districts.pid,jdbcType=INTEGER},
+            deep = #{districts.deep,jdbcType=BIGINT},
+            name = #{districts.name,jdbcType=VARCHAR},
+            pinyin = #{districts.pinyin,jdbcType=VARCHAR},
+            pinyin_shor = #{districts.pinyinShor,jdbcType=VARCHAR},
+            ext_name = #{districts.extName,jdbcType=VARCHAR},
+            create_time = #{districts.createTime,jdbcType=TIMESTAMP},
+            update_time = #{districts.updateTime,jdbcType=TIMESTAMP},
+            create_by = #{districts.createBy,jdbcType=BIGINT},
+            update_by = #{districts.updateBy,jdbcType=BIGINT},
+            remark = #{districts.remark,jdbcType=VARCHAR}
+        </set>
+    </sql>
+    <!--带有空值检查的基本更新-->
+    <sql id="Base_Update_Selective">
+        <set>
+            <if test="districts.id != null">
+                id = #{districts.id,jdbcType=INTEGER},
+            </if>
+            <if test="districts.pid != null">
+                pid = #{districts.pid,jdbcType=INTEGER},
+            </if>
+            <if test="districts.deep != null">
+                deep = #{districts.deep,jdbcType=BIGINT},
+            </if>
+            <if test="districts.name != null">
+                name = #{districts.name,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyin != null">
+                pinyin = #{districts.pinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyinShor != null">
+                pinyin_shor = #{districts.pinyinShor,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.extName != null">
+                ext_name = #{districts.extName,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.createTime != null">
+                create_time = #{districts.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.updateTime != null">
+                update_time = #{districts.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.createBy != null">
+                create_by = #{districts.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.updateBy != null">
+                update_by = #{districts.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.remark != null">
+                remark = #{districts.remark,jdbcType=VARCHAR}
+            </if>
+        </set>
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+        <if test="districts.id != null">
+            and id = #{districts.id,jdbcType=INTEGER}
+        </if>
+        <if test="districts.pid != null">
+            and pid = #{districts.pid,jdbcType=INTEGER}
+        </if>
+        <if test="districts.deep != null">
+            and deep = #{districts.deep,jdbcType=BIGINT}
+        </if>
+        <if test="districts.name != null">
+            and name = #{districts.name,jdbcType=VARCHAR}
+        </if>
+        <if test="districts.pinyin != null">
+            and pinyin = #{districts.pinyin,jdbcType=VARCHAR}
+        </if>
+        <if test="districts.pinyinShor != null">
+            and pinyin_shor = #{districts.pinyinShor,jdbcType=VARCHAR}
+        </if>
+        <if test="districts.extName != null">
+            and ext_name = #{districts.extName,jdbcType=VARCHAR}
+        </if>
+        <if test="districts.createTime != null">
+            and create_time = #{districts.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="districts.updateTime != null">
+            and update_time = #{districts.updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="districts.createBy != null">
+            and create_by = #{districts.createBy,jdbcType=BIGINT}
+        </if>
+        <if test="districts.updateBy != null">
+            and update_by = #{districts.updateBy,jdbcType=BIGINT}
+        </if>
+        <if test="districts.remark != null">
+            and remark = #{districts.remark,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--模糊查询条件 -->
+    <sql id="Base_Query_Like_Where">
+        <if test="districts.id != null">
+            and id like concat('%',concat(#{districts.id},'%'))
+        </if>
+        <if test="districts.pid != null">
+            and pid like concat('%',concat(#{districts.pid},'%'))
+        </if>
+        <if test="districts.deep != null">
+            and deep like concat('%',concat(#{districts.deep},'%'))
+        </if>
+        <if test="districts.name != null">
+            and name like concat('%',concat(#{districts.name},'%'))
+        </if>
+        <if test="districts.pinyin != null">
+            and pinyin like concat('%',concat(#{districts.pinyin},'%'))
+        </if>
+        <if test="districts.pinyinShor != null">
+            and pinyin_shor like concat('%',concat(#{districts.pinyinShor},'%'))
+        </if>
+        <if test="districts.extName != null">
+            and ext_name like concat('%',concat(#{districts.extName},'%'))
+        </if>
+        <if test="districts.createTime != null">
+            and create_time like concat('%',concat(#{districts.createTime},'%'))
+        </if>
+        <if test="districts.updateTime != null">
+            and update_time like concat('%',concat(#{districts.updateTime},'%'))
+        </if>
+        <if test="districts.createBy != null">
+            and create_by like concat('%',concat(#{districts.createBy},'%'))
+        </if>
+        <if test="districts.updateBy != null">
+            and update_by like concat('%',concat(#{districts.updateBy},'%'))
+        </if>
+        <if test="districts.remark != null">
+            and remark like concat('%',concat(#{districts.remark},'%'))
+        </if>
+    </sql>
+
+    <!--模糊查询 -->
+    <sql id="Base_Query_Fuzzy_Where">
+        or id like concat('%',concat(#{districts.searchValue},'%'))
+        or pid like concat('%',concat(#{districts.searchValue},'%'))
+        or deep like concat('%',concat(#{districts.searchValue},'%'))
+        or name like concat('%',concat(#{districts.searchValue},'%'))
+        or pinyin like concat('%',concat(#{districts.searchValue},'%'))
+        or pinyin_shor like concat('%',concat(#{districts.searchValue},'%'))
+        or ext_name like concat('%',concat(#{districts.searchValue},'%'))
+        or create_time like concat('%',concat(#{districts.searchValue},'%'))
+        or update_time like concat('%',concat(#{districts.searchValue},'%'))
+        or create_by like concat('%',concat(#{districts.searchValue},'%'))
+        or update_by like concat('%',concat(#{districts.searchValue},'%'))
+        or remark like concat('%',concat(#{districts.searchValue},'%'))
+    </sql>
+
+
+    <sql id="Order_By">
+        order by
+        <if test="districts.orderBy != null and districts.orderBy != ''">
+            #{districts.orderBy}
+        </if>
+        <if test="districts.orderBy == null or districts.orderBy==''">
+            #{districts.id}
+        </if>
+        <if test="baseService.isAsc  == 1">
+            DESC
+        </if>
+    </sql>
+
+    <sql id="Time_Limit">
+        <if test="districts.beginTime != null">
+            and DATE_FORMAT(#{districts.createTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="districts.endTime != null">
+            and DATE_FORMAT(#{districts.createTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+    </sql>
+
+    <!--插入更新-->
+    <sql id="On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            id = #{districts.id,jdbcType=INTEGER},
+            pid = #{districts.pid,jdbcType=INTEGER},
+            deep = #{districts.deep,jdbcType=BIGINT},
+            name = #{districts.name,jdbcType=VARCHAR},
+            pinyin = #{districts.pinyin,jdbcType=VARCHAR},
+            pinyin_shor = #{districts.pinyinShor,jdbcType=VARCHAR},
+            ext_name = #{districts.extName,jdbcType=VARCHAR},
+            create_time = #{districts.createTime,jdbcType=TIMESTAMP},
+            update_time = #{districts.updateTime,jdbcType=TIMESTAMP},
+            create_by = #{districts.createBy,jdbcType=BIGINT},
+            update_by = #{districts.updateBy,jdbcType=BIGINT},
+            remark = #{districts.remark,jdbcType=VARCHAR}
+         </trim>
+    </sql>
+
+    <!--带有空值检查的插入更新-->
+    <sql id="On_Duplicate_Column_Selective_Update">
+        <trim suffixOverrides=",">
+            <if test="districts.id != null">
+                id = #{districts.id,jdbcType=INTEGER},
+            </if>
+            <if test="districts.pid != null">
+                pid = #{districts.pid,jdbcType=INTEGER},
+            </if>
+            <if test="districts.deep != null">
+                deep = #{districts.deep,jdbcType=BIGINT},
+            </if>
+            <if test="districts.name != null">
+                name = #{districts.name,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyin != null">
+                pinyin = #{districts.pinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyinShor != null">
+                pinyin_shor = #{districts.pinyinShor,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.extName != null">
+                ext_name = #{districts.extName,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.createTime != null">
+                create_time = #{districts.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.updateTime != null">
+                update_time = #{districts.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.createBy != null">
+                create_by = #{districts.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.updateBy != null">
+                update_by = #{districts.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.remark != null">
+                remark = #{districts.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            id = values(id),
+            pid = values(pid),
+            deep = values(deep),
+            name = values(name),
+            pinyin = values(pinyin),
+            pinyin_shor = values(pinyin_shor),
+            ext_name = values(ext_name),
+            create_time = values(create_time),
+            update_time = values(update_time),
+            create_by = values(create_by),
+            update_by = values(update_by),
+            remark = values(remark),
+        </trim>
+    </sql>
+
+    <!--带有控制判断的批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update_Selective">
+        <trim suffixOverrides=",">
+            <if test="districts.id != null">
+                id = #{item.id,jdbcType=INTEGER},
+            </if>
+            <if test="districts.pid != null">
+                pid = #{item.pid,jdbcType=INTEGER},
+            </if>
+            <if test="districts.deep != null">
+                deep = #{item.deep,jdbcType=BIGINT},
+            </if>
+            <if test="districts.name != null">
+                name = #{item.name,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyin != null">
+                pinyin = #{item.pinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.pinyinShor != null">
+                pinyin_shor = #{item.pinyinShor,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.extName != null">
+                ext_name = #{item.extName,jdbcType=VARCHAR},
+            </if>
+            <if test="districts.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="districts.createBy != null">
+                create_by = #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="districts.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入，更新插入值-->
+    <sql id="Batch_Operating_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{item.id,jdbcType=INTEGER},
+            #{item.pid,jdbcType=INTEGER},
+            #{item.deep,jdbcType=BIGINT},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.pinyin,jdbcType=VARCHAR},
+            #{item.pinyinShor,jdbcType=VARCHAR},
+            #{item.extName,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.createBy,jdbcType=BIGINT},
+            #{item.updateBy,jdbcType=BIGINT},
+            #{item.remark,jdbcType=VARCHAR}
+        </trim>
+    </sql>
+
+    <!--批量更新-->
+    <sql id="Batch_Update">
+        <set>
+            id = #{item.id,jdbcType=INTEGER},
+            pid = #{item.pid,jdbcType=INTEGER},
+            deep = #{item.deep,jdbcType=BIGINT},
+            name = #{item.name,jdbcType=VARCHAR},
+            pinyin = #{item.pinyin,jdbcType=VARCHAR},
+            pinyin_shor = #{item.pinyinShor,jdbcType=VARCHAR},
+            ext_name = #{item.extName,jdbcType=VARCHAR},
+            create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            create_by = #{item.createBy,jdbcType=BIGINT},
+            update_by = #{item.updateBy,jdbcType=BIGINT},
+            remark = #{item.remark,jdbcType=VARCHAR}
+        </set>
+    </sql>
+
+    <!--带有空值检查的批量更新-->
+    <sql id="Batch_Update_selective">
+        <set>
+            <if test="item.id != null">
+                id = #{item.id,jdbcType=INTEGER},
+            </if>
+            <if test="item.pid != null">
+                pid = #{item.pid,jdbcType=INTEGER},
+            </if>
+            <if test="item.deep != null">
+                deep = #{item.deep,jdbcType=BIGINT},
+            </if>
+            <if test="item.name != null">
+                name = #{item.name,jdbcType=VARCHAR},
+            </if>
+            <if test="item.pinyin != null">
+                pinyin = #{item.pinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="item.pinyinShor != null">
+                pinyin_shor = #{item.pinyinShor,jdbcType=VARCHAR},
+            </if>
+            <if test="item.extName != null">
+                ext_name = #{item.extName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.createBy != null">
+                create_by = #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </set>
+    </sql>
+
+    <!--带有空值检查的批量操作字段-->
+    <sql id="Batch_Operating_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.id != null">
+                id ,
+            </if>
+            <if test="item.pid != null">
+                pid ,
+            </if>
+            <if test="item.deep != null">
+                deep ,
+            </if>
+            <if test="item.name != null">
+                name ,
+            </if>
+            <if test="item.pinyin != null">
+                pinyin ,
+            </if>
+            <if test="item.pinyinShor != null">
+                pinyin_shor ,
+            </if>
+            <if test="item.extName != null">
+                ext_name ,
+            </if>
+            <if test="item.createTime != null">
+                create_time ,
+            </if>
+            <if test="item.updateTime != null">
+                update_time ,
+            </if>
+            <if test="item.createBy != null">
+                create_by ,
+            </if>
+            <if test="item.updateBy != null">
+                update_by ,
+            </if>
+            <if test="item.remark != null">
+                remark 
+            </if>
+        </trim>
+    </sql>
+
+    <!--带有空值检查的批量操作值-->
+    <sql id="Batch_Operating_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.id != null">
+                #{item.id,jdbcType=INTEGER},
+            </if>
+            <if test="item.pid != null">
+                #{item.pid,jdbcType=INTEGER},
+            </if>
+            <if test="item.deep != null">
+                #{item.deep,jdbcType=BIGINT},
+            </if>
+            <if test="item.name != null">
+                #{item.name,jdbcType=VARCHAR},
+            </if>
+            <if test="item.pinyin != null">
+                #{item.pinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="item.pinyinShor != null">
+                #{item.pinyinShor,jdbcType=VARCHAR},
+            </if>
+            <if test="item.extName != null">
+                #{item.extName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.createTime != null">
+                #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateTime != null">
+                #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.createBy != null">
+                #{item.createBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateBy != null">
+                #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.remark != null">
+                #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.xiaodao.feign.system.entity.Districts">
+        insert into districts
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+    </insert>
+
+    <!--带有空值检查的插入-->
+    <insert id="insertSelective" parameterType="com.xiaodao.feign.system.entity.Districts">
+        insert into districts
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+    </insert>
+
+    <!--更新-->
+    <update id="updateByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.Districts">
+        update districts
+        <include refid="Base_Update"/>
+        <where>
+            id = #{districts.id,jdbcType=INTEGER}
+        </where>
+    </update>
+
+    <!--带有空值检查的更新-->
+    <update id="updateSelectiveByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.Districts">
+        update districts
+        <include refid="Base_Update_Selective"/>
+        <where>
+            id = #{districts.id,jdbcType=INTEGER}
+         </where>
+    </update>
+
+
+    <!--更新插入-->
+    <insert id="upsert" parameterType="com.xiaodao.feign.system.entity.Districts">
+        insert into districts
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Update"/>
+    </insert>
+
+
+    <!--带有控制判断的更新插入-->
+    <insert id="upsertSelective" parameterType="com.xiaodao.feign.system.entity.Districts">
+        insert into districts
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Selective_Update"/>
+    </insert>
+
+
+    <!--批量插入-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into districts
+        <include refid="Base_Insert_Column"/>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <include refid="Batch_Operating_Value"/>
+        </foreach>
+    </insert>
+
+
+    <!-- 批量更新-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update districts
+            <include refid="Batch_Update"/>
+            <where>
+                <trim suffixOverrides=",">
+                    id = #{item.id,jdbcType=INTEGER}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!-- 批量更新插入-->
+    <update id="batchUpsert" parameterType="java.util.List">
+        insert into districts
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Batch_Operating_Value"/>
+        on duplicate Column update
+        <include refid="Batch_On_Duplicate_Column_Update"/>
+    </update>
+
+
+    <!-- 带有控制判断的批量更新-->
+    <update id="batchUpdateSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update districts
+            <include refid="Batch_Update_selective"/>
+            <where>
+                <trim suffixOverrides=",">
+                    id = #{item.id,jdbcType=INTEGER}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!-- 带有空值判断的批量插入-->
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into districts
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+        </foreach>
+    </insert>
+
+    <!-- 带有空值判断的批量更新插入-->
+    <update id="batchUpsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into districts
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+            on duplicate Column update
+            <include refid="Batch_On_Duplicate_Column_Update_Selective"/>
+        </foreach>
+    </update>
+
+
+    <!--通过主键批量查询-->
+    <select id="queryBatchPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from districts
+        <where>
+            id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+            <include refid="Order_By"></include>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--通过主键批量查询-->
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from districts
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select
+        <include refid="Base_Column_List"/>
+        from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--查询一个-->
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select
+        <include refid="Base_Column_List"/>
+        from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        limit 1
+    </select>
+
+
+    <!--条件模糊查询-->
+    <select id="queryByLikeCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select
+        <include refid="Base_Column_List"/>
+        from districts
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        <include refid="Time_Limit"></include>
+    </select>
+
+
+    <!--模糊查询-->
+    <select id="queryFuzzy" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select
+        <include refid="Base_Column_List"/>
+        from districts
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--条件查询数量-->
+    <select id="queryCount" resultType="int" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select count(*) from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--条件删除-->
+    <delete id="delete" parameterType="com.xiaodao.feign.system.entity.Districts">
+        delete from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from districts
+        <where>
+            <trim suffixOverrides=",">
+                id = #{id,jdbcType=INTEGER}
+            </trim>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键批量删除-->
+    <delete id="deleteBatchByPrimaryKeys" parameterType="java.lang.Long">
+        delete from districts
+        <where>
+            id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+        </where>
+    </delete>
+
+    <!--分组统计-->
+    <select id="statisticsGroup" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select ${districts.statisticalProperty} as name,${districts.statisticalMethod}(${districts.statisticalProperty}) as value from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+         group by ${districts.statisticalProperty}
+    </select>
+
+    <!--按日统计-->
+    <select id="statisticsGroupByDay" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select date_format(create_time, '%Y-%m-%d') as name,${districts.statisticalMethod}(${districts.statisticalProperty}) as value from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        group by date_format(create_time,'%Y-%m-%d')
+    </select>
+
+    <!--按月统计-->
+    <select id="statisticsGroupByMonth" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select date_format(create_time, '%Y-%m') as name, ${districts.statisticalMethod}(${districts.statisticalProperty}) as value from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+        </where>
+            group by date_format(create_time,'%Y-%m')
+    </select>
+
+    <!--按年统计-->
+    <select id="statisticsGroupByYear" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.Districts">
+        select date_format(create_time, '%Y') as name,${districts.statisticalMethod}(${districts.statisticalProperty}) as value from districts
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+         </where>
+            group by date_format(create_time,'%Y')
+    </select>
+
+</mapper>

@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysUserPostMapper;
 import com.xiaodao.system.service.ISysUserPostService;
-import com.xiaodao.system.entity.SysUserPost;
+import com.xiaodao.feign.system.entity.SysUserPost;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysUserPostServiceImpl implements ISysUserPostService{
      @Autowired
      private SysUserPostMapper sysUserPostMapper;
 
-    /**
-     * 创建SysUserPost
-     *
-     * @param sysUserPost
-     * @return
-     */
     @Override
-    public Integer insert(SysUserPost sysUserPost){
-        if(sysUserPost ==null){
-            return 0;
-        }
+    public int insert(SysUserPost sysUserPost) {
         return sysUserPostMapper.insert(sysUserPost);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param userId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long userId){
-        if(userId ==null){
-            return 0;
-        }
-        Integer result = sysUserPostMapper.deleteById(userId);
-        return result;
-
+    public int insertSelective(SysUserPost sysUserPost) {
+        return sysUserPostMapper.insertSelective(sysUserPost);
     }
 
-    /**
-     * 修改SysUserPost
-     *
-     * @param sysUserPost
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysUserPost sysUserPost){
-        if(sysUserPost ==null){
-            return 0;
-        }
-        return sysUserPostMapper.updateById(sysUserPost);
+    public int batchInsert(List<SysUserPost> list) {
+        return sysUserPostMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param userId
-    * @return
-    */
     @Override
-    public SysUserPost selectByPrimaryKey(Long userId){
-        if(userId ==null){
-            return null;
-        }
-        SysUserPost sysUserPost  = sysUserPostMapper.selectById(userId);
-        if (sysUserPost == null){
-            return null;
-        }
-        return sysUserPost;
+    public int batchInsertSelective(List<SysUserPost> list) {
+        return sysUserPostMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysUserPost SysUserPost
-     * @return IPage<SysUserPost>
-     */
     @Override
-    public IPage<SysUserPost> queryPage(int pageIndex, int pageSize,SysUserPost sysUserPost){
-        QueryWrapper<SysUserPost> queryWrapper = Wrappers.query();
-        IPage<SysUserPost> ipage = sysUserPostMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysUserPost sysUserPost) {
+        return sysUserPostMapper.updateByPrimaryKey(sysUserPost);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysUserPost
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysUserPost> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysUserPostMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysUserPost sysUserPost) {
+        return sysUserPostMapper.updateSelectiveByPrimaryKey(sysUserPost);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysUserPost>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysUserPost> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysUserPostMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysUserPost> list) {
+        return sysUserPostMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysUserPostMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysUserPost SysUserPost
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysUserPost sysUserPost){
-
-        if (sysUserPost == null){
-            return 0;
-        }
-        else{
-            return sysUserPostMapper.upsert(sysUserPost);
-        }
-
+    public int batchUpdateSelective(List<SysUserPost> list) {
+        return sysUserPostMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysUserPost SysUserPost
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysUserPost sysUserPost){
-        if (sysUserPost == null){
-            return 0;
-        }
-        else{
-            return sysUserPostMapper.upsert(sysUserPost);
-        }
+    public int upsert(SysUserPost sysUserPost) {
+        return sysUserPostMapper.upsert(sysUserPost);
     }
 
-    /**
-     * 条件查询
-     * @param sysUserPost SysUserPost
-     * @return List<SysUserPost>
-    */
     @Override
-    public List<SysUserPost> query(SysUserPost sysUserPost){
-        if (sysUserPost == null){
-            return null;
-        }
-        else{
-            return sysUserPostMapper.query(sysUserPost);
-        }
+    public int upsertSelective(SysUserPost sysUserPost) {
+        return sysUserPostMapper.upsertSelective(sysUserPost);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysUserPostMapper.queryTotalCount();
+    public int batchUpsert(List<SysUserPost> list) {
+        return sysUserPostMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysUserPost> list) {
+        return sysUserPostMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer userId) {
+        return sysUserPostMapper.deleteByPrimaryKey(userId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Integer> list) {
+        return sysUserPostMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysUserPost sysUserPost) {
+        return sysUserPostMapper.delete(sysUserPost);
+    }
+
+    @Override
+    public SysUserPost queryByPrimaryKey(Integer userId) {
+        return sysUserPostMapper.queryByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<SysUserPost> queryBatchPrimaryKeys(List<Integer> list) {
+        return sysUserPostMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysUserPost queryOne(SysUserPost sysUserPost) {
+        return sysUserPostMapper.queryOne(sysUserPost);
+    }
+
+    @Override
+    public List<SysUserPost> queryByCondition(SysUserPost sysUserPost) {
+        return sysUserPostMapper.queryByCondition(sysUserPost);
+    }
+
+    @Override
+    public List<SysUserPost> queryFuzzy(SysUserPost sysUserPost) {
+        return sysUserPostMapper.queryFuzzy(sysUserPost);
+    }
+
+    @Override
+    public List<SysUserPost> queryByLikeCondition(SysUserPost sysUserPost) {
+        return sysUserPostMapper.queryByLikeCondition(sysUserPost);
+    }
+
+    @Override
+    public int queryCount(SysUserPost sysUserPost) {
+        return sysUserPostMapper.queryCount(sysUserPost);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysUserPost sysUserPost) {
+        return sysUserPostMapper.statisticsGroup(sysUserPost);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysUserPost sysUserPost) {
+        return sysUserPostMapper.statisticsGroupByDay(sysUserPost);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysUserPost sysUserPost) {
+        return sysUserPostMapper.statisticsGroupByMonth(sysUserPost);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysUserPost sysUserPost) {
+        return sysUserPostMapper.statisticsGroupByYear(sysUserPost);
     }
 }

@@ -1,138 +1,343 @@
 package com.xiaodao.system.controller;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  com.xiaodao.system.service.ISysConfigService;
+import com.xiaodao.feign.system.entity.SysConfig;
 
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
-import com.xiaodao.system.service.ISysConfigService;
-import com.xiaodao.system.entity.SysConfig;
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * SysConfig
  *
  * @author xiaodao
- * @email 513684652@qq.com
+ * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
 @RestController
 @RequestMapping("/sysConfig")
-@Api(value = "SysConfig管理", tags = "SysConfig管理")
+@Api(value = "参数管理", tags = "参数管理")
 @Validated
 @Slf4j
 public class SysConfigController {
     @Autowired
     private ISysConfigService sysConfigService;
 
-    @ApiOperation(value = "分页查询SysConfig", notes = "分页查询SysConfig")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageIndex", value = "当前页", dataType = "int", required = true, example = "1", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页大小", dataType = "int", defaultValue = "10", example = "10", paramType = "query"),
-    })
-    @GetMapping("/")
-    public RespVO<IPage<SysConfig>> queryPage(@RequestParam(value = "pageIndex") int pageIndex,
-                                                          @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        IPage<SysConfig> iPage = sysConfigService.queryPage(pageIndex, pageSize, new SysConfig());
-        return RespVOBuilder.success(iPage);
-    }
 
-    @ApiOperation(value = "通过主键configId查询SysConfig", notes = "通过主键configId查询SysConfig")
+    @ApiOperation(value = "新增", notes = "新增")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "configId", paramType = "path", value = "configId", required = true, dataType = "Long")
     })
-    @GetMapping("/{configId}")
-    public RespVO<SysConfig> selectByPrimaryKey(@PathVariable(value = "configId") Long configId) {
-        SysConfig sysConfig =
-            sysConfigService.selectByPrimaryKey(configId);
-        if (sysConfig == null){
-            return RespVOBuilder.failure("当前SysConfig不存在");
-        } else{
-            return RespVOBuilder.success(sysConfig);
+    @PostMapping("/insert")
+    public RespVO insert(@RequestBody SysConfig sysConfig) {
+
+        int resultNum = sysConfigService.insert(sysConfig);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
         }
     }
 
-    @ApiOperation(value = "通过主键configId删除SysConfig", notes = "通过主键configId删除SysConfig")
+    @ApiOperation(value = "带有空值判断的新增", notes = "带有空值判断的新增")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/insertSelective")
+    public RespVO insertSelective(@RequestBody SysConfig sysConfig) {
+        int resultNum = sysConfigService.insertSelective(sysConfig);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量插入", notes = "批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsert")
+    public RespVO batchInsert(@RequestBody List<SysConfig> list) {
+        int resultNum = sysConfigService.batchInsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量插入", notes = "带有空值判断的批量插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchInsertSelective")
+    public RespVO batchInsertSelective(@RequestBody List<SysConfig> list) {
+        int resultNum = sysConfigService.batchInsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入失败");
+        } else {
+            return RespVOBuilder.success("插入成功");
+        }
+    }
+
+
+    @ApiOperation(value = "根据主键更新", notes = "根据主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateByPrimaryKey")
+    public RespVO updateByPrimaryKey(@RequestBody SysConfig sysConfig) {
+        int resultNum = sysConfigService.updateByPrimaryKey(sysConfig);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的主键更新", notes = "带有空值判断的主键更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/updateSelectiveByPrimaryKey")
+    public RespVO updateSelectiveByPrimaryKey(@RequestBody SysConfig sysConfig) {
+        int resultNum = sysConfigService.updateSelectiveByPrimaryKey(sysConfig);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "批量更新", notes = "批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdate")
+    public RespVO batchUpdate(@RequestBody List<SysConfig> list) {
+        int resultNum = sysConfigService.batchUpdate(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的批量更新", notes = "带有空值判断的批量更新")
+    @ApiImplicitParams({
+    })
+    @PutMapping("/batchUpdateSelective")
+    public RespVO batchUpdateSelective(@RequestBody List<SysConfig> list) {
+        int resultNum = sysConfigService.batchUpdateSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("更新失败");
+        } else {
+            return RespVOBuilder.success("更新成功");
+        }
+    }
+
+    @ApiOperation(value = "更新插入", notes = "更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsert")
+    public RespVO upsert(@RequestBody SysConfig sysConfig) {
+        int resultNum = sysConfigService.upsert(sysConfig);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "带有空值判断的更新插入", notes = "带有空值判断的更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/upsertSelective")
+    public RespVO upsertSelective(@RequestBody SysConfig sysConfig) {
+        int resultNum = sysConfigService.upsertSelective(sysConfig);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "批量更新插入", notes = "批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsert")
+    public RespVO batchUpsert(@RequestBody List<SysConfig> list) {
+        int resultNum = sysConfigService.batchUpsert(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+    @ApiOperation(value = "带有空值判断的批量更新插入", notes = "带有空值判断的批量更新插入")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/batchUpsertSelective")
+    public RespVO batchUpsertSelective(@RequestBody List<SysConfig> list) {
+        int resultNum = sysConfigService.batchUpsertSelective(list);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("插入更新失败");
+        } else {
+            return RespVOBuilder.success("插入更新成功");
+        }
+    }
+
+
+    @ApiOperation(value = "通过主键删除", notes = "通过主键删除")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "configId", paramType = "path", value = "configId", required = true, dataType = "Long")
     })
     @DeleteMapping("/{configId}")
     public RespVO deleteByPrimaryKey(@PathVariable(value = "configId") Long configId) {
-        Integer num = sysConfigService.deleteByPrimaryKey(configId);
-        if (num == 0) {
-            return RespVOBuilder.failure("删除SysConfig失败");
+        Integer resultNum = sysConfigService.deleteByPrimaryKey(configId);
+        if (resultNum == 0) {
+            return RespVOBuilder.failure("删除失败");
         } else {
-            return RespVOBuilder.success("删除SysConfig成功");
+            return RespVOBuilder.success("删除成功");
         }
     }
 
-    @ApiOperation(value = "新增SysConfig", notes = "新增SysConfig")
+    @ApiOperation(value = "通过主键批量删除", notes = "通过主键批量删除")
     @ApiImplicitParams({
     })
-    @PostMapping("/")
-    public RespVO insert(@RequestBody SysConfig sysConfig) {
-        if (sysConfig == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysConfigService.insert(sysConfig);
-        if (num == 0) {
-            return RespVOBuilder.failure("添加SysConfig失败");
+    @DeleteMapping("/deleteBatchByPrimaryKeys")
+    public RespVO deleteBatchByPrimaryKeys(@RequestBody List<Long> list) {
+        int resultNum = sysConfigService.deleteBatchByPrimaryKeys(list);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("添加SysConfig成功");
+            return RespVOBuilder.failure("删除失败");
         }
     }
 
-    @ApiOperation(value = "修改SysConfig", notes = "修改SysConfig")
+    @ApiOperation(value = "条件删除", notes = "条件删除")
     @ApiImplicitParams({
     })
-    @PutMapping("/")
-    public RespVO updateByPrimaryKey(@RequestBody SysConfig sysConfig) {
-        if (sysConfig == null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysConfigService.updateByPrimaryKey(sysConfig);
-        if (num == 0) {
-            return RespVOBuilder.failure("修改SysConfig失败");
+    @DeleteMapping("/delete")
+    public RespVO delete(@RequestBody SysConfig sysConfig) {
+
+        int resultNum = sysConfigService.delete(sysConfig);
+        if (resultNum > 0) {
+            return RespVOBuilder.success("删除成功");
         } else {
-            return RespVOBuilder.success("修改SysConfig成功");
+            return RespVOBuilder.failure("删除失败");
         }
+
     }
 
-
-    @ApiOperation(value = "通过主键configId批量删除SysConfig", notes = "通过主键configId批量删除SysConfig")
+    @ApiOperation(value = "通过主键查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @DeleteMapping("/deleteBatchPrimaryKeys")
-    public RespVO deleteBatchPrimaryKeys(@RequestBody List<Long> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        Integer num = sysConfigService.deleteBatchIds(list);
-        if (num == 0) {
-            return RespVOBuilder.failure("批量删除SysConfig失败");
-        } else {
-            return RespVOBuilder.success("批量删除SysConfig成功");
-        }
+    @GetMapping("/{configId}")
+    public RespVO<SysConfig> queryByPrimaryKey(@PathVariable(value = "configId") Long configId) {
+        SysConfig sysConfig = sysConfigService.queryByPrimaryKey(configId);
+        return RespVOBuilder.success(sysConfig);
     }
 
-
-    @ApiOperation(value = "条件查询SysConfig", notes = "条件查询SysConfig")
+    @ApiOperation(value = "通过主键批量查询", notes = "通过主键批量查询")
     @ApiImplicitParams({
     })
-    @PostMapping("/list")
-    public RespVO query(@RequestBody SysConfig sysConfig) {
-        if (sysConfig ==null){
-            return RespVOBuilder.failure("参数不能为空");
-        }
-        List<SysConfig> list = sysConfigService.query(sysConfig);
+    @PostMapping("/queryBatchPrimaryKeys")
+    public RespVO<RespDataVO<SysConfig>> queryBatchPrimaryKeys(@RequestBody List<Long> list) {
+        List< SysConfig> sysConfigs = sysConfigService.queryBatchPrimaryKeys(list);
+        return RespVOBuilder.success(sysConfigs);
+    }
+
+    @ApiOperation(value = "条件查询一个", notes = "条件查询一个")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryOne")
+    public RespVO<SysConfig> queryOne(@RequestBody SysConfig sysConfig) {
+        sysConfig =sysConfigService.queryOne(sysConfig);
+        return RespVOBuilder.success(sysConfig);
+    }
+
+    @ApiOperation(value = "条件查询", notes = "条件查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByCondition")
+    public RespVO<RespDataVO<SysConfig>> queryByCondition(@RequestBody SysConfig sysConfig) {
+        List<SysConfig> list = sysConfigService.queryByCondition(sysConfig);
         return RespVOBuilder.success(list);
     }
+
+    @ApiOperation(value = "模糊查询", notes = "模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryFuzzy")
+    public RespVO<RespDataVO<SysConfig>> queryFuzzy(@RequestBody SysConfig sysConfig) {
+        List<SysConfig> list = sysConfigService.queryFuzzy(sysConfig);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryByLikeCondition")
+    public RespVO<RespDataVO<SysConfig>> queryByLikeCondition(@RequestBody SysConfig sysConfig) {
+        List<SysConfig> list = sysConfigService.queryByLikeCondition(sysConfig);
+        return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "条件查询数量", notes = "条件查询数量")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryCount")
+    public RespVO<Long> queryCount(@RequestBody SysConfig sysConfig) {
+        long count = sysConfigService.queryCount(sysConfig);
+        return RespVOBuilder.success(count);
+    }
+
+
+    @ApiOperation(value = "分组统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroup")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroup(@RequestBody SysConfig sysConfig) {
+        List<Map<String, Object>> maps = sysConfigService.statisticsGroup(sysConfig);
+        return RespVOBuilder.success(maps);
+    }
+
+
+    @ApiOperation(value = "日统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByDay")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByDay(@RequestBody SysConfig sysConfig) {
+        List<Map<String, Object>> maps = sysConfigService.statisticsGroupByDay(sysConfig);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "月统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByMonth")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByMonth(@RequestBody SysConfig sysConfig) {
+        List<Map<String, Object>> maps = sysConfigService.statisticsGroupByMonth(sysConfig);
+        return RespVOBuilder.success(maps);
+    }
+
+    @ApiOperation(value = "年统计", notes = "分组统计")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/statisticsGroupByYear")
+    public RespVO<RespDataVO<Map<String, Object>>> statisticsGroupByYear(@RequestBody SysConfig sysConfig) {
+        List<Map<String, Object>> maps = sysConfigService.statisticsGroupByYear(sysConfig);
+        return RespVOBuilder.success(maps);
+    }
+
 }

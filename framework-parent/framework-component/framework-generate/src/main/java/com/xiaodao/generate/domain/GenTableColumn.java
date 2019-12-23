@@ -17,7 +17,6 @@ public class GenTableColumn implements Serializable {
     /**
      * 字段名
      */
-
     private String fieldName;
     /**
      * 字段类型

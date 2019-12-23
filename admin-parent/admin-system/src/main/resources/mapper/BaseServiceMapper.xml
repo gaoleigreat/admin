@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaodao.system.mapper.BaseServiceMapper">
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xiaodao.feign.system.entity.BaseService" id="BaseResultMap">
+        <result property="serviceId" column="service_id"/>
+        <result property="serviceName" column="service_name"/>
+        <result property="contextPath" column="context_path"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <!--数据库表的基本查询列名集合 -->
+    <sql id="Base_Column_List">
+        service_id,
+        service_name,
+        context_path,
+        create_time,
+        create_by,
+        update_time,
+        update_by,
+        remark
+    </sql>
+
+
+    <!--基本插入字段-->
+    <sql id="Base_Insert_Column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        service_id,
+        service_name,
+        context_path,
+        create_time,
+        create_by,
+        update_time,
+        update_by,
+        remark
+    </trim>
+    </sql>
+
+    <!--基本插入值-->
+    <sql id="Base_Insert_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{baseService.serviceId,jdbcType=BIGINT},
+            #{baseService.serviceName,jdbcType=VARCHAR},
+            #{baseService.contextPath,jdbcType=VARCHAR},
+            #{baseService.createTime,jdbcType=TIMESTAMP},
+            #{baseService.createBy,jdbcType=VARCHAR},
+            #{baseService.updateTime,jdbcType=TIMESTAMP},
+            #{baseService.updateBy,jdbcType=TIMESTAMP},
+            #{baseService.remark,jdbcType=VARCHAR}
+    </trim>
+    </sql>
+    <!--基本选择插入字段-->
+    <sql id="Base_Insert_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="baseService.serviceId != null">
+                 service_id,
+            </if>
+            <if test="baseService.serviceName != null">
+                 service_name,
+            </if>
+            <if test="baseService.contextPath != null">
+                 context_path,
+            </if>
+            <if test="baseService.createTime != null">
+                 create_time,
+            </if>
+            <if test="baseService.createBy != null">
+                 create_by,
+            </if>
+            <if test="baseService.updateTime != null">
+                 update_time,
+            </if>
+            <if test="baseService.updateBy != null">
+                 update_by,
+            </if>
+            <if test="baseService.remark != null">
+                 remark
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本选择插入值-->
+    <sql id="Base_Insert_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="baseService.serviceId != null">
+                #{baseService.serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="baseService.serviceName != null">
+                #{baseService.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.contextPath != null">
+                #{baseService.contextPath,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.createTime != null">
+                #{baseService.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.createBy != null">
+                #{baseService.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.updateTime != null">
+                #{baseService.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.updateBy != null">
+                #{baseService.updateBy,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.remark != null">
+                #{baseService.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本更新-->
+    <sql id="Base_Update">
+        <set>
+            service_id = #{baseService.serviceId,jdbcType=BIGINT},
+            service_name = #{baseService.serviceName,jdbcType=VARCHAR},
+            context_path = #{baseService.contextPath,jdbcType=VARCHAR},
+            create_time = #{baseService.createTime,jdbcType=TIMESTAMP},
+            create_by = #{baseService.createBy,jdbcType=VARCHAR},
+            update_time = #{baseService.updateTime,jdbcType=TIMESTAMP},
+            update_by = #{baseService.updateBy,jdbcType=TIMESTAMP},
+            remark = #{baseService.remark,jdbcType=VARCHAR}
+        </set>
+    </sql>
+    <!--带有空值检查的基本更新-->
+    <sql id="Base_Update_Selective">
+        <set>
+            <if test="baseService.serviceId != null">
+                service_id = #{baseService.serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="baseService.serviceName != null">
+                service_name = #{baseService.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.contextPath != null">
+                context_path = #{baseService.contextPath,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.createTime != null">
+                create_time = #{baseService.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.createBy != null">
+                create_by = #{baseService.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.updateTime != null">
+                update_time = #{baseService.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.updateBy != null">
+                update_by = #{baseService.updateBy,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.remark != null">
+                remark = #{baseService.remark,jdbcType=VARCHAR}
+            </if>
+        </set>
+    </sql>
+
+
+    <!--Where子句 -->
+    <sql id="Base_Query_Where">
+        <if test="baseService.serviceId != null">
+            and service_id = #{baseService.serviceId,jdbcType=BIGINT}
+        </if>
+        <if test="baseService.serviceName != null">
+            and service_name = #{baseService.serviceName,jdbcType=VARCHAR}
+        </if>
+        <if test="baseService.contextPath != null">
+            and context_path = #{baseService.contextPath,jdbcType=VARCHAR}
+        </if>
+        <if test="baseService.createTime != null">
+            and create_time = #{baseService.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="baseService.createBy != null">
+            and create_by = #{baseService.createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="baseService.updateTime != null">
+            and update_time = #{baseService.updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="baseService.updateBy != null">
+            and update_by = #{baseService.updateBy,jdbcType=TIMESTAMP}
+        </if>
+        <if test="baseService.remark != null">
+            and remark = #{baseService.remark,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--模糊查询条件 -->
+    <sql id="Base_Query_Like_Where">
+        <if test="baseService.serviceId != null">
+            and service_id like concat('%',concat(#{baseService.serviceId},'%'))
+        </if>
+        <if test="baseService.serviceName != null">
+            and service_name like concat('%',concat(#{baseService.serviceName},'%'))
+        </if>
+        <if test="baseService.contextPath != null">
+            and context_path like concat('%',concat(#{baseService.contextPath},'%'))
+        </if>
+        <if test="baseService.createTime != null">
+            and create_time like concat('%',concat(#{baseService.createTime},'%'))
+        </if>
+        <if test="baseService.createBy != null">
+            and create_by like concat('%',concat(#{baseService.createBy},'%'))
+        </if>
+        <if test="baseService.updateTime != null">
+            and update_time like concat('%',concat(#{baseService.updateTime},'%'))
+        </if>
+        <if test="baseService.updateBy != null">
+            and update_by like concat('%',concat(#{baseService.updateBy},'%'))
+        </if>
+        <if test="baseService.remark != null">
+            and remark like concat('%',concat(#{baseService.remark},'%'))
+        </if>
+    </sql>
+
+    <!--模糊查询 -->
+    <sql id="Base_Query_Fuzzy_Where">
+        or service_id like concat('%',concat(#{baseService.searchValue},'%'))
+        or service_name like concat('%',concat(#{baseService.searchValue},'%'))
+        or context_path like concat('%',concat(#{baseService.searchValue},'%'))
+        or create_time like concat('%',concat(#{baseService.searchValue},'%'))
+        or create_by like concat('%',concat(#{baseService.searchValue},'%'))
+        or update_time like concat('%',concat(#{baseService.searchValue},'%'))
+        or update_by like concat('%',concat(#{baseService.searchValue},'%'))
+        or remark like concat('%',concat(#{baseService.searchValue},'%'))
+    </sql>
+
+
+    <sql id="Order_By">
+        order by
+        <if test="baseService.orderBy != null AND baseService.orderBy != ''">
+            #{baseService.orderBy}
+        </if>
+        <if test="baseService.orderBy == null or baseService.orderBy==''">
+            #{baseService.service_id}
+        </if>
+        <if test="baseService.isAsc  == 1">
+            DESC
+        </if>
+    </sql>
+
+    <sql id="Time_Limit">
+        <if test="baseService.beginTime != null">
+            and DATE_FORMAT(#{baseService.createTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="baseService.endTime != null">
+            and DATE_FORMAT(#{baseService.createTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+    </sql>
+
+    <!--插入更新-->
+    <sql id="On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            service_id = #{baseService.serviceId,jdbcType=BIGINT},
+            service_name = #{baseService.serviceName,jdbcType=VARCHAR},
+            context_path = #{baseService.contextPath,jdbcType=VARCHAR},
+            create_time = #{baseService.createTime,jdbcType=TIMESTAMP},
+            create_by = #{baseService.createBy,jdbcType=VARCHAR},
+            update_time = #{baseService.updateTime,jdbcType=TIMESTAMP},
+            update_by = #{baseService.updateBy,jdbcType=TIMESTAMP},
+            remark = #{baseService.remark,jdbcType=VARCHAR}
+         </trim>
+    </sql>
+
+    <!--带有空值检查的插入更新-->
+    <sql id="On_Duplicate_Column_Selective_Update">
+        <trim suffixOverrides=",">
+            <if test="baseService.serviceId != null">
+                service_id = #{baseService.serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="baseService.serviceName != null">
+                service_name = #{baseService.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.contextPath != null">
+                context_path = #{baseService.contextPath,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.createTime != null">
+                create_time = #{baseService.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.createBy != null">
+                create_by = #{baseService.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.updateTime != null">
+                update_time = #{baseService.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.updateBy != null">
+                update_by = #{baseService.updateBy,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.remark != null">
+                remark = #{baseService.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            service_id = values(service_id),
+            service_name = values(service_name),
+            context_path = values(context_path),
+            create_time = values(create_time),
+            create_by = values(create_by),
+            update_time = values(update_time),
+            update_by = values(update_by),
+            remark = values(remark),
+        </trim>
+    </sql>
+
+    <!--带有控制判断的批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update_Selective">
+        <trim suffixOverrides=",">
+            <if test="baseService.serviceId != null">
+                service_id = #{item.serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="baseService.serviceName != null">
+                service_name = #{item.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.contextPath != null">
+                context_path = #{item.contextPath,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.createBy != null">
+                create_by = #{item.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="baseService.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=TIMESTAMP},
+            </if>
+            <if test="baseService.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入，更新插入值-->
+    <sql id="Batch_Operating_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{item.serviceId,jdbcType=BIGINT},
+            #{item.serviceName,jdbcType=VARCHAR},
+            #{item.contextPath,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=TIMESTAMP},
+            #{item.remark,jdbcType=VARCHAR}
+        </trim>
+    </sql>
+
+    <!--批量更新-->
+    <sql id="Batch_Update">
+        <set>
+            service_id = #{item.serviceId,jdbcType=BIGINT},
+            service_name = #{item.serviceName,jdbcType=VARCHAR},
+            context_path = #{item.contextPath,jdbcType=VARCHAR},
+            create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            create_by = #{item.createBy,jdbcType=VARCHAR},
+            update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            update_by = #{item.updateBy,jdbcType=TIMESTAMP},
+            remark = #{item.remark,jdbcType=VARCHAR}
+        </set>
+    </sql>
+
+    <!--带有空值检查的批量更新-->
+    <sql id="Batch_Update_selective">
+        <set>
+            <if test="item.serviceId != null">
+                service_id = #{item.serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="item.serviceName != null">
+                service_name = #{item.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.contextPath != null">
+                context_path = #{item.contextPath,jdbcType=VARCHAR},
+            </if>
+            <if test="item.createTime != null">
+                create_time = #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.createBy != null">
+                create_by = #{item.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="item.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </set>
+    </sql>
+
+    <!--带有空值检查的批量操作字段-->
+    <sql id="Batch_Operating_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.serviceId != null">
+                service_id ,
+            </if>
+            <if test="item.serviceName != null">
+                service_name ,
+            </if>
+            <if test="item.contextPath != null">
+                context_path ,
+            </if>
+            <if test="item.createTime != null">
+                create_time ,
+            </if>
+            <if test="item.createBy != null">
+                create_by ,
+            </if>
+            <if test="item.updateTime != null">
+                update_time ,
+            </if>
+            <if test="item.updateBy != null">
+                update_by ,
+            </if>
+            <if test="item.remark != null">
+                remark 
+            </if>
+        </trim>
+    </sql>
+
+    <!--带有空值检查的批量操作值-->
+    <sql id="Batch_Operating_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.serviceId != null">
+                #{item.serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="item.serviceName != null">
+                #{item.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.contextPath != null">
+                #{item.contextPath,jdbcType=VARCHAR},
+            </if>
+            <if test="item.createTime != null">
+                #{item.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.createBy != null">
+                #{item.createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="item.updateTime != null">
+                #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                #{item.updateBy,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.remark != null">
+                #{item.remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        insert into base_service
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+    </insert>
+
+    <!--带有空值检查的插入-->
+    <insert id="insertSelective" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        insert into base_service
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+    </insert>
+
+    <!--更新-->
+    <update id="updateByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        update base_service
+        <include refid="Base_Update"/>
+        <where>
+            service_id = #{baseService.serviceId,jdbcType=BIGINT}
+        </where>
+    </update>
+
+    <!--带有空值检查的更新-->
+    <update id="updateSelectiveByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        update base_service
+        <include refid="Base_Update_Selective"/>
+        <where>
+            service_id = #{baseService.serviceId,jdbcType=BIGINT}
+         </where>
+    </update>
+
+
+    <!--更新插入-->
+    <insert id="upsert" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        insert into base_service
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Update"/>
+    </insert>
+
+
+    <!--带有控制判断的更新插入-->
+    <insert id="upsertSelective" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        insert into base_service
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Selective_Update"/>
+    </insert>
+
+
+    <!--批量插入-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into base_service
+        <include refid="Base_Insert_Column"/>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <include refid="Batch_Operating_Value"/>
+        </foreach>
+    </insert>
+
+
+    <!-- 批量更新-->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update base_service
+            <include refid="Batch_Update"/>
+            <where>
+                <trim suffixOverrides=",">
+                    service_id = #{item.serviceId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!-- 批量更新插入-->
+    <update id="batchUpsert" parameterType="java.util.List">
+        insert into base_service
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Batch_Operating_Value"/>
+        on duplicate Column update
+        <include refid="Batch_On_Duplicate_Column_Update"/>
+    </update>
+
+
+    <!-- 带有控制判断的批量更新-->
+    <update id="batchUpdateSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update base_service
+            <include refid="Batch_Update_selective"/>
+            <where>
+                <trim suffixOverrides=",">
+                    service_id = #{item.serviceId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+
+    <!-- 带有空值判断的批量插入-->
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into base_service
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+        </foreach>
+    </insert>
+
+    <!-- 带有空值判断的批量更新插入-->
+    <update id="batchUpsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into base_service
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+            on duplicate Column update
+            <include refid="Batch_On_Duplicate_Column_Update_Selective"/>
+        </foreach>
+    </update>
+
+
+    <!--通过主键批量查询-->
+    <select id="queryBatchPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from base_service
+        <where>
+            service_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+            <include refid="Order_By"></include>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--通过主键批量查询-->
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from base_service
+        <where>
+            service_id = #{serviceId,jdbcType=BIGINT}
+        </where>
+    </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select
+        <include refid="Base_Column_List"/>
+        from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--查询一个-->
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select
+        <include refid="Base_Column_List"/>
+        from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        limit 1
+    </select>
+
+
+    <!--条件模糊查询-->
+    <select id="queryByLikeCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select
+        <include refid="Base_Column_List"/>
+        from base_service
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        <include refid="Time_Limit"></include>
+    </select>
+
+
+    <!--模糊查询-->
+    <select id="queryFuzzy" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select
+        <include refid="Base_Column_List"/>
+        from base_service
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--条件查询数量-->
+    <select id="queryCount" resultType="int" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select count(*) from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--条件删除-->
+    <delete id="delete" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        delete from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from base_service
+        <where>
+            <trim suffixOverrides=",">
+                service_id = #{serviceId,jdbcType=BIGINT}
+            </trim>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键批量删除-->
+    <delete id="deleteBatchByPrimaryKeys" parameterType="java.lang.Long">
+        delete from base_service
+        <where>
+            service_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+        </where>
+    </delete>
+
+    <!--分组统计-->
+    <select id="statisticsGroup" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select ${baseService.statisticalProperty} as name,${baseService.statisticalMethod}(${baseService.statisticalProperty}) as value from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+         group by ${baseService.statisticalProperty}
+    </select>
+
+    <!--按日统计-->
+    <select id="statisticsGroupByDay" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select date_format(create_time, '%Y-%m-%d') as name,${baseService.statisticalMethod}(${baseService.statisticalProperty}) as value from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        group by date_format(create_time,'%Y-%m-%d')
+    </select>
+
+    <!--按月统计-->
+    <select id="statisticsGroupByMonth" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select date_format(create_time, '%Y-%m') as name, ${baseService.statisticalMethod}(${baseService.statisticalProperty}) as value from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+        </where>
+            group by date_format(create_time,'%Y-%m')
+    </select>
+
+    <!--按年统计-->
+    <select id="statisticsGroupByYear" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.BaseService">
+        select date_format(create_time, '%Y') as name,${baseService.statisticalMethod}(${baseService.statisticalProperty}) as value from base_service
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+         </where>
+            group by date_format(create_time,'%Y')
+    </select>
+
+</mapper>

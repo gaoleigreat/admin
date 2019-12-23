@@ -2,4 +2,5 @@ zuul:
   routes:
     system-service: /system-service/**
     file-service: /file-service/**
+    fileview-service: /fileview-service/**
   ignored-services: '*'

@@ -5,6 +5,7 @@ import com.xiaodao.generate.domain.GenTable;
 import com.xiaodao.generate.domain.GenTableColumn;
 import com.xiaodao.generate.mapper.DataDao;
 import com.xiaodao.generate.util.GenUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.sql.SQLException;
@@ -36,11 +37,21 @@ public class DataServiceImpl {
                         break;
                     }
                 }
-                String tableComments = dataDao.getTableComments(dataBase, t);
-                genTable.setTableComment(tableComments);
+
+
                 genTable.setTableName(t);
                 genTable.setColumns(tableFileds);
                 GenUtils.initTable(genTable);
+                String tableComments = dataDao.getTableComments(dataBase, t);
+                if (StringUtils.isNotBlank(tableComments)){
+                    tableComments =tableComments.trim();
+                    if (tableComments.endsWith("表")){
+                        tableComments.substring(0, tableComments.length() - 1);
+                    }
+                    genTable.setTableComment(tableComments);
+                }else {
+                    genTable.setTableComment(genTable.getClassName());
+                }
                 genTables.add(genTable);
                 System.out.println(genTable);
 

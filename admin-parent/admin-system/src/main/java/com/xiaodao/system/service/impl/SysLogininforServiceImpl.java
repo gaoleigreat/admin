@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysLogininforMapper;
 import com.xiaodao.system.service.ISysLogininforService;
-import com.xiaodao.system.entity.SysLogininfor;
+import com.xiaodao.feign.system.entity.SysLogininfor;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysLogininforServiceImpl implements ISysLogininforService{
      @Autowired
      private SysLogininforMapper sysLogininforMapper;
 
-    /**
-     * 创建SysLogininfor
-     *
-     * @param sysLogininfor
-     * @return
-     */
     @Override
-    public Integer insert(SysLogininfor sysLogininfor){
-        if(sysLogininfor ==null){
-            return 0;
-        }
+    public int insert(SysLogininfor sysLogininfor) {
         return sysLogininforMapper.insert(sysLogininfor);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param infoId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long infoId){
-        if(infoId ==null){
-            return 0;
-        }
-        Integer result = sysLogininforMapper.deleteById(infoId);
-        return result;
-
+    public int insertSelective(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.insertSelective(sysLogininfor);
     }
 
-    /**
-     * 修改SysLogininfor
-     *
-     * @param sysLogininfor
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysLogininfor sysLogininfor){
-        if(sysLogininfor ==null){
-            return 0;
-        }
-        return sysLogininforMapper.updateById(sysLogininfor);
+    public int batchInsert(List<SysLogininfor> list) {
+        return sysLogininforMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param infoId
-    * @return
-    */
     @Override
-    public SysLogininfor selectByPrimaryKey(Long infoId){
-        if(infoId ==null){
-            return null;
-        }
-        SysLogininfor sysLogininfor  = sysLogininforMapper.selectById(infoId);
-        if (sysLogininfor == null){
-            return null;
-        }
-        return sysLogininfor;
+    public int batchInsertSelective(List<SysLogininfor> list) {
+        return sysLogininforMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysLogininfor SysLogininfor
-     * @return IPage<SysLogininfor>
-     */
     @Override
-    public IPage<SysLogininfor> queryPage(int pageIndex, int pageSize,SysLogininfor sysLogininfor){
-        QueryWrapper<SysLogininfor> queryWrapper = Wrappers.query();
-        IPage<SysLogininfor> ipage = sysLogininforMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.updateByPrimaryKey(sysLogininfor);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysLogininfor
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysLogininfor> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysLogininforMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.updateSelectiveByPrimaryKey(sysLogininfor);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysLogininfor>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysLogininfor> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysLogininforMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysLogininfor> list) {
+        return sysLogininforMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysLogininforMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysLogininfor SysLogininfor
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysLogininfor sysLogininfor){
-
-        if (sysLogininfor == null){
-            return 0;
-        }
-        else{
-            return sysLogininforMapper.upsert(sysLogininfor);
-        }
-
+    public int batchUpdateSelective(List<SysLogininfor> list) {
+        return sysLogininforMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysLogininfor SysLogininfor
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysLogininfor sysLogininfor){
-        if (sysLogininfor == null){
-            return 0;
-        }
-        else{
-            return sysLogininforMapper.upsert(sysLogininfor);
-        }
+    public int upsert(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.upsert(sysLogininfor);
     }
 
-    /**
-     * 条件查询
-     * @param sysLogininfor SysLogininfor
-     * @return List<SysLogininfor>
-    */
     @Override
-    public List<SysLogininfor> query(SysLogininfor sysLogininfor){
-        if (sysLogininfor == null){
-            return null;
-        }
-        else{
-            return sysLogininforMapper.query(sysLogininfor);
-        }
+    public int upsertSelective(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.upsertSelective(sysLogininfor);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysLogininforMapper.queryTotalCount();
+    public int batchUpsert(List<SysLogininfor> list) {
+        return sysLogininforMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysLogininfor> list) {
+        return sysLogininforMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long infoId) {
+        return sysLogininforMapper.deleteByPrimaryKey(infoId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Long> list) {
+        return sysLogininforMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.delete(sysLogininfor);
+    }
+
+    @Override
+    public SysLogininfor queryByPrimaryKey(Long infoId) {
+        return sysLogininforMapper.queryByPrimaryKey(infoId);
+    }
+
+    @Override
+    public List<SysLogininfor> queryBatchPrimaryKeys(List<Long> list) {
+        return sysLogininforMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysLogininfor queryOne(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.queryOne(sysLogininfor);
+    }
+
+    @Override
+    public List<SysLogininfor> queryByCondition(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.queryByCondition(sysLogininfor);
+    }
+
+    @Override
+    public List<SysLogininfor> queryFuzzy(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.queryFuzzy(sysLogininfor);
+    }
+
+    @Override
+    public List<SysLogininfor> queryByLikeCondition(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.queryByLikeCondition(sysLogininfor);
+    }
+
+    @Override
+    public int queryCount(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.queryCount(sysLogininfor);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.statisticsGroup(sysLogininfor);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.statisticsGroupByDay(sysLogininfor);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.statisticsGroupByMonth(sysLogininfor);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysLogininfor sysLogininfor) {
+        return sysLogininforMapper.statisticsGroupByYear(sysLogininfor);
     }
 }

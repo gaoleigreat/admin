@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xiaodao.system.mapper.SysOperLogMapper">
-
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.xiaodao.system.entity.SysOperLog" id="BaseResultMap">
+    <resultMap type="com.xiaodao.feign.system.entity.SysOperLog" id="BaseResultMap">
         <result property="operId" column="oper_id"/>
         <result property="title" column="title"/>
         <result property="businessType" column="business_type"/>
@@ -22,527 +21,1005 @@
         <result property="operTime" column="oper_time"/>
     </resultMap>
 
-
     <!--数据库表的基本查询列名集合 -->
     <sql id="Base_Column_List">
-        oper_id ,
-        title ,
-        business_type ,
-        method ,
-        request_method ,
-        operator_type ,
-        oper_name ,
-        dept_name ,
-        oper_url ,
-        oper_ip ,
-        oper_location ,
-        oper_param ,
-        status ,
-        error_msg ,
-        oper_time 
+        oper_id,
+        title,
+        business_type,
+        method,
+        request_method,
+        operator_type,
+        oper_name,
+        dept_name,
+        oper_url,
+        oper_ip,
+        oper_location,
+        oper_param,
+        status,
+        error_msg,
+        oper_time
+    </sql>
+
+
+    <!--基本插入字段-->
+    <sql id="Base_Insert_Column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        oper_id,
+        title,
+        business_type,
+        method,
+        request_method,
+        operator_type,
+        oper_name,
+        dept_name,
+        oper_url,
+        oper_ip,
+        oper_location,
+        oper_param,
+        status,
+        error_msg,
+        oper_time
+    </trim>
+    </sql>
+
+    <!--基本插入值-->
+    <sql id="Base_Insert_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{sysOperLog.operId,jdbcType=BIGINT},
+            #{sysOperLog.title,jdbcType=VARCHAR},
+            #{sysOperLog.businessType,jdbcType=INTEGER},
+            #{sysOperLog.method,jdbcType=VARCHAR},
+            #{sysOperLog.requestMethod,jdbcType=VARCHAR},
+            #{sysOperLog.operatorType,jdbcType=INTEGER},
+            #{sysOperLog.operName,jdbcType=VARCHAR},
+            #{sysOperLog.deptName,jdbcType=VARCHAR},
+            #{sysOperLog.operUrl,jdbcType=VARCHAR},
+            #{sysOperLog.operIp,jdbcType=VARCHAR},
+            #{sysOperLog.operLocation,jdbcType=VARCHAR},
+            #{sysOperLog.operParam,jdbcType=VARCHAR},
+            #{sysOperLog.status,jdbcType=INTEGER},
+            #{sysOperLog.errorMsg,jdbcType=VARCHAR},
+            #{sysOperLog.operTime,jdbcType=TIMESTAMP}
+    </trim>
+    </sql>
+    <!--基本选择插入字段-->
+    <sql id="Base_Insert_Selective_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysOperLog.operId != null">
+                 oper_id,
+            </if>
+            <if test="sysOperLog.title != null">
+                 title,
+            </if>
+            <if test="sysOperLog.businessType != null">
+                 business_type,
+            </if>
+            <if test="sysOperLog.method != null">
+                 method,
+            </if>
+            <if test="sysOperLog.requestMethod != null">
+                 request_method,
+            </if>
+            <if test="sysOperLog.operatorType != null">
+                 operator_type,
+            </if>
+            <if test="sysOperLog.operName != null">
+                 oper_name,
+            </if>
+            <if test="sysOperLog.deptName != null">
+                 dept_name,
+            </if>
+            <if test="sysOperLog.operUrl != null">
+                 oper_url,
+            </if>
+            <if test="sysOperLog.operIp != null">
+                 oper_ip,
+            </if>
+            <if test="sysOperLog.operLocation != null">
+                 oper_location,
+            </if>
+            <if test="sysOperLog.operParam != null">
+                 oper_param,
+            </if>
+            <if test="sysOperLog.status != null">
+                 status,
+            </if>
+            <if test="sysOperLog.errorMsg != null">
+                 error_msg,
+            </if>
+            <if test="sysOperLog.operTime != null">
+                 oper_time
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本选择插入值-->
+    <sql id="Base_Insert_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysOperLog.operId != null">
+                #{sysOperLog.operId,jdbcType=BIGINT},
+            </if>
+            <if test="sysOperLog.title != null">
+                #{sysOperLog.title,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.businessType != null">
+                #{sysOperLog.businessType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.method != null">
+                #{sysOperLog.method,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.requestMethod != null">
+                #{sysOperLog.requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operatorType != null">
+                #{sysOperLog.operatorType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.operName != null">
+                #{sysOperLog.operName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.deptName != null">
+                #{sysOperLog.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operUrl != null">
+                #{sysOperLog.operUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operIp != null">
+                #{sysOperLog.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operLocation != null">
+                #{sysOperLog.operLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operParam != null">
+                #{sysOperLog.operParam,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.status != null">
+                #{sysOperLog.status,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.errorMsg != null">
+                #{sysOperLog.errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operTime != null">
+                #{sysOperLog.operTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </sql>
+
+    <!--基本更新-->
+    <sql id="Base_Update">
+        <set>
+            oper_id = #{sysOperLog.operId,jdbcType=BIGINT},
+            title = #{sysOperLog.title,jdbcType=VARCHAR},
+            business_type = #{sysOperLog.businessType,jdbcType=INTEGER},
+            method = #{sysOperLog.method,jdbcType=VARCHAR},
+            request_method = #{sysOperLog.requestMethod,jdbcType=VARCHAR},
+            operator_type = #{sysOperLog.operatorType,jdbcType=INTEGER},
+            oper_name = #{sysOperLog.operName,jdbcType=VARCHAR},
+            dept_name = #{sysOperLog.deptName,jdbcType=VARCHAR},
+            oper_url = #{sysOperLog.operUrl,jdbcType=VARCHAR},
+            oper_ip = #{sysOperLog.operIp,jdbcType=VARCHAR},
+            oper_location = #{sysOperLog.operLocation,jdbcType=VARCHAR},
+            oper_param = #{sysOperLog.operParam,jdbcType=VARCHAR},
+            status = #{sysOperLog.status,jdbcType=INTEGER},
+            error_msg = #{sysOperLog.errorMsg,jdbcType=VARCHAR},
+            oper_time = #{sysOperLog.operTime,jdbcType=TIMESTAMP}
+        </set>
+    </sql>
+    <!--带有空值检查的基本更新-->
+    <sql id="Base_Update_Selective">
+        <set>
+            <if test="sysOperLog.operId != null">
+                oper_id = #{sysOperLog.operId,jdbcType=BIGINT},
+            </if>
+            <if test="sysOperLog.title != null">
+                title = #{sysOperLog.title,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.businessType != null">
+                business_type = #{sysOperLog.businessType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.method != null">
+                method = #{sysOperLog.method,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.requestMethod != null">
+                request_method = #{sysOperLog.requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operatorType != null">
+                operator_type = #{sysOperLog.operatorType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.operName != null">
+                oper_name = #{sysOperLog.operName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.deptName != null">
+                dept_name = #{sysOperLog.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operUrl != null">
+                oper_url = #{sysOperLog.operUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operIp != null">
+                oper_ip = #{sysOperLog.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operLocation != null">
+                oper_location = #{sysOperLog.operLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operParam != null">
+                oper_param = #{sysOperLog.operParam,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.status != null">
+                status = #{sysOperLog.status,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.errorMsg != null">
+                error_msg = #{sysOperLog.errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operTime != null">
+                oper_time = #{sysOperLog.operTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
     </sql>
 
 
     <!--Where子句 -->
     <sql id="Base_Query_Where">
-         <if test="sysOperLog.operId != null">
+        <if test="sysOperLog.operId != null">
             and oper_id = #{sysOperLog.operId,jdbcType=BIGINT}
-         </if>
-         <if test="sysOperLog.title != null">
+        </if>
+        <if test="sysOperLog.title != null">
             and title = #{sysOperLog.title,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.businessType != null">
+        </if>
+        <if test="sysOperLog.businessType != null">
             and business_type = #{sysOperLog.businessType,jdbcType=INTEGER}
-         </if>
-         <if test="sysOperLog.method != null">
+        </if>
+        <if test="sysOperLog.method != null">
             and method = #{sysOperLog.method,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.requestMethod != null">
+        </if>
+        <if test="sysOperLog.requestMethod != null">
             and request_method = #{sysOperLog.requestMethod,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.operatorType != null">
+        </if>
+        <if test="sysOperLog.operatorType != null">
             and operator_type = #{sysOperLog.operatorType,jdbcType=INTEGER}
-         </if>
-         <if test="sysOperLog.operName != null">
+        </if>
+        <if test="sysOperLog.operName != null">
             and oper_name = #{sysOperLog.operName,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.deptName != null">
+        </if>
+        <if test="sysOperLog.deptName != null">
             and dept_name = #{sysOperLog.deptName,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.operUrl != null">
+        </if>
+        <if test="sysOperLog.operUrl != null">
             and oper_url = #{sysOperLog.operUrl,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.operIp != null">
+        </if>
+        <if test="sysOperLog.operIp != null">
             and oper_ip = #{sysOperLog.operIp,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.operLocation != null">
+        </if>
+        <if test="sysOperLog.operLocation != null">
             and oper_location = #{sysOperLog.operLocation,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.operParam != null">
+        </if>
+        <if test="sysOperLog.operParam != null">
             and oper_param = #{sysOperLog.operParam,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.status != null">
+        </if>
+        <if test="sysOperLog.status != null">
             and status = #{sysOperLog.status,jdbcType=INTEGER}
-         </if>
-         <if test="sysOperLog.errorMsg != null">
+        </if>
+        <if test="sysOperLog.errorMsg != null">
             and error_msg = #{sysOperLog.errorMsg,jdbcType=VARCHAR}
-         </if>
-         <if test="sysOperLog.operTime != null">
+        </if>
+        <if test="sysOperLog.operTime != null">
             and oper_time = #{sysOperLog.operTime,jdbcType=TIMESTAMP}
-         </if>
+        </if>
+    </sql>
+
+    <!--模糊查询条件 -->
+    <sql id="Base_Query_Like_Where">
+        <if test="sysOperLog.operId != null">
+            and oper_id like concat('%',concat(#{sysOperLog.operId},'%'))
+        </if>
+        <if test="sysOperLog.title != null">
+            and title like concat('%',concat(#{sysOperLog.title},'%'))
+        </if>
+        <if test="sysOperLog.businessType != null">
+            and business_type like concat('%',concat(#{sysOperLog.businessType},'%'))
+        </if>
+        <if test="sysOperLog.method != null">
+            and method like concat('%',concat(#{sysOperLog.method},'%'))
+        </if>
+        <if test="sysOperLog.requestMethod != null">
+            and request_method like concat('%',concat(#{sysOperLog.requestMethod},'%'))
+        </if>
+        <if test="sysOperLog.operatorType != null">
+            and operator_type like concat('%',concat(#{sysOperLog.operatorType},'%'))
+        </if>
+        <if test="sysOperLog.operName != null">
+            and oper_name like concat('%',concat(#{sysOperLog.operName},'%'))
+        </if>
+        <if test="sysOperLog.deptName != null">
+            and dept_name like concat('%',concat(#{sysOperLog.deptName},'%'))
+        </if>
+        <if test="sysOperLog.operUrl != null">
+            and oper_url like concat('%',concat(#{sysOperLog.operUrl},'%'))
+        </if>
+        <if test="sysOperLog.operIp != null">
+            and oper_ip like concat('%',concat(#{sysOperLog.operIp},'%'))
+        </if>
+        <if test="sysOperLog.operLocation != null">
+            and oper_location like concat('%',concat(#{sysOperLog.operLocation},'%'))
+        </if>
+        <if test="sysOperLog.operParam != null">
+            and oper_param like concat('%',concat(#{sysOperLog.operParam},'%'))
+        </if>
+        <if test="sysOperLog.status != null">
+            and status like concat('%',concat(#{sysOperLog.status},'%'))
+        </if>
+        <if test="sysOperLog.errorMsg != null">
+            and error_msg like concat('%',concat(#{sysOperLog.errorMsg},'%'))
+        </if>
+        <if test="sysOperLog.operTime != null">
+            and oper_time like concat('%',concat(#{sysOperLog.operTime},'%'))
+        </if>
+    </sql>
+
+    <!--模糊查询 -->
+    <sql id="Base_Query_Fuzzy_Where">
+        or oper_id like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or title like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or business_type like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or method like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or request_method like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or operator_type like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or oper_name like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or dept_name like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or oper_url like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or oper_ip like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or oper_location like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or oper_param like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or status like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or error_msg like concat('%',concat(#{sysOperLog.searchValue},'%'))
+        or oper_time like concat('%',concat(#{sysOperLog.searchValue},'%'))
     </sql>
 
 
+    <sql id="Order_By">
+        order by
+        <if test="sysOperLog.orderBy != null and sysOperLog.orderBy != ''">
+            #{sysOperLog.orderBy}
+        </if>
+        <if test="sysOperLog.orderBy == null or sysOperLog.orderBy==''">
+            #{sysOperLog.oper_id}
+        </if>
+        <if test="baseService.isAsc  == 1">
+            DESC
+        </if>
+    </sql>
 
+    <sql id="Time_Limit">
+        <if test="sysOperLog.beginTime != null">
+            and DATE_FORMAT(#{sysOperLog.createTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="sysOperLog.endTime != null">
+            and DATE_FORMAT(#{sysOperLog.createTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+        </if>
+    </sql>
 
-    <!--基本更新字段-->
-    <sql id="Base_Update_Column">
+    <!--插入更新-->
+    <sql id="On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            oper_id = #{sysOperLog.operId,jdbcType=BIGINT},
+            title = #{sysOperLog.title,jdbcType=VARCHAR},
+            business_type = #{sysOperLog.businessType,jdbcType=INTEGER},
+            method = #{sysOperLog.method,jdbcType=VARCHAR},
+            request_method = #{sysOperLog.requestMethod,jdbcType=VARCHAR},
+            operator_type = #{sysOperLog.operatorType,jdbcType=INTEGER},
+            oper_name = #{sysOperLog.operName,jdbcType=VARCHAR},
+            dept_name = #{sysOperLog.deptName,jdbcType=VARCHAR},
+            oper_url = #{sysOperLog.operUrl,jdbcType=VARCHAR},
+            oper_ip = #{sysOperLog.operIp,jdbcType=VARCHAR},
+            oper_location = #{sysOperLog.operLocation,jdbcType=VARCHAR},
+            oper_param = #{sysOperLog.operParam,jdbcType=VARCHAR},
+            status = #{sysOperLog.status,jdbcType=INTEGER},
+            error_msg = #{sysOperLog.errorMsg,jdbcType=VARCHAR},
+            oper_time = #{sysOperLog.operTime,jdbcType=TIMESTAMP}
+         </trim>
+    </sql>
+
+    <!--带有空值检查的插入更新-->
+    <sql id="On_Duplicate_Column_Selective_Update">
+        <trim suffixOverrides=",">
+            <if test="sysOperLog.operId != null">
+                oper_id = #{sysOperLog.operId,jdbcType=BIGINT},
+            </if>
+            <if test="sysOperLog.title != null">
+                title = #{sysOperLog.title,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.businessType != null">
+                business_type = #{sysOperLog.businessType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.method != null">
+                method = #{sysOperLog.method,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.requestMethod != null">
+                request_method = #{sysOperLog.requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operatorType != null">
+                operator_type = #{sysOperLog.operatorType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.operName != null">
+                oper_name = #{sysOperLog.operName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.deptName != null">
+                dept_name = #{sysOperLog.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operUrl != null">
+                oper_url = #{sysOperLog.operUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operIp != null">
+                oper_ip = #{sysOperLog.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operLocation != null">
+                oper_location = #{sysOperLog.operLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operParam != null">
+                oper_param = #{sysOperLog.operParam,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.status != null">
+                status = #{sysOperLog.status,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.errorMsg != null">
+                error_msg = #{sysOperLog.errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operTime != null">
+                oper_time = #{sysOperLog.operTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update">
+        <trim suffixOverrides=",">
+            oper_id = values(oper_id),
+            title = values(title),
+            business_type = values(business_type),
+            method = values(method),
+            request_method = values(request_method),
+            operator_type = values(operator_type),
+            oper_name = values(oper_name),
+            dept_name = values(dept_name),
+            oper_url = values(oper_url),
+            oper_ip = values(oper_ip),
+            oper_location = values(oper_location),
+            oper_param = values(oper_param),
+            status = values(status),
+            error_msg = values(error_msg),
+            oper_time = values(oper_time),
+        </trim>
+    </sql>
+
+    <!--带有控制判断的批量插入更新-->
+    <sql id="Batch_On_Duplicate_Column_Update_Selective">
+        <trim suffixOverrides=",">
+            <if test="sysOperLog.operId != null">
+                oper_id = #{item.operId,jdbcType=BIGINT},
+            </if>
+            <if test="sysOperLog.title != null">
+                title = #{item.title,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.businessType != null">
+                business_type = #{item.businessType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.method != null">
+                method = #{item.method,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.requestMethod != null">
+                request_method = #{item.requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operatorType != null">
+                operator_type = #{item.operatorType,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.operName != null">
+                oper_name = #{item.operName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.deptName != null">
+                dept_name = #{item.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operUrl != null">
+                oper_url = #{item.operUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operIp != null">
+                oper_ip = #{item.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operLocation != null">
+                oper_location = #{item.operLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operParam != null">
+                oper_param = #{item.operParam,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.status != null">
+                status = #{item.status,jdbcType=INTEGER},
+            </if>
+            <if test="sysOperLog.errorMsg != null">
+                error_msg = #{item.errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="sysOperLog.operTime != null">
+                oper_time = #{item.operTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </sql>
+
+    <!--批量插入，更新插入值-->
+    <sql id="Batch_Operating_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{item.operId,jdbcType=BIGINT},
+            #{item.title,jdbcType=VARCHAR},
+            #{item.businessType,jdbcType=INTEGER},
+            #{item.method,jdbcType=VARCHAR},
+            #{item.requestMethod,jdbcType=VARCHAR},
+            #{item.operatorType,jdbcType=INTEGER},
+            #{item.operName,jdbcType=VARCHAR},
+            #{item.deptName,jdbcType=VARCHAR},
+            #{item.operUrl,jdbcType=VARCHAR},
+            #{item.operIp,jdbcType=VARCHAR},
+            #{item.operLocation,jdbcType=VARCHAR},
+            #{item.operParam,jdbcType=VARCHAR},
+            #{item.status,jdbcType=INTEGER},
+            #{item.errorMsg,jdbcType=VARCHAR},
+            #{item.operTime,jdbcType=TIMESTAMP}
+        </trim>
+    </sql>
+
+    <!--批量更新-->
+    <sql id="Batch_Update">
         <set>
-          <if test="sysOperLog.operId != null">
-             oper_id = #{sysOperLog.operId,jdbcType=BIGINT},
-          </if>
-          <if test="sysOperLog.title != null">
-             title = #{sysOperLog.title,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.businessType != null">
-             business_type = #{sysOperLog.businessType,jdbcType=INTEGER},
-          </if>
-          <if test="sysOperLog.method != null">
-             method = #{sysOperLog.method,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.requestMethod != null">
-             request_method = #{sysOperLog.requestMethod,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.operatorType != null">
-             operator_type = #{sysOperLog.operatorType,jdbcType=INTEGER},
-          </if>
-          <if test="sysOperLog.operName != null">
-             oper_name = #{sysOperLog.operName,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.deptName != null">
-             dept_name = #{sysOperLog.deptName,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.operUrl != null">
-             oper_url = #{sysOperLog.operUrl,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.operIp != null">
-             oper_ip = #{sysOperLog.operIp,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.operLocation != null">
-             oper_location = #{sysOperLog.operLocation,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.operParam != null">
-             oper_param = #{sysOperLog.operParam,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.status != null">
-             status = #{sysOperLog.status,jdbcType=INTEGER},
-          </if>
-          <if test="sysOperLog.errorMsg != null">
-             error_msg = #{sysOperLog.errorMsg,jdbcType=VARCHAR},
-          </if>
-          <if test="sysOperLog.operTime != null">
-             oper_time = #{sysOperLog.operTime,jdbcType=TIMESTAMP}
-          </if>
+            oper_id = #{item.operId,jdbcType=BIGINT},
+            title = #{item.title,jdbcType=VARCHAR},
+            business_type = #{item.businessType,jdbcType=INTEGER},
+            method = #{item.method,jdbcType=VARCHAR},
+            request_method = #{item.requestMethod,jdbcType=VARCHAR},
+            operator_type = #{item.operatorType,jdbcType=INTEGER},
+            oper_name = #{item.operName,jdbcType=VARCHAR},
+            dept_name = #{item.deptName,jdbcType=VARCHAR},
+            oper_url = #{item.operUrl,jdbcType=VARCHAR},
+            oper_ip = #{item.operIp,jdbcType=VARCHAR},
+            oper_location = #{item.operLocation,jdbcType=VARCHAR},
+            oper_param = #{item.operParam,jdbcType=VARCHAR},
+            status = #{item.status,jdbcType=INTEGER},
+            error_msg = #{item.errorMsg,jdbcType=VARCHAR},
+            oper_time = #{item.operTime,jdbcType=TIMESTAMP}
         </set>
     </sql>
 
+    <!--带有空值检查的批量更新-->
+    <sql id="Batch_Update_selective">
+        <set>
+            <if test="item.operId != null">
+                oper_id = #{item.operId,jdbcType=BIGINT},
+            </if>
+            <if test="item.title != null">
+                title = #{item.title,jdbcType=VARCHAR},
+            </if>
+            <if test="item.businessType != null">
+                business_type = #{item.businessType,jdbcType=INTEGER},
+            </if>
+            <if test="item.method != null">
+                method = #{item.method,jdbcType=VARCHAR},
+            </if>
+            <if test="item.requestMethod != null">
+                request_method = #{item.requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operatorType != null">
+                operator_type = #{item.operatorType,jdbcType=INTEGER},
+            </if>
+            <if test="item.operName != null">
+                oper_name = #{item.operName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.deptName != null">
+                dept_name = #{item.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operUrl != null">
+                oper_url = #{item.operUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operIp != null">
+                oper_ip = #{item.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operLocation != null">
+                oper_location = #{item.operLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operParam != null">
+                oper_param = #{item.operParam,jdbcType=VARCHAR},
+            </if>
+            <if test="item.status != null">
+                status = #{item.status,jdbcType=INTEGER},
+            </if>
+            <if test="item.errorMsg != null">
+                error_msg = #{item.errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operTime != null">
+                oper_time = #{item.operTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+    </sql>
 
-    <sql id="Base_Insert_Selective">
+    <!--带有空值检查的批量操作字段-->
+    <sql id="Batch_Operating_Selective_Column">
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysOperLog.operId != null">
-               oper_id,
+            <if test="item.operId != null">
+                oper_id ,
             </if>
-            <if test="sysOperLog.title != null">
-               title,
+            <if test="item.title != null">
+                title ,
             </if>
-            <if test="sysOperLog.businessType != null">
-               business_type,
+            <if test="item.businessType != null">
+                business_type ,
             </if>
-            <if test="sysOperLog.method != null">
-               method,
+            <if test="item.method != null">
+                method ,
             </if>
-            <if test="sysOperLog.requestMethod != null">
-               request_method,
+            <if test="item.requestMethod != null">
+                request_method ,
             </if>
-            <if test="sysOperLog.operatorType != null">
-               operator_type,
+            <if test="item.operatorType != null">
+                operator_type ,
             </if>
-            <if test="sysOperLog.operName != null">
-               oper_name,
+            <if test="item.operName != null">
+                oper_name ,
             </if>
-            <if test="sysOperLog.deptName != null">
-               dept_name,
+            <if test="item.deptName != null">
+                dept_name ,
             </if>
-            <if test="sysOperLog.operUrl != null">
-               oper_url,
+            <if test="item.operUrl != null">
+                oper_url ,
             </if>
-            <if test="sysOperLog.operIp != null">
-               oper_ip,
+            <if test="item.operIp != null">
+                oper_ip ,
             </if>
-            <if test="sysOperLog.operLocation != null">
-               oper_location,
+            <if test="item.operLocation != null">
+                oper_location ,
             </if>
-            <if test="sysOperLog.operParam != null">
-               oper_param,
+            <if test="item.operParam != null">
+                oper_param ,
             </if>
-            <if test="sysOperLog.status != null">
-               status,
+            <if test="item.status != null">
+                status ,
             </if>
-            <if test="sysOperLog.errorMsg != null">
-               error_msg,
+            <if test="item.errorMsg != null">
+                error_msg ,
             </if>
-            <if test="sysOperLog.operTime != null">
-               oper_time
+            <if test="item.operTime != null">
+                oper_time 
             </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-             <if test="sysOperLog.operId != null">
-             #{sysOperLog.operId,jdbcType=BIGINT},
-             </if>
-             <if test="sysOperLog.title != null">
-             #{sysOperLog.title,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.businessType != null">
-             #{sysOperLog.businessType,jdbcType=INTEGER},
-             </if>
-             <if test="sysOperLog.method != null">
-             #{sysOperLog.method,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.requestMethod != null">
-             #{sysOperLog.requestMethod,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.operatorType != null">
-             #{sysOperLog.operatorType,jdbcType=INTEGER},
-             </if>
-             <if test="sysOperLog.operName != null">
-             #{sysOperLog.operName,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.deptName != null">
-             #{sysOperLog.deptName,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.operUrl != null">
-             #{sysOperLog.operUrl,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.operIp != null">
-             #{sysOperLog.operIp,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.operLocation != null">
-             #{sysOperLog.operLocation,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.operParam != null">
-             #{sysOperLog.operParam,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.status != null">
-             #{sysOperLog.status,jdbcType=INTEGER},
-             </if>
-             <if test="sysOperLog.errorMsg != null">
-             #{sysOperLog.errorMsg,jdbcType=VARCHAR},
-             </if>
-             <if test="sysOperLog.operTime != null">
-             #{sysOperLog.operTime,jdbcType=TIMESTAMP}
-             </if>
         </trim>
     </sql>
 
+    <!--带有空值检查的批量操作值-->
+    <sql id="Batch_Operating_Selective_Value">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="item.operId != null">
+                #{item.operId,jdbcType=BIGINT},
+            </if>
+            <if test="item.title != null">
+                #{item.title,jdbcType=VARCHAR},
+            </if>
+            <if test="item.businessType != null">
+                #{item.businessType,jdbcType=INTEGER},
+            </if>
+            <if test="item.method != null">
+                #{item.method,jdbcType=VARCHAR},
+            </if>
+            <if test="item.requestMethod != null">
+                #{item.requestMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operatorType != null">
+                #{item.operatorType,jdbcType=INTEGER},
+            </if>
+            <if test="item.operName != null">
+                #{item.operName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.deptName != null">
+                #{item.deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operUrl != null">
+                #{item.operUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operIp != null">
+                #{item.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operLocation != null">
+                #{item.operLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operParam != null">
+                #{item.operParam,jdbcType=VARCHAR},
+            </if>
+            <if test="item.status != null">
+                #{item.status,jdbcType=INTEGER},
+            </if>
+            <if test="item.errorMsg != null">
+                #{item.errorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="item.operTime != null">
+                #{item.operTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入-->
+    <insert id="insert" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        insert into sys_oper_log
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+    </insert>
+
+    <!--带有空值检查的插入-->
+    <insert id="insertSelective" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        insert into sys_oper_log
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+    </insert>
+
+    <!--更新-->
+    <update id="updateByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        update sys_oper_log
+        <include refid="Base_Update"/>
+        <where>
+            oper_id = #{sysOperLog.operId,jdbcType=BIGINT}
+        </where>
+    </update>
+
+    <!--带有空值检查的更新-->
+    <update id="updateSelectiveByPrimaryKey" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        update sys_oper_log
+        <include refid="Base_Update_Selective"/>
+        <where>
+            oper_id = #{sysOperLog.operId,jdbcType=BIGINT}
+         </where>
+    </update>
 
 
-    <!--批量添加记录到数据库表中-->
+    <!--更新插入-->
+    <insert id="upsert" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        insert into sys_oper_log
+        <include refid="Base_Insert_Column"/>
+        values
+        <include refid="Base_Insert_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Update"/>
+    </insert>
+
+
+    <!--带有控制判断的更新插入-->
+    <insert id="upsertSelective" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        insert into sys_oper_log
+        <include refid="Base_Insert_Selective_Column"/>
+        values
+        <include refid="Base_Insert_Selective_Value"/>
+        on duplicate Column update
+        <include refid="On_Duplicate_Column_Selective_Update"/>
+    </insert>
+
+
+    <!--批量插入-->
     <insert id="batchInsert" parameterType="java.util.List">
         insert into sys_oper_log
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             oper_id,
-             title,
-             business_type,
-             method,
-             request_method,
-             operator_type,
-             oper_name,
-             dept_name,
-             oper_url,
-             oper_ip,
-             oper_location,
-             oper_param,
-             status,
-             error_msg,
-             oper_time
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
         <foreach collection="list" index="index" item="item" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.operId,jdbcType=BIGINT},
-                #{item.title,jdbcType=VARCHAR},
-                #{item.businessType,jdbcType=INTEGER},
-                #{item.method,jdbcType=VARCHAR},
-                #{item.requestMethod,jdbcType=VARCHAR},
-                #{item.operatorType,jdbcType=INTEGER},
-                #{item.operName,jdbcType=VARCHAR},
-                #{item.deptName,jdbcType=VARCHAR},
-                #{item.operUrl,jdbcType=VARCHAR},
-                #{item.operIp,jdbcType=VARCHAR},
-                #{item.operLocation,jdbcType=VARCHAR},
-                #{item.operParam,jdbcType=VARCHAR},
-                #{item.status,jdbcType=INTEGER},
-                #{item.errorMsg,jdbcType=VARCHAR},
-                #{item.operTime,jdbcType=TIMESTAMP}
-            </trim>
+            <include refid="Batch_Operating_Value"/>
         </foreach>
     </insert>
 
 
-
-    <!-- 根据主键批量更新数据库表中的记录-->
+    <!-- 批量更新-->
     <update id="batchUpdate" parameterType="java.util.List">
         <foreach collection="list" index="index" item="item" separator=";">
             update sys_oper_log
-            <set>
-                <trim suffixOverrides=",">
-                    oper_id = #{item.operId,jdbcType=BIGINT},
-                    title = #{item.title,jdbcType=VARCHAR},
-                    business_type = #{item.businessType,jdbcType=INTEGER},
-                    method = #{item.method,jdbcType=VARCHAR},
-                    request_method = #{item.requestMethod,jdbcType=VARCHAR},
-                    operator_type = #{item.operatorType,jdbcType=INTEGER},
-                    oper_name = #{item.operName,jdbcType=VARCHAR},
-                    dept_name = #{item.deptName,jdbcType=VARCHAR},
-                    oper_url = #{item.operUrl,jdbcType=VARCHAR},
-                    oper_ip = #{item.operIp,jdbcType=VARCHAR},
-                    oper_location = #{item.operLocation,jdbcType=VARCHAR},
-                    oper_param = #{item.operParam,jdbcType=VARCHAR},
-                    status = #{item.status,jdbcType=INTEGER},
-                    error_msg = #{item.errorMsg,jdbcType=VARCHAR},
-                    oper_time = #{item.operTime,jdbcType=TIMESTAMP}
-                </trim>
-            </set>
+            <include refid="Batch_Update"/>
             <where>
                 <trim suffixOverrides=",">
-                    where oper_id = #{item.operId,jdbcType=BIGINT}
+                    oper_id = #{item.operId,jdbcType=BIGINT}
                 </trim>
             </where>
         </foreach>
     </update>
 
 
-    <!--存在即更新否则插入-->
-    <update id="upsert" parameterType="com.xiaodao.entity.SysOperLog">
+    <!-- 批量更新插入-->
+    <update id="batchUpsert" parameterType="java.util.List">
         insert into sys_oper_log
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             oper_id ,
-             title ,
-             business_type ,
-             method ,
-             request_method ,
-             operator_type ,
-             oper_name ,
-             dept_name ,
-             oper_url ,
-             oper_ip ,
-             oper_location ,
-             oper_param ,
-             status ,
-             error_msg ,
-             oper_time 
-        </trim>
+        <include refid="Base_Insert_Column"/>
         values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-             #{sysOperLog.operId,jdbcType=BIGINT},
-             #{sysOperLog.title,jdbcType=VARCHAR},
-             #{sysOperLog.businessType,jdbcType=INTEGER},
-             #{sysOperLog.method,jdbcType=VARCHAR},
-             #{sysOperLog.requestMethod,jdbcType=VARCHAR},
-             #{sysOperLog.operatorType,jdbcType=INTEGER},
-             #{sysOperLog.operName,jdbcType=VARCHAR},
-             #{sysOperLog.deptName,jdbcType=VARCHAR},
-             #{sysOperLog.operUrl,jdbcType=VARCHAR},
-             #{sysOperLog.operIp,jdbcType=VARCHAR},
-             #{sysOperLog.operLocation,jdbcType=VARCHAR},
-             #{sysOperLog.operParam,jdbcType=VARCHAR},
-             #{sysOperLog.status,jdbcType=INTEGER},
-             #{sysOperLog.errorMsg,jdbcType=VARCHAR},
-             #{sysOperLog.operTime,jdbcType=TIMESTAMP}
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-          #{sysOperLog.operId,jdbcType=BIGINT},
-          #{sysOperLog.title,jdbcType=VARCHAR},
-          #{sysOperLog.businessType,jdbcType=INTEGER},
-          #{sysOperLog.method,jdbcType=VARCHAR},
-          #{sysOperLog.requestMethod,jdbcType=VARCHAR},
-          #{sysOperLog.operatorType,jdbcType=INTEGER},
-          #{sysOperLog.operName,jdbcType=VARCHAR},
-          #{sysOperLog.deptName,jdbcType=VARCHAR},
-          #{sysOperLog.operUrl,jdbcType=VARCHAR},
-          #{sysOperLog.operIp,jdbcType=VARCHAR},
-          #{sysOperLog.operLocation,jdbcType=VARCHAR},
-          #{sysOperLog.operParam,jdbcType=VARCHAR},
-          #{sysOperLog.status,jdbcType=INTEGER},
-          #{sysOperLog.errorMsg,jdbcType=VARCHAR},
-          #{sysOperLog.operTime,jdbcType=TIMESTAMP}
-        </trim>
+        <include refid="Batch_Operating_Value"/>
+        on duplicate Column update
+        <include refid="Batch_On_Duplicate_Column_Update"/>
     </update>
 
 
-    <!--带有空值检查的存在即更新否则插入-->
-    <update id="upsertSelective" parameterType="com.xiaodao.system.entity.SysOperLog">
-        insert into sys_oper_log
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysOperLog.operId != null">
-                oper_id,
-            </if>
-            <if test="sysOperLog.title != null">
-                title,
-            </if>
-            <if test="sysOperLog.businessType != null">
-                business_type,
-            </if>
-            <if test="sysOperLog.method != null">
-                method,
-            </if>
-            <if test="sysOperLog.requestMethod != null">
-                request_method,
-            </if>
-            <if test="sysOperLog.operatorType != null">
-                operator_type,
-            </if>
-            <if test="sysOperLog.operName != null">
-                oper_name,
-            </if>
-            <if test="sysOperLog.deptName != null">
-                dept_name,
-            </if>
-            <if test="sysOperLog.operUrl != null">
-                oper_url,
-            </if>
-            <if test="sysOperLog.operIp != null">
-                oper_ip,
-            </if>
-            <if test="sysOperLog.operLocation != null">
-                oper_location,
-            </if>
-            <if test="sysOperLog.operParam != null">
-                oper_param,
-            </if>
-            <if test="sysOperLog.status != null">
-                status,
-            </if>
-            <if test="sysOperLog.errorMsg != null">
-                error_msg,
-            </if>
-            <if test="sysOperLog.operTime != null">
-                oper_time
-            </if>
-        </trim>
-        values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="sysOperLog.operId !=null ">
-                #{sysOperLog.operId,jdbcType=BIGINT},
-            </if>
-            <if test="sysOperLog.title !=null ">
-                #{sysOperLog.title,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.businessType !=null ">
-                #{sysOperLog.businessType,jdbcType=INTEGER},
-            </if>
-            <if test="sysOperLog.method !=null ">
-                #{sysOperLog.method,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.requestMethod !=null ">
-                #{sysOperLog.requestMethod,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operatorType !=null ">
-                #{sysOperLog.operatorType,jdbcType=INTEGER},
-            </if>
-            <if test="sysOperLog.operName !=null ">
-                #{sysOperLog.operName,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.deptName !=null ">
-                #{sysOperLog.deptName,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operUrl !=null ">
-                #{sysOperLog.operUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operIp !=null ">
-                #{sysOperLog.operIp,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operLocation !=null ">
-                #{sysOperLog.operLocation,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operParam !=null ">
-                #{sysOperLog.operParam,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.status !=null ">
-                #{sysOperLog.status,jdbcType=INTEGER},
-            </if>
-            <if test="sysOperLog.errorMsg !=null ">
-                #{sysOperLog.errorMsg,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operTime !=null ">
-                #{sysOperLog.operTime,jdbcType=TIMESTAMP}
-            </if>
-        </trim>
-        on duplicate key update
-        <trim suffixOverrides=",">
-            <if test="sysOperLog.operId !=null ">
-             #{operId,jdbcType=BIGINT},
-            </if>
-            <if test="sysOperLog.title !=null ">
-             #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.businessType !=null ">
-             #{businessType,jdbcType=INTEGER},
-            </if>
-            <if test="sysOperLog.method !=null ">
-             #{method,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.requestMethod !=null ">
-             #{requestMethod,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operatorType !=null ">
-             #{operatorType,jdbcType=INTEGER},
-            </if>
-            <if test="sysOperLog.operName !=null ">
-             #{operName,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.deptName !=null ">
-             #{deptName,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operUrl !=null ">
-             #{operUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operIp !=null ">
-             #{operIp,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operLocation !=null ">
-             #{operLocation,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operParam !=null ">
-             #{operParam,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.status !=null ">
-             #{status,jdbcType=INTEGER},
-            </if>
-            <if test="sysOperLog.errorMsg !=null ">
-             #{errorMsg,jdbcType=VARCHAR},
-            </if>
-            <if test="sysOperLog.operTime !=null ">
-             #{operTime,jdbcType=TIMESTAMP}
-            </if>
-        </trim>
+    <!-- 带有控制判断的批量更新-->
+    <update id="batchUpdateSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update sys_oper_log
+            <include refid="Batch_Update_selective"/>
+            <where>
+                <trim suffixOverrides=",">
+                    oper_id = #{item.operId,jdbcType=BIGINT}
+                </trim>
+            </where>
+        </foreach>
     </update>
 
-    <select id="query" resultMap="BaseResultMap" parameterType="com.xiaodao.system.entity.SysOperLog">
+
+    <!-- 带有空值判断的批量插入-->
+    <insert id="batchInsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_oper_log
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+        </foreach>
+    </insert>
+
+    <!-- 带有空值判断的批量更新插入-->
+    <update id="batchUpsertSelective" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            insert into sys_oper_log
+            <include refid="Batch_Operating_Selective_Column"/>
+            values
+            <include refid="Batch_Operating_Selective_Value"/>
+            on duplicate Column update
+            <include refid="Batch_On_Duplicate_Column_Update_Selective"/>
+        </foreach>
+    </update>
+
+
+    <!--通过主键批量查询-->
+    <select id="queryBatchPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from sys_oper_log
         <where>
-            <include refid="Base_Query_Where"></include>
+            oper_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+            <include refid="Order_By"></include>
+            <include refid="Time_Limit"></include>
         </where>
     </select>
 
-    <select id="queryTotalCount" resultType="long">
-        select count(*) from sys_oper_log
+    <!--通过主键批量查询-->
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oper_log
+        <where>
+            oper_id = #{operId,jdbcType=BIGINT}
+        </where>
+    </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--查询一个-->
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        limit 1
     </select>
 
 
+    <!--条件模糊查询-->
+    <select id="queryByLikeCondition" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oper_log
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+        <include refid="Time_Limit"></include>
+    </select>
 
+
+    <!--模糊查询-->
+    <select id="queryFuzzy" resultMap="BaseResultMap" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_oper_log
+        <where>
+            <include refid="Base_Query_Like_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        <include refid="Order_By"></include>
+    </select>
+
+    <!--条件查询数量-->
+    <select id="queryCount" resultType="int" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select count(*) from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </select>
+
+    <!--条件删除-->
+    <delete id="delete" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        delete from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_oper_log
+        <where>
+            <trim suffixOverrides=",">
+                oper_id = #{operId,jdbcType=BIGINT}
+            </trim>
+            <include refid="Time_Limit"></include>
+        </where>
+    </delete>
+
+    <!--通过主键批量删除-->
+    <delete id="deleteBatchByPrimaryKeys" parameterType="java.lang.Long">
+        delete from sys_oper_log
+        <where>
+            oper_id in
+            <foreach collection="list" item="item" open="(" separator="," close=")">
+                #{item }
+            </foreach>
+        </where>
+    </delete>
+
+    <!--分组统计-->
+    <select id="statisticsGroup" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select ${sysOperLog.statisticalProperty} as name,${sysOperLog.statisticalMethod}(${sysOperLog.statisticalProperty}) as value from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+         group by ${sysOperLog.statisticalProperty}
+    </select>
+
+    <!--按日统计-->
+    <select id="statisticsGroupByDay" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select date_format(create_time, '%Y-%m-%d') as name,${sysOperLog.statisticalMethod}(${sysOperLog.statisticalProperty}) as value from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"></include>
+        </where>
+        group by date_format(create_time,'%Y-%m-%d')
+    </select>
+
+    <!--按月统计-->
+    <select id="statisticsGroupByMonth" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select date_format(create_time, '%Y-%m') as name, ${sysOperLog.statisticalMethod}(${sysOperLog.statisticalProperty}) as value from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+        </where>
+            group by date_format(create_time,'%Y-%m')
+    </select>
+
+    <!--按年统计-->
+    <select id="statisticsGroupByYear" resultType="java.util.Map" parameterType="com.xiaodao.feign.system.entity.SysOperLog">
+        select date_format(create_time, '%Y') as name,${sysOperLog.statisticalMethod}(${sysOperLog.statisticalProperty}) as value from sys_oper_log
+        <where>
+            <include refid="Base_Query_Where"/>
+            <include refid="Time_Limit"/>
+         </where>
+            group by date_format(create_time,'%Y')
+    </select>
 
 </mapper>

@@ -37,22 +37,6 @@ public class GenTable implements Serializable {
      */
     private String camelCaseclassName;
 
-    /**
-     * 生成包路径
-     */
-    private String packageName;
-
-    /**
-     * 生成模块名
-     */
-    private String moduleName;
-
-
-
-    /**
-     * 生成作者
-     */
-    private String author;
 
     /**
      * 主键信息

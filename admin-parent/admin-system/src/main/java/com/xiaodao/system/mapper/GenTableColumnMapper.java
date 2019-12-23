@@ -1,58 +1,200 @@
 package com.xiaodao.system.mapper;
 
-import java.util.List;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import org.apache.ibatis.annotations.Param;
-import com.xiaodao.system.entity.GenTableColumn;
+import com.xiaodao.feign.system.entity.GenTableColumn;
 
-
+import java.util.List;
+import java.util.Map;
 /**
  * @description GenTableColumnMapper
  * @authorxiaodao
  * @since jdk1.8
  */
-public interface GenTableColumnMapper extends BaseMapper<GenTableColumn>{
+public interface GenTableColumnMapper{
 
     /**
-    * 批量插入
-    * @param list List<GenTableColumn
-    * @return Integer
-    */
-    Integer batchInsert(List<GenTableColumn> list);
+     * 新增
+     * @param genTableColumn
+     * @return int
+     */
+    int insert(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 带有空值判断的新增
+     * @param genTableColumn
+     * @return int
+     */
+    int insertSelective(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsert(@Param("list") List<GenTableColumn> list);
+
+    /**
+     * 带有空值判断的批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsertSelective(@Param("list") List<GenTableColumn> list);
+
+    /**
+     * 根据主键更新
+     * @param genTableColumn
+     * @return int
+     */
+    int updateByPrimaryKey(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 带有空值判断的主键更新
+     * @param genTableColumn
+     * @return int
+     */
+    int updateSelectiveByPrimaryKey(@Param("genTableColumn") GenTableColumn genTableColumn);
 
     /**
      * 批量更新
-     * @param list List<GenTableColumn>
-     * @return Integer
+     * @param list
+     * @return int
      */
-    Integer batchUpdate(List<GenTableColumn> list);
+    int batchUpdate(@Param("list") List<GenTableColumn> list);
 
     /**
-     * 存在即更新
-     * @param genTableColumn GenTableColumn
-     * @return Integer
+     * 带有空值判断的批量更新
+     * @param list
+     * @return int
      */
-    Integer upsert(@Param("genTableColumn") GenTableColumn genTableColumn);
+    int batchUpdateSelective(@Param("list") List<GenTableColumn> list);
 
     /**
-     * 存在即更新，可选择具体属性
-     * @param genTableColumn GenTableColumn
-     * @return Integer
+     * 更新插入
+     * @param genTableColumn
+     * @return int
      */
-    Integer upsertSelective(@Param("genTableColumn") GenTableColumn genTableColumn);
+    int upsert(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 带有空值判断的更新插入
+     * @param genTableColumn
+     * @return int
+     */
+    int upsertSelective(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsert(@Param("list") List<GenTableColumn> list);
+
+    /**
+     * 带有空值判断的批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsertSelective(@Param("list") List<GenTableColumn> list);
+
+    /**
+     * 通过主键删除
+     * @param columnId
+     * @return int
+     */
+    int deleteByPrimaryKey(@Param("genTableColumn") Long columnId);
+
+    /**
+     * 通过主键批量删除
+     * @param list
+     * @return int
+     */
+    int deleteBatchByPrimaryKeys(@Param("list") List<Long> list);
+
+    /**
+     * 条件删除
+     * @param genTableColumn
+     * @return int
+     */
+    int delete(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 通过主键查询
+     * @param columnId
+     * @return GenTableColumn genTableColumn
+     */
+     GenTableColumn queryByPrimaryKey(@Param("genTableColumn") Long columnId);
+
+    /**
+     * 通过主键批量查询
+     * @param list
+     * @return List<GenTableColumn>
+     */
+    List<GenTableColumn> queryBatchPrimaryKeys(@Param("list") List<Long> list);
+
+    /**
+     * 条件查询一个
+     * @param genTableColumn
+     * @return List<GenTableColumn>
+     */
+    GenTableColumn queryOne(@Param("genTableColumn") GenTableColumn genTableColumn);
 
     /**
      * 条件查询
-     * @param genTableColumn GenTableColumn
+     * @param genTableColumn
      * @return List<GenTableColumn>
-    */
-    List<GenTableColumn> query(@Param("genTableColumn") GenTableColumn genTableColumn);
+     */
+    List<GenTableColumn> queryByCondition(@Param("genTableColumn") GenTableColumn genTableColumn);
 
     /**
-     * 查询总数
-     * @return Integer
+     * 模糊查询
+     * @param genTableColumn
+     * @return List<GenTableColumn>
      */
-    Long queryTotalCount();
+    List<GenTableColumn> queryFuzzy(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 模糊条件查询
+     * @param genTableColumn
+     * @return List<GenTableColumn>
+     */
+    List<GenTableColumn> queryByLikeCondition(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 条件查询数量
+     * @param genTableColumn
+     * @return int
+     */
+    int queryCount(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 分组统计
+     * @param genTableColumn
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroup(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 日统计
+     * @param genTableColumn
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByDay(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 月统计
+     * @param genTableColumn
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByMonth(@Param("genTableColumn") GenTableColumn genTableColumn);
+
+    /**
+     * 年统计
+     * @param genTableColumn
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByYear(@Param("genTableColumn") GenTableColumn genTableColumn);
+
 
 
 }

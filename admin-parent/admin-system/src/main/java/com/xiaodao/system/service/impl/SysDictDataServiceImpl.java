@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysDictDataMapper;
 import com.xiaodao.system.service.ISysDictDataService;
-import com.xiaodao.system.entity.SysDictData;
+import com.xiaodao.feign.system.entity.SysDictData;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysDictDataServiceImpl implements ISysDictDataService{
      @Autowired
      private SysDictDataMapper sysDictDataMapper;
 
-    /**
-     * 创建SysDictData
-     *
-     * @param sysDictData
-     * @return
-     */
     @Override
-    public Integer insert(SysDictData sysDictData){
-        if(sysDictData ==null){
-            return 0;
-        }
+    public int insert(SysDictData sysDictData) {
         return sysDictDataMapper.insert(sysDictData);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param dictCode
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Integer dictCode){
-        if(dictCode ==null){
-            return 0;
-        }
-        Integer result = sysDictDataMapper.deleteById(dictCode);
-        return result;
-
+    public int insertSelective(SysDictData sysDictData) {
+        return sysDictDataMapper.insertSelective(sysDictData);
     }
 
-    /**
-     * 修改SysDictData
-     *
-     * @param sysDictData
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysDictData sysDictData){
-        if(sysDictData ==null){
-            return 0;
-        }
-        return sysDictDataMapper.updateById(sysDictData);
+    public int batchInsert(List<SysDictData> list) {
+        return sysDictDataMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param dictCode
-    * @return
-    */
     @Override
-    public SysDictData selectByPrimaryKey(Integer dictCode){
-        if(dictCode ==null){
-            return null;
-        }
-        SysDictData sysDictData  = sysDictDataMapper.selectById(dictCode);
-        if (sysDictData == null){
-            return null;
-        }
-        return sysDictData;
+    public int batchInsertSelective(List<SysDictData> list) {
+        return sysDictDataMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysDictData SysDictData
-     * @return IPage<SysDictData>
-     */
     @Override
-    public IPage<SysDictData> queryPage(int pageIndex, int pageSize,SysDictData sysDictData){
-        QueryWrapper<SysDictData> queryWrapper = Wrappers.query();
-        IPage<SysDictData> ipage = sysDictDataMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysDictData sysDictData) {
+        return sysDictDataMapper.updateByPrimaryKey(sysDictData);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysDictData
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysDictData> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysDictDataMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysDictData sysDictData) {
+        return sysDictDataMapper.updateSelectiveByPrimaryKey(sysDictData);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysDictData>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysDictData> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysDictDataMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysDictData> list) {
+        return sysDictDataMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Integer >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Integer> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysDictDataMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysDictData SysDictData
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysDictData sysDictData){
-
-        if (sysDictData == null){
-            return 0;
-        }
-        else{
-            return sysDictDataMapper.upsert(sysDictData);
-        }
-
+    public int batchUpdateSelective(List<SysDictData> list) {
+        return sysDictDataMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysDictData SysDictData
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysDictData sysDictData){
-        if (sysDictData == null){
-            return 0;
-        }
-        else{
-            return sysDictDataMapper.upsert(sysDictData);
-        }
+    public int upsert(SysDictData sysDictData) {
+        return sysDictDataMapper.upsert(sysDictData);
     }
 
-    /**
-     * 条件查询
-     * @param sysDictData SysDictData
-     * @return List<SysDictData>
-    */
     @Override
-    public List<SysDictData> query(SysDictData sysDictData){
-        if (sysDictData == null){
-            return null;
-        }
-        else{
-            return sysDictDataMapper.query(sysDictData);
-        }
+    public int upsertSelective(SysDictData sysDictData) {
+        return sysDictDataMapper.upsertSelective(sysDictData);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysDictDataMapper.queryTotalCount();
+    public int batchUpsert(List<SysDictData> list) {
+        return sysDictDataMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysDictData> list) {
+        return sysDictDataMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer dictCode) {
+        return sysDictDataMapper.deleteByPrimaryKey(dictCode);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Integer> list) {
+        return sysDictDataMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysDictData sysDictData) {
+        return sysDictDataMapper.delete(sysDictData);
+    }
+
+    @Override
+    public SysDictData queryByPrimaryKey(Integer dictCode) {
+        return sysDictDataMapper.queryByPrimaryKey(dictCode);
+    }
+
+    @Override
+    public List<SysDictData> queryBatchPrimaryKeys(List<Integer> list) {
+        return sysDictDataMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysDictData queryOne(SysDictData sysDictData) {
+        return sysDictDataMapper.queryOne(sysDictData);
+    }
+
+    @Override
+    public List<SysDictData> queryByCondition(SysDictData sysDictData) {
+        return sysDictDataMapper.queryByCondition(sysDictData);
+    }
+
+    @Override
+    public List<SysDictData> queryFuzzy(SysDictData sysDictData) {
+        return sysDictDataMapper.queryFuzzy(sysDictData);
+    }
+
+    @Override
+    public List<SysDictData> queryByLikeCondition(SysDictData sysDictData) {
+        return sysDictDataMapper.queryByLikeCondition(sysDictData);
+    }
+
+    @Override
+    public int queryCount(SysDictData sysDictData) {
+        return sysDictDataMapper.queryCount(sysDictData);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysDictData sysDictData) {
+        return sysDictDataMapper.statisticsGroup(sysDictData);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysDictData sysDictData) {
+        return sysDictDataMapper.statisticsGroupByDay(sysDictData);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysDictData sysDictData) {
+        return sysDictDataMapper.statisticsGroupByMonth(sysDictData);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysDictData sysDictData) {
+        return sysDictDataMapper.statisticsGroupByYear(sysDictData);
     }
 }

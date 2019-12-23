@@ -1,5 +1,7 @@
 package com.xiaodao.generate.util;
 
+import freemarker.template.utility.StringUtil;
+
 /**
  * 转型操作工具类
  */
@@ -33,7 +35,7 @@ public final class CastUtil {
         double doubleValue = defaultValue;
         if (obj != null) {
             String strValue = castString(obj);
-            if (StringUtil.isNotEmpty(strValue)) {
+            if (StringUtils.isNotEmpty(strValue)) {
                 try {
                     doubleValue = Double.parseDouble(strValue);
                 } catch (NumberFormatException e) {
@@ -58,7 +60,7 @@ public final class CastUtil {
         long longValue = defaultValue;
         if (obj != null) {
             String strValue = castString(obj);
-            if (StringUtil.isNotEmpty(strValue)) {
+            if (StringUtils.isNotEmpty(strValue)) {
                 try {
                     longValue = Long.parseLong(strValue);
                 } catch (NumberFormatException e) {
@@ -83,7 +85,7 @@ public final class CastUtil {
         int intValue = defaultValue;
         if (obj != null) {
             String strValue = castString(obj);
-            if (StringUtil.isNotEmpty(strValue)) {
+            if (StringUtils.isNotEmpty(strValue)) {
                 try {
                     intValue = Integer.parseInt(strValue);
                 } catch (NumberFormatException e) {

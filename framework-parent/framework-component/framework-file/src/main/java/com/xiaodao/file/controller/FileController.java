@@ -1,7 +1,7 @@
 package com.xiaodao.file.controller;
 
-import com.xiaodao.core.vo.RespVO;
-import com.xiaodao.core.vo.RespVOBuilder;
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespVOBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

@@ -1,12 +1,15 @@
 package com.xiaodao.system.service;
 
-import java.util.List;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.apache.ibatis.annotations.Param;
 import javax.validation.constraints.NotNull;
-import com.xiaodao.system.entity.SysPost;
+import javax.validation.constraints.Size;
+
+import com.xiaodao.feign.system.entity.SysPost;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
+import java.util.Map;
+
+
 
 
 /**
@@ -14,101 +17,194 @@ import com.xiaodao.system.entity.SysPost;
  * @author xiaodao
  * @since jdk1.8
  */
+@Validated
 public interface ISysPostService {
 
-
-
     /**
-     * 创建SysPost
-     *
+     * 新增
      * @param sysPost
-     * @return
+     * @return int
      */
-    Integer insert(@NotNull(message = "添加失败，参数不能为空") SysPost sysPost);
-
+    int insert(@NotNull(message = "参数不能为空") SysPost sysPost);
 
     /**
-     * 根据主键删除
-     *
-     * @param postId
-     * @return
-     */
-    Integer deleteByPrimaryKey(@NotNull(message = "删除失败，参数不能为空") Long postId);
-
-    /**
-     * 修改SysPost
-     *
+     * 带有空值判断的新增
      * @param sysPost
-     * @return
-    */
-    Integer updateByPrimaryKey(@NotNull(message = "添加失败，参数不能为空") SysPost sysPost);
-
-
-    /**
-    * 根据主键查询
-    *
-    * @param postId
-    * @return
-    */
-    SysPost selectByPrimaryKey(@NotNull(message = "查询失败，参数不能为空") Long postId);
-
-
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysPost SysPost
-     * @return IPage<SysPost>
+     * @return int
      */
-    IPage<SysPost> queryPage(int pageIndex, int pageSize, SysPost sysPost);
+    int insertSelective(@NotNull(message = "参数不能为空") SysPost sysPost);
+
 
     /**
-    * 批量插入
-    * @param list List<SysPost
-    * @return Integer
-    */
-    Integer batchInsert(List<SysPost> list);
+     * 批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsert(@Size(min = 1, message = "参数不能为空") List<SysPost> list);
+
+    /**
+     * 带有空值判断的批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsertSelective(@Size(min = 1, message = "参数不能为空") List<SysPost> list);
+
+    /**
+     * 根据主键更新
+     * @param sysPost
+     * @return int
+     */
+    int updateByPrimaryKey(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 带有空值判断的主键更新
+     * @param sysPost
+     * @return int
+     */
+    int updateSelectiveByPrimaryKey(@NotNull(message = "参数不能为空") SysPost sysPost);
 
     /**
      * 批量更新
-     * @param list List<SysPost>
-     * @return Integer
+     * @param list
+     * @return int
      */
-    Integer batchUpdate(List<SysPost> list);
+    int batchUpdate(@Size(min = 1, message = "参数不能为空") List<SysPost> list);
 
     /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
+     * 带有空值判断的批量更新
+     * @param list
+     * @return int
      */
-    Integer deleteBatchIds(List<Long> list);
+    int batchUpdateSelective(@Size(min = 1, message = "参数不能为空") List<SysPost> list);
+
 
     /**
-     * 存在即更新
-     * @param sysPost SysPost
-     * @return Integer
+     * 更新插入
+     * @param sysPost
+     * @return int
      */
-    Integer upsert(@Param("sysPost") SysPost sysPost);
+    int upsert(@NotNull(message = "参数不能为空") SysPost sysPost);
 
     /**
-     * 存在即更新，可选择具体属性
-     * @param sysPost SysPost
-     * @return Integer
+     * 带有空值判断的更新插入
+     * @param sysPost
+     * @return int
      */
-    Integer upsertSelective(SysPost sysPost);
+    int upsertSelective(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsert(@Size(min = 1, message = "参数不能为空") List<SysPost> list);
+
+    /**
+     * 带有空值判断的批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsertSelective(@Size(min = 1, message = "参数不能为空") List<SysPost> list);
+
+
+    /**
+     * 通过主键删除
+     * @param postId
+     * @return int
+     */
+
+    int deleteByPrimaryKey(@NotNull(message = "参数不能为空") Long postId);
+
+    /**
+     * 通过主键批量删除
+     * @param list
+     * @return int
+     */
+    int deleteBatchByPrimaryKeys(@Size(min = 1, message = "参数不能为空") List<Long> list);
+
+    /**
+     * 条件删除
+     * @param sysPost
+     * @return int
+     */
+    int delete(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 通过主键查询
+     * @param  postId
+     * @return SysPost sysPost
+     */
+    SysPost queryByPrimaryKey(@NotNull(message = "参数不能为空") Long postId);
+
+    /**
+     * 通过主键批量查询
+     * @param list
+     * @return List<SysPost>
+     */
+    List<SysPost> queryBatchPrimaryKeys(@Size(min = 1, message = "参数不能为空") List<Long> list);
+
+    /**
+     * 条件查询一个
+     * @param sysPost
+     * @return List<SysPost>
+     */
+    SysPost queryOne(@NotNull(message = "参数不能为空") SysPost sysPost);
 
     /**
      * 条件查询
-     * @param sysPost SysPost
+     * @param sysPost
      * @return List<SysPost>
-    */
-    List<SysPost> query(SysPost sysPost);
+     */
+    List<SysPost> queryByCondition(@NotNull(message = "参数不能为空") SysPost sysPost);
 
     /**
-     * 查询总数
-     * @return Integer
+     * 模糊查询
+     * @param sysPost
+     * @return List<SysPost>
      */
-    Long queryTotalCount();
+    List<SysPost> queryFuzzy(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 模糊条件查询
+     * @param sysPost
+     * @return List<SysPost>
+     */
+    List<SysPost> queryByLikeCondition(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 条件查询数量
+     * @param sysPost
+     * @return int
+     */
+    int queryCount(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 分组统计
+     * @param sysPost
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroup(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 日统计
+     * @param sysPost
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByDay(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 月统计
+     * @param sysPost
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByMonth(@NotNull(message = "参数不能为空") SysPost sysPost);
+
+    /**
+     * 年统计
+     * @param sysPost
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByYear(@NotNull(message = "参数不能为空") SysPost sysPost);
 
 
 }

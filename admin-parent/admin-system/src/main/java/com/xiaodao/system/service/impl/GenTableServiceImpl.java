@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.GenTableMapper;
 import com.xiaodao.system.service.IGenTableService;
-import com.xiaodao.system.entity.GenTable;
+import com.xiaodao.feign.system.entity.GenTable;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class GenTableServiceImpl implements IGenTableService{
      @Autowired
      private GenTableMapper genTableMapper;
 
-    /**
-     * 创建GenTable
-     *
-     * @param genTable
-     * @return
-     */
     @Override
-    public Integer insert(GenTable genTable){
-        if(genTable ==null){
-            return 0;
-        }
+    public int insert(GenTable genTable) {
         return genTableMapper.insert(genTable);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param tableId
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(Long tableId){
-        if(tableId ==null){
-            return 0;
-        }
-        Integer result = genTableMapper.deleteById(tableId);
-        return result;
-
+    public int insertSelective(GenTable genTable) {
+        return genTableMapper.insertSelective(genTable);
     }
 
-    /**
-     * 修改GenTable
-     *
-     * @param genTable
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(GenTable genTable){
-        if(genTable ==null){
-            return 0;
-        }
-        return genTableMapper.updateById(genTable);
+    public int batchInsert(List<GenTable> list) {
+        return genTableMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param tableId
-    * @return
-    */
     @Override
-    public GenTable selectByPrimaryKey(Long tableId){
-        if(tableId ==null){
-            return null;
-        }
-        GenTable genTable  = genTableMapper.selectById(tableId);
-        if (genTable == null){
-            return null;
-        }
-        return genTable;
+    public int batchInsertSelective(List<GenTable> list) {
+        return genTableMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param genTable GenTable
-     * @return IPage<GenTable>
-     */
     @Override
-    public IPage<GenTable> queryPage(int pageIndex, int pageSize,GenTable genTable){
-        QueryWrapper<GenTable> queryWrapper = Wrappers.query();
-        IPage<GenTable> ipage = genTableMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(GenTable genTable) {
+        return genTableMapper.updateByPrimaryKey(genTable);
     }
 
-    /**
-    * 批量插入
-    * @param list List<GenTable
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<GenTable> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return genTableMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(GenTable genTable) {
+        return genTableMapper.updateSelectiveByPrimaryKey(genTable);
     }
 
-    /**
-     * 批量更新
-     * @param list List<GenTable>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<GenTable> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return genTableMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<GenTable> list) {
+        return genTableMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<Long >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<Long> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return genTableMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param genTable GenTable
-     * @return Integer
-     */
     @Override
-    public Integer upsert(GenTable genTable){
-
-        if (genTable == null){
-            return 0;
-        }
-        else{
-            return genTableMapper.upsert(genTable);
-        }
-
+    public int batchUpdateSelective(List<GenTable> list) {
+        return genTableMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param genTable GenTable
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(GenTable genTable){
-        if (genTable == null){
-            return 0;
-        }
-        else{
-            return genTableMapper.upsert(genTable);
-        }
+    public int upsert(GenTable genTable) {
+        return genTableMapper.upsert(genTable);
     }
 
-    /**
-     * 条件查询
-     * @param genTable GenTable
-     * @return List<GenTable>
-    */
     @Override
-    public List<GenTable> query(GenTable genTable){
-        if (genTable == null){
-            return null;
-        }
-        else{
-            return genTableMapper.query(genTable);
-        }
+    public int upsertSelective(GenTable genTable) {
+        return genTableMapper.upsertSelective(genTable);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return genTableMapper.queryTotalCount();
+    public int batchUpsert(List<GenTable> list) {
+        return genTableMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<GenTable> list) {
+        return genTableMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long tableId) {
+        return genTableMapper.deleteByPrimaryKey(tableId);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<Long> list) {
+        return genTableMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(GenTable genTable) {
+        return genTableMapper.delete(genTable);
+    }
+
+    @Override
+    public GenTable queryByPrimaryKey(Long tableId) {
+        return genTableMapper.queryByPrimaryKey(tableId);
+    }
+
+    @Override
+    public List<GenTable> queryBatchPrimaryKeys(List<Long> list) {
+        return genTableMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public GenTable queryOne(GenTable genTable) {
+        return genTableMapper.queryOne(genTable);
+    }
+
+    @Override
+    public List<GenTable> queryByCondition(GenTable genTable) {
+        return genTableMapper.queryByCondition(genTable);
+    }
+
+    @Override
+    public List<GenTable> queryFuzzy(GenTable genTable) {
+        return genTableMapper.queryFuzzy(genTable);
+    }
+
+    @Override
+    public List<GenTable> queryByLikeCondition(GenTable genTable) {
+        return genTableMapper.queryByLikeCondition(genTable);
+    }
+
+    @Override
+    public int queryCount(GenTable genTable) {
+        return genTableMapper.queryCount(genTable);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(GenTable genTable) {
+        return genTableMapper.statisticsGroup(genTable);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(GenTable genTable) {
+        return genTableMapper.statisticsGroupByDay(genTable);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(GenTable genTable) {
+        return genTableMapper.statisticsGroupByMonth(genTable);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(GenTable genTable) {
+        return genTableMapper.statisticsGroupByYear(genTable);
     }
 }

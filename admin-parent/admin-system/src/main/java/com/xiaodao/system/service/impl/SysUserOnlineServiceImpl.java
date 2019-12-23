@@ -1,17 +1,15 @@
 package com.xiaodao.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysUserOnlineMapper;
 import com.xiaodao.system.service.ISysUserOnlineService;
-import com.xiaodao.system.entity.SysUserOnline;
+import com.xiaodao.feign.system.entity.SysUserOnline;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,178 +24,133 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService{
      @Autowired
      private SysUserOnlineMapper sysUserOnlineMapper;
 
-    /**
-     * 创建SysUserOnline
-     *
-     * @param sysUserOnline
-     * @return
-     */
     @Override
-    public Integer insert(SysUserOnline sysUserOnline){
-        if(sysUserOnline ==null){
-            return 0;
-        }
+    public int insert(SysUserOnline sysUserOnline) {
         return sysUserOnlineMapper.insert(sysUserOnline);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param sessionid
-     * @return
-     */
     @Override
-    public Integer deleteByPrimaryKey(String sessionid){
-        if(sessionid ==null){
-            return 0;
-        }
-        Integer result = sysUserOnlineMapper.deleteById(sessionid);
-        return result;
-
+    public int insertSelective(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.insertSelective(sysUserOnline);
     }
 
-    /**
-     * 修改SysUserOnline
-     *
-     * @param sysUserOnline
-     * @return
-    */
     @Override
-    public Integer updateByPrimaryKey(SysUserOnline sysUserOnline){
-        if(sysUserOnline ==null){
-            return 0;
-        }
-        return sysUserOnlineMapper.updateById(sysUserOnline);
+    public int batchInsert(List<SysUserOnline> list) {
+        return sysUserOnlineMapper.batchInsert(list);
     }
 
-    /**
-    * 根据主键查询
-    *
-    * @param sessionid
-    * @return
-    */
     @Override
-    public SysUserOnline selectByPrimaryKey(String sessionid){
-        if(sessionid ==null){
-            return null;
-        }
-        SysUserOnline sysUserOnline  = sysUserOnlineMapper.selectById(sessionid);
-        if (sysUserOnline == null){
-            return null;
-        }
-        return sysUserOnline;
+    public int batchInsertSelective(List<SysUserOnline> list) {
+        return sysUserOnlineMapper.batchInsertSelective(list);
     }
 
-    /**
-     * 分页查询
-     * @param pageIndex
-     * @param pageSize
-     * @param sysUserOnline SysUserOnline
-     * @return IPage<SysUserOnline>
-     */
     @Override
-    public IPage<SysUserOnline> queryPage(int pageIndex, int pageSize,SysUserOnline sysUserOnline){
-        QueryWrapper<SysUserOnline> queryWrapper = Wrappers.query();
-        IPage<SysUserOnline> ipage = sysUserOnlineMapper.selectPage(new Page(pageIndex, pageSize), queryWrapper);
-        return ipage;
+    public int updateByPrimaryKey(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.updateByPrimaryKey(sysUserOnline);
     }
 
-    /**
-    * 批量插入
-    * @param list List<SysUserOnline
-    * @return Integer
-    */
     @Override
-    public Integer batchInsert(List<SysUserOnline> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysUserOnlineMapper.batchInsert(list);
-        }
+    public int updateSelectiveByPrimaryKey(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.updateSelectiveByPrimaryKey(sysUserOnline);
     }
 
-    /**
-     * 批量更新
-     * @param list List<SysUserOnline>
-     * @return Integer
-     */
     @Override
-    public Integer batchUpdate(List<SysUserOnline> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        }
-        else{
-            return sysUserOnlineMapper.batchInsert(list);
-        }
+    public int batchUpdate(List<SysUserOnline> list) {
+        return sysUserOnlineMapper.batchUpdate(list);
     }
 
-    /**
-     * 批量删除
-     * @param list List<String >
-     * @return Integer
-    */
-    public Integer deleteBatchIds(List<String> list){
-        if (CollectionUtils.isEmpty(list)){
-            return 0;
-        } else{
-            return sysUserOnlineMapper.deleteBatchIds(list);
-        }
-    }
-    /**
-     * 存在即更新
-     * @param sysUserOnline SysUserOnline
-     * @return Integer
-     */
     @Override
-    public Integer upsert(SysUserOnline sysUserOnline){
-
-        if (sysUserOnline == null){
-            return 0;
-        }
-        else{
-            return sysUserOnlineMapper.upsert(sysUserOnline);
-        }
-
+    public int batchUpdateSelective(List<SysUserOnline> list) {
+        return sysUserOnlineMapper.batchUpdateSelective(list);
     }
 
-    /**
-     * 存在即更新，可选择具体属性
-     * @param sysUserOnline SysUserOnline
-     * @return Integer
-     */
     @Override
-    public Integer upsertSelective(SysUserOnline sysUserOnline){
-        if (sysUserOnline == null){
-            return 0;
-        }
-        else{
-            return sysUserOnlineMapper.upsert(sysUserOnline);
-        }
+    public int upsert(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.upsert(sysUserOnline);
     }
 
-    /**
-     * 条件查询
-     * @param sysUserOnline SysUserOnline
-     * @return List<SysUserOnline>
-    */
     @Override
-    public List<SysUserOnline> query(SysUserOnline sysUserOnline){
-        if (sysUserOnline == null){
-            return null;
-        }
-        else{
-            return sysUserOnlineMapper.query(sysUserOnline);
-        }
+    public int upsertSelective(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.upsertSelective(sysUserOnline);
     }
 
-    /**
-     * 查询总数
-     * @return Integer
-     */
     @Override
-    public Long queryTotalCount(){
-        return sysUserOnlineMapper.queryTotalCount();
+    public int batchUpsert(List<SysUserOnline> list) {
+        return sysUserOnlineMapper.batchUpsert(list);
+    }
+
+    @Override
+    public int batchUpsertSelective(List<SysUserOnline> list) {
+        return sysUserOnlineMapper.batchUpsertSelective(list);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(String sessionid) {
+        return sysUserOnlineMapper.deleteByPrimaryKey(sessionid);
+    }
+
+    @Override
+    public int deleteBatchByPrimaryKeys(List<String> list) {
+        return sysUserOnlineMapper.deleteBatchByPrimaryKeys(list);
+    }
+
+    @Override
+    public int delete(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.delete(sysUserOnline);
+    }
+
+    @Override
+    public SysUserOnline queryByPrimaryKey(String sessionid) {
+        return sysUserOnlineMapper.queryByPrimaryKey(sessionid);
+    }
+
+    @Override
+    public List<SysUserOnline> queryBatchPrimaryKeys(List<String> list) {
+        return sysUserOnlineMapper.queryBatchPrimaryKeys(list);
+    }
+
+    @Override
+    public SysUserOnline queryOne(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.queryOne(sysUserOnline);
+    }
+
+    @Override
+    public List<SysUserOnline> queryByCondition(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.queryByCondition(sysUserOnline);
+    }
+
+    @Override
+    public List<SysUserOnline> queryFuzzy(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.queryFuzzy(sysUserOnline);
+    }
+
+    @Override
+    public List<SysUserOnline> queryByLikeCondition(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.queryByLikeCondition(sysUserOnline);
+    }
+
+    @Override
+    public int queryCount(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.queryCount(sysUserOnline);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroup(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.statisticsGroup(sysUserOnline);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByDay(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.statisticsGroupByDay(sysUserOnline);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByMonth(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.statisticsGroupByMonth(sysUserOnline);
+    }
+
+    @Override
+    public List<Map<String, Object>> statisticsGroupByYear(SysUserOnline sysUserOnline) {
+        return sysUserOnlineMapper.statisticsGroupByYear(sysUserOnline);
     }
 }

@@ -1,58 +1,200 @@
 package com.xiaodao.system.mapper;
 
-import java.util.List;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import org.apache.ibatis.annotations.Param;
-import com.xiaodao.system.entity.SysDictType;
+import com.xiaodao.feign.system.entity.SysDictType;
 
-
+import java.util.List;
+import java.util.Map;
 /**
  * @description SysDictTypeMapper
  * @authorxiaodao
  * @since jdk1.8
  */
-public interface SysDictTypeMapper extends BaseMapper<SysDictType>{
+public interface SysDictTypeMapper{
 
     /**
-    * 批量插入
-    * @param list List<SysDictType
-    * @return Integer
-    */
-    Integer batchInsert(List<SysDictType> list);
+     * 新增
+     * @param sysDictType
+     * @return int
+     */
+    int insert(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 带有空值判断的新增
+     * @param sysDictType
+     * @return int
+     */
+    int insertSelective(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsert(@Param("list") List<SysDictType> list);
+
+    /**
+     * 带有空值判断的批量插入
+     * @param list
+     * @return int
+     */
+    int batchInsertSelective(@Param("list") List<SysDictType> list);
+
+    /**
+     * 根据主键更新
+     * @param sysDictType
+     * @return int
+     */
+    int updateByPrimaryKey(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 带有空值判断的主键更新
+     * @param sysDictType
+     * @return int
+     */
+    int updateSelectiveByPrimaryKey(@Param("sysDictType") SysDictType sysDictType);
 
     /**
      * 批量更新
-     * @param list List<SysDictType>
-     * @return Integer
+     * @param list
+     * @return int
      */
-    Integer batchUpdate(List<SysDictType> list);
+    int batchUpdate(@Param("list") List<SysDictType> list);
 
     /**
-     * 存在即更新
-     * @param sysDictType SysDictType
-     * @return Integer
+     * 带有空值判断的批量更新
+     * @param list
+     * @return int
      */
-    Integer upsert(@Param("sysDictType") SysDictType sysDictType);
+    int batchUpdateSelective(@Param("list") List<SysDictType> list);
 
     /**
-     * 存在即更新，可选择具体属性
-     * @param sysDictType SysDictType
-     * @return Integer
+     * 更新插入
+     * @param sysDictType
+     * @return int
      */
-    Integer upsertSelective(@Param("sysDictType") SysDictType sysDictType);
+    int upsert(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 带有空值判断的更新插入
+     * @param sysDictType
+     * @return int
+     */
+    int upsertSelective(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsert(@Param("list") List<SysDictType> list);
+
+    /**
+     * 带有空值判断的批量更新插入
+     * @param list
+     * @return int
+     */
+    int batchUpsertSelective(@Param("list") List<SysDictType> list);
+
+    /**
+     * 通过主键删除
+     * @param dictId
+     * @return int
+     */
+    int deleteByPrimaryKey(@Param("sysDictType") Long dictId);
+
+    /**
+     * 通过主键批量删除
+     * @param list
+     * @return int
+     */
+    int deleteBatchByPrimaryKeys(@Param("list") List<Long> list);
+
+    /**
+     * 条件删除
+     * @param sysDictType
+     * @return int
+     */
+    int delete(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 通过主键查询
+     * @param dictId
+     * @return SysDictType sysDictType
+     */
+     SysDictType queryByPrimaryKey(@Param("sysDictType") Long dictId);
+
+    /**
+     * 通过主键批量查询
+     * @param list
+     * @return List<SysDictType>
+     */
+    List<SysDictType> queryBatchPrimaryKeys(@Param("list") List<Long> list);
+
+    /**
+     * 条件查询一个
+     * @param sysDictType
+     * @return List<SysDictType>
+     */
+    SysDictType queryOne(@Param("sysDictType") SysDictType sysDictType);
 
     /**
      * 条件查询
-     * @param sysDictType SysDictType
+     * @param sysDictType
      * @return List<SysDictType>
-    */
-    List<SysDictType> query(@Param("sysDictType") SysDictType sysDictType);
+     */
+    List<SysDictType> queryByCondition(@Param("sysDictType") SysDictType sysDictType);
 
     /**
-     * 查询总数
-     * @return Integer
+     * 模糊查询
+     * @param sysDictType
+     * @return List<SysDictType>
      */
-    Long queryTotalCount();
+    List<SysDictType> queryFuzzy(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 模糊条件查询
+     * @param sysDictType
+     * @return List<SysDictType>
+     */
+    List<SysDictType> queryByLikeCondition(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 条件查询数量
+     * @param sysDictType
+     * @return int
+     */
+    int queryCount(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 分组统计
+     * @param sysDictType
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroup(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 日统计
+     * @param sysDictType
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByDay(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 月统计
+     * @param sysDictType
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByMonth(@Param("sysDictType") SysDictType sysDictType);
+
+    /**
+     * 年统计
+     * @param sysDictType
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> statisticsGroupByYear(@Param("sysDictType") SysDictType sysDictType);
+
 
 
 }
