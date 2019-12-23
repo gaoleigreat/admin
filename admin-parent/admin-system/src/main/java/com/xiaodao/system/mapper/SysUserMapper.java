@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * @description SysUserMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysUserMapper {

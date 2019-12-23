@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 /**
  * @description SysDictDataMapper
- * @authorxiaodao
+ * @author¸ßÀÚ
  * @since jdk1.8
  */
 public interface SysDictDataMapper{
