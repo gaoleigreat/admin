@@ -11,6 +11,9 @@
         <result property="createTime" column="create_time"/>
         <result property="createBy" column="create_by"/>
         <result property="service" column="service"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="remark" column="remark"/>
     </resultMap>
 
     <!--数据库表的基本查询列名集合 -->
@@ -21,7 +24,10 @@
         url,
         create_time,
         create_by,
-        service
+        service,
+        update_time,
+        update_by,
+        remark
     </sql>
 
 
@@ -34,7 +40,10 @@
         url,
         create_time,
         create_by,
-        service
+        service,
+        update_time,
+        update_by,
+        remark
     </trim>
     </sql>
 
@@ -46,8 +55,11 @@
             #{sysOss.fileSuffix,jdbcType=VARCHAR},
             #{sysOss.url,jdbcType=VARCHAR},
             #{sysOss.createTime,jdbcType=TIMESTAMP},
-            #{sysOss.createBy,jdbcType=VARCHAR},
-            #{sysOss.service,jdbcType=BIGINT}
+            #{sysOss.createBy,jdbcType=BIGINT},
+            #{sysOss.service,jdbcType=BIGINT},
+            #{sysOss.updateTime,jdbcType=TIMESTAMP},
+            #{sysOss.updateBy,jdbcType=BIGINT},
+            #{sysOss.remark,jdbcType=VARCHAR}
     </trim>
     </sql>
     <!--基本选择插入字段-->
@@ -72,7 +84,16 @@
                  create_by,
             </if>
             <if test="sysOss.service != null">
-                 service
+                 service,
+            </if>
+            <if test="sysOss.updateTime != null">
+                 update_time,
+            </if>
+            <if test="sysOss.updateBy != null">
+                 update_by,
+            </if>
+            <if test="sysOss.remark != null">
+                 remark
             </if>
         </trim>
     </sql>
@@ -96,10 +117,19 @@
                 #{sysOss.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="sysOss.createBy != null">
-                #{sysOss.createBy,jdbcType=VARCHAR},
+                #{sysOss.createBy,jdbcType=BIGINT},
             </if>
             <if test="sysOss.service != null">
-                #{sysOss.service,jdbcType=BIGINT}
+                #{sysOss.service,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.updateTime != null">
+                #{sysOss.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysOss.updateBy != null">
+                #{sysOss.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.remark != null">
+                #{sysOss.remark,jdbcType=VARCHAR}
             </if>
         </trim>
     </sql>
@@ -112,8 +142,11 @@
             file_suffix = #{sysOss.fileSuffix,jdbcType=VARCHAR},
             url = #{sysOss.url,jdbcType=VARCHAR},
             create_time = #{sysOss.createTime,jdbcType=TIMESTAMP},
-            create_by = #{sysOss.createBy,jdbcType=VARCHAR},
-            service = #{sysOss.service,jdbcType=BIGINT}
+            create_by = #{sysOss.createBy,jdbcType=BIGINT},
+            service = #{sysOss.service,jdbcType=BIGINT},
+            update_time = #{sysOss.updateTime,jdbcType=TIMESTAMP},
+            update_by = #{sysOss.updateBy,jdbcType=BIGINT},
+            remark = #{sysOss.remark,jdbcType=VARCHAR}
         </set>
     </sql>
     <!--带有空值检查的基本更新-->
@@ -135,10 +168,19 @@
                 create_time = #{sysOss.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="sysOss.createBy != null">
-                create_by = #{sysOss.createBy,jdbcType=VARCHAR},
+                create_by = #{sysOss.createBy,jdbcType=BIGINT},
             </if>
             <if test="sysOss.service != null">
-                service = #{sysOss.service,jdbcType=BIGINT}
+                service = #{sysOss.service,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.updateTime != null">
+                update_time = #{sysOss.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysOss.updateBy != null">
+                update_by = #{sysOss.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.remark != null">
+                remark = #{sysOss.remark,jdbcType=VARCHAR}
             </if>
         </set>
     </sql>
@@ -162,10 +204,19 @@
             and create_time = #{sysOss.createTime,jdbcType=TIMESTAMP}
         </if>
         <if test="sysOss.createBy != null">
-            and create_by = #{sysOss.createBy,jdbcType=VARCHAR}
+            and create_by = #{sysOss.createBy,jdbcType=BIGINT}
         </if>
         <if test="sysOss.service != null">
             and service = #{sysOss.service,jdbcType=BIGINT}
+        </if>
+        <if test="sysOss.updateTime != null">
+            and update_time = #{sysOss.updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="sysOss.updateBy != null">
+            and update_by = #{sysOss.updateBy,jdbcType=BIGINT}
+        </if>
+        <if test="sysOss.remark != null">
+            and remark = #{sysOss.remark,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -192,6 +243,15 @@
         <if test="sysOss.service != null">
             and service like concat('%',concat(#{sysOss.service},'%'))
         </if>
+        <if test="sysOss.updateTime != null">
+            and update_time like concat('%',concat(#{sysOss.updateTime},'%'))
+        </if>
+        <if test="sysOss.updateBy != null">
+            and update_by like concat('%',concat(#{sysOss.updateBy},'%'))
+        </if>
+        <if test="sysOss.remark != null">
+            and remark like concat('%',concat(#{sysOss.remark},'%'))
+        </if>
     </sql>
 
     <!--模糊查询 -->
@@ -203,6 +263,9 @@
         or create_time like concat('%',concat(#{sysOss.searchValue},'%'))
         or create_by like concat('%',concat(#{sysOss.searchValue},'%'))
         or service like concat('%',concat(#{sysOss.searchValue},'%'))
+        or update_time like concat('%',concat(#{sysOss.searchValue},'%'))
+        or update_by like concat('%',concat(#{sysOss.searchValue},'%'))
+        or remark like concat('%',concat(#{sysOss.searchValue},'%'))
     </sql>
 
 
@@ -214,7 +277,7 @@
         <if test="sysOss.orderBy == null or sysOss.orderBy==''">
             #{sysOss.id}
         </if>
-        <if test="baseService.isAsc  == 1">
+        <if test="sysOss.isAsc  == 1">
             DESC
         </if>
     </sql>
@@ -236,8 +299,11 @@
             file_suffix = #{sysOss.fileSuffix,jdbcType=VARCHAR},
             url = #{sysOss.url,jdbcType=VARCHAR},
             create_time = #{sysOss.createTime,jdbcType=TIMESTAMP},
-            create_by = #{sysOss.createBy,jdbcType=VARCHAR},
-            service = #{sysOss.service,jdbcType=BIGINT}
+            create_by = #{sysOss.createBy,jdbcType=BIGINT},
+            service = #{sysOss.service,jdbcType=BIGINT},
+            update_time = #{sysOss.updateTime,jdbcType=TIMESTAMP},
+            update_by = #{sysOss.updateBy,jdbcType=BIGINT},
+            remark = #{sysOss.remark,jdbcType=VARCHAR}
          </trim>
     </sql>
 
@@ -260,10 +326,19 @@
                 create_time = #{sysOss.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="sysOss.createBy != null">
-                create_by = #{sysOss.createBy,jdbcType=VARCHAR},
+                create_by = #{sysOss.createBy,jdbcType=BIGINT},
             </if>
             <if test="sysOss.service != null">
-                service = #{sysOss.service,jdbcType=BIGINT}
+                service = #{sysOss.service,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.updateTime != null">
+                update_time = #{sysOss.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysOss.updateBy != null">
+                update_by = #{sysOss.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.remark != null">
+                remark = #{sysOss.remark,jdbcType=VARCHAR}
             </if>
         </trim>
     </sql>
@@ -278,6 +353,9 @@
             create_time = values(create_time),
             create_by = values(create_by),
             service = values(service),
+            update_time = values(update_time),
+            update_by = values(update_by),
+            remark = values(remark),
         </trim>
     </sql>
 
@@ -300,10 +378,19 @@
                 create_time = #{item.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="sysOss.createBy != null">
-                create_by = #{item.createBy,jdbcType=VARCHAR},
+                create_by = #{item.createBy,jdbcType=BIGINT},
             </if>
             <if test="sysOss.service != null">
-                service = #{item.service,jdbcType=BIGINT}
+                service = #{item.service,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysOss.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sysOss.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
             </if>
         </trim>
     </sql>
@@ -316,8 +403,11 @@
             #{item.fileSuffix,jdbcType=VARCHAR},
             #{item.url,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.createBy,jdbcType=VARCHAR},
-            #{item.service,jdbcType=BIGINT}
+            #{item.createBy,jdbcType=BIGINT},
+            #{item.service,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=BIGINT},
+            #{item.remark,jdbcType=VARCHAR}
         </trim>
     </sql>
 
@@ -329,8 +419,11 @@
             file_suffix = #{item.fileSuffix,jdbcType=VARCHAR},
             url = #{item.url,jdbcType=VARCHAR},
             create_time = #{item.createTime,jdbcType=TIMESTAMP},
-            create_by = #{item.createBy,jdbcType=VARCHAR},
-            service = #{item.service,jdbcType=BIGINT}
+            create_by = #{item.createBy,jdbcType=BIGINT},
+            service = #{item.service,jdbcType=BIGINT},
+            update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            update_by = #{item.updateBy,jdbcType=BIGINT},
+            remark = #{item.remark,jdbcType=VARCHAR}
         </set>
     </sql>
 
@@ -353,10 +446,19 @@
                 create_time = #{item.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="item.createBy != null">
-                create_by = #{item.createBy,jdbcType=VARCHAR},
+                create_by = #{item.createBy,jdbcType=BIGINT},
             </if>
             <if test="item.service != null">
-                service = #{item.service,jdbcType=BIGINT}
+                service = #{item.service,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateTime != null">
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                update_by = #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.remark != null">
+                remark = #{item.remark,jdbcType=VARCHAR}
             </if>
         </set>
     </sql>
@@ -383,7 +485,16 @@
                 create_by ,
             </if>
             <if test="item.service != null">
-                service 
+                service ,
+            </if>
+            <if test="item.updateTime != null">
+                update_time ,
+            </if>
+            <if test="item.updateBy != null">
+                update_by ,
+            </if>
+            <if test="item.remark != null">
+                remark 
             </if>
         </trim>
     </sql>
@@ -407,10 +518,19 @@
                 #{item.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="item.createBy != null">
-                #{item.createBy,jdbcType=VARCHAR},
+                #{item.createBy,jdbcType=BIGINT},
             </if>
             <if test="item.service != null">
-                #{item.service,jdbcType=BIGINT}
+                #{item.service,jdbcType=BIGINT},
+            </if>
+            <if test="item.updateTime != null">
+                #{item.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.updateBy != null">
+                #{item.updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="item.remark != null">
+                #{item.remark,jdbcType=VARCHAR}
             </if>
         </trim>
     </sql>

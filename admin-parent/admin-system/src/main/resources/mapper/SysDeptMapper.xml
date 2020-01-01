@@ -380,9 +380,9 @@
             #{sysDept.orderBy}
         </if>
         <if test="sysDept.orderBy == null or sysDept.orderBy==''">
-            #{sysDept.dept_id}
+            #{sysDept.deptId}
         </if>
-        <if test="baseService.isAsc  == 1">
+        <if test="sysDept.isAsc  == 1">
             DESC
         </if>
     </sql>

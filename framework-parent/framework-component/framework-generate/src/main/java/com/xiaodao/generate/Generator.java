@@ -44,13 +44,13 @@ public class Generator {
                 map.put("gentable", e);
                 map.put("genconfig", genConfig);
 
-                String mapperDir = "E:\\" + genConfig.getDaoPackageName().replace(".", "/") + "/";
-                String entityDir = "E:\\" + genConfig.getEntityPackageName().replace(".", "/") + "/";
-                String serviceDir = "E:\\" + genConfig.getServicePackageName().replace(".", "/") + "/";
-                String serviceImplDir = "E:\\" + genConfig.getServiceImplPackageName().replace(".", "/") + "/";
-                String controllerDir = "E:\\" + genConfig.getControllerPackageName().replace(".", "/") + "/";
-                String feignClient = "E:\\" + genConfig.getFeignClientPackageName().replace(".", "/") + "/";
-                String mapperXmlDir = "E:\\" + genConfig.getMapperPackageName().replace(".", "/") + "/";
+                String mapperDir = "C:\\" + genConfig.getDaoPackageName().replace(".", "/") + "/";
+                String entityDir = "C:\\" + genConfig.getEntityPackageName().replace(".", "/") + "/";
+                String serviceDir = "C:\\" + genConfig.getServicePackageName().replace(".", "/") + "/";
+                String serviceImplDir = "C:\\" + genConfig.getServiceImplPackageName().replace(".", "/") + "/";
+                String controllerDir = "C:\\" + genConfig.getControllerPackageName().replace(".", "/") + "/";
+                String feignClient = "C:\\" + genConfig.getFeignClientPackageName().replace(".", "/") + "/";
+                String mapperXmlDir = "C:\\" + genConfig.getMapperPackageName().replace(".", "/") + "/";
                 mkdirs(mapperDir);
                 mkdirs(entityDir);
                 mkdirs(serviceDir);

@@ -487,7 +487,7 @@
         <if test="sysUser.orderBy == null or sysUser.orderBy==''">
             #{sysUser.user_id}
         </if>
-        <if test="baseService.isAsc  == 1">
+        <if test="sysUser.isAsc  == 1">
             DESC
         </if>
     </sql>

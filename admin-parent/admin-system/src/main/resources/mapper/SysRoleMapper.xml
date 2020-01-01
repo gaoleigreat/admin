@@ -317,9 +317,9 @@
             #{sysRole.orderBy}
         </if>
         <if test="sysRole.orderBy == null or sysRole.orderBy==''">
-            #{sysRole.role_id}
+            #{sysRole.roleId}
         </if>
-        <if test="baseService.isAsc  == 1">
+        <if test="sysRole.isAsc  == 1">
             DESC
         </if>
     </sql>

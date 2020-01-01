@@ -11,7 +11,7 @@
         <module>framework-gateway</module>
         <module>framework-generate</module>
         <module>framework-zuul</module>
-        <module>framework-fileview</module>
+
     </modules>
     <parent>
         <groupId>com.xiaodao</groupId>
