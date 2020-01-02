@@ -21,7 +21,7 @@ package com.xiaodao.core.utils;
 public class SnowflakeIdUtils {
 
     private static class SnowflakeIdUtilsHolder {
-        private final static SnowflakeIdUtils instance = new SnowflakeIdUtils(0, 0);
+        private final static SnowflakeIdUtils INSTANCE = new SnowflakeIdUtils(0, 0);
     }
 
     /**
@@ -30,7 +30,7 @@ public class SnowflakeIdUtils {
      * @return the long
      */
     public static long createId() {
-        return SnowflakeIdUtilsHolder.instance.nextId();
+        return SnowflakeIdUtilsHolder.INSTANCE.nextId();
     }
 
     /**

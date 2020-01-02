@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
@@ -18,7 +17,7 @@ import java.util.Vector;
  * @Version 1.0
  */
 @Slf4j
-public final class DBConnectionPool extends Pool {
+public final class DBConnectionBasePool extends BasePool {
     /**
      * 正在使用的连接数
      */
@@ -39,21 +38,21 @@ public final class DBConnectionPool extends Pool {
 
     private static int numActive = 0;
 
-    private static DBConnectionPool pool = null;
+    private static DBConnectionBasePool pool = null;
 
     /**
      * 产生数据连接池
      *
      * @return
      */
-    public static synchronized DBConnectionPool getInstance() {
+    public static synchronized DBConnectionBasePool getInstance() {
         if (pool == null) {
-            pool = new DBConnectionPool();
+            pool = new DBConnectionBasePool();
         }
         return pool;
     }
 
-    private DBConnectionPool() {
+    private DBConnectionBasePool() {
         try {
             this.init();
             for (int i = 0; i < normalConnect; i++) {
@@ -161,7 +160,7 @@ public final class DBConnectionPool extends Pool {
 
     @Override
     public void createPool() {
-        pool = new DBConnectionPool();
+        pool = new DBConnectionBasePool();
         if (pool != null) {
             log.info("创建连接池成功");
         } else {

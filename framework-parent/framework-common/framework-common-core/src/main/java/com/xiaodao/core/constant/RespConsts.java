@@ -53,18 +53,18 @@ public class RespConsts {
      * 失败
      */
     public interface Failure {
-        String ret = FAILURE;
-        int retCode = FAIL_RESULT_CODE;
-        String msg = "请求失败";
+        String RET = FAILURE;
+        int RET_CODE = FAIL_RESULT_CODE;
+        String MSG = "请求失败";
     }
 
     /**
      * 成功
      */
     public interface Success {
-        String ret = SUCCESS;
-        int retCode = SUCCESS_RESULT_CODE;
-        String msg = "请求成功";
+        String RET = SUCCESS;
+        int RET_CODE = SUCCESS_RESULT_CODE;
+        String MSG = "请求成功";
     }
 
 

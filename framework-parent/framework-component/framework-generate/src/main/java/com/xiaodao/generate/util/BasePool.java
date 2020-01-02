@@ -13,13 +13,13 @@ import java.util.Properties;
  * @Date 2019/11/1 23:41
  * @Version 1.0
  */
-public abstract class Pool {
+public abstract class BasePool {
     public String propertiesNames = "connection-INF.properties";
 
     /**
      * 定义唯一实例
      */
-    private static Pool instance = null;
+    private static BasePool instance = null;
 
     /**
      * 最大连接数
@@ -42,7 +42,7 @@ public abstract class Pool {
     protected Driver driver = null;
 
 
-    protected Pool() {
+    protected BasePool() {
         init();
         loadDrivers(driverName);
     }
@@ -91,10 +91,10 @@ public abstract class Pool {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public static synchronized Pool getInstance() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public static synchronized BasePool getInstance() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         if (instance == null) {
             instance.init();
-            instance = (Pool) Class.forName("com.xiaodao.generate.util.Pool").newInstance();
+            instance = (BasePool) Class.forName("com.xiaodao.generate.util.BasePool").newInstance();
         }
         return instance;
     }

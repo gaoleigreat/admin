@@ -78,8 +78,8 @@ public class DataDao implements IDataDao {
     public static void main(String[] args) throws SQLException {
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
         DataDao dataDao = new DataDao(dataBaseConnection.getConnection());
-        List<GenTableColumn> sys_config = dataDao.getTableFileds("sys_config");
-        sys_config.forEach(s -> {
+        List<GenTableColumn> sysConfig = dataDao.getTableFileds("sys_config");
+        sysConfig.forEach(s -> {
             System.out.println(s);
         }
     );}

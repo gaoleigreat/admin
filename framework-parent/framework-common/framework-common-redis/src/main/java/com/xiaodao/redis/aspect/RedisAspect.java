@@ -59,7 +59,7 @@ public class RedisAspect
      * 环绕通知，方法拦截器
      */
     @Around("redisCachePoint()")
-    public Object WriteReadFromRedis(ProceedingJoinPoint point)
+    public Object writeReadFromRedis(ProceedingJoinPoint point)
     {
         try
         {
