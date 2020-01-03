@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class SysOss  {
+public class SysOss  extends BaseEntity{
     /**
      * 
      */
@@ -36,18 +36,7 @@ public class SysOss  {
     
     @ApiModelProperty("URL地址")
     private String url;
-    /**
-     * 创建时间
-     */
-    
-    @ApiModelProperty("创建时间")
-    private Date createTime;
-    /**
-     * 上传人
-     */
-    
-    @ApiModelProperty("上传人")
-    private String createBy;
+
     /**
      * 服务商
      */

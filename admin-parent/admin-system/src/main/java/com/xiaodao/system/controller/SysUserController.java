@@ -1,10 +1,5 @@
 package com.xiaodao.system.controller;
 
-import com.xiaodao.core.result.RespDataVO;
-import com.xiaodao.core.result.RespVO;
-import com.xiaodao.core.result.RespVOBuilder;
-import com.xiaodao.feign.system.entity.SysUser;
-import com.xiaodao.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,14 +8,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  com.xiaodao.system.service.ISysUserService;
+import com.xiaodao.feign.system.entity.SysUser;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SysUser
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -253,7 +254,7 @@ public class SysUserController {
     })
     @PostMapping("/queryBatchPrimaryKeys")
     public RespVO<RespDataVO<SysUser>> queryBatchPrimaryKeys(@RequestBody List<Long> list) {
-        List<SysUser> sysUsers = sysUserService.queryBatchPrimaryKeys(list);
+        List< SysUser> sysUsers = sysUserService.queryBatchPrimaryKeys(list);
         return RespVOBuilder.success(sysUsers);
     }
 
@@ -262,7 +263,7 @@ public class SysUserController {
     })
     @PostMapping("/queryOne")
     public RespVO<SysUser> queryOne(@RequestBody SysUser sysUser) {
-        sysUser = sysUserService.queryOne(sysUser);
+        sysUser =sysUserService.queryOne(sysUser);
         return RespVOBuilder.success(sysUser);
     }
 
@@ -275,6 +276,16 @@ public class SysUserController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<SysUser>> queryPageByCondition(@RequestBody SysUser sysUser) {
+        PageHelper.startPage(sysUser.getPageIndex(),sysUser.getPageSie());
+        List<SysUser> list = sysUserService.queryByCondition(sysUser);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class SysUserController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<SysUser>> queryPageFuzzy(@RequestBody SysUser sysUser) {
+        PageHelper.startPage(sysUser.getPageIndex(),sysUser.getPageSie());
+        List<SysUser> list = sysUserService.queryFuzzy(sysUser);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class SysUserController {
     public RespVO<RespDataVO<SysUser>> queryByLikeCondition(@RequestBody SysUser sysUser) {
         List<SysUser> list = sysUserService.queryByLikeCondition(sysUser);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<SysUser>> queryPageByLikeCondition(@RequestBody SysUser sysUser) {
+        PageHelper.startPage(sysUser.getPageIndex(),sysUser.getPageSie());
+        List<SysUser> list = sysUserService.queryByLikeCondition(sysUser);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

@@ -13,14 +13,15 @@ import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.ISysNoticeService;
 import com.xiaodao.feign.system.entity.SysNotice;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SysNotice
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -275,6 +276,16 @@ public class SysNoticeController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<SysNotice>> queryPageByCondition(@RequestBody SysNotice sysNotice) {
+        PageHelper.startPage(sysNotice.getPageIndex(),sysNotice.getPageSie());
+        List<SysNotice> list = sysNoticeService.queryByCondition(sysNotice);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class SysNoticeController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<SysNotice>> queryPageFuzzy(@RequestBody SysNotice sysNotice) {
+        PageHelper.startPage(sysNotice.getPageIndex(),sysNotice.getPageSie());
+        List<SysNotice> list = sysNoticeService.queryFuzzy(sysNotice);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class SysNoticeController {
     public RespVO<RespDataVO<SysNotice>> queryByLikeCondition(@RequestBody SysNotice sysNotice) {
         List<SysNotice> list = sysNoticeService.queryByLikeCondition(sysNotice);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<SysNotice>> queryPageByLikeCondition(@RequestBody SysNotice sysNotice) {
+        PageHelper.startPage(sysNotice.getPageIndex(),sysNotice.getPageSie());
+        List<SysNotice> list = sysNoticeService.queryByLikeCondition(sysNotice);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

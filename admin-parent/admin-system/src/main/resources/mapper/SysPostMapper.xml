@@ -284,10 +284,10 @@
 
     <sql id="Time_Limit">
         <if test="sysPost.beginTime != null">
-            and DATE_FORMAT(#{sysPost.createTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+            and DATE_FORMAT(#{sysPost.beginTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
         </if>
         <if test="sysPost.endTime != null">
-            and DATE_FORMAT(#{sysPost.createTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%S')
+            and DATE_FORMAT(#{sysPost.endTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
         </if>
     </sql>
 
@@ -726,7 +726,6 @@
             <include refid="Time_Limit"></include>
         </where>
         <include refid="Order_By"></include>
-        <include refid="Time_Limit"></include>
     </select>
 
 

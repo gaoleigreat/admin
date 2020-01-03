@@ -13,14 +13,15 @@ import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.IBaseServiceService;
 import com.xiaodao.feign.system.entity.BaseService;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * BaseService
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -275,6 +276,16 @@ public class BaseServiceController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<BaseService>> queryPageByCondition(@RequestBody BaseService baseService) {
+        PageHelper.startPage(baseService.getPageIndex(),baseService.getPageSie());
+        List<BaseService> list = baseServiceService.queryByCondition(baseService);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class BaseServiceController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<BaseService>> queryPageFuzzy(@RequestBody BaseService baseService) {
+        PageHelper.startPage(baseService.getPageIndex(),baseService.getPageSie());
+        List<BaseService> list = baseServiceService.queryFuzzy(baseService);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class BaseServiceController {
     public RespVO<RespDataVO<BaseService>> queryByLikeCondition(@RequestBody BaseService baseService) {
         List<BaseService> list = baseServiceService.queryByLikeCondition(baseService);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<BaseService>> queryPageByLikeCondition(@RequestBody BaseService baseService) {
+        PageHelper.startPage(baseService.getPageIndex(),baseService.getPageSie());
+        List<BaseService> list = baseServiceService.queryByLikeCondition(baseService);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

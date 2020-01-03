@@ -13,14 +13,15 @@ import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.ISysUserRoleService;
 import com.xiaodao.feign.system.entity.SysUserRole;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SysUserRole
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -275,6 +276,16 @@ public class SysUserRoleController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<SysUserRole>> queryPageByCondition(@RequestBody SysUserRole sysUserRole) {
+        PageHelper.startPage(sysUserRole.getPageIndex(),sysUserRole.getPageSie());
+        List<SysUserRole> list = sysUserRoleService.queryByCondition(sysUserRole);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class SysUserRoleController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<SysUserRole>> queryPageFuzzy(@RequestBody SysUserRole sysUserRole) {
+        PageHelper.startPage(sysUserRole.getPageIndex(),sysUserRole.getPageSie());
+        List<SysUserRole> list = sysUserRoleService.queryFuzzy(sysUserRole);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class SysUserRoleController {
     public RespVO<RespDataVO<SysUserRole>> queryByLikeCondition(@RequestBody SysUserRole sysUserRole) {
         List<SysUserRole> list = sysUserRoleService.queryByLikeCondition(sysUserRole);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<SysUserRole>> queryPageByLikeCondition(@RequestBody SysUserRole sysUserRole) {
+        PageHelper.startPage(sysUserRole.getPageIndex(),sysUserRole.getPageSie());
+        List<SysUserRole> list = sysUserRoleService.queryByLikeCondition(sysUserRole);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

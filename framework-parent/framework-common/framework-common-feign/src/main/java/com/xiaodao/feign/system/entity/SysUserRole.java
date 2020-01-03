@@ -11,18 +11,18 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class SysUserRole  {
+public class SysUserRole extends BaseEntity {
     /**
      * 用户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    @ApiModelProperty("用户ID")
+    @ApiModelProperty("用户ID" )
     private Integer userId;
     /**
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    @ApiModelProperty("角色ID")
+    @ApiModelProperty("角色ID" )
     private Integer roleId;
 
 }

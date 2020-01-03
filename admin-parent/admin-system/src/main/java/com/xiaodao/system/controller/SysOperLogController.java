@@ -13,14 +13,15 @@ import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.ISysOperLogService;
 import com.xiaodao.feign.system.entity.SysOperLog;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SysOperLog
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -275,6 +276,16 @@ public class SysOperLogController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<SysOperLog>> queryPageByCondition(@RequestBody SysOperLog sysOperLog) {
+        PageHelper.startPage(sysOperLog.getPageIndex(),sysOperLog.getPageSie());
+        List<SysOperLog> list = sysOperLogService.queryByCondition(sysOperLog);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class SysOperLogController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<SysOperLog>> queryPageFuzzy(@RequestBody SysOperLog sysOperLog) {
+        PageHelper.startPage(sysOperLog.getPageIndex(),sysOperLog.getPageSie());
+        List<SysOperLog> list = sysOperLogService.queryFuzzy(sysOperLog);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class SysOperLogController {
     public RespVO<RespDataVO<SysOperLog>> queryByLikeCondition(@RequestBody SysOperLog sysOperLog) {
         List<SysOperLog> list = sysOperLogService.queryByLikeCondition(sysOperLog);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<SysOperLog>> queryPageByLikeCondition(@RequestBody SysOperLog sysOperLog) {
+        PageHelper.startPage(sysOperLog.getPageIndex(),sysOperLog.getPageSie());
+        List<SysOperLog> list = sysOperLogService.queryByLikeCondition(sysOperLog);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

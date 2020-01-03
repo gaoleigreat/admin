@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class GenTableColumn  {
+public class GenTableColumn  extends BaseEntity{
     /**
      * 编号
      */

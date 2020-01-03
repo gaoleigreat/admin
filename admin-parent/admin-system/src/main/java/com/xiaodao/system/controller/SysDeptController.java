@@ -13,14 +13,15 @@ import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.ISysDeptService;
 import com.xiaodao.feign.system.entity.SysDept;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SysDept
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -275,6 +276,16 @@ public class SysDeptController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<SysDept>> queryPageByCondition(@RequestBody SysDept sysDept) {
+        PageHelper.startPage(sysDept.getPageIndex(),sysDept.getPageSie());
+        List<SysDept> list = sysDeptService.queryByCondition(sysDept);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class SysDeptController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<SysDept>> queryPageFuzzy(@RequestBody SysDept sysDept) {
+        PageHelper.startPage(sysDept.getPageIndex(),sysDept.getPageSie());
+        List<SysDept> list = sysDeptService.queryFuzzy(sysDept);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class SysDeptController {
     public RespVO<RespDataVO<SysDept>> queryByLikeCondition(@RequestBody SysDept sysDept) {
         List<SysDept> list = sysDeptService.queryByLikeCondition(sysDept);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<SysDept>> queryPageByLikeCondition(@RequestBody SysDept sysDept) {
+        PageHelper.startPage(sysDept.getPageIndex(),sysDept.getPageSie());
+        List<SysDept> list = sysDeptService.queryByLikeCondition(sysDept);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

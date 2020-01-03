@@ -13,14 +13,15 @@ import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.IGenTableColumnService;
 import com.xiaodao.feign.system.entity.GenTableColumn;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * GenTableColumn
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -275,6 +276,16 @@ public class GenTableColumnController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<GenTableColumn>> queryPageByCondition(@RequestBody GenTableColumn genTableColumn) {
+        PageHelper.startPage(genTableColumn.getPageIndex(),genTableColumn.getPageSie());
+        List<GenTableColumn> list = genTableColumnService.queryByCondition(genTableColumn);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class GenTableColumnController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<GenTableColumn>> queryPageFuzzy(@RequestBody GenTableColumn genTableColumn) {
+        PageHelper.startPage(genTableColumn.getPageIndex(),genTableColumn.getPageSie());
+        List<GenTableColumn> list = genTableColumnService.queryFuzzy(genTableColumn);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class GenTableColumnController {
     public RespVO<RespDataVO<GenTableColumn>> queryByLikeCondition(@RequestBody GenTableColumn genTableColumn) {
         List<GenTableColumn> list = genTableColumnService.queryByLikeCondition(genTableColumn);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<GenTableColumn>> queryPageByLikeCondition(@RequestBody GenTableColumn genTableColumn) {
+        PageHelper.startPage(genTableColumn.getPageIndex(),genTableColumn.getPageSie());
+        List<GenTableColumn> list = genTableColumnService.queryByLikeCondition(genTableColumn);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")

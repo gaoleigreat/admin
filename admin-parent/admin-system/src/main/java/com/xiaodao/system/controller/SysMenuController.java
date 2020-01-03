@@ -1,10 +1,5 @@
 package com.xiaodao.system.controller;
 
-import com.xiaodao.core.result.RespDataVO;
-import com.xiaodao.core.result.RespVO;
-import com.xiaodao.core.result.RespVOBuilder;
-import com.xiaodao.feign.system.entity.SysMenu;
-import com.xiaodao.system.service.ISysMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,14 +8,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import com.xiaodao.core.result.RespVO;
+import com.xiaodao.core.result.RespDataVO;
+import com.xiaodao.core.result.RespVOBuilder;
+import  com.xiaodao.system.service.ISysMenuService;
+import com.xiaodao.feign.system.entity.SysMenu;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SysMenu
  *
- * @author xiaodao
+ * @author ¸ßÀÚ
  * @email tyut_gaolei@163.com
  * @since jdk 1.8
  */
@@ -253,7 +254,7 @@ public class SysMenuController {
     })
     @PostMapping("/queryBatchPrimaryKeys")
     public RespVO<RespDataVO<SysMenu>> queryBatchPrimaryKeys(@RequestBody List<Long> list) {
-        List<SysMenu> sysMenus = sysMenuService.queryBatchPrimaryKeys(list);
+        List< SysMenu> sysMenus = sysMenuService.queryBatchPrimaryKeys(list);
         return RespVOBuilder.success(sysMenus);
     }
 
@@ -262,7 +263,7 @@ public class SysMenuController {
     })
     @PostMapping("/queryOne")
     public RespVO<SysMenu> queryOne(@RequestBody SysMenu sysMenu) {
-        sysMenu = sysMenuService.queryOne(sysMenu);
+        sysMenu =sysMenuService.queryOne(sysMenu);
         return RespVOBuilder.success(sysMenu);
     }
 
@@ -275,6 +276,16 @@ public class SysMenuController {
         return RespVOBuilder.success(list);
     }
 
+    @ApiOperation(value = "条件分页查询", notes = "条件分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByCondition")
+    public RespVO<PageInfo<SysMenu>> queryPageByCondition(@RequestBody SysMenu sysMenu) {
+        PageHelper.startPage(sysMenu.getPageIndex(),sysMenu.getPageSie());
+        List<SysMenu> list = sysMenuService.queryByCondition(sysMenu);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
     @ApiOperation(value = "模糊查询", notes = "模糊查询")
     @ApiImplicitParams({
     })
@@ -284,6 +295,18 @@ public class SysMenuController {
         return RespVOBuilder.success(list);
     }
 
+
+    @ApiOperation(value = "模糊分页查询", notes = "模糊分页查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageFuzzy")
+    public RespVO<PageInfo<SysMenu>> queryPageFuzzy(@RequestBody SysMenu sysMenu) {
+        PageHelper.startPage(sysMenu.getPageIndex(),sysMenu.getPageSie());
+        List<SysMenu> list = sysMenuService.queryFuzzy(sysMenu);
+        return RespVOBuilder.success(new PageInfo(list));
+    }
+
+
     @ApiOperation(value = "模糊条件查询", notes = "条件模糊查询")
     @ApiImplicitParams({
     })
@@ -291,6 +314,16 @@ public class SysMenuController {
     public RespVO<RespDataVO<SysMenu>> queryByLikeCondition(@RequestBody SysMenu sysMenu) {
         List<SysMenu> list = sysMenuService.queryByLikeCondition(sysMenu);
         return RespVOBuilder.success(list);
+    }
+
+    @ApiOperation(value = "模糊分页条件查询", notes = "条件模糊查询")
+    @ApiImplicitParams({
+    })
+    @PostMapping("/queryPageByLikeCondition")
+    public RespVO<PageInfo<SysMenu>> queryPageByLikeCondition(@RequestBody SysMenu sysMenu) {
+        PageHelper.startPage(sysMenu.getPageIndex(),sysMenu.getPageSie());
+        List<SysMenu> list = sysMenuService.queryByLikeCondition(sysMenu);
+        return RespVOBuilder.success(new PageInfo(list));
     }
 
     @ApiOperation(value = "条件查询数量", notes = "条件查询数量")
@@ -345,7 +378,6 @@ public class SysMenuController {
      *
      * @return 菜单列表
      */
-
     @ApiOperation(value = "查询系统所有菜单（含按钮）", notes = "查询系统所有菜单（含按钮）")
     @GetMapping("/selectMenuAll")
     public RespVO<RespDataVO<SysMenu>> selectMenuAll() {
@@ -359,7 +391,6 @@ public class SysMenuController {
      *
      * @return 菜单列表
      */
-
     @ApiOperation(value = "查询系统正常显示菜单（不含按钮）", notes = "查询系统正常显示菜单（不含按钮)")
     @GetMapping("/selectMenuNormalAll")
     public RespVO<RespDataVO<SysMenu>> selectMenuNormalAll() {
@@ -380,7 +411,6 @@ public class SysMenuController {
         List<SysMenu> sysMenus = sysMenuService.selectMenusByUserId(userId);
         return RespVOBuilder.success(sysMenus);
     }
-
 
     /**
      * 根据用户ID查询权限
