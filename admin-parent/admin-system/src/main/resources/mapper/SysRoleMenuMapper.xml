@@ -115,12 +115,6 @@
     </sql>
 
     <sql id="Time_Limit">
-        <if test="sysRoleMenu.beginTime != null">
-            and DATE_FORMAT(#{sysRoleMenu.beginTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="sysRoleMenu.endTime != null">
-            and DATE_FORMAT(#{sysRoleMenu.endTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
-        </if>
     </sql>
 
     <!--插入更新-->

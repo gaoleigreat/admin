@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class SysOperLog  extends BaseEntity{
+public class SysOperLog extends BaseEntity {
     /**
      * 日志主键
      */

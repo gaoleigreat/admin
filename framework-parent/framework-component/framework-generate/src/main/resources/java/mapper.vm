@@ -116,12 +116,14 @@
     </sql>
 
     <sql id="Time_Limit">
+    <#if gentable.extendsBase == "true">
         <if test="${gentable.camelCaseclassName}.beginTime != null">
             and DATE_FORMAT(<#noparse>#{</#noparse>${gentable.camelCaseclassName}.beginTime<#noparse>}</#noparse>,'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
         </if>
         <if test="${gentable.camelCaseclassName}.endTime != null">
             and DATE_FORMAT(<#noparse>#{</#noparse>${gentable.camelCaseclassName}.endTime<#noparse>}</#noparse>,'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
         </if>
+    </#if>
     </sql>
 
     <!--插入更新-->

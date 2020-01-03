@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class SysRoleDept  extends BaseEntity{
+public class SysRoleDept extends BaseEntity {
     /**
      * 角色ID
      */

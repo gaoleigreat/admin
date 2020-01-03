@@ -304,12 +304,6 @@
     </sql>
 
     <sql id="Time_Limit">
-        <if test="sysUserOnline.beginTime != null">
-            and DATE_FORMAT(#{sysUserOnline.beginTime},'%Y-%m-%d %H:%i:%S') &lt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
-        </if>
-        <if test="sysUserOnline.endTime != null">
-            and DATE_FORMAT(#{sysUserOnline.endTime},'%Y-%m-%d %H:%i:%S') &gt;= DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S')
-        </if>
     </sql>
 
     <!--插入更新-->

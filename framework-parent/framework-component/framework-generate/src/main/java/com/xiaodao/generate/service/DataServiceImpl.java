@@ -53,20 +53,11 @@ public class DataServiceImpl {
                     genTable.setTableComment(genTable.getClassName());
                 }
                 genTables.add(genTable);
-                System.out.println(genTable);
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         return genTables;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        DataServiceImpl dataService = new DataServiceImpl();
-        List<GenTable> exam = dataService.getGenTable("exam");
-        exam.forEach(s->{
-            System.out.println(s);
-        });
     }
 }

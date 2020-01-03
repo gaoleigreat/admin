@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class ${gentable.className} <#if gentable.extendsBase == "true">extends BaseEntity</#if> {
+public class ${gentable.className} extends BaseEntity {
 <#list gentable.columns as field>
     <#if gentable.extendsBase == "false" || (field.javaFieldName != "createTime" && field.javaFieldName != "createBy" && field.javaFieldName != "updateTime" && field.javaFieldName != "updateBy" && field.javaFieldName != "remark")>
     /**

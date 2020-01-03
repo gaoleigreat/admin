@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Slf4j
-public class SysUserPost  extends BaseEntity{
+public class SysUserPost extends BaseEntity {
     /**
      * 用户ID
      */
