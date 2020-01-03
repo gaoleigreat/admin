@@ -67,6 +67,11 @@
             <version>${framework.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.xiaodao</groupId>
+            <artifactId>admin-object</artifactId>
+            <version>${framework.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>

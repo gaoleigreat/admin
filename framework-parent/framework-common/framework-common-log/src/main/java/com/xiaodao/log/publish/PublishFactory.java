@@ -5,7 +5,7 @@ import com.xiaodao.core.utils.AddressUtils;
 import com.xiaodao.core.utils.IpUtils;
 import com.xiaodao.core.utils.ServletUtils;
 import com.xiaodao.core.utils.spring.SpringContextHolder;
-import com.xiaodao.feign.system.entity.SysLogininfor;
+import com.xiaodao.admin.entity.SysLogininfor;
 import com.xiaodao.log.event.SysLogininforEvent;
 import eu.bitwalker.useragentutils.UserAgent;
 

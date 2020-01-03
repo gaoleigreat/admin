@@ -1,7 +1,7 @@
 package com.xiaodao.log.event;
 
 
-import com.xiaodao.feign.system.entity.SysLogininfor;
+import com.xiaodao.admin.entity.SysLogininfor;
 import org.springframework.context.ApplicationEvent;
 
 /**

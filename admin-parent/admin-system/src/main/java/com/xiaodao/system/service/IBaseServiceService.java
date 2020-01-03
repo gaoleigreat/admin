@@ -3,7 +3,7 @@ package com.xiaodao.system.service;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.xiaodao.feign.system.entity.BaseService;
+import com.xiaodao.admin.entity.BaseService;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;

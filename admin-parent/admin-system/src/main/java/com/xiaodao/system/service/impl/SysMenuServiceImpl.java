@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysMenuMapper;
 import com.xiaodao.system.service.ISysMenuService;
-import com.xiaodao.feign.system.entity.SysMenu;
+import com.xiaodao.admin.entity.SysMenu;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

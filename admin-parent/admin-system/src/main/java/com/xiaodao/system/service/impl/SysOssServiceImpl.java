@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysOssMapper;
 import com.xiaodao.system.service.ISysOssService;
-import com.xiaodao.feign.system.entity.SysOss;
+import com.xiaodao.admin.entity.SysOss;
 
 import java.util.List;
 import java.util.Map;

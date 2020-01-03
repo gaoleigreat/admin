@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.DistrictsMapper;
 import com.xiaodao.system.service.IDistrictsService;
-import com.xiaodao.feign.system.entity.Districts;
+import com.xiaodao.admin.entity.Districts;
 
 import java.util.List;
 import java.util.Map;

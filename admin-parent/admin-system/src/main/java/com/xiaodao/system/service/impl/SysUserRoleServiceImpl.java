@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysUserRoleMapper;
 import com.xiaodao.system.service.ISysUserRoleService;
-import com.xiaodao.feign.system.entity.SysUserRole;
+import com.xiaodao.admin.entity.SysUserRole;
 
 import java.util.List;
 import java.util.Map;

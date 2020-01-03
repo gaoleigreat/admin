@@ -1,7 +1,7 @@
 package com.xiaodao.system.service.impl;
 
 
-import com.xiaodao.feign.system.entity.SysUser;
+import com.xiaodao.admin.entity.SysUser;
 import com.xiaodao.system.mapper.SysUserMapper;
 import com.xiaodao.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;

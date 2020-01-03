@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.BaseServiceMapper;
 import com.xiaodao.system.service.IBaseServiceService;
-import com.xiaodao.feign.system.entity.BaseService;
+import com.xiaodao.admin.entity.BaseService;
 
 import java.util.List;
 import java.util.Map;

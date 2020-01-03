@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysDeptMapper;
 import com.xiaodao.system.service.ISysDeptService;
-import com.xiaodao.feign.system.entity.SysDept;
+import com.xiaodao.admin.entity.SysDept;
 
 import java.util.List;
 import java.util.Map;

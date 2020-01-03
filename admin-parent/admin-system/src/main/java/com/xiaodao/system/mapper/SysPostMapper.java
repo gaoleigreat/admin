@@ -2,7 +2,7 @@ package com.xiaodao.system.mapper;
 
 
 import org.apache.ibatis.annotations.Param;
-import com.xiaodao.feign.system.entity.SysPost;
+import com.xiaodao.admin.entity.SysPost;
 
 import java.util.List;
 import java.util.Map;

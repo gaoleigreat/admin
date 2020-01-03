@@ -7,7 +7,7 @@ import com.xiaodao.auth.service.SysLoginService;
 import com.xiaodao.auth.vo.LoginBean;
 import com.xiaodao.core.result.RespVO;
 import com.xiaodao.core.result.RespVOBuilder;
-import com.xiaodao.feign.system.entity.SysUser;
+import com.xiaodao.admin.entity.SysUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.tomcat.util.http.fileupload.IOUtils;

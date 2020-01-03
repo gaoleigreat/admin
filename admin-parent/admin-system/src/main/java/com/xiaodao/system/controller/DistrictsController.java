@@ -12,7 +12,7 @@ import com.xiaodao.core.result.RespVO;
 import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.IDistrictsService;
-import com.xiaodao.feign.system.entity.Districts;
+import com.xiaodao.admin.entity.Districts;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.util.List;

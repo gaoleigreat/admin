@@ -12,7 +12,7 @@ import com.xiaodao.core.result.RespVO;
 import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.ISysDictDataService;
-import com.xiaodao.feign.system.entity.SysDictData;
+import com.xiaodao.admin.entity.SysDictData;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.util.List;

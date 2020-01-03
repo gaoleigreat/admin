@@ -3,7 +3,7 @@ package com.xiaodao.auth.service;
 import cn.hutool.core.util.IdUtil;
 
 import com.xiaodao.core.constant.Constants;
-import com.xiaodao.feign.system.entity.SysUser;
+import com.xiaodao.admin.entity.SysUser;
 import com.xiaodao.redis.annotation.RedisEvict;
 import com.xiaodao.redis.util.RedisUtils;
 import org.apache.commons.lang3.StringUtils;

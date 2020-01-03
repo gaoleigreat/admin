@@ -1,6 +1,6 @@
 package com.xiaodao.system.service;
 
-import com.xiaodao.feign.system.entity.SysMenu;
+import com.xiaodao.admin.entity.SysMenu;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;

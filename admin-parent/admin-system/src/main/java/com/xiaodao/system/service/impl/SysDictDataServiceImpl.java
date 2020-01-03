@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysDictDataMapper;
 import com.xiaodao.system.service.ISysDictDataService;
-import com.xiaodao.feign.system.entity.SysDictData;
+import com.xiaodao.admin.entity.SysDictData;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package com.xiaodao.system.mapper;
 
 
-import com.xiaodao.feign.system.entity.SysMenu;
+import com.xiaodao.admin.entity.SysMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -12,7 +12,7 @@ import com.xiaodao.core.result.RespVO;
 import com.xiaodao.core.result.RespDataVO;
 import com.xiaodao.core.result.RespVOBuilder;
 import  com.xiaodao.system.service.IGenTableService;
-import com.xiaodao.feign.system.entity.GenTable;
+import com.xiaodao.admin.entity.GenTable;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.util.List;

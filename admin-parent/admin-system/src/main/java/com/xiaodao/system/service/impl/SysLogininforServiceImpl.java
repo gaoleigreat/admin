@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysLogininforMapper;
 import com.xiaodao.system.service.ISysLogininforService;
-import com.xiaodao.feign.system.entity.SysLogininfor;
+import com.xiaodao.admin.entity.SysLogininfor;
 
 import java.util.List;
 import java.util.Map;

@@ -3,7 +3,7 @@ package com.xiaodao.system.service;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.xiaodao.feign.system.entity.SysOperLog;
+import com.xiaodao.admin.entity.SysOperLog;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;

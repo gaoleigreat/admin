@@ -1,6 +1,6 @@
 package com.xiaodao.system.service;
 
-import com.xiaodao.feign.system.entity.SysUser;
+import com.xiaodao.admin.entity.SysUser;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;

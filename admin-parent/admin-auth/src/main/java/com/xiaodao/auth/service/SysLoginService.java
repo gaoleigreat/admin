@@ -14,7 +14,7 @@ import com.xiaodao.core.utils.MessageUtils;
 import com.xiaodao.core.utils.ServletUtils;
 import com.xiaodao.core.utils.security.PasswordUtils;
 import com.xiaodao.feign.system.client.SysUserClient;
-import com.xiaodao.feign.system.entity.SysUser;
+import com.xiaodao.admin.entity.SysUser;
 import com.xiaodao.log.publish.PublishFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

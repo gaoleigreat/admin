@@ -2,8 +2,8 @@ package com.xiaodao.log.listen;
 
 import com.xiaodao.feign.system.client.SysLogininforClient;
 import com.xiaodao.feign.system.client.SysOperLogClient;
-import com.xiaodao.feign.system.entity.SysLogininfor;
-import com.xiaodao.feign.system.entity.SysOperLog;
+import com.xiaodao.admin.entity.SysLogininfor;
+import com.xiaodao.admin.entity.SysOperLog;
 import com.xiaodao.log.event.SysLogininforEvent;
 import com.xiaodao.log.event.SysOperLogEvent;
 import lombok.AllArgsConstructor;

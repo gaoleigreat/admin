@@ -7,8 +7,8 @@
 //import com.xiaodao.datascope.annotation.DataScope;
 //import com.xiaodao.feign.system.client.SysMenuClient;
 //import com.xiaodao.feign.system.client.SysUserClient;
-//import com.xiaodao.feign.system.entity.SysRole;
-//import com.xiaodao.feign.system.entity.SysUser;
+//import com.xiaodao.admin.entity.SysRole;
+//import com.xiaodao.admin.entity.SysUser;
 //import com.xiaodao.redis.util.RedisUtils;
 //import lombok.extern.slf4j.Slf4j;
 //import org.aspectj.lang.JoinPoint;

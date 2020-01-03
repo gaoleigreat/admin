@@ -2,7 +2,7 @@ package com.xiaodao.system.mapper;
 
 
 import org.apache.ibatis.annotations.Param;
-import com.xiaodao.feign.system.entity.SysNotice;
+import com.xiaodao.admin.entity.SysNotice;
 
 import java.util.List;
 import java.util.Map;

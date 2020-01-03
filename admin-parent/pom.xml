@@ -13,6 +13,7 @@
     <modules>
         <module>admin-system</module>
         <module>admin-auth</module>
+        <module>admin-common</module>
     </modules>
 
 

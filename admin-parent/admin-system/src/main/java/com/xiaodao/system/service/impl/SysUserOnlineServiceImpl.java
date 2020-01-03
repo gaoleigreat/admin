@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysUserOnlineMapper;
 import com.xiaodao.system.service.ISysUserOnlineService;
-import com.xiaodao.feign.system.entity.SysUserOnline;
+import com.xiaodao.admin.entity.SysUserOnline;
 
 import java.util.List;
 import java.util.Map;

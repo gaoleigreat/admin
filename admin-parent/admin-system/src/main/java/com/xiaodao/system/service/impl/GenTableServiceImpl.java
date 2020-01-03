@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.GenTableMapper;
 import com.xiaodao.system.service.IGenTableService;
-import com.xiaodao.feign.system.entity.GenTable;
+import com.xiaodao.admin.entity.GenTable;
 
 import java.util.List;
 import java.util.Map;

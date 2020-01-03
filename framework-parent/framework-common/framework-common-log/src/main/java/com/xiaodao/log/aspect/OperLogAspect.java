@@ -7,7 +7,7 @@ import com.xiaodao.core.utils.IpUtils;
 import com.xiaodao.core.utils.ServletUtils;
 import com.xiaodao.core.utils.StringUtils;
 import com.xiaodao.core.utils.spring.SpringContextHolder;
-import com.xiaodao.feign.system.entity.SysOperLog;
+import com.xiaodao.admin.entity.SysOperLog;
 import com.xiaodao.log.annotation.OperLog;
 import com.xiaodao.log.enums.BusinessStatus;
 import com.xiaodao.log.event.SysOperLogEvent;

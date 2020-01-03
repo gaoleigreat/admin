@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.xiaodao.system.mapper.SysUserPostMapper;
 import com.xiaodao.system.service.ISysUserPostService;
-import com.xiaodao.feign.system.entity.SysUserPost;
+import com.xiaodao.admin.entity.SysUserPost;
 
 import java.util.List;
 import java.util.Map;
